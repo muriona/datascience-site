@@ -1,0 +1,300 @@
+---
+title: "Tarefa 2 - Machine Learning em R"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: paper
+link-citations: yes
+---
+
+Nesta segunda tarefa usaremos dois datasets diferentes, ambos relacionados com o serviço de aluguel de bikes em DC, EUA. O primeiro dataset é um dataset com registros diários de aluguel desde 2011 a 2012. O segundo é um dataset mais desagregado, neste caso com registros por hora de aluguel de bikes para o mesmo período (2011 a 2012).
+
+# Sobre o aluguel de bikes em DC, EUA
+
+Os sistemas de compartilhamento de bicicletas são a nova geração de sistemas tradicionais de aluguel de bicicletas onde todo o processo de adesão, aluguel e retorno se tornou automático. Através destes sistemas, o usuário é capaz de alugar facilmente uma bicicleta de uma determinada posição e retornar em outra posição. Atualmente, existem cerca de 500 programas de compartilhamento de bicicletas em todo o mundo, que é composto de mais de 500 mil bicicletas. Hoje, existe um grande interesse nestes sistemas devido ao seu importante papel em questões de tráfego, meio ambiente e saúde.
+
+Além das aplicações interessantes no mundo real dos sistemas de aluguel de bicicletas, as características dos dados gerados por estes sistemas os tornam atraentes para a pesquisa. Ao contrário de outros serviços de transporte, como ônibus ou metrô, a duração da viagem, posição de partida e chegada é explicitamente registrada nestes sistemas. Esta característica transforma o sistema de compartilhamento de bicicletas em uma rede virtual de sensores que pode ser usada para a detecção da mobilidade na cidade. Portanto, espera-se que a maioria dos eventos importantes na cidade possam ser detectados através do monitoramento destes dados.
+
+Fonte: [UCI Machine Learning Repository - Bike Sharing Dataset](http://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset)
+
+# Pacotes
+
+Usaremos o pacote `tidyverse`, o pacote `caret` que facilitar o workflow para machine learning, e o pacote `ranger` para o uso do algoritmo Random Forests. Observação: podem usar o comando `library(dsbox)` e logo `data(nome_do_dataset)` para carregar automaticamente.
+
+```{r load-package, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, eval = TRUE, results=FALSE)
+
+```
+
+Você pode baixar os dados:
+
+# Dados
+
+```{r}
+library(tidyverse)
+
+
+dcbikeshare <- read.csv("dataset/bikeshare-day.csv")
+dcbikeshare$dteday <- as.Date(dcbikeshare$dteday)
+```
+
+Os dados incluem contagens diárias de aluguel de bicicletas (por membros e usuários casuais) da "Capital Bikeshare" em Washington, DC entre 2011 e 2012, bem como informações meteorológicas sobre esses dias.
+
+As fontes de dados originais se encontram em: <http://capitalbikeshare.com/system-data> e <http://www.freemeteo.com>.
+
+O dataset chama-se `dcbikeshare-day`. A descrição de cada uma das variáveis pode ser encontrada no arquivo de ajuda do dataset, que pode ser acessado executando `?dcbikeshare` em seu Console.
+
+Já, o segundo dataset representa o mesmo caso de bikes compartilhadas mas incluindo contagens por hora, chamado de `hour.csv`.
+
+# Exercícios com o 1o dataset
+
+1.  Recodificar a variável `season` para um fator com nomes mais significativos para cada nível, considerando a "primavera" (spring) como categoria base.
+
+```{r}
+dcbikeshare <- read.csv("dataset/bikeshare-day.csv")
+
+dcbikeshare$season <- factor(dcbikeshare$season, levels = c(1,2,3,4), labels = c("winter","spring","summer","fall"))
+
+dcbikeshare$season <- relevel(dcbikeshare$season, ref = 2)
+```
+
+2.  Recodificar as variáveis binárias `holiday` e `workingday` para serem fatores com níveis não (0) e sim (1), com "não" como categoria base.
+
+```{r}
+dcbikeshare$holiday <- factor(dcbikeshare$holiday,
+                              levels = c(0,1),
+                              labels = c("Não","Sim"))
+
+dcbikeshare$holiday <- relevel(dcbikeshare$holiday, ref="Não")
+
+dcbikeshare$workingday <- factor(dcbikeshare$workingday,
+                                 levels = c(0,1),
+                                 labels = c("Não","Sim"))
+dcbikeshare$workingday <- relevel(dcbikeshare$workingday,
+                                  ref = "Não")
+```
+
+3.  Recodificar a variável `yr` para ser um fator com níveis 2011 e 2012, com 2011 como categoria base.
+
+```{r}
+dcbikeshare$yr <- factor(dcbikeshare$yr, levels = c(0,1),
+                         labels = c(2011, 2012))
+
+dcbikeshare$yr <- relevel(dcbikeshare$yr, ref = "2011")
+```
+
+4.  Recodificar a variável `weathersit` para: 1 - claro, 2 - névoa, 3 - precipitação leve, e 4 - precipitação pesada, com "claro" como categoria base.
+
+```{r}
+dcbikeshare$weathersit <- factor(dcbikeshare$weathersit,
+                                 levels = c(1,2,3,4),
+                                 labels = c("claro",
+                                            "névoa",
+                                            "precipitação leve",
+                                            "precipitação pesada"))
+
+dcbikeshare$weathersit <- relevel(dcbikeshare$weathersit,
+                                  ref = "claro")
+```
+
+5.  Calcular os valores brutos para temperatura (`temp`), sensação térmica (`atemp`), umidade (`hum`) e velocidade do vento (`windspeed`) multiplicando os valores indicados no dataset pelos valores máximos brutos indicados na tabela abaixo
+
+| Variável  | Valor Máximo |
+|-----------|--------------|
+| temp      | 41           |
+| atemp     | 50           |
+| hum       | 100          |
+| windspeed | 67           |
+
+```{r}
+dcbikeshare2 <- dcbikeshare %>% 
+  mutate(temp_real = temp*41,
+         atemp_real = atemp*50,
+         hum_real = hum *100,
+         windspeed_real = windspeed*67)
+```
+
+6.  Verifique se a soma de `casual` e `registered` somam a `cnt` para cada observação. **Dica** Uma maneira de fazer isso é criar uma nova coluna que assuma o valor `TRUE` se a condição é cumprida e `FALSE` se não, e depois verificar se todos os valores nessa nova coluna são `TRUE`. Mas esta é apenas uma maneira, você pode inventar outra.
+
+```{r}
+dcbikeshare %>% 
+  mutate(veri = casual + registered,
+         veri2 = veri != cnt) %>% 
+  summarize(sum(veri2))
+```
+
+```{r fig.width=8, fig.height=6, eval=FALSE}
+#7. Recrie a seguinte visualização, e interprete-a no contexto dos dados. 
+#**Dica**: Você precisará usar uma das variáveis que você criou acima. A temperatura plotada é a sensação térmica. Antes de realizar o gráfico verifique que o tipo da variável `dteday` deve ser "Date" e não "chr"*
+
+library(viridisLite)
+dcbikeshare$dteday <- as.Date(dcbikeshare$dteday)
+
+dcbikeshare %>% 
+  mutate(atemp_raw = atemp * 50) %>% 
+  ggplot(mapping = aes(x = dteday, y = cnt, color = atemp_raw)) +
+    geom_point(alpha = 0.9) +
+    labs(
+      title = "Bikes alugadas em DC, 2011 e 2012",
+      subtitle = "Temperaturas mais quentes associadas 
+      com mais bikes alugadas",
+      x = "Data",
+      y = "Bikes alugadas",
+      color = "Temperatura (C)"
+    ) +
+  theme_minimal()+
+  scale_color_viridis_c()
+
+```
+
+8.  Criar uma visualização mostrando a relação entre o aluguel de bicicletas e a estação do ano (`season`). Interpretá-la no contexto dos dados.
+
+9.  Ajustar um modelo linear prevendo o total de aluguéis diários de bicicletas a partir da temperatura diária. Escreva o modelo linear, interprete a pendente e a interceptação no contexto dos dados e determine e interprete o $R^2$ bem como o **RMSE**.
+
+10. Ajustar outro modelo linear prevendo o total de aluguéis diários de bicicletas a partir da sensação térmica. Escreva o modelo linear, interprete a pendente e a interceptação no contexto dos dados, e determine e interprete o $R^2$ e o **RMSE**. Qual é um melhor preditor do aluguel de bicicletas, a temperatura ou a sensação térmica? Explique seu raciocínio.
+
+11. Ajuste um modelo que faça a previsão do total de aluguéis diários de bicicletas a partir de várias variáveis: a estação (`season`), o ano, se o dia é ou não feriado, se é dia útil ou não, o clima (`weather`), a temperatura, a sensação térmica, umidade e velocidade do vento, assim como a interação entre sensação térmica e as feriados. Calcule o $R^2$ ajustado do modelo e o **RMSE**.
+
+12. De acordo com este modelo, em qual estação o modelo prevê o valor mais alto de aluguéis diários de bicicletas e em qual o mais baixo?
+
+```{r}
+#13. Execute o primeiro passo do método "backward selection", ajustando um modelo diferente para cada variável explanatória removida, partindo do modelo completo da Pergunta 11. Calcule o $R^2$ ajustado para cada um desses modelos. Qual modelo destes  modelos, se houver, mostra o melhor resultado em termos de $R^2$ em relação ao modelo completo da Pergunta 11?
+#Obs. Esta pergunta é **bonus**, ou seja não é obrigatória, mas o grupo que a fizer ganhará um ponto extra sobre a nota final da Tarefa.
+```
+
+# Exercícios com o 2o dataset 2 (hour.csv)
+
+14. Refaça a questões 1 a 6 para este novo dataset.
+
+```{r}
+
+```
+
+15. Separe o dataset em dois grupos, treinamento e teste, sendo a proporção 75 e 25 respectivamente. **Dica** Você precisará da biblioteca `caret` e da função específica para fazer o split, pode usar `??caret` no console para identificá-la. **Dica2** Converta a variável `hr` para fator com 24 níveis (de 0 a 23), antes de fazer o split.
+
+```{r}
+library(caret)
+dcbikeshare_hour <- read.csv("dataset/hour.csv")
+
+dcbikeshare_hour$hr <- factor(dcbikeshare_hour$hr,
+                              levels=c(0,1,2,3,4,5,6,7,8,9,
+                                       10,11,12,13,14,15,16,
+                                       17,18,19,20,21,22,
+                                       23))
+
+inTrain <- createDataPartition(y=dcbikeshare_hour$cnt,
+                               p = 0.75, list = FALSE)
+training <- dcbikeshare_hour[inTrain,]
+testing <- dcbikeshare_hour[-inTrain,]
+
+```
+
+16. Utilize o algoritmo **árvore de decisão** com as variáveis preditoras: `hr`, `holiday`, `workingday`, `weathersit`, `temp`, `atemp`, `hum`, `windspeed`.
+
+```{r}
+library(rpart)
+
+
+```
+
+17. Fazer a previsão para o dataset de teste, usando a **árvore de decisão** previamente construída e calcule o RMSE para esse dataset e apresente o gráfico da árvore.
+
+18. Utilize o algoritmo **Random Forests** com as variáveis preditoras: `hr`, `holiday`, `workingday`, `weathersit`, `temp`, `atemp`, `hum`, `windspeed`. **Dica** usar a função `ranger` da biblioteca do mesmo nome, com o argumento `seed=251904`.
+
+```{r}
+library(ranger)
+
+seed <- 251904
+
+outcome <- "cnt"
+vars <- c("hr","holiday", "workingday", "weathersit", "temp", "atemp", "hum", "windspeed")
+fmla <- paste(outcome, "~", paste(vars, collapse = " + "))
+
+
+(bike_model_rf <- ranger(fmla, training, num.trees = 500,
+                        respect.unordered.factors = "order",
+                        seed = seed))
+
+
+```
+
+17. Fazer a previsão para o dataset de teste, usando o algoritmo **random forests** e calcule o RMSE para esse dataset
+
+```{r}
+
+testing$pred <- predict(bike_model_rf, testing)$predictions
+
+```
+
+```{r}
+
+testing %>% 
+  mutate(residual = pred-cnt) %>% 
+  summarize(rmse=sqrt(mean(residual^2)))
+```
+
+18. Converter a variável `weekday` em fator iniciando no `Domingo` para o valor `0`.
+
+```{r}
+testing$weekday <- factor(testing$weekday, levels = c(0,1,2,3,
+                                                      4,5,6),
+                          labels=c("Domingo","Segunda-Feira",
+                                   "Terça-Feira",
+                                   "Quarta-Feira","Quinta-Feira",
+                                   "Sexta-Feira","Sábado"))
+```
+
+19. Reproduza as visualizações a seguir **Dica** Use o dataset de teste e a variável `weekday`.
+
+```{r}
+testing %>% 
+  ggplot(aes(pred, cnt, color=weekday))+
+  geom_point(alpha=0.8)+
+  geom_abline(color="red")+
+  labs(title="Aluguel de bikes, previsão vs histórico, Random Forest")+
+  theme_minimal()+
+  scale_color_viridis_d()
+
+testing %>% 
+  mutate(atemp_raw = atemp * 50) %>% 
+  ggplot(aes(pred, cnt, color=weekday))+
+  geom_point(alpha=0.8)+
+  geom_abline(color="red")+
+  labs(title="Aluguel de bikes, previsão vs histórico, Random Forest")+
+  theme_minimal()+
+  scale_color_viridis_d()+
+  facet_wrap(~weekday)+
+  theme(legend.position = "none")
+```
+
+```{r, eval = FALSE}
+
+#20. Reproduza as visualizações a seguir. **Dica** para as cores utilize a função `scale_color_brewer(palette = "Dark2")`.
+
+testing$dteday <- as.Date(testing$dteday)
+
+testing %>% 
+  filter(dteday >="2012-01-01" & dteday <= "2012-01-30") %>% 
+  mutate(instant=(instant-min(instant))/24) %>% 
+  pivot_longer(17:18, names_to="tipo", values_to="valor") %>% 
+  ggplot(aes(instant, valor, color=tipo, linetype=tipo))+
+  geom_point()+
+  geom_line()+
+  labs(title="Previsão vs Histórico para Jan/2012",
+       x="dias do mês", y="Bikes alugadas por hora")+
+  scale_color_brewer(palette = "Dark2")+
+  theme_minimal()
+
+testing %>% 
+  filter(dteday >="2012-07-01" & dteday <= "2012-07-31") %>% 
+  mutate(instant=(instant-min(instant))/24) %>% 
+  pivot_longer(17:18, names_to="tipo", values_to="valor") %>% 
+  ggplot(aes(instant, valor, color=tipo, linetype=tipo))+
+  geom_point()+
+  geom_line()+
+  labs(title="Previsão vs Histórico para Jul/2012",
+       x="dias do mês", y="Bikes alugadas por hora")+
+  scale_color_brewer(palette = "Dark2")+
+  theme_minimal()
+```

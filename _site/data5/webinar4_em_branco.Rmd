@@ -1,0 +1,219 @@
+---
+title: "Webinar 4 - Machine Learning"
+subtitle: "Métodos Não Supervisionados: Clustering"
+output: 
+  html_document:
+    code_download: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+## Sobre os dados
+
+Para este webinar vamos usar um dataset sobre compras de produtos (para realizar segmentação de mercado) e um dataset sobre salários de diferentes profissões (para agrupamento de profissões com crescimento de salários similares).
+
+Você pode baixar os dados
+```{r echo=FALSE}
+xfun::pkg_load2(c('htmltools', 'mime'))
+xfun::embed_dir("data4/", text = "aqui.")
+
+```
+
+## Carregando pacotes
+
+```{r pacotes}
+
+library(tidyverse)
+library(dendextend) # para colorir os agrupamentos do cluster hirárquico
+library(cluster) #para usar função pam
+library(cowplot) #para plotar vários gráficos juntos
+
+```
+
+## Segmentação de clientes
+
+calcular a distância euclidiana entre clientes
+
+```{r}
+
+```
+
+criar uma análise usando o algoritmo da distância completa:
+
+```{r}
+
+
+```
+
+graficar o dendograma:
+
+```{r}
+
+
+```
+
+Criar uma asignação de clusters no valor de altura h = 15000
+
+```{r}
+
+```
+
+Gerar um dataframe com os clientes segmentados
+
+```{r}
+
+```
+
+Calcular o número de clientes que fazer parte de cada cluster
+
+```{r}
+
+
+```
+
+colorir o dendograma com base no valor de cutoff
+
+```{r}
+
+
+```
+
+
+calcular a média para cada cluster
+
+```{r}
+
+
+```
+
+Com base neste resultado, podemos inferir que:
+
+* Os clientes do cluster 1 gastaram mais em Leite do que os outros grupos
+
+* Os clientes do cluster 3 gastaram mais em mercado do que os outros grupos
+
+* os clientes do cluster 4 gastaram mais em frozen iogurte do que os outros grupos
+
+* Os clientes do cluster 2 gastaram consideravelmente menos do que os outros clusters
+
+
+
+## Agrupamento de profissões a partir do crescimento dos salários
+
+Vamos carregar os dados:
+
+```{r oes}
+
+```
+
+### Clustering hierárquico
+
+passos necessários conforme o método
+
+```{r}
+# Calculate Euclidean distance between the occupations
+
+
+# Generate an average linkage analysis 
+
+
+# Create a dendrogram object from the hclust variable
+
+
+# Plot the dendrogram
+
+
+# Color branches by cluster formed from the cut at a height of 100000
+
+
+# Plot the colored dendrogram
+
+```
+
+
+agora, vamos 'recortar' a árvore e vamos incluir o agrupamento num novo dataframe.
+
+```{r}
+
+# Use rownames_to_column to move the rownames into a column of the data frame
+
+
+# Create a cluster assignment vector at h = 100,000
+
+
+# Generate the segmented the oes data frame
+
+
+# Create a tidy data frame by gathering the year and values into two columns
+
+
+```
+
+Agora vamos plotar os grupos de clusters para cada ano:
+
+```{r}
+
+# Plot the relationship between mean_salary and year and color the lines by the assigned cluster
+
+
+```
+
+
+### K-means
+
+O algortimo do k-means segue a lógica descrita no último webinar. O primeiro passo é criar duas funções customizadas, que nos ajudarão a extrair as informações necessárias para a escolha do número de $k$ grupos.
+
+```{r}
+
+# Use map_dbl to run many models with varying value of k (centers)
+
+
+# Generate a data frame containing both k and tot_withinss
+
+
+# Plot the elbow plot
+
+```
+
+O interessante é que o método do Elbow sugere 2 clusters, diferentemente do clustering hierárquico que sugeria 3.
+
+```{r}
+
+
+```
+
+
+Vamos usar a largura média da silhueta (ASW) para tentar decidir qual número de clusters é o melhor.
+
+```{r}
+
+
+# Use map_dbl to run many models with varying value of k
+
+
+# Generate a data frame containing both k and sil_width
+
+
+# Plot the relationship between k and sil_width
+
+
+```
+
+Neste método, quanto mais alto for o valor de um referido cluster, melhor, ou seja, este método sugere que o melhor número de clusters seria 7, pois obteve o valor mais alto de largura, seguido pelo cluster k = 2.
+
+```{r}
+
+
+```
+
+
+Vamos comparar os três resultados:
+
+```{r fig.width=14, fig.height=4}
+
+
+
+```
+

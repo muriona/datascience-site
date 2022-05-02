@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Gabarito - Webinar 1b - EDA</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="dd_cv_milz.css" type="text/css" />
+<link rel="stylesheet" href="custom_milz.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EPS 7008</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tarefas
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Instrucoes_Gerais.html">Instruções Gerais</a>
+    </li>
+    <li>
+      <a href="Template_entregas.html">Template para entregas</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Webinars
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="webinar1a-EDA.html">Webinar 1</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar1a.html">Webinar 1a - Gabarito</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar1a-output.html">Webinar 1a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="webinar1b-EDA.html">Webinar 1b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar2.html">Webinar 2 - Dashboards em R</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar3a.html">Webinar 3a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar3b.html">Webinar 3b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar4a.html">Webinar 4a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar4b.html">Webinar 4b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar5.html">Webinar 5 - Gabarito com output</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Gabarito - Webinar 1b - EDA</h1>
+<h3 class="subtitle">Segunda parte</h3>
+<h4 class="date">Última versão em 02/05/22</h4>
+
+</div>
+
+
+<div id="carregando-os-dados" class="section level1">
+<h1>Carregando os dados</h1>
+<p>Nesta aula vamos continuar explorando os dados sobre seriados de TV,
+usando dois datasets, um do Netflix (informações do viewing history) e
+outro do IMDb, banco de dados com informações sobre o rating de seriados
+e filmes e também</p>
+<p>Inicialmente vamos carregar os dados. Os dados do Netflix vem do site
+onde o usuário pode fazer download do seu histórico após o login (<a
+href="https://www.netflix.com/viewingactivity"
+class="uri">https://www.netflix.com/viewingactivity</a>). Já os dados o
+IMDb usam um script que encontra-se em: <a
+href="https://github.com/nazareno/imdb-series"
+class="uri">https://github.com/nazareno/imdb-series</a> para fazer o web
+scrapping do site oficial do IMDb.</p>
+<p>Carregando os dados do IMDb, já unidos num único dataframe, a partir
+do arquivo <code>imdb_series.xlsx</code> (o código para gerar o arquivo
+excel aparece abaixo com # no início de cada linha):</p>
+<pre class="r"><code>library(tidyverse)
+library(readxl)
+
+#library(openxlsx)
+#write.xlsx(imdb, file = &quot;imdb_series.xlsx&quot;)
+
+imdb_series &lt;- read_xlsx(&quot;data1/imdb_series.xlsx&quot;)</code></pre>
+<p>Já mostramos como carregar os dados do Netflix no webinar anterior.
+Após arrumar o tipo <code>Date</code> para a coluna “Date”, eliminar os
+registros que não são seriados e eliminar os registros que tinha
+<code>NA</code> na coluna “Episode”, chegamos a um dataframe limpo, que
+será carregado já em formato excel, denominado
+<code>netflix_series_limpo.xlsx</code> (o código para gerar o arquivo
+excel aparece abaixo com # no início de cada linha):</p>
+<pre class="r"><code>#netflix_series_limpo &lt;- netflix %&gt;% 
+#  filter(str_detect(Title, &quot;:&quot;)) %&gt;% 
+#  separate(Title,c(&quot;series_title&quot;,&quot;season&quot;,&quot;episode&quot;),&quot;:&quot;) %&gt;% 
+#  filter(!is.na(episode))
+
+#write.xlsx(netflix_series_limpo, file = &quot;netflix_series_limpo.xlsx&quot;)
+
+netflix &lt;- read.csv(&quot;data1/NetflixViewingHistory.csv&quot;)
+
+netflix_series_limpo &lt;- read_xlsx(&quot;data1/netflix_series_limpo.xlsx&quot;)</code></pre>
+<p>Também podemos ter facilmente a lista de filmes assistidos, a partir
+do dataset <code>netflix</code> e do código apresentado anteriormente
+para filtrar seriados:</p>
+<pre class="r"><code>netflix_filmes &lt;- netflix %&gt;% 
+  separate(Title, c(&quot;movie_title&quot;,&quot;season&quot;,&quot;episode&quot;),&quot;:&quot;) %&gt;% 
+  filter(is.na(episode)) %&gt;% 
+  select(movie_title, Date)</code></pre>
+<pre><code>## Warning: Expected 3 pieces. Additional pieces discarded in 50 rows [17, 69, 70,
+## 219, 313, 314, 315, 316, 317, 318, 319, 320, 389, 397, 398, 399, 400, 425, 427,
+## 428, ...].</code></pre>
+<pre><code>## Warning: Expected 3 pieces. Missing pieces filled with `NA` in 215 rows [11, 14,
+## 22, 23, 24, 25, 26, 27, 28, 29, 30, 34, 43, 46, 47, 49, 53, 54, 63, 66, ...].</code></pre>
+</div>
+<div id="seriados-mais-assistidos-no-netflix-e-suas-avaliações-no-imdb"
+class="section level1">
+<h1>Seriados mais assistidos no Netflix e suas avaliações no imdb:</h1>
+<p>Podemos iniciar visualizando a lista dos 20 seriados mais assistidos,
+com o código a seguir:</p>
+<pre class="r"><code>netflix_series_mais_assistidas &lt;- netflix_series_limpo %&gt;% 
+  group_by(series_title) %&gt;% 
+  count() %&gt;% 
+  arrange(desc(n)) %&gt;% 
+  ungroup() %&gt;% 
+  top_n(20, wt=n)
+
+
+netflix_series_mais_assistidas %&gt;% 
+  ggplot(aes(reorder(series_title, n), n))+
+  geom_col(fill=&quot;#f16727&quot;)+
+  coord_flip()+
+  theme_linedraw() +
+  labs(y=&quot;Capítulos assistidos&quot;,
+       title = &quot;Seriados mais assistidos - Netflix&quot;)+
+  theme(axis.title.y = element_blank())</code></pre>
+<p><img src="webinar1b-EDA_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>e agora vamos verificar a avaliação global de cada um dos seriados
+acima, usando as informações do imdb. Primeiro, vamos calcular a
+avaliação média para cada seriado no dataframe do imdb:</p>
+<pre class="r"><code>imdb_series_nota_media &lt;- imdb_series %&gt;% 
+  group_by(series_name) %&gt;% 
+  summarize(nota=mean(UserRating))</code></pre>
+</div>
+<div id="juntando-os-datasets-netflix-e-imdb" class="section level1">
+<h1>Juntando os datasets Netflix e IMDb</h1>
+<p>Agora podemos juntar as informações de avaliação de cada seriado com
+os seriados mais assistidos:</p>
+<pre class="r"><code>nomes &lt;- data.frame(pt=c(&quot;Grimm: Contos de Terror&quot;, &quot;Era Uma Vez&quot;,
+                         &quot;Como Defender um Assassino&quot;, &quot;La Casa de Papel&quot;,
+                         &quot;Lúcifer&quot;,&quot;Motel Bates&quot;,&quot;Pânico: A Série de TV&quot;),
+                    en=c(&quot;Grimm&quot;,&quot;Once Upon a Time&quot;,
+                         &quot;How to Get Away With Murder&quot;,&quot;Money Heist&quot;,
+                         &quot;Lucifer&quot;,&quot;Bates Motel&quot;,&quot;Scream&quot;))
+
+netflix_imdb_pt_en &lt;- netflix_series_mais_assistidas %&gt;% 
+  left_join(nomes, by=c(&quot;series_title&quot;=&quot;en&quot;)) %&gt;% 
+  mutate(titulo_pt=ifelse(is.na(pt), series_title, pt)) %&gt;% 
+  left_join(imdb_series_nota_media, by=c(&quot;titulo_pt&quot;=&quot;series_name&quot;)) %&gt;% 
+  select(-pt)
+
+library(ggrepel)
+
+
+netflix_imdb_pt_en %&gt;% 
+  ggplot(aes(n, nota, label=series_title))+
+  geom_point(color=&quot;#f16727&quot;) +
+  geom_text_repel()</code></pre>
+<pre><code>## Warning: Removed 4 rows containing missing values (geom_point).</code></pre>
+<pre><code>## Warning: Removed 4 rows containing missing values (geom_text_repel).</code></pre>
+<p><img src="webinar1b-EDA_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div
+id="quantidade-de-capítulos-assistidos-e-de-capítulos-totais-por-seriado"
+class="section level1">
+<h1>Quantidade de capítulos assistidos e de capítulos totais por
+seriado</h1>
+<p>Será que foram assistidos todos os capítulos de cada seriado
+acima?</p>
+<pre class="r"><code>assistidos_vs_total &lt;- netflix_imdb_pt_en %&gt;% 
+  left_join(imdb_series, by=c(&quot;titulo_pt&quot;=&quot;series_name&quot;)) %&gt;% 
+  group_by(series_title) %&gt;% 
+  summarize(total=n()) %&gt;% 
+  left_join(netflix_imdb_pt_en, by=&quot;series_title&quot;) %&gt;% 
+  mutate(faltam=total-n) %&gt;% 
+  filter(faltam &gt;=0)
+
+library(knitr)
+
+assistidos_vs_total %&gt;% 
+  kable(digits = 2)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+series_title
+</th>
+<th style="text-align:right;">
+total
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:left;">
+titulo_pt
+</th>
+<th style="text-align:right;">
+nota
+</th>
+<th style="text-align:right;">
+faltam
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+13 Reasons Why
+</td>
+<td style="text-align:right;">
+49
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:left;">
+13 Reasons Why
+</td>
+<td style="text-align:right;">
+7.25
+</td>
+<td style="text-align:right;">
+34
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Away
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+Away
+</td>
+<td style="text-align:right;">
+7.08
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bates Motel
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:left;">
+Motel Bates
+</td>
+<td style="text-align:right;">
+8.59
+</td>
+<td style="text-align:right;">
+33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dark
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:left;">
+Dark
+</td>
+<td style="text-align:right;">
+9.08
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Greenleaf
+</td>
+<td style="text-align:right;">
+60
+</td>
+<td style="text-align:right;">
+60
+</td>
+<td style="text-align:left;">
+Greenleaf
+</td>
+<td style="text-align:right;">
+7.59
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grimm
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:left;">
+Grimm: Contos de Terror
+</td>
+<td style="text-align:right;">
+8.44
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hemlock Grove
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+Hemlock Grove
+</td>
+<td style="text-align:right;">
+7.49
+</td>
+<td style="text-align:right;">
+22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+How to Get Away With Murder
+</td>
+<td style="text-align:right;">
+180
+</td>
+<td style="text-align:right;">
+71
+</td>
+<td style="text-align:left;">
+Como Defender um Assassino
+</td>
+<td style="text-align:right;">
+8.57
+</td>
+<td style="text-align:right;">
+109
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lucifer
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:left;">
+Lúcifer
+</td>
+<td style="text-align:right;">
+8.74
+</td>
+<td style="text-align:right;">
+52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Narcos
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+Narcos
+</td>
+<td style="text-align:right;">
+8.76
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Once Upon a Time
+</td>
+<td style="text-align:right;">
+312
+</td>
+<td style="text-align:right;">
+105
+</td>
+<td style="text-align:left;">
+Era Uma Vez
+</td>
+<td style="text-align:right;">
+8.27
+</td>
+<td style="text-align:right;">
+207
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Orange Is the New Black
+</td>
+<td style="text-align:right;">
+91
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:left;">
+Orange Is the New Black
+</td>
+<td style="text-align:right;">
+8.17
+</td>
+<td style="text-align:right;">
+26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Orphan Black
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:left;">
+Orphan Black
+</td>
+<td style="text-align:right;">
+8.53
+</td>
+<td style="text-align:right;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scream
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+Pânico: A Série de TV
+</td>
+<td style="text-align:right;">
+7.54
+</td>
+<td style="text-align:right;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sleepy Hollow
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+Sleepy Hollow
+</td>
+<td style="text-align:right;">
+7.68
+</td>
+<td style="text-align:right;">
+49
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stranger Things
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+Stranger Things
+</td>
+<td style="text-align:right;">
+8.68
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Walking Dead
+</td>
+<td style="text-align:right;">
+288
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:left;">
+The Walking Dead
+</td>
+<td style="text-align:right;">
+8.01
+</td>
+<td style="text-align:right;">
+221
+</td>
+</tr>
+</tbody>
+</table>
+<p>vamos fazer um gráfico comparativo do que foi assistido e o total de
+capítulos vs a avaliação do IMDb:</p>
+<pre class="r"><code>assistidos_vs_total %&gt;% 
+  ggplot(aes(total, nota, label=series_title))+
+  geom_point(color=&quot;red&quot;)+
+  geom_text_repel()</code></pre>
+<p><img src="webinar1b-EDA_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>assistidos_vs_total %&gt;% 
+  ggplot(aes(total, n, label=series_title))+
+  geom_point(color=&quot;red&quot;)+
+  geom_text_repel()+
+  scale_x_continuous(trans=&quot;log2&quot;)+
+  scale_y_continuous(trans=&quot;log2&quot;)+
+  geom_abline(color=&quot;blue&quot;)</code></pre>
+<p><img src="webinar1b-EDA_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+</div>
+<div id="avaliações-de-seriados-específicos-por-temporada"
+class="section level1">
+<h1>Avaliações de seriados específicos por temporada</h1>
+<p>Agora vamos ver como foram avaliados capítulos específicos de alguns
+dos seriados mais assistidos, como exemplo vamos analisar o seriado com
+mais capítulos assistidos (Grimm).</p>
+<pre class="r"><code>netflix_series_limpo %&gt;% 
+  filter(series_title == &quot;Grimm&quot;) %&gt;% 
+  arrange(.,Date) %&gt;% 
+  left_join(nomes, by=c(&quot;series_title&quot;=&quot;en&quot;)) %&gt;% 
+  left_join(imdb_series, by=c(&quot;pt&quot;=&quot;series_name&quot;,
+                              &quot;episode&quot;=&quot;Episode&quot;)) %&gt;% 
+  select(Date, season.x, episode, UserRating) %&gt;% 
+  ggplot(aes(season.x, UserRating))+
+  geom_boxplot(aes(fill=season.x))</code></pre>
+<pre><code>## Warning: Removed 9 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="webinar1b-EDA_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Por fim, vamos mudar a camada de cores, para uma que é
+tradicionalmente usada, a escala viridis, usando a função
+´scale_fill_viridis_d()`:</p>
+<pre class="r"><code>netflix_series_limpo %&gt;% 
+  filter(series_title == &quot;Grimm&quot;) %&gt;% 
+  arrange(.,Date) %&gt;% 
+  left_join(nomes, by=c(&quot;series_title&quot;=&quot;en&quot;)) %&gt;% 
+  left_join(imdb_series, by=c(&quot;pt&quot;=&quot;series_name&quot;,
+                              &quot;episode&quot;=&quot;Episode&quot;)) %&gt;% 
+  select(Date, season.x, episode, UserRating) %&gt;% 
+  ggplot(aes(season.x, UserRating))+
+  geom_boxplot(aes(fill=season.x))+
+  scale_fill_viridis_d()</code></pre>
+<pre><code>## Warning: Removed 9 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="webinar1b-EDA_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiR2FiYXJpdG8gLSBXZWJpbmFyIDFiIC0gRURBIgpzdWJ0aXRsZTogIlNlZ3VuZGEgcGFydGUiCm91dHB1dDoKICAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogdHJ1ZQogICAgdG9jX2Zsb2F0OiB0cnVlCiAgICBjb2RlX2Rvd25sb2FkOiB0cnVlCiAgICB0aGVtZTogcGFwZXIKZGF0ZTogIsOabHRpbWEgdmVyc8OjbyBlbSBgciBmb3JtYXQoU3lzLnRpbWUoKSwgJyVkLyVtLyV5JylgIgotLS0KCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpCmBgYAoKIyBDYXJyZWdhbmRvIG9zIGRhZG9zCgpOZXN0YSBhdWxhIHZhbW9zIGNvbnRpbnVhciBleHBsb3JhbmRvIG9zIGRhZG9zIHNvYnJlIHNlcmlhZG9zIGRlIFRWLCB1c2FuZG8gZG9pcyBkYXRhc2V0cywgdW0gZG8gTmV0ZmxpeCAoaW5mb3JtYcOnw7VlcyBkbyB2aWV3aW5nIGhpc3RvcnkpIGUgb3V0cm8gZG8gSU1EYiwgYmFuY28gZGUgZGFkb3MgY29tIGluZm9ybWHDp8O1ZXMgc29icmUgbyByYXRpbmcgZGUgc2VyaWFkb3MgZSBmaWxtZXMgZSB0YW1iw6ltIAoKSW5pY2lhbG1lbnRlIHZhbW9zIGNhcnJlZ2FyIG9zIGRhZG9zLiBPcyBkYWRvcyBkbyBOZXRmbGl4IHZlbSBkbyBzaXRlIG9uZGUgbyB1c3XDoXJpbyBwb2RlIGZhemVyIGRvd25sb2FkIGRvIHNldSBoaXN0w7NyaWNvIGFww7NzIG8gbG9naW4gKGh0dHBzOi8vd3d3Lm5ldGZsaXguY29tL3ZpZXdpbmdhY3Rpdml0eSkuIErDoSBvcyBkYWRvcyBvIElNRGIgdXNhbSB1bSBzY3JpcHQgcXVlIGVuY29udHJhLXNlIGVtOiBodHRwczovL2dpdGh1Yi5jb20vbmF6YXJlbm8vaW1kYi1zZXJpZXMgcGFyYSBmYXplciBvIHdlYiBzY3JhcHBpbmcgZG8gc2l0ZSBvZmljaWFsIGRvIElNRGIuCgpDYXJyZWdhbmRvIG9zIGRhZG9zIGRvIElNRGIsIGrDoSB1bmlkb3MgbnVtIMO6bmljbyBkYXRhZnJhbWUsIGEgcGFydGlyIGRvIGFycXVpdm8gYGltZGJfc2VyaWVzLnhsc3hgIChvIGPDs2RpZ28gcGFyYSBnZXJhciBvIGFycXVpdm8gZXhjZWwgYXBhcmVjZSBhYmFpeG8gY29tICMgbm8gaW7DrWNpbyBkZSBjYWRhIGxpbmhhKToKCmBgYHtyIGltZGJ9CgpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShyZWFkeGwpCgojbGlicmFyeShvcGVueGxzeCkKI3dyaXRlLnhsc3goaW1kYiwgZmlsZSA9ICJpbWRiX3Nlcmllcy54bHN4IikKCmltZGJfc2VyaWVzIDwtIHJlYWRfeGxzeCgiZGF0YTEvaW1kYl9zZXJpZXMueGxzeCIpCmBgYAoKSsOhIG1vc3RyYW1vcyBjb21vIGNhcnJlZ2FyIG9zIGRhZG9zIGRvIE5ldGZsaXggbm8gd2ViaW5hciBhbnRlcmlvci4gQXDDs3MgYXJydW1hciBvIHRpcG8gYERhdGVgIHBhcmEgYSBjb2x1bmEgIkRhdGUiLCBlbGltaW5hciBvcyByZWdpc3Ryb3MgcXVlIG7Do28gc8OjbyBzZXJpYWRvcyBlIGVsaW1pbmFyIG9zIHJlZ2lzdHJvcyBxdWUgdGluaGEgYE5BYCBuYSBjb2x1bmEgIkVwaXNvZGUiLCBjaGVnYW1vcyBhIHVtIGRhdGFmcmFtZSBsaW1wbywgcXVlIHNlcsOhIGNhcnJlZ2FkbyBqw6EgZW0gZm9ybWF0byBleGNlbCwgZGVub21pbmFkbyBgbmV0ZmxpeF9zZXJpZXNfbGltcG8ueGxzeGAgKG8gY8OzZGlnbyBwYXJhIGdlcmFyIG8gYXJxdWl2byBleGNlbCBhcGFyZWNlIGFiYWl4byBjb20gIyBubyBpbsOtY2lvIGRlIGNhZGEgbGluaGEpOgoKYGBge3J9CgojbmV0ZmxpeF9zZXJpZXNfbGltcG8gPC0gbmV0ZmxpeCAlPiUgCiMgIGZpbHRlcihzdHJfZGV0ZWN0KFRpdGxlLCAiOiIpKSAlPiUgCiMgIHNlcGFyYXRlKFRpdGxlLGMoInNlcmllc190aXRsZSIsInNlYXNvbiIsImVwaXNvZGUiKSwiOiIpICU+JSAKIyAgZmlsdGVyKCFpcy5uYShlcGlzb2RlKSkKCiN3cml0ZS54bHN4KG5ldGZsaXhfc2VyaWVzX2xpbXBvLCBmaWxlID0gIm5ldGZsaXhfc2VyaWVzX2xpbXBvLnhsc3giKQoKbmV0ZmxpeCA8LSByZWFkLmNzdigiZGF0YTEvTmV0ZmxpeFZpZXdpbmdIaXN0b3J5LmNzdiIpCgpuZXRmbGl4X3Nlcmllc19saW1wbyA8LSByZWFkX3hsc3goImRhdGExL25ldGZsaXhfc2VyaWVzX2xpbXBvLnhsc3giKQoKYGBgCgpUYW1iw6ltIHBvZGVtb3MgdGVyIGZhY2lsbWVudGUgYSBsaXN0YSBkZSBmaWxtZXMgYXNzaXN0aWRvcywgYSBwYXJ0aXIgZG8gZGF0YXNldCBgbmV0ZmxpeGAgZSBkbyBjw7NkaWdvIGFwcmVzZW50YWRvIGFudGVyaW9ybWVudGUgcGFyYSBmaWx0cmFyIHNlcmlhZG9zOgoKYGBge3J9CgpuZXRmbGl4X2ZpbG1lcyA8LSBuZXRmbGl4ICU+JSAKICBzZXBhcmF0ZShUaXRsZSwgYygibW92aWVfdGl0bGUiLCJzZWFzb24iLCJlcGlzb2RlIiksIjoiKSAlPiUgCiAgZmlsdGVyKGlzLm5hKGVwaXNvZGUpKSAlPiUgCiAgc2VsZWN0KG1vdmllX3RpdGxlLCBEYXRlKQoKYGBgCgoKCiMgU2VyaWFkb3MgbWFpcyBhc3Npc3RpZG9zIG5vIE5ldGZsaXggZSBzdWFzIGF2YWxpYcOnw7VlcyBubyBpbWRiOgoKUG9kZW1vcyBpbmljaWFyIHZpc3VhbGl6YW5kbyBhIGxpc3RhIGRvcyAyMCBzZXJpYWRvcyBtYWlzIGFzc2lzdGlkb3MsIGNvbSBvIGPDs2RpZ28gYSBzZWd1aXI6CgpgYGB7cn0KbmV0ZmxpeF9zZXJpZXNfbWFpc19hc3Npc3RpZGFzIDwtIG5ldGZsaXhfc2VyaWVzX2xpbXBvICU+JSAKICBncm91cF9ieShzZXJpZXNfdGl0bGUpICU+JSAKICBjb3VudCgpICU+JSAKICBhcnJhbmdlKGRlc2MobikpICU+JSAKICB1bmdyb3VwKCkgJT4lIAogIHRvcF9uKDIwLCB3dD1uKQoKCm5ldGZsaXhfc2VyaWVzX21haXNfYXNzaXN0aWRhcyAlPiUgCiAgZ2dwbG90KGFlcyhyZW9yZGVyKHNlcmllc190aXRsZSwgbiksIG4pKSsKICBnZW9tX2NvbChmaWxsPSIjZjE2NzI3IikrCiAgY29vcmRfZmxpcCgpKwogIHRoZW1lX2xpbmVkcmF3KCkgKwogIGxhYnMoeT0iQ2Fww610dWxvcyBhc3Npc3RpZG9zIiwKICAgICAgIHRpdGxlID0gIlNlcmlhZG9zIG1haXMgYXNzaXN0aWRvcyAtIE5ldGZsaXgiKSsKICB0aGVtZShheGlzLnRpdGxlLnkgPSBlbGVtZW50X2JsYW5rKCkpCgpgYGAKCgplIGFnb3JhIHZhbW9zIHZlcmlmaWNhciBhIGF2YWxpYcOnw6NvIGdsb2JhbCBkZSBjYWRhIHVtIGRvcyBzZXJpYWRvcyBhY2ltYSwgdXNhbmRvIGFzIGluZm9ybWHDp8O1ZXMgZG8gaW1kYi4gUHJpbWVpcm8sIHZhbW9zIGNhbGN1bGFyIGEgYXZhbGlhw6fDo28gbcOpZGlhIHBhcmEgY2FkYSBzZXJpYWRvIG5vIGRhdGFmcmFtZSBkbyBpbWRiOgoKYGBge3J9CgppbWRiX3Nlcmllc19ub3RhX21lZGlhIDwtIGltZGJfc2VyaWVzICU+JSAKICBncm91cF9ieShzZXJpZXNfbmFtZSkgJT4lIAogIHN1bW1hcml6ZShub3RhPW1lYW4oVXNlclJhdGluZykpCgpgYGAKCgojIEp1bnRhbmRvIG9zIGRhdGFzZXRzIE5ldGZsaXggZSBJTURiCgpBZ29yYSBwb2RlbW9zIGp1bnRhciBhcyBpbmZvcm1hw6fDtWVzIGRlIGF2YWxpYcOnw6NvIGRlIGNhZGEgc2VyaWFkbyBjb20gb3Mgc2VyaWFkb3MgbWFpcyBhc3Npc3RpZG9zOgoKYGBge3J9Cgpub21lcyA8LSBkYXRhLmZyYW1lKHB0PWMoIkdyaW1tOiBDb250b3MgZGUgVGVycm9yIiwgIkVyYSBVbWEgVmV6IiwKICAgICAgICAgICAgICAgICAgICAgICAgICJDb21vIERlZmVuZGVyIHVtIEFzc2Fzc2lubyIsICJMYSBDYXNhIGRlIFBhcGVsIiwKICAgICAgICAgICAgICAgICAgICAgICAgICJMw7pjaWZlciIsIk1vdGVsIEJhdGVzIiwiUMOibmljbzogQSBTw6lyaWUgZGUgVFYiKSwKICAgICAgICAgICAgICAgICAgICBlbj1jKCJHcmltbSIsIk9uY2UgVXBvbiBhIFRpbWUiLAogICAgICAgICAgICAgICAgICAgICAgICAgIkhvdyB0byBHZXQgQXdheSBXaXRoIE11cmRlciIsIk1vbmV5IEhlaXN0IiwKICAgICAgICAgICAgICAgICAgICAgICAgICJMdWNpZmVyIiwiQmF0ZXMgTW90ZWwiLCJTY3JlYW0iKSkKCm5ldGZsaXhfaW1kYl9wdF9lbiA8LSBuZXRmbGl4X3Nlcmllc19tYWlzX2Fzc2lzdGlkYXMgJT4lIAogIGxlZnRfam9pbihub21lcywgYnk9Yygic2VyaWVzX3RpdGxlIj0iZW4iKSkgJT4lIAogIG11dGF0ZSh0aXR1bG9fcHQ9aWZlbHNlKGlzLm5hKHB0KSwgc2VyaWVzX3RpdGxlLCBwdCkpICU+JSAKICBsZWZ0X2pvaW4oaW1kYl9zZXJpZXNfbm90YV9tZWRpYSwgYnk9YygidGl0dWxvX3B0Ij0ic2VyaWVzX25hbWUiKSkgJT4lIAogIHNlbGVjdCgtcHQpCgpsaWJyYXJ5KGdncmVwZWwpCgoKbmV0ZmxpeF9pbWRiX3B0X2VuICU+JSAKICBnZ3Bsb3QoYWVzKG4sIG5vdGEsIGxhYmVsPXNlcmllc190aXRsZSkpKwogIGdlb21fcG9pbnQoY29sb3I9IiNmMTY3MjciKSArCiAgZ2VvbV90ZXh0X3JlcGVsKCkKCmBgYAoKCiMgUXVhbnRpZGFkZSBkZSBjYXDDrXR1bG9zIGFzc2lzdGlkb3MgZSBkZSBjYXDDrXR1bG9zIHRvdGFpcyBwb3Igc2VyaWFkbwoKU2Vyw6EgcXVlIGZvcmFtIGFzc2lzdGlkb3MgdG9kb3Mgb3MgY2Fww610dWxvcyBkZSBjYWRhIHNlcmlhZG8gYWNpbWE/CgpgYGB7cn0KCmFzc2lzdGlkb3NfdnNfdG90YWwgPC0gbmV0ZmxpeF9pbWRiX3B0X2VuICU+JSAKICBsZWZ0X2pvaW4oaW1kYl9zZXJpZXMsIGJ5PWMoInRpdHVsb19wdCI9InNlcmllc19uYW1lIikpICU+JSAKICBncm91cF9ieShzZXJpZXNfdGl0bGUpICU+JSAKICBzdW1tYXJpemUodG90YWw9bigpKSAlPiUgCiAgbGVmdF9qb2luKG5ldGZsaXhfaW1kYl9wdF9lbiwgYnk9InNlcmllc190aXRsZSIpICU+JSAKICBtdXRhdGUoZmFsdGFtPXRvdGFsLW4pICU+JSAKICBmaWx0ZXIoZmFsdGFtID49MCkKCmxpYnJhcnkoa25pdHIpCgphc3Npc3RpZG9zX3ZzX3RvdGFsICU+JSAKICBrYWJsZShkaWdpdHMgPSAyKQoKYGBgCgoKdmFtb3MgZmF6ZXIgdW0gZ3LDoWZpY28gY29tcGFyYXRpdm8gZG8gcXVlIGZvaSBhc3Npc3RpZG8gZSBvIHRvdGFsIGRlIGNhcMOtdHVsb3MgdnMgYSBhdmFsaWHDp8OjbyBkbyBJTURiOgoKYGBge3J9CmFzc2lzdGlkb3NfdnNfdG90YWwgJT4lIAogIGdncGxvdChhZXModG90YWwsIG5vdGEsIGxhYmVsPXNlcmllc190aXRsZSkpKwogIGdlb21fcG9pbnQoY29sb3I9InJlZCIpKwogIGdlb21fdGV4dF9yZXBlbCgpCgoKYXNzaXN0aWRvc192c190b3RhbCAlPiUgCiAgZ2dwbG90KGFlcyh0b3RhbCwgbiwgbGFiZWw9c2VyaWVzX3RpdGxlKSkrCiAgZ2VvbV9wb2ludChjb2xvcj0icmVkIikrCiAgZ2VvbV90ZXh0X3JlcGVsKCkrCiAgc2NhbGVfeF9jb250aW51b3VzKHRyYW5zPSJsb2cyIikrCiAgc2NhbGVfeV9jb250aW51b3VzKHRyYW5zPSJsb2cyIikrCiAgZ2VvbV9hYmxpbmUoY29sb3I9ImJsdWUiKQoKYGBgCgoKCiMgQXZhbGlhw6fDtWVzIGRlIHNlcmlhZG9zIGVzcGVjw61maWNvcyBwb3IgdGVtcG9yYWRhCgpBZ29yYSB2YW1vcyB2ZXIgY29tbyBmb3JhbSBhdmFsaWFkb3MgY2Fww610dWxvcyBlc3BlY8OtZmljb3MgZGUgYWxndW5zIGRvcyBzZXJpYWRvcyBtYWlzIGFzc2lzdGlkb3MsIGNvbW8gZXhlbXBsbyB2YW1vcyBhbmFsaXNhciBvIHNlcmlhZG8gY29tIG1haXMgY2Fww610dWxvcyBhc3Npc3RpZG9zIChHcmltbSkuCgpgYGB7cn0KCm5ldGZsaXhfc2VyaWVzX2xpbXBvICU+JSAKICBmaWx0ZXIoc2VyaWVzX3RpdGxlID09ICJHcmltbSIpICU+JSAKICBhcnJhbmdlKC4sRGF0ZSkgJT4lIAogIGxlZnRfam9pbihub21lcywgYnk9Yygic2VyaWVzX3RpdGxlIj0iZW4iKSkgJT4lIAogIGxlZnRfam9pbihpbWRiX3NlcmllcywgYnk9YygicHQiPSJzZXJpZXNfbmFtZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJlcGlzb2RlIj0iRXBpc29kZSIpKSAlPiUgCiAgc2VsZWN0KERhdGUsIHNlYXNvbi54LCBlcGlzb2RlLCBVc2VyUmF0aW5nKSAlPiUgCiAgZ2dwbG90KGFlcyhzZWFzb24ueCwgVXNlclJhdGluZykpKwogIGdlb21fYm94cGxvdChhZXMoZmlsbD1zZWFzb24ueCkpCgpgYGAKClBvciBmaW0sIHZhbW9zIG11ZGFyIGEgY2FtYWRhIGRlIGNvcmVzLCBwYXJhIHVtYSBxdWUgw6kgdHJhZGljaW9uYWxtZW50ZSB1c2FkYSwgYSBlc2NhbGEgdmlyaWRpcywgdXNhbmRvIGEgZnVuw6fDo28gwrRzY2FsZV9maWxsX3ZpcmlkaXNfZCgpYDoKCmBgYHtyfQpuZXRmbGl4X3Nlcmllc19saW1wbyAlPiUgCiAgZmlsdGVyKHNlcmllc190aXRsZSA9PSAiR3JpbW0iKSAlPiUgCiAgYXJyYW5nZSguLERhdGUpICU+JSAKICBsZWZ0X2pvaW4obm9tZXMsIGJ5PWMoInNlcmllc190aXRsZSI9ImVuIikpICU+JSAKICBsZWZ0X2pvaW4oaW1kYl9zZXJpZXMsIGJ5PWMoInB0Ij0ic2VyaWVzX25hbWUiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiZXBpc29kZSI9IkVwaXNvZGUiKSkgJT4lIAogIHNlbGVjdChEYXRlLCBzZWFzb24ueCwgZXBpc29kZSwgVXNlclJhdGluZykgJT4lIAogIGdncGxvdChhZXMoc2Vhc29uLngsIFVzZXJSYXRpbmcpKSsKICBnZW9tX2JveHBsb3QoYWVzKGZpbGw9c2Vhc29uLngpKSsKICBzY2FsZV9maWxsX3ZpcmlkaXNfZCgpCmBgYAoKCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("webinar1b-EDA.Rmd");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

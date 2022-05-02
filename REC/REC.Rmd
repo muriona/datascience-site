@@ -1,0 +1,247 @@
+---
+title: "REC - Gestão Estratégica de TI"
+date: "22 de Março de 2022"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: paper
+link-citations: yes
+---
+
+Usaremos um dataset com registros diários de aluguel desde 2011 a 2012. 
+
+# Sobre o aluguel de bikes em DC, EUA
+
+Os sistemas de compartilhamento de bicicletas são a nova geração de sistemas tradicionais de aluguel de bicicletas onde todo o processo de adesão, aluguel e retorno se tornou automático. Através destes sistemas, o usuário é capaz de alugar facilmente uma bicicleta de uma determinada posição e retornar em outra posição. Atualmente, existem cerca de 500 programas de compartilhamento de bicicletas em todo o mundo, que é composto de mais de 500 mil bicicletas. Hoje, existe um grande interesse nestes sistemas devido ao seu importante papel em questões de tráfego, meio ambiente e saúde.
+
+Além das aplicações interessantes no mundo real dos sistemas de aluguel de bicicletas, as características dos dados gerados por estes sistemas os tornam atraentes para a pesquisa. Ao contrário de outros serviços de transporte, como ônibus ou metrô, a duração da viagem, posição de partida e chegada é explicitamente registrada nestes sistemas. Esta característica transforma o sistema de compartilhamento de bicicletas em uma rede virtual de sensores que pode ser usada para a detecção da mobilidade na cidade. Portanto, espera-se que a maioria dos eventos importantes na cidade possam ser detectados através do monitoramento destes dados.
+
+Fonte: [UCI Machine Learning Repository - Bike Sharing Dataset](http://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset)
+
+
+```{r load-package, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, eval = TRUE, results=FALSE)
+
+```
+
+
+# Dados
+
+```{r}
+library(tidyverse)
+
+
+dcbikeshare <- read.csv("dataset/bikeshare-day.csv")
+dcbikeshare$dteday <- as.Date(dcbikeshare$dteday)
+```
+
+Os dados incluem contagens diárias de aluguel de bicicletas (por membros e usuários casuais) da "Capital Bikeshare" em Washington, DC entre 2011 e 2012, bem como informações meteorológicas sobre esses dias.
+
+As fontes de dados originais se encontram em: <http://capitalbikeshare.com/system-data> e <http://www.freemeteo.com>.
+
+O dataset chama-se `dcbikeshare-day.csv`.
+
+# Questões
+
+1.  Recodifique a variável `season` para um *factor* com nomes mais significativos para cada nível, considerando a "primavera" **spring** como categoria base. (*Valor: 0,5 pts*)
+
+```{r}
+dcbikeshare <- read.csv("dataset/bikeshare-day.csv")
+
+dcbikeshare$season <- factor(dcbikeshare$season, levels = c(1,2,3,4), labels = c("winter","spring","summer","fall"))
+
+dcbikeshare$season <- relevel(dcbikeshare$season, ref = 2)
+```
+
+2.  Recodifique as variáveis binárias `holiday` e `workingday` para serem fatores com níveis não (0) e sim (1), com "não" como categoria base. (*Valor: 0,5 pts*)
+
+```{r}
+dcbikeshare$holiday <- factor(dcbikeshare$holiday,
+                              levels = c(0,1),
+                              labels = c("Não","Sim"))
+
+dcbikeshare$holiday <- relevel(dcbikeshare$holiday, ref="Não")
+
+dcbikeshare$workingday <- factor(dcbikeshare$workingday,
+                                 levels = c(0,1),
+                                 labels = c("Não","Sim"))
+dcbikeshare$workingday <- relevel(dcbikeshare$workingday,
+                                  ref = "Não")
+```
+
+3.  Recodifique a variável `yr` para ser um fator com níveis 2011 e 2012, com 2011 como categoria base. (*Valor: 0,5 pts*)
+
+```{r}
+dcbikeshare$yr <- factor(dcbikeshare$yr, levels = c(0,1),
+                         labels = c(2011, 2012))
+
+dcbikeshare$yr <- relevel(dcbikeshare$yr, ref = "2011")
+```
+
+4.  Recodifique a variável `weathersit` para: 1 - claro, 2 - névoa, 3 - precipitação leve, e 4 - precipitação pesada, com "claro" como categoria base. (*Valor: 0,5 pts*)
+
+```{r}
+dcbikeshare$weathersit <- factor(dcbikeshare$weathersit,
+                                 levels = c(1,2,3,4),
+                                 labels = c("claro",
+                                            "névoa",
+                                            "precipitação leve",
+                                            "precipitação pesada"))
+
+dcbikeshare$weathersit <- relevel(dcbikeshare$weathersit,
+                                  ref = "claro")
+```
+
+5. Recodifique a variável `dteday` para formato "Date" e a variável  `mnth` para **factor** com 12 níveis. (*Valor: 0,5 pts*)
+
+```{r}
+dcbikeshare$dteday <- as.Date(dcbikeshare$dteday)
+
+dcbikeshare$mnth <- as.factor(dcbikeshare$mnth)
+```
+
+
+6.  Calcule os valores brutos de temperatura (`temp`), sensação térmica (`atemp`), umidade (`hum`) e velocidade do vento (`windspeed`) a partir da multiplicação dos valores indicados no dataset *dcbikeshare* pelos valores máximos brutos indicados na tabela abaixo: 
+
+| Variável  | Valor Máximo |
+|-----------|--------------|
+| temp      | 41           |
+| atemp     | 50           |
+| hum       | 100          |
+| windspeed | 67           |
+
+```{r}
+dcbikeshare2 <- dcbikeshare %>% 
+  mutate(temp_real = temp*41,
+         atemp_real = atemp*50,
+         hum_real = hum *100,
+         windspeed_real = windspeed*67)
+```
+
+E inclua as novas variáveis `temp_real`, `atemp_real`,`hum_real`,`windspeed_real` no dataframe. (*Valor: 0,5 pts*)
+
+7. Recrie a seguinte visualização, e interprete-a no contexto dos dados. 
+Obs: A temperatura plotada é a sensação térmica *atemp*. (*Valor: 0,5 pts*)
+
+```{r fig.width=8, fig.height=6}
+
+#**Dica**: Você precisará usar uma das variáveis que você criou acima. *
+
+library(viridisLite)
+
+
+dcbikeshare2 %>% 
+  ggplot(mapping = aes(x = dteday, y = cnt, color = atemp_real)) +
+    geom_point(alpha = 0.9) +
+    labs(
+      title = "Bikes alugadas em DC, 2011 e 2012",
+      subtitle = "Temperaturas mais quentes associadas 
+      com mais bikes alugadas",
+      x = "Data",
+      y = "Bikes alugadas",
+      color = "Temperatura (C)"
+    ) +
+  theme_minimal()+
+  scale_color_viridis_c()
+
+```
+
+8.  Crie uma visualização *Boxplot* mostrando a relação entre o aluguel de bicicletas e a estação do ano (`season`). Interprete-a no contexto dos dados. (*Valor: 0,5 pts*)
+
+```{r, eval = FALSE}
+dcbikeshare %>% 
+  ggplot(aes(cnt, season))+
+  geom_boxplot()+
+  coord_flip()
+```
+
+
+9. Crie um novo dataset com as variáveis: `season`, `yr`,`mnth`, `holiday`, `workingday`, `weathersit`, `temp_real`, `atemp_real`, `hum_real`, `windspeed_real` e `cnt`. Logo, separe-o em dois grupos, treinamento e teste, sendo a proporção 75 e 25 respectivamente. (*Valor: 0,5 pts*)
+
+```{r}
+library(tidymodels)
+
+set.seed(1234)
+
+dcbikeshare_df <- dcbikeshare2 %>% 
+  select(cnt, season, yr, mnth, holiday, workingday, weathersit, 
+         temp_real, atemp_real, hum_real, windspeed_real)
+
+split <- initial_split(dcbikeshare_df, prop = 0.75)
+training <- training(split)
+testing <- testing(split)
+
+```
+
+10. Utilize o k-fold cross validation ou validação cruzada, com 10 dobras e treine o algoritmo **árvore de decisão** com as variáveis preditoras: `season`, `yr`,`mnth`, `holiday`, `workingday`, `weathersit`, `temp_real`, `atemp_real`, `hum_real`, `windspeed_real`, para o dataset de treino (lembrando que a variável de saída é `cnt`. Reporte os valores de $R^2$, *RMSE* e *MAE*. (*Valor: 1,5 pts*)
+
+```{r}
+
+dcbikeshare_fold <- vfold_cv(training)
+
+dcbikeshare_rec <- recipe(cnt ~ ., data = training)
+
+dcbikeshare_wf <- workflow() %>% 
+  add_recipe(dcbikeshare_rec)
+
+tree_spec <- decision_tree() %>%
+  set_engine("rpart") %>%
+  set_mode("regression")
+
+tree_rs <- dcbikeshare_wf %>% 
+  add_model(tree_spec) %>% 
+  fit_resamples(resamples=dcbikeshare_fold,
+                metrics=metric_set(rmse, rsq, mae),
+                control=control_resamples(save_pred=TRUE))
+
+#collect_metrics(tree_rs)
+
+```
+
+
+11. Refaça a questão 10 só que agora usando o algoritmo **Random Forests** com 1000 árvores. Reporte os valores de $R^2$, *RMSE* e *MAE*. (*Valor: 1,5 pts*)
+
+```{r}
+
+rf_spec <- rand_forest(trees=1000) %>% 
+  set_engine("ranger") %>% 
+  set_mode("regression")
+
+
+rf_rs <- dcbikeshare_wf %>% 
+  add_model(rf_spec) %>% 
+  fit_resamples(resamples=dcbikeshare_fold,
+                metrics=metric_set(rmse, rsq, mae),
+                control=control_resamples(save_pred=TRUE))
+
+#collect_metrics(rf_rs)
+```
+
+
+12. Destes dois modelos, escolha aquele com a melhor precisão com base nos valores $R^2$, *RMSE* e *MAE* e use-o para verificar o resultado final com o dataset de teste. Reporte os valores de $R^2$, *RMSE* e *MAE* para o dataset de teste. (*Valor: 1,5 pts*)
+
+```{r}
+modelo_final <- dcbikeshare_wf %>% 
+  add_model(rf_spec) %>% 
+  last_fit(split)
+
+#collect_metrics(modelo_final,
+#                metrics = metric_set(rsq, rmse, mae))
+```
+
+
+13. Reproduza o gráfico a seguir, onde no eixo "x" temos `cnt` e no eixo "y", o valor da previsão. (*Valor: 1 pts*)
+
+```{r}
+
+collect_predictions(modelo_final) %>%
+  ggplot(aes(cnt, .pred)) +
+  geom_abline(lty = 2, color = "gray50") +
+  geom_point(alpha = 0.5, color = "#e32d91") +
+  coord_fixed()+
+  theme_minimal()+
+  scale_color_viridis_c()
+
+```
+

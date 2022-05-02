@@ -1,0 +1,54 @@
+name: "eps7008"
+navbar:
+  title: "EPS 7008"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Tarefas"
+      menu: 
+      - text: "Instruções Gerais"
+        href: Instrucoes_Gerais.html
+      - text: "Template para entregas"
+        href: Template_entregas.html
+#      - text: "Tarefa 1"
+#        href: Tarefa1_20212.html
+#      - text: "Tarefa 2"
+#        href: Tarefa2_20212.html
+#      - text: "Tarefa 3"
+#        href: Tarefa3.html
+#    - text: "Notas"
+#      href: notas.html
+    - text: "Webinars"
+      menu: 
+      - text: "Webinar 1"
+        href: webinar1a-EDA.html
+      - text: "Webinar 1a - Gabarito"
+        href: Gabarito-webinar1a.html
+      - text: "Webinar 1a - Gabarito com output"
+        href: Gabarito-webinar1a-output.html
+      - text: "Webinar 1b - Gabarito com output"
+        href: webinar1b-EDA.html
+#      - text: "Webinar 2a"
+#        href: webinar2a.html
+#      - text: "Webinar 2a - Gabarito com output"
+#        href: Gabarito-webinar2a.html
+#      - text: "Webinar 3"
+#        href: webinar3.html
+#      - text: "Webinar 4"
+#        href: webinar4.html
+      - text: "Webinar 2 - Dashboards em R"
+        href: Gabarito-webinar2.html
+      - text: "Webinar 3a - Gabarito com output"
+        href: Gabarito-webinar3a.html
+      - text: "Webinar 3b - Gabarito com output"
+        href: Gabarito-webinar3b.html
+      - text: "Webinar 4a - Gabarito com output"
+        href: Gabarito-webinar4a.html
+      - text: "Webinar 4b - Gabarito com output"
+        href: Gabarito-webinar4b.html
+      - text: "Webinar 5 - Gabarito com output"
+        href: Gabarito-webinar5.html
+output:
+  html_document:
+    #css: style.css
+    css: [dd_cv_milz.css, custom_milz.css]

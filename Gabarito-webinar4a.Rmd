@@ -1,0 +1,206 @@
+---
+title: "Webinar 4a - Métodos Supervisionados em Machine Learning"
+subtitle: "Regressão Linear"
+output: 
+  html_document:
+    code_download: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+```{r echo = FALSE, eval=TRUE}
+xfun::pkg_load2(c('htmltools', 'mime'))
+xfun::embed_dir("data4/", text = "Você pode baixar os dados aqui.")
+
+```
+
+# Exemplo 01 Salário vs Experiência
+
+Vamos ajustar a pasta com que iremos trabalhar
+
+Importando os dados:
+
+```{r}
+
+library(tidyverse)
+
+dataset <- read.csv('data4/Salary_Data.csv')
+dataset %>% 
+  ggplot(aes(YearsExperience, Salary))+
+  geom_point()
+
+```
+
+Vamos separar os dados do dataset em training_set e test_set
+
+```{r}
+library(caret)
+
+seed <- 2020
+
+split <- createDataPartition(y=dataset$Salary,
+                               p = 0.75, list = FALSE)
+
+training_set <- dataset[split,]
+test_set <- dataset[-split,]
+
+```
+
+Agora opcionalmente podemos transformar os dados para uma escala entre 0 e 1
+
+```{r}
+# training_set = scale(training_set)
+# test_set = scale(test_set)
+```
+
+Neste espaço do template, sempre iremos inserir um model para o objeto Regressor, neste exemplo utilizamos lm.
+
+```{r}
+regressor <- lm(formula = Salary ~ YearsExperience,
+              data = dataset)
+
+#summary(regressor)
+```
+
+A função predict utiliza o regressor para prever a var dependente a partir das var independentes do test_set.
+
+```{r}
+y_pred = predict(regressor, data = dataset)
+
+```
+
+Visualizações, prestem atenção que diretamente no geom_line, utilizamo para aes(y) a função predict de forma integral, ou seja, não é necessário utilizá-la previamente.
+
+```{r}
+
+dataset <- dataset %>% 
+  mutate(pred = y_pred)
+
+dataset %>% 
+  ggplot(aes(YearsExperience, Salary)) +
+  geom_point()+
+  geom_line(aes(x = YearsExperience, y = pred,
+             colour = 'pred'),
+             size=1) +
+  labs(title = 'Salary vs Experience',
+       x = 'Years of Experience',
+       y= 'Salary')
+
+
+```
+
+# Exemplo 02 - GPA
+
+A regressão linear é talvez o método mais conhecido para realizar previsões quando o comportamento dos dados remete a uma forma linear. Para mostrar a utilidade deste método iremos usar dois datasets, `GPA.csv` e `real_estate_price_size`.
+
+## Carregando pacotes
+
+```{r pacotes}
+
+library(readxl)
+library(ggrepel)
+library(caret)
+library(viridisLite)
+
+seed <- 2020
+```
+
+## GPA - Grade Point Average
+
+Vamos carregar os dados, e vamos plotar um gráfico de dispersão:
+
+```{r}
+
+gpa <- read.csv("data4/GPA.csv")
+
+ggplot(gpa, aes(SAT, GPA))+
+  geom_point()
+
+summary(gpa)
+str(gpa)
+
+```
+
+Como pode ser observado, não temos suficientes dados como para fazer o split em treino e teste. Por este motivo, iremos usar o método de Cross-Validation, usando a função `trainControl` da biblioteca `caret`. Vamos iniciar pelo dataframe `gpa`.
+
+install.packages("vtreat")
+
+```{r}
+library(vtreat)
+
+fmla <- GPA~SAT
+
+train_control <- trainControl(method="cv", number = 3)
+
+
+train(GPA~SAT, data=gpa, trControl=train_control, method = "lm" )
+
+
+
+model <- train(GPA~SAT, data=gpa, trControl=train_control, method = "lm" )
+
+gpa$pred.cv <- predict(model, gpa)
+
+gpa %>% 
+  mutate(residuo = pred.cv - GPA) %>% 
+  summarize(rmse = sqrt(mean(residuo^2)))
+```
+
+Para comparar, vamos rodar o modelo usando todos os dados:
+
+```{r}
+pred <- predict(lm(GPA~SAT, data=gpa))
+
+gpa %>% 
+  mutate(residuo = pred - GPA) %>% 
+  summarize(rmse = sqrt(mean(residuo^2)))
+
+summary(lm(GPA~SAT, data=gpa))
+```
+
+```{r}
+###### visualizar
+ggplot() +
+  geom_point(aes(x = gpa$SAT, y = gpa$pred.cv),
+             colour = 'red') +
+  geom_point(aes(x = gpa$SAT, y = gpa$GPA),
+             colour = 'purple') +
+  geom_line(aes(x = gpa$SAT, y = pred),
+            colour = 'blue') +
+  ggtitle('GPA') +
+  xlab('SAT') +
+  ylab('GPA')
+```
+
+# Exemplo 3 Real State
+
+Vamos carregar os dados, e vamos plotar um gráfico de disperção:
+
+```{r}
+
+real_state <- read.csv("data4/real_estate_price_size.csv")
+
+ggplot(real_state, aes(size, price))+
+  geom_point()
+
+summary(real_state)
+str(real_state)
+```
+
+Agora, vamos fazer o mesmo procedimento para o dataframe `real_state`:
+
+```{r}
+fmla <- price~size
+
+train(fmla, data=real_state, trControl=train_control, method = "lm" )
+
+model <- train(fmla, data=real_state, trControl=train_control, method = "lm" )
+
+real_state$pred.cv <- predict(model, real_state)
+
+real_state %>% 
+  mutate(residuo = pred.cv - price) %>% 
+  summarize(rmse = sqrt(mean(residuo^2)))
+```

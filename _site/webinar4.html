@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Webinar 4 - Métodos Supervisionados em Machine Learning</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="dd_cv_milz.css" type="text/css" />
+<link rel="stylesheet" href="custom_milz.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EPS 7008</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tarefas
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Instrucoes_Gerais.html">Instruções Gerais</a>
+    </li>
+    <li>
+      <a href="Template_entregas.html">Template para entregas</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Webinars
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="webinar1a-EDA.html">Webinar 1</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar1a.html">Webinar 1a - Gabarito</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar1a-output.html">Webinar 1a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="webinar1b-EDA.html">Webinar 1b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar2.html">Webinar 2 - Dashboards em R</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar3a.html">Webinar 3a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar3b.html">Webinar 3b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar4a.html">Webinar 4a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar4b.html">Webinar 4b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar5.html">Webinar 5 - Gabarito com output</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Webinar 4 - Métodos Supervisionados em
+Machine Learning</h1>
+<h3 class="subtitle">Regressão Linear</h3>
+
+</div>
+
+
+<div id="carregando-os-dados" class="section level1">
+<h1>Carregando os dados</h1>
+<p>A regressão linear é talvez o método mais conhecido para realizar
+previsões quando o comportamento dos dados remete a uma forma linear.
+Para mostrar a utilidade deste método iremos usar três datasets,
+<code>Salary.csv</code>, <code>GPA.csv</code> e
+<code>real_estate_price_size</code>.</p>
+<p><a href="data:application/zip;base64,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" download="data4.zip">Você pode baixar os dados aqui.</a></p>
+</div>
+<div id="carregando-pacotes" class="section level1">
+<h1>Carregando pacotes</h1>
+<pre class="r"><code>library(tidyverse)
+library(readxl)
+library(ggrepel)
+library(caret)
+library(viridisLite)
+
+seed &lt;- 2020</code></pre>
+</div>
+<div id="exemplo-1-salário-vs-experiência" class="section level1">
+<h1>Exemplo 1: Salário vs experiência</h1>
+<p>Vamos ajustar a pasta com que iremos trabalhar</p>
+<p>Importando os dados:</p>
+<p>Vamos separar os dados do dataset em training_set e test_set</p>
+<p>Agora opcionalmente podemos transformar os dados para uma escala
+entre 0 e 1</p>
+<p>Neste espaço do template, sempre iremos inserir um model para o
+objeto Regressor, neste exemplo utilizamos lm.</p>
+<p>A função <code>predict()</code> utiliza o regressor para prever a var
+dependente a partir das var independentes do test_set.</p>
+<p>Visualizações, prestem atenção que diretamente no geom_line,
+utilizamo para aes(y) a função predict de forma integral, ou seja, não é
+necessário utilizá-la previamente.</p>
+</div>
+<div id="exemplo-2-gpa---grade-point-average" class="section level1">
+<h1>Exemplo 2: GPA - Grade Point Average</h1>
+<p>Vamos carregar os dados, e vamos plotar um gráfico de disperção:</p>
+<p>Como pode ser observado, não temos suficientes dados como para fazer
+o split em treino e teste. Por este motivo, iremos usar o método de
+Cross-Validation, usando a função <code>trainControl</code> da
+biblioteca <code>caret</code>. Vamos iniciar pelo dataframe
+<code>gpa</code>.</p>
+<p>Para comparar, vamos rodar o modelo usando todos os dados:</p>
+</div>
+<div id="exemplo-3---real-state" class="section level1">
+<h1>Exemplo 3 - Real State</h1>
+<p>Vamos carregar os dados, e vamos plotar um gráfico de disperção:</p>
+<p>Agora, vamos fazer o mesmo procedimento para o dataframe
+<code>real_state</code>:</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

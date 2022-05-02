@@ -1,0 +1,208 @@
+---
+title: "Gabarito - Webinar 1b - EDA"
+subtitle: "Segunda parte"
+output:
+   html_document:
+    toc: true
+    toc_float: true
+    code_download: true
+    theme: paper
+date: "Última versão em `r format(Sys.time(), '%d/%m/%y')`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Carregando os dados
+
+Nesta aula vamos continuar explorando os dados sobre seriados de TV, usando dois datasets, um do Netflix (informações do viewing history) e outro do IMDb, banco de dados com informações sobre o rating de seriados e filmes e também 
+
+Inicialmente vamos carregar os dados. Os dados do Netflix vem do site onde o usuário pode fazer download do seu histórico após o login (https://www.netflix.com/viewingactivity). Já os dados o IMDb usam um script que encontra-se em: https://github.com/nazareno/imdb-series para fazer o web scrapping do site oficial do IMDb.
+
+Carregando os dados do IMDb, já unidos num único dataframe, a partir do arquivo `imdb_series.xlsx` (o código para gerar o arquivo excel aparece abaixo com # no início de cada linha):
+
+```{r imdb}
+
+library(tidyverse)
+library(readxl)
+
+#library(openxlsx)
+#write.xlsx(imdb, file = "imdb_series.xlsx")
+
+imdb_series <- read_xlsx("data1/imdb_series.xlsx")
+```
+
+Já mostramos como carregar os dados do Netflix no webinar anterior. Após arrumar o tipo `Date` para a coluna "Date", eliminar os registros que não são seriados e eliminar os registros que tinha `NA` na coluna "Episode", chegamos a um dataframe limpo, que será carregado já em formato excel, denominado `netflix_series_limpo.xlsx` (o código para gerar o arquivo excel aparece abaixo com # no início de cada linha):
+
+```{r}
+
+#netflix_series_limpo <- netflix %>% 
+#  filter(str_detect(Title, ":")) %>% 
+#  separate(Title,c("series_title","season","episode"),":") %>% 
+#  filter(!is.na(episode))
+
+#write.xlsx(netflix_series_limpo, file = "netflix_series_limpo.xlsx")
+
+netflix <- read.csv("data1/NetflixViewingHistory.csv")
+
+netflix_series_limpo <- read_xlsx("data1/netflix_series_limpo.xlsx")
+
+```
+
+Também podemos ter facilmente a lista de filmes assistidos, a partir do dataset `netflix` e do código apresentado anteriormente para filtrar seriados:
+
+```{r}
+
+netflix_filmes <- netflix %>% 
+  separate(Title, c("movie_title","season","episode"),":") %>% 
+  filter(is.na(episode)) %>% 
+  select(movie_title, Date)
+
+```
+
+
+
+# Seriados mais assistidos no Netflix e suas avaliações no imdb:
+
+Podemos iniciar visualizando a lista dos 20 seriados mais assistidos, com o código a seguir:
+
+```{r}
+netflix_series_mais_assistidas <- netflix_series_limpo %>% 
+  group_by(series_title) %>% 
+  count() %>% 
+  arrange(desc(n)) %>% 
+  ungroup() %>% 
+  top_n(20, wt=n)
+
+
+netflix_series_mais_assistidas %>% 
+  ggplot(aes(reorder(series_title, n), n))+
+  geom_col(fill="#f16727")+
+  coord_flip()+
+  theme_linedraw() +
+  labs(y="Capítulos assistidos",
+       title = "Seriados mais assistidos - Netflix")+
+  theme(axis.title.y = element_blank())
+
+```
+
+
+e agora vamos verificar a avaliação global de cada um dos seriados acima, usando as informações do imdb. Primeiro, vamos calcular a avaliação média para cada seriado no dataframe do imdb:
+
+```{r}
+
+imdb_series_nota_media <- imdb_series %>% 
+  group_by(series_name) %>% 
+  summarize(nota=mean(UserRating))
+
+```
+
+
+# Juntando os datasets Netflix e IMDb
+
+Agora podemos juntar as informações de avaliação de cada seriado com os seriados mais assistidos:
+
+```{r}
+
+nomes <- data.frame(pt=c("Grimm: Contos de Terror", "Era Uma Vez",
+                         "Como Defender um Assassino", "La Casa de Papel",
+                         "Lúcifer","Motel Bates","Pânico: A Série de TV"),
+                    en=c("Grimm","Once Upon a Time",
+                         "How to Get Away With Murder","Money Heist",
+                         "Lucifer","Bates Motel","Scream"))
+
+netflix_imdb_pt_en <- netflix_series_mais_assistidas %>% 
+  left_join(nomes, by=c("series_title"="en")) %>% 
+  mutate(titulo_pt=ifelse(is.na(pt), series_title, pt)) %>% 
+  left_join(imdb_series_nota_media, by=c("titulo_pt"="series_name")) %>% 
+  select(-pt)
+
+library(ggrepel)
+
+
+netflix_imdb_pt_en %>% 
+  ggplot(aes(n, nota, label=series_title))+
+  geom_point(color="#f16727") +
+  geom_text_repel()
+
+```
+
+
+# Quantidade de capítulos assistidos e de capítulos totais por seriado
+
+Será que foram assistidos todos os capítulos de cada seriado acima?
+
+```{r}
+
+assistidos_vs_total <- netflix_imdb_pt_en %>% 
+  left_join(imdb_series, by=c("titulo_pt"="series_name")) %>% 
+  group_by(series_title) %>% 
+  summarize(total=n()) %>% 
+  left_join(netflix_imdb_pt_en, by="series_title") %>% 
+  mutate(faltam=total-n) %>% 
+  filter(faltam >=0)
+
+library(knitr)
+
+assistidos_vs_total %>% 
+  kable(digits = 2)
+
+```
+
+
+vamos fazer um gráfico comparativo do que foi assistido e o total de capítulos vs a avaliação do IMDb:
+
+```{r}
+assistidos_vs_total %>% 
+  ggplot(aes(total, nota, label=series_title))+
+  geom_point(color="red")+
+  geom_text_repel()
+
+
+assistidos_vs_total %>% 
+  ggplot(aes(total, n, label=series_title))+
+  geom_point(color="red")+
+  geom_text_repel()+
+  scale_x_continuous(trans="log2")+
+  scale_y_continuous(trans="log2")+
+  geom_abline(color="blue")
+
+```
+
+
+
+# Avaliações de seriados específicos por temporada
+
+Agora vamos ver como foram avaliados capítulos específicos de alguns dos seriados mais assistidos, como exemplo vamos analisar o seriado com mais capítulos assistidos (Grimm).
+
+```{r}
+
+netflix_series_limpo %>% 
+  filter(series_title == "Grimm") %>% 
+  arrange(.,Date) %>% 
+  left_join(nomes, by=c("series_title"="en")) %>% 
+  left_join(imdb_series, by=c("pt"="series_name",
+                              "episode"="Episode")) %>% 
+  select(Date, season.x, episode, UserRating) %>% 
+  ggplot(aes(season.x, UserRating))+
+  geom_boxplot(aes(fill=season.x))
+
+```
+
+Por fim, vamos mudar a camada de cores, para uma que é tradicionalmente usada, a escala viridis, usando a função ´scale_fill_viridis_d()`:
+
+```{r}
+netflix_series_limpo %>% 
+  filter(series_title == "Grimm") %>% 
+  arrange(.,Date) %>% 
+  left_join(nomes, by=c("series_title"="en")) %>% 
+  left_join(imdb_series, by=c("pt"="series_name",
+                              "episode"="Episode")) %>% 
+  select(Date, season.x, episode, UserRating) %>% 
+  ggplot(aes(season.x, UserRating))+
+  geom_boxplot(aes(fill=season.x))+
+  scale_fill_viridis_d()
+```
+
+
