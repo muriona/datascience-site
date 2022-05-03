@@ -90,7 +90,7 @@ Os dados incluem as vendas fictícias de uma grande loja, chamada de Global Supe
 library(readxl)
 library(knitr)
 
-global <- read_xlsx("/Users/mauricio/Dropbox/mauricio/10. R Studio/EPS7008_website/data_tarefa3/Global Superstore Orders 2016.xlsx")
+global <- read_xlsx("/Users/mauricio/Dropbox/mauricio/10. R Studio/eps7008-site/data_tarefa3/Global Superstore Orders 2016.xlsx")
 
 ```
 
