@@ -4,7 +4,7 @@ output:
   html_document:
     toc: true
     toc_float: true
-    code_download: true
+    code_download: false
     theme: paper
 date: "Última versão em `r format(Sys.time(), '%d/%m/%y')`"
 ---
@@ -67,6 +67,7 @@ knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
 Nesta aula iremos explorar os dados sobre seriados de TV, usando dois datasets, um do Netflix (informações do viewing history) e outro do IMDb, banco de dados com informações sobre o rating de seriados e filmes.
 
 ```{r echo = FALSE, eval=TRUE}
+
 xfun::pkg_load2(c('htmltools', 'mime'))
 xfun::embed_dir("data1/", text = "Você pode baixar os dados aqui.")
 
@@ -88,7 +89,7 @@ head(imdb, 10)
 Carregando os dados do Netflix e mostrando as primeiras 10 linhas:
 
 ```{r}
-netflix <- read.csv("/Users/mauricio/Desktop/Paper/eps7008/data1/NetflixViewingHistory.csv")
+netflix <- read.csv("data1/NetflixViewingHistory.csv")
 
 head(netflix, 10)
 

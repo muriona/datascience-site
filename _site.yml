@@ -7,26 +7,30 @@ navbar:
     - text: "Tarefas"
       menu: 
       - text: "Instruções Gerais"
-        href: Instrucoes_Gerais.html
+        href: Tarefa_Instrucoes.html
       - text: "Template para entregas"
         href: Template_entregas.html
 #      - text: "Tarefa 1"
-#        href: Tarefa1_20212.html
+#        href: Tarefa1.html
 #      - text: "Tarefa 2"
 #        href: Tarefa2_20212.html
 #      - text: "Tarefa 3"
 #        href: Tarefa3.html
 #    - text: "Notas"
 #      href: notas.html
-    - text: "Webinars"
+    - text: "Tutoriais"
       menu: 
-      - text: "Webinar 1"
+      - text: "Tutorial 1 - Tidyverse"
+        href: Tutorial1.html
+    - text: "Labs"
+      menu: 
+      - text: "Lab 1"
         href: webinar1a-EDA.html
-      - text: "Webinar 1a - Gabarito"
+      - text: "Lab 1a - Gabarito"
         href: Gabarito-webinar1a.html
-      - text: "Webinar 1a - Gabarito com output"
+      - text: "Lab 1a - Gabarito com output"
         href: Gabarito-webinar1a-output.html
-      - text: "Webinar 1b - Gabarito com output"
+      - text: "Lab 1b - Gabarito com output"
         href: webinar1b-EDA.html
 #      - text: "Webinar 2a"
 #        href: webinar2a.html
@@ -36,17 +40,17 @@ navbar:
 #        href: webinar3.html
 #      - text: "Webinar 4"
 #        href: webinar4.html
-      - text: "Webinar 2 - Dashboards em R"
+      - text: "Lab 2 - Dashboards em R"
         href: Gabarito-webinar2.html
-      - text: "Webinar 3a - Gabarito com output"
+      - text: "Lab 3a - Gabarito com output"
         href: Gabarito-webinar3a.html
-      - text: "Webinar 3b - Gabarito com output"
+      - text: "Lab 3b - Gabarito com output"
         href: Gabarito-webinar3b.html
-      - text: "Webinar 4a - Gabarito com output"
+      - text: "Lab 4a - Gabarito com output"
         href: Gabarito-webinar4a.html
-      - text: "Webinar 4b - Gabarito com output"
+      - text: "Lab 4b - Gabarito com output"
         href: Gabarito-webinar4b.html
-      - text: "Webinar 5 - Gabarito com output"
+      - text: "Lab 5 - Gabarito com output"
         href: Gabarito-webinar5.html
 output:
   html_document:

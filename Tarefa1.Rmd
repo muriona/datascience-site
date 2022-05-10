@@ -1,157 +1,235 @@
 ---
-title: "Tarefa 1 - Análise exploratória de dados"
+title: "Tarefa 1 - Vendas de Legos"
 output: 
   html_document:
     toc: true
     toc_float: true
     theme: paper
+    css: tarefas.css
 link-citations: yes
 ---
 
-```{css, echo = FALSE}
-
-@import url('https://fonts.googleapis.com/css?family=Muli:400,400i,700&display=swap');
-
-/*------------- Whole Document---------------- */
-
-body {
-    font-family: 'Muli';
-    font-size: 19px;
-}
-
-/*----------------ADDING WHITE SPACE-------------*/
-
-.title {
-  margin-top: 2em !important;
-  margin-bottom: 0.75em;
-}
-
-.section h1,
-.section h2, 
-.section h3, 
-.section h4, 
-.section h5 { 
-  padding-top: 3em !important; /*adding so much padding because theme adds a margin-top: -65px by default */
-  margin-bottom: 0.75em;
-}
-
-.list-group-item {
-    color: #7b8a8b;
-    font-size: 16px;
-}
-.list-group-item.active {
-    color: white;
-    background-color: #e32d91;
-    border: none;
-}
-.list-group-item:hover, 
-.list-group-item.active:hover {
-    color: #ffffff;
-    background-color: #e32d91;
-}
-
-/* headers */
-
-h1, h2, h3, h4, h5 {
-  color:#e32d91;
-}
-```
 
 ```{r grassmarket, fig.margin = TRUE, echo = FALSE, warning=FALSE, message=FALSE, fig.width=3, fig.cap="Photo by Daniel Cheung on Unsplash"}
+
 knitr::include_graphics("img/daniel-cheung-ZqqlOZyGG7g-unsplash.jpg")
-library(dsbox)
+
+knitr::opts_chunk$set(cache = TRUE)
+
 library(tidyverse)
-data("ncbikecrash")
+library(knitr)
+
 ```
 
-Nesta primeira tarefa usaremos dois datasets diferentes, o primeiro apresentando vendas simuladas de Legos nos Estados Unidos e o segundo, mostrando dados reais de acidentes com bicicletas compartilhadas no Estado de North Carolina (EUA) entre 2007 e 2014 (dados de [Durham Open Data](https://live-durhamnc.opendata.arcgis.com/))
+Nesta primeira tarefa usaremos um dataset apresentando vendas de Legos nos Estados Unidos, junto com especificações técnicas de cada set de lego vendido, como o número de peças e as cores de cada peça.
 
-# Pacotes
+# Dados
 
-Usaremos o pacote `tidyverse` como sempre e também o pacote **dsbox** para os dados. Observação: podem usar o comando `library(dsbox)` e logo `data(nome_do_dataset)` usando os comandos `data("lego_sales")` e `data("ncbikecrash")`.
+Os dados provém de duas fontes, o pacote **dsbox** que traz uma lista de mais de 600 vendas de legos e os dados do [kaggle](https://www.kaggle.com/datasets/rtatman/lego-database) sobre as especificações técnicas dos conjuntos.
 
-Alternativamente, você pode baixar os dados:
+Três arquivos fazem parte desta tarefa: `lego_colors.csv`, `lego_inventories.csv` e `lego_sales`. Os dados podem ser baixados 
 
-```{r echo = FALSE, eval=TRUE}
+```{r zip, echo = FALSE, eval=TRUE}
 xfun::pkg_load2(c('htmltools', 'mime'))
 xfun::embed_dir("data_tarefa1/", text = "aqui.")
 
 ```
 
-Uma vez baixados, vocÊ precisará carregá-los no RStudio usando o pacote `readxl`
+`lego_colors.csv`: Lista de todas as cores utilizadas por peças Lego, incluindo o nome da cor, a cor em RGB e um id único para cada cor (`color_id`).
+
+`lego_inventories.csv`: Lista de todas as peças (`set_id`) que fazem parte de conjuntos lego (cada conjunto ou set é composto por peças de vários tamanhos, cores e tipos). Esta lista inclui também o código de cor utilizado para cada peça `color_id`
+
+`lego_sales`: Lista das 674 vendas de conjuntos de lego, incluindo informações de quantidade vendida, preço unitário, nome e sobrenome do comprador, idade, etc. Inclui também o id de cada conjunto (`set_id`) de lego vendido.
+
+
+# Pacotes
+
+Usaremos o pacote `tidyverse` para a manipulação e limpeza dos dados. 
+
+
+```{r dt, echo = FALSE, message=FALSE, warning=FALSE}
+
+library(DT)
+
+lego_sales <- read_csv("data_tarefa1/lego_sales.csv")
+
+```
+
+
+Uma vez baixados os dados, carregue o pacote `tidyverse`:
 
 ```{r load-package, eval=TRUE}
 library(tidyverse)
-#library(dsbox)
+
 ```
 
-# Vendas de Lego
+# Perguntas
 
-Temos dados (simulados) de vendas de legos em 2018 para uma amostra de clientes que compraram legos nos EUA.  O conjunto de dados é chamado de `lego_sales`. Você pode encontrar descrições de cada uma das variáveis no arquivo de ajuda do conjunto de dados, que você pode acessar executando `?lego_sales` em seu Console.
+## Usando `lego_sales`
 
-Responda as seguintes perguntas utilizando pipelines. Para cada pergunta, diga sua resposta em uma frase, por exemplo: "Os três nomes mais comuns de compradores são...".
+**Para este primeiro grupo de perguntas, usaremos apenas o dataset `lego_sales`.**
 
-1. Quais são os três nomes mais comuns de compradores?
+Temos dados (simulados) de vendas de Legos em 2018 para uma amostra de clientes que compraram legos nos EUA.
 
-2. Quais são os três temas mais comuns dos conjuntos de lego comprados?
+O dataset conta com `r nrow(lego_sales)` observações (vendas) e 14 variáveis:
 
-3. Entre os temas mais comuns de conjuntos de lego comprados, qual é o subtema mais comum?
+```{r colnames, echo = FALSE}
 
-4. Crie uma nova variável chamada `age_group` e agrupe as idades nas
-seguintes categorias: "18 e inferior", "19 - 25", "26 - 35", "36 - 50", "51 e superior".
+colnames(lego_sales)
 
-5. Qual faixa etária adquiriu o maior número de conjuntos de lego? 
-
-```{marginfigure}
-*Dica:* Vai precisar considerar a quantidade de vendas.
 ```
 
-6. Qual faixa etária gastou mais dinheiro com legos?
+Os dados podem ser observados aqui:
 
-7. Faça uma pergunta que você queira responder usando estes dados e anote-a. 
-Depois, crie uma visualização de dados que responda à pergunta (usando boxplots ou histogramas), e explique como  a sua visualização responde à pergunta.
+```{r echo = FALSE, eval=FALSE}
 
-
-# Acidentes com bicicletas em North Carolina
-
-O dataset é chamado de `ncbikecrash`. Você pode encontrar a descrição de cada uma das variáveis no arquivo de ajuda do dataset, executando `?ncbikecrash' em seu Console.
-
-```{r nc, fig.margin = TRUE, echo = FALSE, fig.width=3, fig.cap="Photo by Andhika Soreng on Unsplash"}
-knitr::include_graphics("img/bike.jpg")
-```
-
-8.  Execute ``View(ncbikecrash'' em seu Console para visualizar os dados no visualizador de dados. O que representa cada linha do conjunto de dados? 
-
-9. Quantos acidentes com bikes foram registrados em North Carolina (NC) entre 2007 e 2014? Quantas variáveis são registradas no dataset?
-
-10. Quantos acidentes ocorreram em áreas residenciais onde o motorista tinha entre 0 e 19 anos de idade?
-
-11. Crie uma tabela de freqüência da velocidade estimada do carro (`driver_est_speed`) envolvido no acidente. Qual é a faixa de velocidade estimada mais comum no conjunto de dados?
-
-12. Recrie o gráfico a seguir, e descreva o contexto dos dados que ele mostra.
-
-```{marginfigure}
-**Dica:** Para obter as mesmas cores pode usar `scale_fill_viridis_d()`. Use os comandos `fig.height` e `fig.width` na opções do chunk para escolher a melhor proporção de tamanho do gráfico
-```
-
-```{r fig.width=7, fig.height=3, echo=FALSE}
-ggplot(ncbikecrash, aes(x = crash_alcohol, fill = crash_severity)) +
-  geom_bar(position = "fill") +
-  coord_flip() +
-  labs(y = "Proportion", x = "Did the crash involve alcohol?",
-       fill = "Crash severity", 
-       title = "Involvement of alcohol and severity of bike crashes") +
-  scale_fill_viridis_d()
+datatable(lego_sales, style = "bootstrap")
+  
 ```
 
 
-```{marginfigure}
-**Dica:** Ao invés de tentar mudar a legenda, altere o nome dos dados na coluna `crash_severity` usando `mutate()`.
+A partir dos dados acima, responda as seguintes perguntas utilizando os comandos aprendidos em aula. Para cada pergunta, escreva a sua resposta em uma frase, por exemplo: "Os três nomes mais comuns de compradores são...".
+
+1. Quais são os dez nomes (`first_name`) mais comuns de compradores?
+
+```{r first-name, echo=FALSE, eval=FALSE}
+
+lego_sales %>% 
+  group_by(first_name) %>% 
+  summarize(n=n()) %>% 
+  arrange(desc(n))
 ```
 
-13. Recrie a mesma figura, mas desta vez altere os rótulos da variável `crash_severity` de forma que as letras `A:`, `B:`, etc. não apareçam.
+Desta lista, informe no `moodle` o nome do 4o (quarto) comprador mais frequente.
 
-Para esta pergunta você precisará adicionar um novo chunk, e definir as preferências para a altura e largura da figura - `fig.height` e `fig.width`.
+2. Quais foram os dez temas dos conjuntos de lego mais comprados? Dica: use a coluna `quantity`. Mostre em formato de tabela.
 
-14. Faça uma pergunta que gostaria que os dados ajudassem a responder. Logo, faça uma visualização do tipo Line, Bar, Histogram ou Boxplot para tentar 
-respondê-la e digite a explicação.
+```{r themes, echo = FALSE, eval=FALSE}
+lego_sales %>% 
+  group_by(theme) %>% 
+  summarize(n=n(),
+            q=sum(quantity)) %>% 
+  arrange(desc(q))
+```
+
+Desta lista, informe no `moodle`, o nome do 4o (quarto) tema mais comprado.
+
+3. Do tema mais comprado (referente à questão anterior), qual é o subtema mais comum e quantas unidades foram vendidas?
+
+```{r subthemes, echo = FALSE, eval=FALSE}
+lego_sales %>% 
+  filter(theme=="Star Wars") %>% 
+  group_by(subtheme) %>% 
+  summarize(n=n(),
+            q=sum(quantity)) %>% 
+  arrange(desc(q))
+```
+
+Desta lista, informe no `moodle`, o nome do 4o (quarto) sub-tema mais comprado.
+
+4. Escolha o tema `Architecture` e calcule qual foi o faturamento total dele. Dica: $Faturamento=us_{price}quantity$
+
+```{r faturamento, echo = FALSE, eval=FALSE}
+
+lego_sales %>% 
+  filter(theme=="Architecture") %>% 
+  mutate(Faturamento = us_price*quantity) %>% 
+  summarize(Fat_Total = sum(Faturamento))
+```
+
+Informe no `moodle`, este valor de faturamento.
+
+5. Crie uma nova variável do tipo `factor` e agrupe as idades nas
+seguintes categorias: "18 e inferior", "19 - 25", "26 - 35", "36 - 50", "51 e superior". Qual faixa etária adquiriu o maior número de conjuntos de lego? Dica: lembre da coluna `quantity` e verifique a função `cut()`.
+
+```{r factor-age, echo = FALSE, eval=TRUE}
+
+lego_sales$age_group <- cut(lego_sales$age, 
+                            breaks = c(0,18,25,35,50,100),
+                            labels=c("<=18", "19-25","26-35",                                                            "36-50",">=51")) 
+```
+
+```{r echo = FALSE, message=FALSE, warning=FALSE}
+lego_sales %>% 
+  group_by(age_group) %>% 
+  summarize(q=sum(quantity)) %>% 
+  arrange(desc(q))
+```
+
+Informe no `moodle`, o grupo com maior quantidade comprada.
+
+6. Qual faixa etária gastou mais dinheiro com legos? Dica: lembre da equação de $Faturamento$.
+
+```{r}
+lego_sales %>% 
+  group_by(age_group) %>% 
+  mutate(faturamento=us_price*quantity) %>% 
+  summarize(fat_total=sum(faturamento)) %>% 
+  arrange(desc(fat_total))
+```
+
+Informe no `moodle`, o valor total gasto pelo grupo etário que mais gastou.
+
+7. Quais são os cinco conjuntos de Lego mais caros? mostre como tabela.
+
+```{r, price, echo = FALSE, eval = FALSE}
+theme <- lego_sales %>% 
+  group_by(theme) %>% 
+  select(theme, us_price) %>% 
+  top_n(1, wt = us_price) %>% 
+  arrange(desc(us_price))
+
+head(unique(theme),5) %>% 
+  knitr::kable()
+```
+
+Informe no `moodle`, o valor do 4o (quarto) conjunto mais caro de Lego.
+
+## Usando todos os datasets
+
+**Para este segundo grupo de perguntas, usaremos os três datasets.**
+
+Para estas últimas perguntas, verifique inicialmente o enunciado no moodle, que indica qual `set` de Lego escolher.
+
+```{r choose-set, echo = FALSE, message=FALSE, warning=FALSE}
+
+lego_inventories <- read_csv("data_tarefa1/lego_inventories.csv")
+
+lego_colors <- read_csv("data_tarefa1/lego_colors.csv")
+
+#lego_set <- "76062"
+
+lego_set <- "70595"
+
+custom_theme <- lego_sales %>% filter(set_id==lego_set)
+
+
+```
+
+1) Para o `set_id` definido no `moodle`, identifique as cores mais frequentes usadas nele. Por exemplo, para o conjunto "`r lego_set`", do `r custom_theme[1,6]` com o nome `r custom_theme[1,9]` o resultado deve parecer-se com a tabela a seguir:
+
+```{r sets-colors, echo=FALSE, message=FALSE, warning=FALSE}
+
+lego_inventories$color_id <- as.factor(lego_inventories$color_id)
+
+lego_colors$color_id <- as.factor(lego_colors$color_id)
+
+lego_custom_color <- lego_inventories %>% 
+  filter(set_id == lego_set) %>% 
+  left_join(lego_colors, by="color_id") %>% 
+  group_by(color_id) %>% 
+  summarize(n=n(), name=name, rgb=rgb) %>% 
+  arrange(desc(n)) %>% 
+  ungroup() %>% 
+  select(name, rgb, n, -color_id) %>% 
+  rename(Cor = name, RGB = rgb, Frequencia = n)
+
+unique(lego_custom_color) %>% 
+  kable()
+```
+
+
+Para fins de referência, o conjunto escolhido anteriormente é ![Conjunto 76062](https://images.brickset.com/sets/images/76062-1.jpg).
+
+2) Inclua uma imagem do conjunto lego escolhido, similar ao exemplo anterior. Pode usar o comando: `![Conjunto xxxx](url)`. Obs.: a url de cada conjunto aparece na coluna `image_url` do dataset `lego_sales.csv`, por exemplo, para o conjunto 76062, o código é: `![Conjunto 76062](https://images.brickset.com/sets/images/76062-1.jpg)`
+
