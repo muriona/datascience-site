@@ -149,7 +149,7 @@ lego_sales$age_group <- cut(lego_sales$age,
                             labels=c("<=18", "19-25","26-35",                                                            "36-50",">=51")) 
 ```
 
-```{r echo = FALSE, message=FALSE, warning=FALSE}
+```{r echo = FALSE, message=FALSE, warning=FALSE, eval=FALSE}
 lego_sales %>% 
   group_by(age_group) %>% 
   summarize(q=sum(quantity)) %>% 
@@ -160,7 +160,7 @@ Informe no `moodle`, o grupo com maior quantidade comprada.
 
 6. Qual faixa etária gastou mais dinheiro com legos? Dica: lembre da equação de $Faturamento$.
 
-```{r}
+```{r echo = FALSE, eval = FALSE}
 lego_sales %>% 
   group_by(age_group) %>% 
   mutate(faturamento=us_price*quantity) %>% 
@@ -197,9 +197,7 @@ lego_inventories <- read_csv("data_tarefa1/lego_inventories.csv")
 
 lego_colors <- read_csv("data_tarefa1/lego_colors.csv")
 
-#lego_set <- "76062"
-
-lego_set <- "70595"
+lego_set <- "76062"
 
 custom_theme <- lego_sales %>% filter(set_id==lego_set)
 

@@ -1,0 +1,675 @@
+first_name,last_name,age,phone_number,set_id,theme,subtheme,year,name,pieces,us_price,image_url,quantity,theme_id
+Kimberly,Beckstead,24,216-555-2549,76062,DC Comics Super Heroes,Mighty Micros,2018,Robin vs. Bane,77,9.99,http://images.brickset.com/sets/images/76062-1.jpg,1,482
+Neel,Garvin,35,819-555-3189,70595,Ninjago,Rise of the Villains,2018,Ultra Stealth Raider,1093,119.99,http://images.brickset.com/sets/images/70595-1.jpg,1,435
+Neel,Garvin,35,819-555-3189,21031,Architecture,NA,2018,Burj Khalifa,333,39.99,http://images.brickset.com/sets/images/21031-1.jpg,1,252
+Chelsea,Bouchard,41,NA,31048,Creator,NA,2018,Lakeside Lodge,368,29.99,http://images.brickset.com/sets/images/31048-1.jpg,1,22
+Chelsea,Bouchard,41,NA,70595,Ninjago,Rise of the Villains,2018,Ultra Stealth Raider,1093,119.99,http://images.brickset.com/sets/images/70595-1.jpg,1,435
+Chelsea,Bouchard,41,NA,10831,Duplo,NA,2018,My First Caterpillar,19,9.99,http://images.brickset.com/sets/images/10831-1.jpg,1,504
+Bryanna,Welsh,19,NA,75138,Star Wars,Episode V,2018,Hoth Attack,233,24.99,http://images.brickset.com/sets/images/75138-1.jpg,1,169
+Bryanna,Welsh,19,NA,76062,DC Comics Super Heroes,Mighty Micros,2018,Robin vs. Bane,77,9.99,http://images.brickset.com/sets/images/76062-1.jpg,3,482
+Caleb,Garcia-Wideman,37,907-555-9236,41115,Friends,NA,2018,Emma's Creative Workshop,108,9.99,http://images.brickset.com/sets/images/41115-1.jpg,1,494
+Caleb,Garcia-Wideman,37,907-555-9236,21127,Minecraft,Minifig-scale,2018,The Fortress,NA,109.99,http://images.brickset.com/sets/images/21127-1.jpg,2,577
+Chase,Fortenberry,19,205-555-3704,10801,Duplo,NA,2018,Baby Animals,13,9.99,http://images.brickset.com/sets/images/10801-1.jpg,1,504
+Chase,Fortenberry,19,205-555-3704,10809,Duplo,NA,2018,Police Patrol,15,14.99,http://images.brickset.com/sets/images/10809-1.jpg,1,NA
+Kevin,Cruz,20,947-555-7946,70335,Nexo Knights,Ultimate,2018,Ultimate Lavaria,69,9.99,http://images.brickset.com/sets/images/70335-1.jpg,2,605
+Connor,Brown,36,516-555-4310,71230,Dimensions,Fun Pack,2018,Fun Pack: Doc Brown,69,14.99,http://images.brickset.com/sets/images/71230-1.jpg,1,604
+Connor,Brown,36,516-555-4310,60112,City,Fire,2018,Fire Engine,376,49.99,http://images.brickset.com/sets/images/60112-1.jpg,1,58
+Connor,Brown,36,516-555-4310,41573,Mixels,Series 9,2018,Sweepz,61,4.99,NA,1,589
+Toni,Borison,40,284-555-4560,70595,Ninjago,Rise of the Villains,2018,Ultra Stealth Raider,1093,119.99,http://images.brickset.com/sets/images/70595-1.jpg,1,435
+Toni,Borison,40,284-555-4560,10251,Advanced Models,Modular Buildings,2018,Brick Bank,2380,169.99,http://images.brickset.com/sets/images/10251-1.jpg,1,155
+Daniel,Hurst,44,251-555-0845,41558,Mixels,Series 7,2018,Mixadel,63,4.99,http://images.brickset.com/sets/images/41558-1.jpg,1,587
+Daniel,Hurst,44,251-555-0845,31048,Creator,NA,2018,Lakeside Lodge,368,29.99,http://images.brickset.com/sets/images/31048-1.jpg,1,22
+Judith,Webb,39,917-555-7417,5005059,Gear,Video Games/PS3,2018,Marvel Avengers PS3 Video Game,NA,49.99,http://images.brickset.com/sets/images/5005059-1.jpg,2,NA
+Nicholas,Belfageoua,46,606-555-4814,853549,Gear,Key Chains/Friends,2018,Mia Key Chain,NA,5.99,http://images.brickset.com/sets/images/853549-1.jpg,1,NA
+Nicholas,Belfageoua,46,606-555-4814,70327,Nexo Knights,NA,2018,The King's Mech,375,29.99,http://images.brickset.com/sets/images/70327-1.jpg,1,605
+Amanda,Tronnier,45,317-555-7477,75139,Star Wars,The Force Awakens,2018,Battle on Takodana,409,59.99,http://images.brickset.com/sets/images/75139-1.jpg,1,184
+Amanda,Tronnier,45,317-555-7477,853543,Ninjago,NA,2018,Ninjago Party Set,70,7.99,http://images.brickset.com/sets/images/853543-1.jpg,2,NA
+Amanda,Tronnier,45,317-555-7477,60118,City,Traffic,2018,Garbage Truck,248,19.99,http://images.brickset.com/sets/images/60118-1.jpg,1,52
+Amanda,Tronnier,45,317-555-7477,5004612,Gear,Watches/Clocks,2018,Lucy Wyldstyle Minifigure Link Watch,NA,24.99,http://images.brickset.com/sets/images/5004612-1.jpg,1,501
+Jacob,Nzabanita,31,339-555-2572,41117,Friends,Pop Star,2018,Pop Star TV Studio,194,19.99,http://images.brickset.com/sets/images/41117-1.jpg,1,494
+Jacob,Nzabanita,31,339-555-2572,75133,Star Wars,Battlefront,2018,Rebel Alliance Battle Pack,101,12.99,http://images.brickset.com/sets/images/75133-1.jpg,2,158
+Jacob,Nzabanita,31,339-555-2572,41172,Elves,NA,2018,The Water Dragon Adventure,212,19.99,http://images.brickset.com/sets/images/41172-1.jpg,1,600
+Jacob,Nzabanita,31,339-555-2572,75151,Star Wars,Episode III,2018,Clone Turbo Tank,903,109.99,http://images.brickset.com/sets/images/75151-1.jpg,1,168
+Hannah,Drews Stunkel,55,339-555-6320,70590,Ninjago,NA,2018,Airjitzu Battle Grounds,666,59.99,NA,1,436
+Hannah,Drews Stunkel,55,339-555-6320,70593,Ninjago,Skybound,2018,The Green NRG Dragon,567,49.99,http://images.brickset.com/sets/images/70593-1.jpg,3,435
+Hannah,Drews Stunkel,55,339-555-6320,41119,Friends,NA,2018,Heartlake Cupcake Cafe,439,39.99,http://images.brickset.com/sets/images/41119-1.jpg,1,494
+Erik,Brownrigg,44,NA,70589,Ninjago,Rise of the Villains,2018,Rock Roader,406,39.99,http://images.brickset.com/sets/images/70589-1.jpg,1,435
+Jackson,Martinez,43,250-555-1732,71304,Bionicle,Companions,2018,Terak - Creature of Earth,74,9.99,http://images.brickset.com/sets/images/71304-1.jpg,1,324
+Jackson,Martinez,43,250-555-1732,41559,Mixels,Series 7,2018,Paladum,64,4.99,http://images.brickset.com/sets/images/41559-1.jpg,2,587
+Jackson,Martinez,43,250-555-1732,21031,Architecture,NA,2018,Burj Khalifa,333,39.99,http://images.brickset.com/sets/images/21031-1.jpg,3,252
+Riley,Ott,51,517-555-2093,75126,Star Wars,MicroFighters,2018,First Order Snowspeeder,91,9.99,http://images.brickset.com/sets/images/75126-1.jpg,2,184
+Riley,Ott,51,517-555-2093,70604,Ninjago,Skybound,2018,Tiger Widow Island,450,49.99,http://images.brickset.com/sets/images/70604-1.jpg,1,435
+Hector,Collins,20,340-555-2508,75116,Star Wars,Buildable Figures,2018,Finn,98,24.99,http://images.brickset.com/sets/images/75116-1.jpg,1,184
+Hector,Collins,20,340-555-2508,41172,Elves,NA,2018,The Water Dragon Adventure,212,19.99,http://images.brickset.com/sets/images/41172-1.jpg,1,600
+Hector,Collins,20,340-555-2508,75098,Star Wars,Ultimate Collector Series,2018,Assault on Hoth,2144,249.99,http://images.brickset.com/sets/images/75098-1.jpg,1,174
+Mckenzie,Cherry,37,336-555-9269,853505,Gear,Role-Play toys,2018,NK Sword Standard,NA,9.99,http://images.brickset.com/sets/images/853505-1.jpg,1,NA
+Michelle,Uguccioni,17,NA,70310,Nexo Knights,NA,2018,Knighton Battle Blaster,76,9.99,http://images.brickset.com/sets/images/70310-1.jpg,1,605
+Michelle,Uguccioni,17,NA,31046,Creator,NA,2018,Fast Car,222,19.99,http://images.brickset.com/sets/images/31046-1.jpg,1,22
+Rebecca,Duval,48,908-555-4029,41114,Friends,Party,2018,Party Styling,54,4.99,http://images.brickset.com/sets/images/41114-1.jpg,2,494
+Rebecca,Duval,48,908-555-4029,41573,Mixels,Series 9,2018,Sweepz,61,4.99,NA,1,589
+Rebecca,Duval,48,908-555-4029,21028,Architecture,Skylines,2018,New York City,598,59.99,http://images.brickset.com/sets/images/21028-1.jpg,2,253
+Katherine,Hogue,27,289-555-4928,853555,Gear,Stationery,2018,Campsite Scrapbook,NA,14.99,http://images.brickset.com/sets/images/853555-1.jpg,2,NA
+Katherine,Hogue,27,289-555-4928,75822,The Angry Birds Movie,NA,2018,Piggy Plane Attack,168,19.99,http://images.brickset.com/sets/images/75822-1.jpg,1,606
+Adoria,Hammond,40,712-555-6781,10830,Duplo,NA,2018,Minnie's Café,27,19.99,http://images.brickset.com/sets/images/10830-1.jpg,1,504
+Amanda,Musick,24,878-555-7113,76054,DC Comics Super Heroes,Batman,2018,Batman: Scarecrow Harvest of Fear,563,59.99,http://images.brickset.com/sets/images/76054-1.jpg,2,484
+Cecilia,Mauro,50,NA,75157,Star Wars,Rebels,2018,Captain Rex's AT-TE,972,119.99,http://images.brickset.com/sets/images/75157-1.jpg,3,182
+Shina,Hegarty,22,868-555-1868,41135,Friends,Pop Star,2018,Livi's Pop Star House,597,49.99,http://images.brickset.com/sets/images/41135-1.jpg,3,494
+Shina,Hegarty,22,868-555-1868,41142,Disney Princess,Palace Pets,2018,Palace Pets Royal Castle,186,19.99,http://images.brickset.com/sets/images/41142-1.jpg,3,579
+Shina,Hegarty,22,868-555-1868,21028,Architecture,Skylines,2018,New York City,598,59.99,http://images.brickset.com/sets/images/21028-1.jpg,1,253
+Anthony,Kiyotake,22,980-555-0099,41568,Mixels,Series 8,2018,Lewt,62,4.99,http://images.brickset.com/sets/images/41568-1.jpg,1,588
+Anthony,Kiyotake,22,980-555-0099,853568,Gear,Key Chains/City,2018,Prison Guard Key Chain,NA,5.99,http://images.brickset.com/sets/images/853568-1.jpg,1,NA
+Connor,Fourzan,32,805-555-3065,853519,Gear,Playmats,2018,NK Playmat,NA,14.99,http://images.brickset.com/sets/images/853519-1.jpg,1,NA
+Connor,Fourzan,32,805-555-3065,75130,Star Wars,MicroFighters,2018,AT-DP,76,9.99,http://images.brickset.com/sets/images/75130-1.jpg,1,182
+Kayla,Rush,25,281-555-9341,31046,Creator,NA,2018,Fast Car,222,19.99,http://images.brickset.com/sets/images/31046-1.jpg,1,22
+Kayla,Rush,25,281-555-9341,76065,Marvel Super Heroes,Mighty Micros,2018,Captain America vs. Red Skull,95,9.99,http://images.brickset.com/sets/images/76065-1.jpg,1,482
+Kayla,Rush,25,281-555-9341,75824,The Angry Birds Movie,NA,2018,Pig City Teardown,386,39.99,http://images.brickset.com/sets/images/75824-1.jpg,1,606
+Lucas,Montoya,34,616-555-2269,41555,Mixels,Series 7,2018,Busto,69,4.99,http://images.brickset.com/sets/images/41555-1.jpg,2,587
+Lucas,Montoya,34,616-555-2269,41114,Friends,Party,2018,Party Styling,54,4.99,http://images.brickset.com/sets/images/41114-1.jpg,2,494
+Lucas,Montoya,34,616-555-2269,70330,Nexo Knights,Ultimate,2018,Ultimate Clay,72,9.99,http://images.brickset.com/sets/images/70330-1.jpg,2,605
+Peggy,Hiner,21,563-555-1011,41119,Friends,NA,2018,Heartlake Cupcake Cafe,439,39.99,http://images.brickset.com/sets/images/41119-1.jpg,1,494
+Maya,Wolfe,33,NA,853549,Gear,Key Chains/Friends,2018,Mia Key Chain,NA,5.99,http://images.brickset.com/sets/images/853549-1.jpg,1,NA
+Keno,Graves,51,209-555-6030,75145,Star Wars,Original Content,2018,Eclipse Fighter,363,29.99,http://images.brickset.com/sets/images/75145-1.jpg,1,170
+Lucas,Jimenez-Dominguez,18,712-555-0459,31043,Creator,NA,2018,Chopper Transporter,124,9.99,http://images.brickset.com/sets/images/31043-1.jpg,2,22
+Lucas,Jimenez-Dominguez,18,712-555-0459,41573,Mixels,Series 9,2018,Sweepz,61,4.99,NA,1,589
+Lucas,Jimenez-Dominguez,18,712-555-0459,41140,Disney Princess,Palace Pets,2018,Daisy's Beauty Salon,98,9.99,http://images.brickset.com/sets/images/41140-1.jpg,1,579
+Lucas,Jimenez-Dominguez,18,712-555-0459,41558,Mixels,Series 7,2018,Mixadel,63,4.99,http://images.brickset.com/sets/images/41558-1.jpg,2,587
+Lucas,Jimenez-Dominguez,18,712-555-0459,41572,Mixels,Series 9,2018,Gobbol,62,4.99,NA,1,589
+Jake,Montes Alvarez,30,603-555-6881,41566,Mixels,Series 8,2018,Sharx,55,4.99,http://images.brickset.com/sets/images/41566-1.jpg,1,588
+Jake,Montes Alvarez,30,603-555-6881,76066,Marvel Super Heroes,Mighty Micros,2018,Hulk vs. Ultron,80,9.99,http://images.brickset.com/sets/images/76066-1.jpg,1,482
+Jake,Montes Alvarez,30,603-555-6881,41140,Disney Princess,Palace Pets,2018,Daisy's Beauty Salon,98,9.99,http://images.brickset.com/sets/images/41140-1.jpg,2,579
+Jake,Montes Alvarez,30,603-555-6881,5004612,Gear,Watches/Clocks,2018,Lucy Wyldstyle Minifigure Link Watch,NA,24.99,http://images.brickset.com/sets/images/5004612-1.jpg,3,501
+Trevon,Thanh,25,NA,21128,Minecraft,Minifig-scale,2018,The Village,NA,199.99,NA,1,577
+John'Dunae,Higgins,19,813-555-5561,76046,DC Comics Super Heroes,Batman v Superman: Dawn of Justice,2018,Heroes of Justice: Sky High Battle,517,59.99,http://images.brickset.com/sets/images/76046-1.jpg,1,482
+Tysen,Banda-Chavez,43,NA,5005060,Gear,Video Games/3DS,2018,Marvel Avengers Nintendo 3DS Video Game,NA,29.99,http://images.brickset.com/sets/images/5005060-1.jpg,2,NA
+Tysen,Banda-Chavez,43,NA,41564,Mixels,Series 8,2018,Aquad,70,4.99,http://images.brickset.com/sets/images/41564-1.jpg,1,588
+Tysen,Banda-Chavez,43,NA,60108,City,Fire,2018,Fire Response Unit,257,39.99,http://images.brickset.com/sets/images/60108-1.jpg,2,58
+Janay,Gienapp,63,774-555-2102,21128,Minecraft,Minifig-scale,2018,The Village,NA,199.99,NA,1,577
+Janay,Gienapp,63,774-555-2102,41140,Disney Princess,Palace Pets,2018,Daisy's Beauty Salon,98,9.99,http://images.brickset.com/sets/images/41140-1.jpg,1,579
+Janay,Gienapp,63,774-555-2102,30349,City,NA,2018,Sports Car,47,3.99,http://images.brickset.com/sets/images/30349-1.jpg,1,52
+Eric,Benally,20,418-555-3696,70316,Nexo Knights,NA,2018,Jestro's Evil Mobile,658,59.99,http://images.brickset.com/sets/images/70316-1.jpg,1,605
+Eric,Benally,20,418-555-3696,70319,Nexo Knights,NA,2018,Macy's Thunder Mace,202,19.99,http://images.brickset.com/sets/images/70319-1.jpg,1,605
+Eric,Benally,20,418-555-3696,41122,Friends,Adventure Camp,2018,Adventure Camp Tree House,726,79.99,http://images.brickset.com/sets/images/41122-1.jpg,1,494
+Carson,Aragon,38,NA,70319,Nexo Knights,NA,2018,Macy's Thunder Mace,202,19.99,http://images.brickset.com/sets/images/70319-1.jpg,1,605
+Carson,Aragon,38,NA,30347,City,Fire,2018,Fire Car,53,3.99,http://images.brickset.com/sets/images/30347-1.jpg,1,58
+Samantha,Haberland,21,705-555-1457,75828,Ghostbusters,Reboot,2018,Ghostbusters Ecto-1 & Ecto-2,NA,59.99,http://images.brickset.com/sets/images/75828-1.jpg,1,607
+Samantha,Haberland,21,705-555-1457,71313,Bionicle,Reboot Villains,2018,Lava Beast,114,14.99,NA,1,324
+Samantha,Haberland,21,705-555-1457,70333,Nexo Knights,Ultimate,2018,Ultimate Robin,75,9.99,http://images.brickset.com/sets/images/70333-1.jpg,1,605
+Cameron,Rodriguez,48,325-555-1926,853534,Gear,Key Chains/Ninjago,2018,Airjitzu Jay Key Chain,NA,5.99,http://images.brickset.com/sets/images/853534-1.jpg,1,NA
+Cameron,Rodriguez,48,325-555-1926,30347,City,Fire,2018,Fire Car,53,3.99,http://images.brickset.com/sets/images/30347-1.jpg,1,58
+Connor,Padilla,36,441-555-6534,71310,Bionicle,Reboot Villains,2018,Umarak the Hunter,172,19.99,http://images.brickset.com/sets/images/71310-1.jpg,2,324
+Connor,Padilla,36,441-555-6534,41556,Mixels,Series 7,2018,Tiketz,62,4.99,http://images.brickset.com/sets/images/41556-1.jpg,1,587
+Connor,Padilla,36,441-555-6534,75138,Star Wars,Episode V,2018,Hoth Attack,233,24.99,http://images.brickset.com/sets/images/75138-1.jpg,1,169
+Tyrii,Bloom,23,784-555-7128,70313,Nexo Knights,NA,2018,Moltor's Lava Smasher,187,19.99,http://images.brickset.com/sets/images/70313-1.jpg,1,605
+Tyrii,Bloom,23,784-555-7128,41120,Friends,Adventure Camp,2018,Adventure Camp Archery,114,9.99,http://images.brickset.com/sets/images/41120-1.jpg,1,494
+Tyrii,Bloom,23,784-555-7128,31044,Creator,NA,2018,Park Animals,202,14.99,http://images.brickset.com/sets/images/31044-1.jpg,1,22
+Tyrii,Bloom,23,784-555-7128,41135,Friends,Pop Star,2018,Livi's Pop Star House,597,49.99,http://images.brickset.com/sets/images/41135-1.jpg,3,494
+Austin,Martinez,29,NA,70600,Ninjago,Skybound,2018,Ninja Bike Chase,231,19.99,http://images.brickset.com/sets/images/70600-1.jpg,2,435
+Caroline,Holstein,38,318-555-7894,75140,Star Wars,The Force Awakens,2018,Resistance Troop Transporter,646,69.99,http://images.brickset.com/sets/images/75140-1.jpg,1,184
+Caroline,Holstein,38,318-555-7894,70331,Nexo Knights,Ultimate,2018,Ultimate Macy,101,9.99,http://images.brickset.com/sets/images/70331-1.jpg,1,605
+Caroline,Holstein,38,318-555-7894,60109,City,Fire,2018,Fire Boat,412,79.99,http://images.brickset.com/sets/images/60109-1.jpg,1,58
+Caroline,Holstein,38,318-555-7894,75139,Star Wars,The Force Awakens,2018,Battle on Takodana,409,59.99,http://images.brickset.com/sets/images/75139-1.jpg,1,184
+Caroline,Holstein,38,318-555-7894,76053,DC Comics Super Heroes,Batman,2018,Gotham City Cycle Chase,224,19.99,http://images.brickset.com/sets/images/76053-1.jpg,3,484
+Joshua,Long,55,469-555-6245,5005057,Gear,Video Games/XBOX 360,2018,Marvel Avengers XBOX 360 Video Game,NA,49.99,http://images.brickset.com/sets/images/5005057-1.jpg,1,NA
+Joshua,Long,55,469-555-6245,5005058,Gear,Video Games/Wii U,2018,Marvel Avengers Wii U Video Game,NA,49.99,http://images.brickset.com/sets/images/5005058-1.jpg,1,NA
+Binh,Skalla,23,NA,60118,City,Traffic,2018,Garbage Truck,248,19.99,http://images.brickset.com/sets/images/60118-1.jpg,1,52
+Binh,Skalla,23,NA,75116,Star Wars,Buildable Figures,2018,Finn,98,24.99,http://images.brickset.com/sets/images/75116-1.jpg,1,184
+Binh,Skalla,23,NA,41121,Friends,Adventure Camp,2018,Adventure Camp Rafting,320,29.99,http://images.brickset.com/sets/images/41121-1.jpg,1,494
+Nicholas,Scott,57,418-555-1075,70312,Nexo Knights,NA,2018,Lance's Mecha Horse,237,19.99,http://images.brickset.com/sets/images/70312-1.jpg,1,605
+Nicholas,Scott,57,418-555-1075,853549,Gear,Key Chains/Friends,2018,Mia Key Chain,NA,5.99,http://images.brickset.com/sets/images/853549-1.jpg,1,NA
+Nicholas,Scott,57,418-555-1075,853572,Gear,Key Chains/Miscellaneous,2018,Bumble Bee Key Chain,NA,5.99,http://images.brickset.com/sets/images/853572-1.jpg,2,NA
+Jacob,Barron,27,319-555-6104,60113,City,Traffic,2018,Rally Car,104,9.99,http://images.brickset.com/sets/images/60113-1.jpg,1,63
+Jacob,Barron,27,319-555-6104,75134,Star Wars,Battlefront,2018,Galactic Empire Battle Pack,109,12.99,http://images.brickset.com/sets/images/75134-1.jpg,2,158
+Madeline,Castor,39,450-555-9877,41567,Mixels,Series 8,2018,Skulzy,66,4.99,http://images.brickset.com/sets/images/41567-1.jpg,1,588
+Madeline,Castor,39,450-555-9877,76059,Marvel Super Heroes,Ultimate Spider-Man,2018,Spider-Man: Doc Ock's Tentacle Trap,446,39.99,http://images.brickset.com/sets/images/76059-1.jpg,1,488
+Madeline,Castor,39,450-555-9877,41178,Elves,NA,2018,The Dragon Sanctuary,585,49.99,NA,1,600
+Trevor,Perez,39,878-555-5155,41115,Friends,NA,2018,Emma's Creative Workshop,108,9.99,http://images.brickset.com/sets/images/41115-1.jpg,1,494
+Trevor,Perez,39,878-555-5155,76048,Marvel Super Heroes,Avengers Assemble,2018,Iron Skull Sub Attack,335,29.99,http://images.brickset.com/sets/images/76048-1.jpg,1,487
+Trevor,Perez,39,878-555-5155,41069,Disney Princess,Palace Pets,2018,Treasure's Day at the Pool,70,5.99,http://images.brickset.com/sets/images/41069-1.jpg,1,579
+David,Cabral,19,415-555-8642,71309,Bionicle,Toa,2018,Onua - Uniter of Earth,143,19.99,http://images.brickset.com/sets/images/71309-1.jpg,2,324
+Adam,Albornoz,36,418-555-2486,42050,Technic,NA,2018,Drag Racer,647,79.99,http://images.brickset.com/sets/images/42050-1.jpg,1,1
+Manuel,Wilkerson,23,441-555-3652,41174,Elves,NA,2018,The Starlight Inn,343,29.99,http://images.brickset.com/sets/images/41174-1.jpg,1,600
+Manuel,Wilkerson,23,441-555-3652,76066,Marvel Super Heroes,Mighty Micros,2018,Hulk vs. Ultron,80,9.99,http://images.brickset.com/sets/images/76066-1.jpg,1,482
+Manuel,Wilkerson,23,441-555-3652,70599,Ninjago,Skybound,2018,Cole's Dragon,98,9.99,http://images.brickset.com/sets/images/70599-1.jpg,2,435
+Dakota,Klopp,33,970-555-9320,75822,The Angry Birds Movie,NA,2018,Piggy Plane Attack,168,19.99,http://images.brickset.com/sets/images/75822-1.jpg,1,606
+Dakota,Klopp,33,970-555-9320,71235,Dimensions,Level Pack,2018,Level Pack: Midway Arcade,96,29.99,http://images.brickset.com/sets/images/71235-1.jpg,2,604
+Dakota,Klopp,33,970-555-9320,41567,Mixels,Series 8,2018,Skulzy,66,4.99,http://images.brickset.com/sets/images/41567-1.jpg,2,588
+Aleksandr,Gurrola,61,508-555-9403,30347,City,Fire,2018,Fire Car,53,3.99,http://images.brickset.com/sets/images/30347-1.jpg,1,58
+Michael,Hernandez Muniz,62,NA,76047,Marvel Super Heroes,Captain America: Civil War,2018,Black Panther Pursuit,287,29.99,http://images.brickset.com/sets/images/76047-1.jpg,2,493
+Xavier,Suazo,27,321-555-0605,75114,Star Wars,Buildable Figures,2018,First Order Stormtrooper,81,19.99,http://images.brickset.com/sets/images/75114-1.jpg,1,184
+Xavier,Suazo,27,321-555-0605,70603,Ninjago,Skybound,2018,Raid Zeppelin,294,29.99,http://images.brickset.com/sets/images/70603-1.jpg,1,435
+Jaime,Rideout,26,913-555-5139,70326,Nexo Knights,NA,2018,The Black Knight Mech,530,39.99,NA,2,605
+Jaime,Rideout,26,913-555-5139,10818,Duplo,NA,2018,My First Truck,29,19.99,http://images.brickset.com/sets/images/10818-1.jpg,2,504
+Jaime,Rideout,26,913-555-5139,41114,Friends,Party,2018,Party Styling,54,4.99,http://images.brickset.com/sets/images/41114-1.jpg,2,494
+Tj,Aguon,47,862-555-5629,41135,Friends,Pop Star,2018,Livi's Pop Star House,597,49.99,http://images.brickset.com/sets/images/41135-1.jpg,1,494
+Tj,Aguon,47,862-555-5629,31040,Creator,NA,2018,Desert Racers,65,4.99,http://images.brickset.com/sets/images/31040-1.jpg,1,22
+Tj,Aguon,47,862-555-5629,10830,Duplo,NA,2018,Minnie's Café,27,19.99,http://images.brickset.com/sets/images/10830-1.jpg,1,504
+Taylor,Allen,41,760-555-8123,75147,Star Wars,Original Content,2018,Star Scavenger,558,49.99,http://images.brickset.com/sets/images/75147-1.jpg,2,170
+Kaitlyn,Degeer,24,316-555-7890,853543,Ninjago,NA,2018,Ninjago Party Set,70,7.99,http://images.brickset.com/sets/images/853543-1.jpg,1,NA
+Kaitlyn,Degeer,24,316-555-7890,70332,Nexo Knights,Ultimate,2018,Ultimate Aaron,82,9.99,http://images.brickset.com/sets/images/70332-1.jpg,2,605
+Kaitlyn,Degeer,24,316-555-7890,41574,Mixels,Series 9,2018,Compax,66,4.99,NA,1,589
+Kaitlyn,Degeer,24,316-555-7890,10251,Advanced Models,Modular Buildings,2018,Brick Bank,2380,169.99,http://images.brickset.com/sets/images/10251-1.jpg,2,155
+Matthew,Sandoval,22,671-555-7044,75822,The Angry Birds Movie,NA,2018,Piggy Plane Attack,168,19.99,http://images.brickset.com/sets/images/75822-1.jpg,1,606
+Matthew,Sandoval,22,671-555-7044,853571,Gear,Key Chains/Miscellaneous,2018,Hot Dog Guy Key Chain,NA,5.99,http://images.brickset.com/sets/images/853571-1.jpg,1,NA
+Jordan,West,56,810-555-1608,41113,Friends,Party,2018,Party Gift Shop,52,4.99,http://images.brickset.com/sets/images/41113-1.jpg,1,494
+Jordan,West,56,810-555-1608,10807,Duplo,NA,2018,Horse Trailer,15,19.99,http://images.brickset.com/sets/images/10807-1.jpg,1,NA
+Reyes,Wilson,33,605-555-2774,41558,Mixels,Series 7,2018,Mixadel,63,4.99,http://images.brickset.com/sets/images/41558-1.jpg,1,587
+Reyes,Wilson,33,605-555-2774,31045,Creator,NA,2018,Ocean Explorer,213,14.99,http://images.brickset.com/sets/images/31045-1.jpg,1,22
+Reyes,Wilson,33,605-555-2774,75133,Star Wars,Battlefront,2018,Rebel Alliance Battle Pack,101,12.99,http://images.brickset.com/sets/images/75133-1.jpg,2,158
+Avery,Leung,33,330-555-2699,75116,Star Wars,Buildable Figures,2018,Finn,98,24.99,http://images.brickset.com/sets/images/75116-1.jpg,1,184
+Avery,Leung,33,330-555-2699,853555,Gear,Stationery,2018,Campsite Scrapbook,NA,14.99,http://images.brickset.com/sets/images/853555-1.jpg,1,NA
+Michael,Williams,31,936-555-2974,40202,Seasonal,Easter,2018,Easter Chick,111,9.99,NA,1,229
+Michael,Williams,31,936-555-2974,71307,Bionicle,Toa,2018,Gali - Uniter of Water,87,14.99,http://images.brickset.com/sets/images/71307-1.jpg,1,324
+Michael,Williams,31,936-555-2974,31041,Creator,NA,2018,Construction Vehicles,64,4.99,http://images.brickset.com/sets/images/31041-1.jpg,1,22
+Colleen,Galley,31,710-555-8843,41141,Disney Princess,Palace Pets,2018,Pumpkin's Royal Carriage,79,9.99,http://images.brickset.com/sets/images/41141-1.jpg,2,579
+Colleen,Galley,31,710-555-8843,60105,City,Fire,2018,Fire ATV,64,6.99,http://images.brickset.com/sets/images/60105-1.jpg,1,58
+Colleen,Galley,31,710-555-8843,71300,Bionicle,companions,2018,Uxar - Creature of Jungle,89,9.99,http://images.brickset.com/sets/images/71300-1.jpg,1,324
+Brandilyn,Robertson,27,724-555-5496,41069,Disney Princess,Palace Pets,2018,Treasure's Day at the Pool,70,5.99,http://images.brickset.com/sets/images/41069-1.jpg,1,579
+Brandilyn,Robertson,27,724-555-5496,853519,Gear,Playmats,2018,NK Playmat,NA,14.99,http://images.brickset.com/sets/images/853519-1.jpg,3,NA
+Brandilyn,Robertson,27,724-555-5496,41140,Disney Princess,Palace Pets,2018,Daisy's Beauty Salon,98,9.99,http://images.brickset.com/sets/images/41140-1.jpg,1,579
+Brandilyn,Robertson,27,724-555-5496,70320,Nexo Knights,NA,2018,Aaron Fox's Aero-Striker V2,301,29.99,http://images.brickset.com/sets/images/70320-1.jpg,1,605
+Brandilyn,Robertson,27,724-555-5496,76047,Marvel Super Heroes,Captain America: Civil War,2018,Black Panther Pursuit,287,29.99,http://images.brickset.com/sets/images/76047-1.jpg,2,493
+Son,Saldanha,30,507-555-2278,853505,Gear,Role-Play toys,2018,NK Sword Standard,NA,9.99,http://images.brickset.com/sets/images/853505-1.jpg,2,NA
+Son,Saldanha,30,507-555-2278,75133,Star Wars,Battlefront,2018,Rebel Alliance Battle Pack,101,12.99,http://images.brickset.com/sets/images/75133-1.jpg,2,158
+Katherine,Beck,45,209-555-7105,10251,Advanced Models,Modular Buildings,2018,Brick Bank,2380,169.99,http://images.brickset.com/sets/images/10251-1.jpg,1,155
+Katherine,Beck,45,209-555-7105,75139,Star Wars,The Force Awakens,2018,Battle on Takodana,409,59.99,http://images.brickset.com/sets/images/75139-1.jpg,1,184
+Katherine,Beck,45,209-555-7105,70312,Nexo Knights,NA,2018,Lance's Mecha Horse,237,19.99,http://images.brickset.com/sets/images/70312-1.jpg,2,605
+Katherine,Beck,45,209-555-7105,41178,Elves,NA,2018,The Dragon Sanctuary,585,49.99,NA,1,600
+Beemnet,Masters,41,902-555-8429,60109,City,Fire,2018,Fire Boat,412,79.99,http://images.brickset.com/sets/images/60109-1.jpg,1,58
+Beemnet,Masters,41,902-555-8429,75135,Star Wars,Episode III,2018,Obi-Wan's Jedi Interceptor,215,24.99,http://images.brickset.com/sets/images/75135-1.jpg,1,168
+Shylynn,Seitz,28,205-555-7084,70310,Nexo Knights,NA,2018,Knighton Battle Blaster,76,9.99,http://images.brickset.com/sets/images/70310-1.jpg,2,605
+Shylynn,Seitz,28,205-555-7084,60111,City,Fire,2018,Fire Utility Truck,368,39.99,http://images.brickset.com/sets/images/60111-1.jpg,1,58
+Sonny,Smith,24,246-555-7913,76053,DC Comics Super Heroes,Batman,2018,Gotham City Cycle Chase,224,19.99,http://images.brickset.com/sets/images/76053-1.jpg,1,484
+Joshua,Reyes,53,251-555-5985,75146,Star Wars,Seasonal,2018,Star Wars Advent Calendar,282,39.99,http://images.brickset.com/sets/images/75146-1.jpg,2,209
+Joshua,Reyes,53,251-555-5985,75115,Star Wars,Buildable Figures,2018,Poe Dameron,102,24.99,http://images.brickset.com/sets/images/75115-1.jpg,3,184
+Joshua,Reyes,53,251-555-5985,71238,Dimensions,Fun Pack,2018,Fun Pack: Cyberman,40,14.99,http://images.brickset.com/sets/images/71238-1.jpg,1,604
+Asia,Salyer,24,508-555-0418,76066,Marvel Super Heroes,Mighty Micros,2018,Hulk vs. Ultron,80,9.99,http://images.brickset.com/sets/images/76066-1.jpg,3,482
+Neil,Gabel,30,508-555-5700,5005057,Gear,Video Games/XBOX 360,2018,Marvel Avengers XBOX 360 Video Game,NA,49.99,http://images.brickset.com/sets/images/5005057-1.jpg,2,NA
+Neil,Gabel,30,508-555-5700,5005059,Gear,Video Games/PS3,2018,Marvel Avengers PS3 Video Game,NA,49.99,http://images.brickset.com/sets/images/5005059-1.jpg,1,NA
+Neil,Gabel,30,508-555-5700,71307,Bionicle,Toa,2018,Gali - Uniter of Water,87,14.99,http://images.brickset.com/sets/images/71307-1.jpg,1,324
+Chayanne,Williams,17,869-555-6681,60109,City,Fire,2018,Fire Boat,412,79.99,http://images.brickset.com/sets/images/60109-1.jpg,2,58
+Chayanne,Williams,17,869-555-6681,76044,DC Comics Super Heroes,Batman v Superman: Dawn of Justice,2018,Clash of the Heroes,92,12.99,http://images.brickset.com/sets/images/76044-1.jpg,1,482
+Demetri,Do,21,541-555-1433,21031,Architecture,NA,2018,Burj Khalifa,333,39.99,http://images.brickset.com/sets/images/21031-1.jpg,1,252
+Demetri,Do,21,541-555-1433,70588,Ninjago,Rise of the Villains,2018,Titanium Ninja Tumbler,342,29.99,NA,4,435
+Demetri,Do,21,541-555-1433,70314,Nexo Knights,NA,2018,Beast Master's Chaos Chariot,314,29.99,http://images.brickset.com/sets/images/70314-1.jpg,2,605
+Demetri,Do,21,541-555-1433,75135,Star Wars,Episode III,2018,Obi-Wan's Jedi Interceptor,215,24.99,http://images.brickset.com/sets/images/75135-1.jpg,1,168
+Brittany,Mclellan,25,210-555-0265,21026,Architecture,Skylines,2018,Venice,212,29.99,http://images.brickset.com/sets/images/21026-1.jpg,2,253
+Brittany,Mclellan,25,210-555-0265,10818,Duplo,NA,2018,My First Truck,29,19.99,http://images.brickset.com/sets/images/10818-1.jpg,1,504
+Joseph,Ross,33,254-555-7628,75135,Star Wars,Episode III,2018,Obi-Wan's Jedi Interceptor,215,24.99,http://images.brickset.com/sets/images/75135-1.jpg,4,168
+Joseph,Ross,33,254-555-7628,60117,City,Traffic,2018,Van & Caravan,250,19.99,http://images.brickset.com/sets/images/60117-1.jpg,2,63
+Paige,Wagner,35,860-555-1618,41577,Mixels,Series 9,2018,Mysto,64,4.99,NA,1,589
+Paige,Wagner,35,860-555-1618,41176,Elves,NA,2018,The Secret Market Place,691,59.99,http://images.brickset.com/sets/images/41176-1.jpg,3,600
+Paige,Wagner,35,860-555-1618,71309,Bionicle,Toa,2018,Onua - Uniter of Earth,143,19.99,http://images.brickset.com/sets/images/71309-1.jpg,1,324
+Paige,Wagner,35,860-555-1618,75140,Star Wars,The Force Awakens,2018,Resistance Troop Transporter,646,69.99,http://images.brickset.com/sets/images/75140-1.jpg,1,184
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Daianaira,Joseph,26,714-555-9762,5005059,Gear,Video Games/PS3,2018,Marvel Avengers PS3 Video Game,NA,49.99,http://images.brickset.com/sets/images/5005059-1.jpg,1,NA
+Sean,Cordova,43,881-555-7280,41565,Mixels,Series 8,2018,Hydro,70,4.99,http://images.brickset.com/sets/images/41565-1.jpg,5,588
+Sean,Cordova,43,881-555-7280,10804,Duplo,NA,2018,Jungle,86,49.99,http://images.brickset.com/sets/images/10804-1.jpg,1,504
+Amber,Terwilliger,35,626-555-5321,41118,Friends,NA,2018,Heartlake Supermarket,313,29.99,http://images.brickset.com/sets/images/41118-1.jpg,2,494
+Amber,Terwilliger,35,626-555-5321,21127,Minecraft,Minifig-scale,2018,The Fortress,NA,109.99,http://images.brickset.com/sets/images/21127-1.jpg,1,577
+Katie,Evering,37,882-555-7296,71228,Dimensions,Level Pack,2018,Level Pack: Ghostbusters,115,29.99,http://images.brickset.com/sets/images/71228-1.jpg,1,604
+Katie,Evering,37,882-555-7296,41579,Mixels,Series 9,2018,Camsta,62,4.99,NA,2,589
+Katie,Evering,37,882-555-7296,75821,The Angry Birds Movie,NA,2018,Piggy Car Escape,74,12.99,http://images.brickset.com/sets/images/75821-1.jpg,2,606
+Katie,Evering,37,882-555-7296,70332,Nexo Knights,Ultimate,2018,Ultimate Aaron,82,9.99,http://images.brickset.com/sets/images/70332-1.jpg,2,605
+Nerea,Feldman,28,423-555-9631,42049,Technic,NA,2018,Mine Loader,476,49.99,http://images.brickset.com/sets/images/42049-1.jpg,2,1
+Nerea,Feldman,28,423-555-9631,75157,Star Wars,Rebels,2018,Captain Rex's AT-TE,972,119.99,http://images.brickset.com/sets/images/75157-1.jpg,2,182
+Julianna,Stephens,34,403-555-9991,31044,Creator,NA,2018,Park Animals,202,14.99,http://images.brickset.com/sets/images/31044-1.jpg,1,22
+Julianna,Stephens,34,403-555-9991,75138,Star Wars,Episode V,2018,Hoth Attack,233,24.99,http://images.brickset.com/sets/images/75138-1.jpg,1,169
+Katrina,Clyman,32,604-555-3882,60129,City,Police,2018,Police Patrol Boat,200,49.99,http://images.brickset.com/sets/images/60129-1.jpg,1,61
+Katrina,Clyman,32,604-555-3882,21027,Architecture,Skylines,2018,Berlin,289,29.99,http://images.brickset.com/sets/images/21027-1.jpg,1,253
+Ramon,Walker-Reese,23,NA,75137,Star Wars,Episode V,2018,Carbon-Freezing Chamber,231,24.99,http://images.brickset.com/sets/images/75137-1.jpg,1,169
+Ramon,Walker-Reese,23,NA,70318,Nexo Knights,NA,2018,The Glob Lobber,95,9.99,http://images.brickset.com/sets/images/70318-1.jpg,1,605
+Brandon,Lopez,21,606-555-3903,10809,Duplo,NA,2018,Police Patrol,15,14.99,http://images.brickset.com/sets/images/10809-1.jpg,1,NA
+Brandon,Lopez,21,606-555-3903,71241,Dimensions,Fun Pack,2018,Fun Pack: Slimer,33,14.99,http://images.brickset.com/sets/images/71241-1.jpg,1,604
+Sagi,Heredia,19,989-555-3671,41113,Friends,Party,2018,Party Gift Shop,52,4.99,http://images.brickset.com/sets/images/41113-1.jpg,3,494
+Sagi,Heredia,19,989-555-3671,70325,Nexo Knights,NA,2018,Infernox captures the Queen,253,24.99,http://images.brickset.com/sets/images/70325-1.jpg,1,605
+Michael,Cruz,17,361-555-8212,41172,Elves,NA,2018,The Water Dragon Adventure,212,19.99,http://images.brickset.com/sets/images/41172-1.jpg,1,600
+Michael,Cruz,17,361-555-8212,71238,Dimensions,Fun Pack,2018,Fun Pack: Cyberman,40,14.99,http://images.brickset.com/sets/images/71238-1.jpg,1,604
+Michael,Cruz,17,361-555-8212,70605,Ninjago,Skybound,2018,Misfortune's Keep,754,79.99,http://images.brickset.com/sets/images/70605-1.jpg,1,435
+Melissa,Holmberg,36,NA,75132,Star Wars,The Force Awakens,2018,First Order Battle Pack,88,12.99,http://images.brickset.com/sets/images/75132-1.jpg,1,184
+Cody,Gonzales,44,973-555-3236,42052,Technic,NA,2018,Heavy Lift Helicopter,1042,139.99,http://images.brickset.com/sets/images/42052-1.jpg,1,1
+Cody,Gonzales,44,973-555-3236,75149,Star Wars,The Force Awakens,2018,Resistance X-wing Fighter,740,79.99,http://images.brickset.com/sets/images/75149-1.jpg,3,184
+Jessie,Barron,37,918-555-7552,31050,Creator,NA,2018,Corner Deli,467,39.99,http://images.brickset.com/sets/images/31050-1.jpg,1,22
+Jessie,Barron,37,918-555-7552,41115,Friends,NA,2018,Emma's Creative Workshop,108,9.99,http://images.brickset.com/sets/images/41115-1.jpg,1,494
+Jackson,Roybal,26,NA,41575,Mixels,Series 9,2018,Cobrax,64,4.99,NA,1,589
+Jackson,Roybal,26,NA,76061,DC Comics Super Heroes,Mighty Micros,2018,Batman vs. Catwoman,79,9.99,http://images.brickset.com/sets/images/76061-1.jpg,1,482
+Jackson,Roybal,26,NA,31048,Creator,NA,2018,Lakeside Lodge,368,29.99,http://images.brickset.com/sets/images/31048-1.jpg,1,22
+Kelsey,Schiffner,37,510-555-5847,70601,Ninjago,Skybound,2018,Sky Shark,221,19.99,http://images.brickset.com/sets/images/70601-1.jpg,2,435
+Kelsey,Schiffner,37,510-555-5847,70310,Nexo Knights,NA,2018,Knighton Battle Blaster,76,9.99,http://images.brickset.com/sets/images/70310-1.jpg,1,605
+Kalynne,Kerth,46,361-555-5328,60105,City,Fire,2018,Fire ATV,64,6.99,http://images.brickset.com/sets/images/60105-1.jpg,1,58
+Kalynne,Kerth,46,361-555-5328,70326,Nexo Knights,NA,2018,The Black Knight Mech,530,39.99,NA,1,605
+John Jay,Griego,50,710-555-8921,71229,Dimensions,Team Pack,2018,Team Pack: Joker and Harley Quinn,92,24.99,http://images.brickset.com/sets/images/71229-1.jpg,2,604
+John Jay,Griego,50,710-555-8921,75136,Star Wars,Episode IV,2018,Droid Escape Pod,197,24.99,http://images.brickset.com/sets/images/75136-1.jpg,1,169
+Kareena,Hagar,23,678-555-3786,75825,The Angry Birds Movie,NA,2018,Piggy Pirate Ship,620,59.99,http://images.brickset.com/sets/images/75825-1.jpg,1,606
+Celia,Foley,42,NA,71305,Bionicle,Toa,2018,Lewa - Uniter of Jungle,79,14.99,http://images.brickset.com/sets/images/71305-1.jpg,1,324
+Celia,Foley,42,NA,41119,Friends,NA,2018,Heartlake Cupcake Cafe,439,39.99,http://images.brickset.com/sets/images/41119-1.jpg,1,494
+Celia,Foley,42,NA,71314,Bionicle,Reboot Villains,2018,Storm Beast,109,14.99,NA,3,324
+Celia,Foley,42,NA,75146,Star Wars,Seasonal,2018,Star Wars Advent Calendar,282,39.99,http://images.brickset.com/sets/images/75146-1.jpg,2,209
+Celia,Foley,42,NA,21128,Minecraft,Minifig-scale,2018,The Village,NA,199.99,NA,1,577
+Alyssa,Gorrell,38,867-555-7840,60116,City,Medical,2018,Ambulance Plane,183,19.99,http://images.brickset.com/sets/images/60116-1.jpg,2,60
+Alyssa,Gorrell,38,867-555-7840,853548,Gear,Key Chains/Friends,2018,Andrea Key Chain,NA,5.99,http://images.brickset.com/sets/images/853548-1.jpg,1,NA
+Alyssa,Gorrell,38,867-555-7840,71228,Dimensions,Level Pack,2018,Level Pack: Ghostbusters,115,29.99,http://images.brickset.com/sets/images/71228-1.jpg,1,604
+Tian,Nelson,38,205-555-7773,70319,Nexo Knights,NA,2018,Macy's Thunder Mace,202,19.99,http://images.brickset.com/sets/images/70319-1.jpg,4,605
+Tian,Nelson,38,205-555-7773,71316,Bionicle,Reboot Villains,2018,Umarak the Destroyer,191,24.99,NA,1,324
+Tian,Nelson,38,205-555-7773,5005051,Gear,Digital Media,2018,Friends of Heartlake City Girlz 4 Life,NA,19.99,NA,1,NA
+Elizabeth,Kendrick,35,816-555-5138,70337,Nexo Knights,Ultimate,2018,Ultimate Lance,75,9.99,NA,1,605
+Elizabeth,Kendrick,35,816-555-5138,41120,Friends,Adventure Camp,2018,Adventure Camp Archery,114,9.99,http://images.brickset.com/sets/images/41120-1.jpg,1,494
+Van,Rapp,51,413-555-0987,70339,Nexo Knights,Ultimate,2018,Ultimate Flama,67,9.99,NA,2,605
+Sofia,Szloboda,46,602-555-2267,41562,Mixels,Series 7,2018,Trumpsy,54,4.99,http://images.brickset.com/sets/images/41562-1.jpg,2,587
+Sofia,Szloboda,46,602-555-2267,41140,Disney Princess,Palace Pets,2018,Daisy's Beauty Salon,98,9.99,http://images.brickset.com/sets/images/41140-1.jpg,2,579
+Abigayle,Hosman,34,604-555-7100,10806,Duplo,NA,2018,Horses,20,14.99,http://images.brickset.com/sets/images/10806-1.jpg,1,504
+Abigayle,Hosman,34,604-555-7100,70337,Nexo Knights,Ultimate,2018,Ultimate Lance,75,9.99,NA,1,605
+Joseph,Brown,50,801-555-2112,41140,Disney Princess,Palace Pets,2018,Daisy's Beauty Salon,98,9.99,http://images.brickset.com/sets/images/41140-1.jpg,1,579
+Joseph,Brown,50,801-555-2112,B0189OU0JY,Gear,Digital media,2018,LEGO Star Wars: Droid Tales,NA,19.99,http://images.brickset.com/sets/images/B0189OU0JY-1.jpg,1,NA
+Joseph,Brown,50,801-555-2112,30347,City,Fire,2018,Fire Car,53,3.99,http://images.brickset.com/sets/images/30347-1.jpg,2,58
+Joseph,Brown,50,801-555-2112,76051,Marvel Super Heroes,Captain America: Civil War,2018,Super Hero Airport Battle,807,79.99,http://images.brickset.com/sets/images/76051-1.jpg,2,482
+Austin,Atencio,30,225-555-7391,75821,The Angry Birds Movie,NA,2018,Piggy Car Escape,74,12.99,http://images.brickset.com/sets/images/75821-1.jpg,1,606
+Austin,Atencio,30,225-555-7391,42048,Technic,NA,2018,Race Kart,345,29.99,http://images.brickset.com/sets/images/42048-1.jpg,2,1
+Austin,Atencio,30,225-555-7391,41580,Mixels,Series 9,2018,Myke,63,4.99,NA,1,589
+Austin,Atencio,30,225-555-7391,41140,Disney Princess,Palace Pets,2018,Daisy's Beauty Salon,98,9.99,http://images.brickset.com/sets/images/41140-1.jpg,1,579
+Brenden,Trujillo,31,928-555-1076,21305,Ideas,NA,2018,Maze,769,69.99,NA,1,576
+Darian,Smith,24,830-555-6006,41575,Mixels,Series 9,2018,Cobrax,64,4.99,NA,1,589
+Elizabeth,Roemmich,32,502-555-4381,10251,Advanced Models,Modular Buildings,2018,Brick Bank,2380,169.99,http://images.brickset.com/sets/images/10251-1.jpg,1,155
+Elizabeth,Roemmich,32,502-555-4381,76051,Marvel Super Heroes,Captain America: Civil War,2018,Super Hero Airport Battle,807,79.99,http://images.brickset.com/sets/images/76051-1.jpg,1,482
+Lady,Brown,21,856-555-0798,41172,Elves,NA,2018,The Water Dragon Adventure,212,19.99,http://images.brickset.com/sets/images/41172-1.jpg,1,600
+Lady,Brown,21,856-555-0798,71301,Bionicle,Companions,2018,Ketar - Creature of Stone,80,9.99,http://images.brickset.com/sets/images/71301-1.jpg,1,324
+Lady,Brown,21,856-555-0798,41118,Friends,NA,2018,Heartlake Supermarket,313,29.99,http://images.brickset.com/sets/images/41118-1.jpg,1,494
+Lady,Brown,21,856-555-0798,70312,Nexo Knights,NA,2018,Lance's Mecha Horse,237,19.99,http://images.brickset.com/sets/images/70312-1.jpg,1,605
+Sarah,Wagner,20,NA,41113,Friends,Party,2018,Party Gift Shop,52,4.99,http://images.brickset.com/sets/images/41113-1.jpg,1,494
+Sarah,Wagner,20,NA,71306,Bionicle,Toa,2018,Pohatu - Uniter of Stone,90,14.99,http://images.brickset.com/sets/images/71306-1.jpg,1,324
+Sarah,Wagner,20,NA,41179,Elves,NA,2018,Queen Dragon's Rescue,833,69.99,NA,1,600
+Sarah,Wagner,20,NA,10830,Duplo,NA,2018,Minnie's Café,27,19.99,http://images.brickset.com/sets/images/10830-1.jpg,1,504
+Sarah,Wagner,20,NA,41174,Elves,NA,2018,The Starlight Inn,343,29.99,http://images.brickset.com/sets/images/41174-1.jpg,1,600
+Spencer,Pasillas,44,865-555-3503,41066,Disney Princess,Frozen,2018,Anna & Kristoff's Sleigh Adventure,174,29.99,http://images.brickset.com/sets/images/41066-1.jpg,1,579
+Spencer,Pasillas,44,865-555-3503,10817,Duplo,NA,2018,Creative Chest,70,29.99,http://images.brickset.com/sets/images/10817-1.jpg,1,NA
+Spencer,Pasillas,44,865-555-3503,10815,Duplo,NA,2018,My First Rocket,18,9.99,http://images.brickset.com/sets/images/10815-1.jpg,1,NA
+Spencer,Pasillas,44,865-555-3503,70310,Nexo Knights,NA,2018,Knighton Battle Blaster,76,9.99,http://images.brickset.com/sets/images/70310-1.jpg,1,605
+Steven,Washington,16,336-555-1433,30347,City,Fire,2018,Fire Car,53,3.99,http://images.brickset.com/sets/images/30347-1.jpg,1,58
+Steven,Washington,16,336-555-1433,30349,City,NA,2018,Sports Car,47,3.99,http://images.brickset.com/sets/images/30349-1.jpg,5,52
+Serena,Bartkowiak,16,305-555-2377,71311,Bionicle,Miscellaneous,2018,Kopaka and Melum - Unity set,171,24.99,http://images.brickset.com/sets/images/71311-1.jpg,2,324
+Serena,Bartkowiak,16,305-555-2377,75113,Star Wars,Buildable Figures,2018,Rey,84,19.99,http://images.brickset.com/sets/images/75113-1.jpg,1,184
+Serena,Bartkowiak,16,305-555-2377,40201,Seasonal,Valentine's Day,2018,Valentine's Cupid Dog,150,9.99,http://images.brickset.com/sets/images/40201-1.jpg,1,232
+Alejandre,Baek,26,616-555-9268,70603,Ninjago,Skybound,2018,Raid Zeppelin,294,29.99,http://images.brickset.com/sets/images/70603-1.jpg,2,435
+Billlie,Benson,50,940-555-2729,10829,Duplo,Mickey Mouse Clubhouse,2018,Mickey's Workshop,18,19.99,http://images.brickset.com/sets/images/10829-1.jpg,1,504
+Billlie,Benson,50,940-555-2729,853534,Gear,Key Chains/Ninjago,2018,Airjitzu Jay Key Chain,NA,5.99,http://images.brickset.com/sets/images/853534-1.jpg,1,NA
+Marisa,Beck,37,580-555-3417,70591,Ninjago,Skybound,2018,Kryptarium Prison Breakout,207,19.99,http://images.brickset.com/sets/images/70591-1.jpg,1,435
+Marisa,Beck,37,580-555-3417,76058,Marvel Super Heroes,Ultimate Spider-Man,2018,Spider-Man: Ghost Rider Team-Up,217,19.99,http://images.brickset.com/sets/images/76058-1.jpg,1,488
+Marisa,Beck,37,580-555-3417,31046,Creator,NA,2018,Fast Car,222,19.99,http://images.brickset.com/sets/images/31046-1.jpg,2,22
+Marisa,Beck,37,580-555-3417,31044,Creator,NA,2018,Park Animals,202,14.99,http://images.brickset.com/sets/images/31044-1.jpg,2,22
+Cartrell,Park,49,816-555-5191,41175,Elves,NA,2018,Fire Dragon's Lava Cave,441,39.99,http://images.brickset.com/sets/images/41175-1.jpg,1,600
+Cartrell,Park,49,816-555-5191,71235,Dimensions,Level Pack,2018,Level Pack: Midway Arcade,96,29.99,http://images.brickset.com/sets/images/71235-1.jpg,1,604
+Krista,Gaines,24,307-555-5115,76044,DC Comics Super Heroes,Batman v Superman: Dawn of Justice,2018,Clash of the Heroes,92,12.99,http://images.brickset.com/sets/images/76044-1.jpg,1,482
+Krista,Gaines,24,307-555-5115,41177,Elves,NA,2018,The Precious Crystal Mine,273,29.99,http://images.brickset.com/sets/images/41177-1.jpg,1,600
+Krista,Gaines,24,307-555-5115,76063,DC Comics Super Heroes,Mighty Micros,2018,The Flash vs. Captain Cold,88,9.99,http://images.brickset.com/sets/images/76063-1.jpg,2,482
+Krista,Gaines,24,307-555-5115,60117,City,Traffic,2018,Van & Caravan,250,19.99,http://images.brickset.com/sets/images/60117-1.jpg,2,63
+Krista,Gaines,24,307-555-5115,10814,Duplo,NA,2018,Tow Truck,28,19.99,http://images.brickset.com/sets/images/10814-1.jpg,1,504
+Pa,Strasser,26,830-555-7071,70602,Ninjago,Skybound,2018,Jay's Elemental Dragon,350,29.99,http://images.brickset.com/sets/images/70602-1.jpg,1,435
+Pa,Strasser,26,830-555-7071,75136,Star Wars,Episode IV,2018,Droid Escape Pod,197,24.99,http://images.brickset.com/sets/images/75136-1.jpg,2,169
+Jessy,Lopez-Itomura,43,613-555-4443,853505,Gear,Role-Play toys,2018,NK Sword Standard,NA,9.99,http://images.brickset.com/sets/images/853505-1.jpg,2,NA
+Jessy,Lopez-Itomura,43,613-555-4443,60107,City,Fire,2018,Fire Ladder Truck,214,24.99,http://images.brickset.com/sets/images/60107-1.jpg,1,58
+Jessy,Lopez-Itomura,43,613-555-4443,76050,Marvel Super Heroes,Captain America: Civil War,2018,Crossbones' Hazard Heist,179,19.99,http://images.brickset.com/sets/images/76050-1.jpg,3,493
+George,Guerra,35,NA,31041,Creator,NA,2018,Construction Vehicles,64,4.99,http://images.brickset.com/sets/images/31041-1.jpg,1,22
+Abraham,Medlock,23,754-555-6047,41573,Mixels,Series 9,2018,Sweepz,61,4.99,NA,1,589
+Abraham,Medlock,23,754-555-6047,41173,Elves,NA,2018,Elvendale School of Dragons,230,19.99,http://images.brickset.com/sets/images/41173-1.jpg,2,600
+Abraham,Medlock,23,754-555-6047,75118,Star Wars,Buildable Figures,2018,Captain Phasma,82,24.99,http://images.brickset.com/sets/images/75118-1.jpg,1,184
+Abraham,Medlock,23,754-555-6047,10803,Duplo,NA,2018,Arctic,40,29.99,http://images.brickset.com/sets/images/10803-1.jpg,3,504
+Abraham,Medlock,23,754-555-6047,41570,Mixels,Series 8,2018,Skrubz,68,4.99,http://images.brickset.com/sets/images/41570-1.jpg,1,588
+Mario,Synn,59,519-555-9924,853534,Gear,Key Chains/Ninjago,2018,Airjitzu Jay Key Chain,NA,5.99,http://images.brickset.com/sets/images/853534-1.jpg,1,NA
+Mario,Synn,59,519-555-9924,853543,Ninjago,NA,2018,Ninjago Party Set,70,7.99,http://images.brickset.com/sets/images/853543-1.jpg,3,NA
+Mario,Synn,59,519-555-9924,41561,Mixels,Series 7,2018,Tapsy,57,4.99,http://images.brickset.com/sets/images/41561-1.jpg,2,587
+Joshua,Dillard,41,734-555-7042,853506,Gear,Role-Play toys,2018,NK Shield Standard,NA,12.99,http://images.brickset.com/sets/images/853506-1.jpg,1,NA
+Joshua,Dillard,41,734-555-7042,70335,Nexo Knights,Ultimate,2018,Ultimate Lavaria,69,9.99,http://images.brickset.com/sets/images/70335-1.jpg,1,605
+Annabelle,Lindegren,36,662-555-9880,71316,Bionicle,Reboot Villains,2018,Umarak the Destroyer,191,24.99,NA,1,324
+Annabelle,Lindegren,36,662-555-9880,30446,DC Comics Super Heroes,Batman v Superman: Dawn of Justice,2018,The Batmobile,63,3.99,http://images.brickset.com/sets/images/30446-1.jpg,2,484
+Gabrielle,Mccumiskey,37,441-555-2199,60130,City,Police,2018,Prison Island,754,89.99,http://images.brickset.com/sets/images/60130-1.jpg,2,61
+Makenzie,Pitts,25,NA,75134,Star Wars,Battlefront,2018,Galactic Empire Battle Pack,109,12.99,http://images.brickset.com/sets/images/75134-1.jpg,1,158
+Makenzie,Pitts,25,NA,41576,Mixels,Series 9,2018,Spinza,60,4.99,NA,2,589
+Ramses,Ackah Yensu,38,909-555-0851,853534,Gear,Key Chains/Ninjago,2018,Airjitzu Jay Key Chain,NA,5.99,http://images.brickset.com/sets/images/853534-1.jpg,1,NA
+Ramses,Ackah Yensu,38,909-555-0851,75132,Star Wars,The Force Awakens,2018,First Order Battle Pack,88,12.99,http://images.brickset.com/sets/images/75132-1.jpg,1,184
+Ramses,Ackah Yensu,38,909-555-0851,60131,City,Police,2018,Crooks Island,244,29.99,http://images.brickset.com/sets/images/60131-1.jpg,1,61
+Ramses,Ackah Yensu,38,909-555-0851,10829,Duplo,Mickey Mouse Clubhouse,2018,Mickey's Workshop,18,19.99,http://images.brickset.com/sets/images/10829-1.jpg,2,504
+Ramses,Ackah Yensu,38,909-555-0851,75137,Star Wars,Episode V,2018,Carbon-Freezing Chamber,231,24.99,http://images.brickset.com/sets/images/75137-1.jpg,2,169
+Christian,Ortiviz Madrid,41,434-555-8176,75116,Star Wars,Buildable Figures,2018,Finn,98,24.99,http://images.brickset.com/sets/images/75116-1.jpg,3,184
+Christian,Ortiviz Madrid,41,434-555-8176,70337,Nexo Knights,Ultimate,2018,Ultimate Lance,75,9.99,NA,1,605
+Christian,Ortiviz Madrid,41,434-555-8176,41111,Friends,Party,2018,Party Train,109,9.99,http://images.brickset.com/sets/images/41111-1.jpg,1,494
+Christian,Ortiviz Madrid,41,434-555-8176,70334,Nexo Knights,Ultimate,2018,Ultimate Beast Master,65,9.99,http://images.brickset.com/sets/images/70334-1.jpg,2,605
+Jeffrey,Cervantes,61,859-555-4454,70601,Ninjago,Skybound,2018,Sky Shark,221,19.99,http://images.brickset.com/sets/images/70601-1.jpg,1,435
+Jeffrey,Cervantes,61,859-555-4454,75125,Star Wars,MicroFighters,2018,Resistance X-wing Fighter,87,9.99,http://images.brickset.com/sets/images/75125-1.jpg,1,184
+Jeffrey,Cervantes,61,859-555-4454,41118,Friends,NA,2018,Heartlake Supermarket,313,29.99,http://images.brickset.com/sets/images/41118-1.jpg,1,494
+Jeffrey,Cervantes,61,859-555-4454,60129,City,Police,2018,Police Patrol Boat,200,49.99,http://images.brickset.com/sets/images/60129-1.jpg,1,61
+Meagan,Burke,22,316-555-5143,70600,Ninjago,Skybound,2018,Ninja Bike Chase,231,19.99,http://images.brickset.com/sets/images/70600-1.jpg,1,435
+Meagan,Burke,22,316-555-5143,41141,Disney Princess,Palace Pets,2018,Pumpkin's Royal Carriage,79,9.99,http://images.brickset.com/sets/images/41141-1.jpg,1,579
+Meagan,Burke,22,316-555-5143,71303,Bionicle,Companions,2018,Ikir - Creature of Fire,77,9.99,http://images.brickset.com/sets/images/71303-1.jpg,1,324
+Meagan,Burke,22,316-555-5143,5004612,Gear,Watches/Clocks,2018,Lucy Wyldstyle Minifigure Link Watch,NA,24.99,http://images.brickset.com/sets/images/5004612-1.jpg,1,501
+Dakotah,Baca,30,979-555-1121,21127,Minecraft,Minifig-scale,2018,The Fortress,NA,109.99,http://images.brickset.com/sets/images/21127-1.jpg,1,577
+Dakotah,Baca,30,979-555-1121,60129,City,Police,2018,Police Patrol Boat,200,49.99,http://images.brickset.com/sets/images/60129-1.jpg,1,61
+Elaine,Richa,37,246-555-8048,70313,Nexo Knights,NA,2018,Moltor's Lava Smasher,187,19.99,http://images.brickset.com/sets/images/70313-1.jpg,2,605
+Chisa,Pomeroy,39,617-555-1805,75129,Star Wars,MicroFighters,2018,Wookiee Gunship,84,9.99,http://images.brickset.com/sets/images/75129-1.jpg,1,182
+Chisa,Pomeroy,39,617-555-1805,5004612,Gear,Watches/Clocks,2018,Lucy Wyldstyle Minifigure Link Watch,NA,24.99,http://images.brickset.com/sets/images/5004612-1.jpg,2,501
+Trevor,Calderon-Nava,47,778-555-6609,76048,Marvel Super Heroes,Avengers Assemble,2018,Iron Skull Sub Attack,335,29.99,http://images.brickset.com/sets/images/76048-1.jpg,3,487
+Trevor,Calderon-Nava,47,778-555-6609,41176,Elves,NA,2018,The Secret Market Place,691,59.99,http://images.brickset.com/sets/images/41176-1.jpg,1,600
+Senay,Hildreth,30,607-555-8247,31041,Creator,NA,2018,Construction Vehicles,64,4.99,http://images.brickset.com/sets/images/31041-1.jpg,3,22
+Senay,Hildreth,30,607-555-8247,75140,Star Wars,The Force Awakens,2018,Resistance Troop Transporter,646,69.99,http://images.brickset.com/sets/images/75140-1.jpg,2,184
+Senay,Hildreth,30,607-555-8247,70327,Nexo Knights,NA,2018,The King's Mech,375,29.99,http://images.brickset.com/sets/images/70327-1.jpg,1,605
+Senay,Hildreth,30,607-555-8247,71309,Bionicle,Toa,2018,Onua - Uniter of Earth,143,19.99,http://images.brickset.com/sets/images/71309-1.jpg,2,324
+Shadae,Chidel,20,406-555-0853,71233,Dimensions,Fun Pack,2018,Fun Pack: Stay Puft,65,14.99,http://images.brickset.com/sets/images/71233-1.jpg,2,604
+Shadae,Chidel,20,406-555-0853,41141,Disney Princess,Palace Pets,2018,Pumpkin's Royal Carriage,79,9.99,http://images.brickset.com/sets/images/41141-1.jpg,1,579
+Vanessa,Mantey,42,NA,41557,Mixels,Series 7,2018,Camillot,64,4.99,http://images.brickset.com/sets/images/41557-1.jpg,1,587
+Vanessa,Mantey,42,NA,31050,Creator,NA,2018,Corner Deli,467,39.99,http://images.brickset.com/sets/images/31050-1.jpg,2,22
+Vanessa,Mantey,42,NA,76049,Marvel Super Heroes,Avengers Assemble,2018,Avenjet Space Mission,523,59.99,http://images.brickset.com/sets/images/76049-1.jpg,1,487
+Vanessa,Mantey,42,NA,41110,Friends,Party,2018,Birthday Party,191,19.99,http://images.brickset.com/sets/images/41110-1.jpg,1,494
+Mitchell,Olivo,41,345-555-9053,41576,Mixels,Series 9,2018,Spinza,60,4.99,NA,1,589
+Mitchell,Olivo,41,345-555-9053,76055,DC Comics Super Heroes,Batman,2018,Batman: Killer Croc Sewer Smash,759,79.99,http://images.brickset.com/sets/images/76055-1.jpg,1,484
+Hanibal,Vera,54,206-555-3697,75118,Star Wars,Buildable Figures,2018,Captain Phasma,82,24.99,http://images.brickset.com/sets/images/75118-1.jpg,2,184
+Holly,Klingelsmith,33,NA,41564,Mixels,Series 8,2018,Aquad,70,4.99,http://images.brickset.com/sets/images/41564-1.jpg,4,588
+Holly,Klingelsmith,33,NA,41562,Mixels,Series 7,2018,Trumpsy,54,4.99,http://images.brickset.com/sets/images/41562-1.jpg,1,587
+Mason,Perez,32,403-555-2627,10819,Duplo,NA,2018,My First Garden,25,19.99,http://images.brickset.com/sets/images/10819-1.jpg,3,NA
+Mason,Perez,32,403-555-2627,41558,Mixels,Series 7,2018,Mixadel,63,4.99,http://images.brickset.com/sets/images/41558-1.jpg,1,587
+Jose,Downing,53,415-555-4797,75147,Star Wars,Original Content,2018,Star Scavenger,558,49.99,http://images.brickset.com/sets/images/75147-1.jpg,1,170
+Jose,Downing,53,415-555-4797,71301,Bionicle,Companions,2018,Ketar - Creature of Stone,80,9.99,http://images.brickset.com/sets/images/71301-1.jpg,1,324
+Jordan,O'Boyle,28,880-555-9695,21026,Architecture,Skylines,2018,Venice,212,29.99,http://images.brickset.com/sets/images/21026-1.jpg,1,253
+Jordan,O'Boyle,28,880-555-9695,70320,Nexo Knights,NA,2018,Aaron Fox's Aero-Striker V2,301,29.99,http://images.brickset.com/sets/images/70320-1.jpg,2,605
+Justin,Hiner,23,212-555-7274,75138,Star Wars,Episode V,2018,Hoth Attack,233,24.99,http://images.brickset.com/sets/images/75138-1.jpg,1,169
+Brianna,Biery,20,443-555-5650,10804,Duplo,NA,2018,Jungle,86,49.99,http://images.brickset.com/sets/images/10804-1.jpg,2,504
+Brianna,Biery,20,443-555-5650,41113,Friends,Party,2018,Party Gift Shop,52,4.99,http://images.brickset.com/sets/images/41113-1.jpg,1,494
+Sergey,Lapp,56,802-555-5261,10803,Duplo,NA,2018,Arctic,40,29.99,http://images.brickset.com/sets/images/10803-1.jpg,1,504
+Sergey,Lapp,56,802-555-5261,75147,Star Wars,Original Content,2018,Star Scavenger,558,49.99,http://images.brickset.com/sets/images/75147-1.jpg,1,170
+Allison,English,20,308-555-8064,70311,Nexo Knights,NA,2018,Chaos Catapult,93,9.99,http://images.brickset.com/sets/images/70311-1.jpg,1,605
+Isabel,Garrison,38,561-555-4014,853555,Gear,Stationery,2018,Campsite Scrapbook,NA,14.99,http://images.brickset.com/sets/images/853555-1.jpg,1,NA
+Isabel,Garrison,38,561-555-4014,70310,Nexo Knights,NA,2018,Knighton Battle Blaster,76,9.99,http://images.brickset.com/sets/images/70310-1.jpg,1,605
+Isabel,Garrison,38,561-555-4014,41174,Elves,NA,2018,The Starlight Inn,343,29.99,http://images.brickset.com/sets/images/41174-1.jpg,1,600
+Rachelle,Henderson,50,636-555-3458,41570,Mixels,Series 8,2018,Skrubz,68,4.99,http://images.brickset.com/sets/images/41570-1.jpg,1,588
+Eden,Morgan,47,882-555-5047,10808,Duplo,NA,2018,Little Plane,13,9.99,http://images.brickset.com/sets/images/10808-1.jpg,2,504
+Eden,Morgan,47,882-555-5047,21128,Minecraft,Minifig-scale,2018,The Village,NA,199.99,NA,1,577
+Eden,Morgan,47,882-555-5047,60106,City,Fire,2018,Fire Starter Set,90,9.99,http://images.brickset.com/sets/images/60106-1.jpg,2,58
+Emilie,Ellis,33,806-555-3409,70324,Nexo Knights,NA,2018,Merlok's Library 2.0,288,24.99,http://images.brickset.com/sets/images/70324-1.jpg,1,605
+Emilie,Ellis,33,806-555-3409,70315,Nexo Knights,NA,2018,Clay's Rumble Blade,367,39.99,http://images.brickset.com/sets/images/70315-1.jpg,1,605
+Emilie,Ellis,33,806-555-3409,70330,Nexo Knights,Ultimate,2018,Ultimate Clay,72,9.99,http://images.brickset.com/sets/images/70330-1.jpg,2,605
+Emilie,Ellis,33,806-555-3409,853506,Gear,Role-Play toys,2018,NK Shield Standard,NA,12.99,http://images.brickset.com/sets/images/853506-1.jpg,1,NA
+Seth,Foley,24,NA,41558,Mixels,Series 7,2018,Mixadel,63,4.99,http://images.brickset.com/sets/images/41558-1.jpg,2,587
+Seth,Foley,24,NA,76065,Marvel Super Heroes,Mighty Micros,2018,Captain America vs. Red Skull,95,9.99,http://images.brickset.com/sets/images/76065-1.jpg,1,482
+Seth,Foley,24,NA,853570,City,Police,2018,Police Accessory Set,26,14.99,http://images.brickset.com/sets/images/853570-1.jpg,2,NA
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Seth,Foley,24,NA,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Sara,Siegwarth,30,214-555-6861,41113,Friends,Party,2018,Party Gift Shop,52,4.99,http://images.brickset.com/sets/images/41113-1.jpg,1,494
+Sara,Siegwarth,30,214-555-6861,853555,Gear,Stationery,2018,Campsite Scrapbook,NA,14.99,http://images.brickset.com/sets/images/853555-1.jpg,1,NA
+Siria,Vorwald,28,716-555-2704,71300,Bionicle,companions,2018,Uxar - Creature of Jungle,89,9.99,http://images.brickset.com/sets/images/71300-1.jpg,1,324
+Siria,Vorwald,28,716-555-2704,31043,Creator,NA,2018,Chopper Transporter,124,9.99,http://images.brickset.com/sets/images/31043-1.jpg,1,22
+Blake,Serota,44,952-555-3416,5005059,Gear,Video Games/PS3,2018,Marvel Avengers PS3 Video Game,NA,49.99,http://images.brickset.com/sets/images/5005059-1.jpg,1,NA
+Blake,Serota,44,952-555-3416,75126,Star Wars,MicroFighters,2018,First Order Snowspeeder,91,9.99,http://images.brickset.com/sets/images/75126-1.jpg,1,184
+Blake,Serota,44,952-555-3416,853572,Gear,Key Chains/Miscellaneous,2018,Bumble Bee Key Chain,NA,5.99,http://images.brickset.com/sets/images/853572-1.jpg,1,NA
+Lavie,Faulkner,41,718-555-0575,71316,Bionicle,Reboot Villains,2018,Umarak the Destroyer,191,24.99,NA,2,324
+Lavie,Faulkner,41,718-555-0575,75824,The Angry Birds Movie,NA,2018,Pig City Teardown,386,39.99,http://images.brickset.com/sets/images/75824-1.jpg,1,606
+Lavie,Faulkner,41,718-555-0575,70592,Ninjago,Rise of the Villains,2018,Salvage M.E.C.,439,39.99,http://images.brickset.com/sets/images/70592-1.jpg,1,435
+Brianna,Prisbrey,28,580-555-3606,76044,DC Comics Super Heroes,Batman v Superman: Dawn of Justice,2018,Clash of the Heroes,92,12.99,http://images.brickset.com/sets/images/76044-1.jpg,1,482
+Brianna,Prisbrey,28,580-555-3606,10804,Duplo,NA,2018,Jungle,86,49.99,http://images.brickset.com/sets/images/10804-1.jpg,1,504
+Brianna,Prisbrey,28,580-555-3606,71234,Dimensions,Fun Pack,2018,Fun Pack: Sensei Wu,58,14.99,http://images.brickset.com/sets/images/71234-1.jpg,1,604
+Da Som,Roskam,36,441-555-9959,70333,Nexo Knights,Ultimate,2018,Ultimate Robin,75,9.99,http://images.brickset.com/sets/images/70333-1.jpg,1,605
+Da Som,Roskam,36,441-555-9959,853570,City,Police,2018,Police Accessory Set,26,14.99,http://images.brickset.com/sets/images/853570-1.jpg,1,NA
+Alina,Calerich,22,480-555-5897,41116,Friends,NA,2018,Olivia's Exploration Car,185,14.99,http://images.brickset.com/sets/images/41116-1.jpg,1,494
+Alina,Calerich,22,480-555-5897,41176,Elves,NA,2018,The Secret Market Place,691,59.99,http://images.brickset.com/sets/images/41176-1.jpg,1,600
+Alina,Calerich,22,480-555-5897,60130,City,Police,2018,Prison Island,754,89.99,http://images.brickset.com/sets/images/60130-1.jpg,1,61
+Alina,Calerich,22,480-555-5897,853551,Gear,Key Chains/Friends,2018,Olivia Key Chain,NA,5.99,http://images.brickset.com/sets/images/853551-1.jpg,1,NA
+Alina,Calerich,22,480-555-5897,71308,Bionicle,Toa,2018,Tahu - Uniter of Fire,132,19.99,http://images.brickset.com/sets/images/71308-1.jpg,1,324
+Ursula,Goyen,33,973-555-5517,70605,Ninjago,Skybound,2018,Misfortune's Keep,754,79.99,http://images.brickset.com/sets/images/70605-1.jpg,2,435
+Ursula,Goyen,33,973-555-5517,853555,Gear,Stationery,2018,Campsite Scrapbook,NA,14.99,http://images.brickset.com/sets/images/853555-1.jpg,1,NA
+Ursula,Goyen,33,973-555-5517,70323,Nexo Knights,NA,2018,Jestro's Volcano Lair,1186,119.99,http://images.brickset.com/sets/images/70323-1.jpg,1,605
+Ursula,Goyen,33,973-555-5517,41171,Elves,NA,2018,Emily Jones & the Baby Wind Dragon,80,9.99,http://images.brickset.com/sets/images/41171-1.jpg,1,600
+Ashley,Bletcher,61,567-555-1984,41561,Mixels,Series 7,2018,Tapsy,57,4.99,http://images.brickset.com/sets/images/41561-1.jpg,2,587
+Ashley,Bletcher,61,567-555-1984,10803,Duplo,NA,2018,Arctic,40,29.99,http://images.brickset.com/sets/images/10803-1.jpg,1,504
+Ashley,Bletcher,61,567-555-1984,76044,DC Comics Super Heroes,Batman v Superman: Dawn of Justice,2018,Clash of the Heroes,92,12.99,http://images.brickset.com/sets/images/76044-1.jpg,2,482
+Jackson,Dominguez,40,NA,70313,Nexo Knights,NA,2018,Moltor's Lava Smasher,187,19.99,http://images.brickset.com/sets/images/70313-1.jpg,2,605
+Jackson,Dominguez,40,NA,21127,Minecraft,Minifig-scale,2018,The Fortress,NA,109.99,http://images.brickset.com/sets/images/21127-1.jpg,1,577
+Jackson,Dominguez,40,NA,41569,Mixels,Series 8,2018,Surgeo,63,4.99,http://images.brickset.com/sets/images/41569-1.jpg,2,588
+Jackson,Dominguez,40,NA,41118,Friends,NA,2018,Heartlake Supermarket,313,29.99,http://images.brickset.com/sets/images/41118-1.jpg,1,494
+Jackson,Dominguez,40,NA,70339,Nexo Knights,Ultimate,2018,Ultimate Flama,67,9.99,NA,3,605
+Jackson,Dominguez,40,NA,41573,Mixels,Series 9,2018,Sweepz,61,4.99,NA,1,589
+Jackson,Dominguez,40,NA,853572,Gear,Key Chains/Miscellaneous,2018,Bumble Bee Key Chain,NA,5.99,http://images.brickset.com/sets/images/853572-1.jpg,2,NA
+India,Rudy,39,NA,10803,Duplo,NA,2018,Arctic,40,29.99,http://images.brickset.com/sets/images/10803-1.jpg,1,504
+India,Rudy,39,NA,41565,Mixels,Series 8,2018,Hydro,70,4.99,http://images.brickset.com/sets/images/41565-1.jpg,2,588
+India,Rudy,39,NA,71228,Dimensions,Level Pack,2018,Level Pack: Ghostbusters,115,29.99,http://images.brickset.com/sets/images/71228-1.jpg,1,604
+India,Rudy,39,NA,70321,Nexo Knights,NA,2018,General Magmar's Siege Machine of Doom,516,49.99,http://images.brickset.com/sets/images/70321-1.jpg,2,605
+India,Rudy,39,NA,75131,Star Wars,The Force Awakens,2018,Resistance Trooper Battle Pack,112,12.99,http://images.brickset.com/sets/images/75131-1.jpg,1,184
+Alex,Martin,32,612-555-6849,75826,The Angry Birds Movie,NA,2018,King Pig's Castle,859,89.99,http://images.brickset.com/sets/images/75826-1.jpg,2,606
+Alex,Martin,32,612-555-6849,70593,Ninjago,Skybound,2018,The Green NRG Dragon,567,49.99,http://images.brickset.com/sets/images/70593-1.jpg,1,435
+Carolane,Levosky,37,732-555-0913,853555,Gear,Stationery,2018,Campsite Scrapbook,NA,14.99,http://images.brickset.com/sets/images/853555-1.jpg,4,NA
+Carolane,Levosky,37,732-555-0913,41580,Mixels,Series 9,2018,Myke,63,4.99,NA,1,589
+Carolane,Levosky,37,732-555-0913,75138,Star Wars,Episode V,2018,Hoth Attack,233,24.99,http://images.brickset.com/sets/images/75138-1.jpg,2,169
+Tristin,Marcy,39,NA,41571,Mixels,Series 8,2018,Tuth,67,4.99,http://images.brickset.com/sets/images/41571-1.jpg,1,588
+Tristin,Marcy,39,NA,70315,Nexo Knights,NA,2018,Clay's Rumble Blade,367,39.99,http://images.brickset.com/sets/images/70315-1.jpg,2,605
+Tristin,Marcy,39,NA,42044,Technic,NA,2018,Display Team Jet,113,12.99,http://images.brickset.com/sets/images/42044-1.jpg,1,1
+Tristin,Marcy,39,NA,30446,DC Comics Super Heroes,Batman v Superman: Dawn of Justice,2018,The Batmobile,63,3.99,http://images.brickset.com/sets/images/30446-1.jpg,1,484
+Tristin,Marcy,39,NA,5005058,Gear,Video Games/Wii U,2018,Marvel Avengers Wii U Video Game,NA,49.99,http://images.brickset.com/sets/images/5005058-1.jpg,3,NA
+Aaron,Bruner,18,914-555-5003,60111,City,Fire,2018,Fire Utility Truck,368,39.99,http://images.brickset.com/sets/images/60111-1.jpg,4,58
+Aaron,Bruner,18,914-555-5003,71300,Bionicle,companions,2018,Uxar - Creature of Jungle,89,9.99,http://images.brickset.com/sets/images/71300-1.jpg,1,324
+Aaron,Bruner,18,914-555-5003,75137,Star Wars,Episode V,2018,Carbon-Freezing Chamber,231,24.99,http://images.brickset.com/sets/images/75137-1.jpg,2,169
+Dominic,Mayo,34,936-555-0956,853543,Ninjago,NA,2018,Ninjago Party Set,70,7.99,http://images.brickset.com/sets/images/853543-1.jpg,2,NA
+Michael,Donner,18,432-555-3069,71241,Dimensions,Fun Pack,2018,Fun Pack: Slimer,33,14.99,http://images.brickset.com/sets/images/71241-1.jpg,2,604
+Michael,Donner,18,432-555-3069,10803,Duplo,NA,2018,Arctic,40,29.99,http://images.brickset.com/sets/images/10803-1.jpg,1,504
+Michael,Donner,18,432-555-3069,5005060,Gear,Video Games/3DS,2018,Marvel Avengers Nintendo 3DS Video Game,NA,29.99,http://images.brickset.com/sets/images/5005060-1.jpg,1,NA
+Elyssa,Nelson,26,815-555-4287,41069,Disney Princess,Palace Pets,2018,Treasure's Day at the Pool,70,5.99,http://images.brickset.com/sets/images/41069-1.jpg,1,579
+Elyssa,Nelson,26,815-555-4287,41121,Friends,Adventure Camp,2018,Adventure Camp Rafting,320,29.99,http://images.brickset.com/sets/images/41121-1.jpg,1,494
+Francisco,Smith,34,229-555-6673,60127,City,Police,2018,Prison Island Starter Set,92,9.99,http://images.brickset.com/sets/images/60127-1.jpg,1,61
+Francisco,Smith,34,229-555-6673,42046,Technic,NA,2018,Getaway Racer,170,19.99,http://images.brickset.com/sets/images/42046-1.jpg,1,1
+Saige,Dugger,27,406-555-4946,60108,City,Fire,2018,Fire Response Unit,257,39.99,http://images.brickset.com/sets/images/60108-1.jpg,1,58
+Saige,Dugger,27,406-555-4946,10816,Duplo,NA,2018,My First Cars and Trucks,36,19.99,http://images.brickset.com/sets/images/10816-1.jpg,2,NA
+Saige,Dugger,27,406-555-4946,41171,Elves,NA,2018,Emily Jones & the Baby Wind Dragon,80,9.99,http://images.brickset.com/sets/images/41171-1.jpg,1,600
+Saige,Dugger,27,406-555-4946,70320,Nexo Knights,NA,2018,Aaron Fox's Aero-Striker V2,301,29.99,http://images.brickset.com/sets/images/70320-1.jpg,1,605
+Saige,Dugger,27,406-555-4946,70330,Nexo Knights,Ultimate,2018,Ultimate Clay,72,9.99,http://images.brickset.com/sets/images/70330-1.jpg,1,605
+Taylor,Bruder,56,409-555-7986,10819,Duplo,NA,2018,My First Garden,25,19.99,http://images.brickset.com/sets/images/10819-1.jpg,2,NA
+Taylor,Bruder,56,409-555-7986,75133,Star Wars,Battlefront,2018,Rebel Alliance Battle Pack,101,12.99,http://images.brickset.com/sets/images/75133-1.jpg,2,158
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,71011,Collectable Minifigures,Series 15,2018,LEGO Minifigures - Series 15 - Sealed Box,NA,3.99,http://images.brickset.com/sets/images/71011-18.jpg,1,554
+Keyana,Lafay,52,786-555-6090,21027,Architecture,Skylines,2018,Berlin,289,29.99,http://images.brickset.com/sets/images/21027-1.jpg,1,253
+Keyana,Lafay,52,786-555-6090,70601,Ninjago,Skybound,2018,Sky Shark,221,19.99,http://images.brickset.com/sets/images/70601-1.jpg,1,435
+Keyana,Lafay,52,786-555-6090,41576,Mixels,Series 9,2018,Spinza,60,4.99,NA,2,589
+Kaitlyn,Engel,27,440-555-1127,71307,Bionicle,Toa,2018,Gali - Uniter of Water,87,14.99,http://images.brickset.com/sets/images/71307-1.jpg,3,324
+Kaitlyn,Engel,27,440-555-1127,41571,Mixels,Series 8,2018,Tuth,67,4.99,http://images.brickset.com/sets/images/41571-1.jpg,2,588
+Kaitlyn,Engel,27,440-555-1127,853547,Gear,Key Chains/Friends,2018,Emma Key Chain,NA,5.99,http://images.brickset.com/sets/images/853547-1.jpg,2,NA
+Kaitlyn,Engel,27,440-555-1127,71314,Bionicle,Reboot Villains,2018,Storm Beast,109,14.99,NA,1,324
+Rachael,Tilley,26,806-555-8594,40202,Seasonal,Easter,2018,Easter Chick,111,9.99,NA,2,229
+Rachael,Tilley,26,806-555-8594,41575,Mixels,Series 9,2018,Cobrax,64,4.99,NA,1,589
+Keith,Atwood,25,NA,42048,Technic,NA,2018,Race Kart,345,29.99,http://images.brickset.com/sets/images/42048-1.jpg,1,1
+John,Ellis,24,815-555-9436,5005058,Gear,Video Games/Wii U,2018,Marvel Avengers Wii U Video Game,NA,49.99,http://images.brickset.com/sets/images/5005058-1.jpg,1,NA
+Tynecia,Kramer,20,778-555-0036,41116,Friends,NA,2018,Olivia's Exploration Car,185,14.99,http://images.brickset.com/sets/images/41116-1.jpg,1,494
+Tynecia,Kramer,20,778-555-0036,70602,Ninjago,Skybound,2018,Jay's Elemental Dragon,350,29.99,http://images.brickset.com/sets/images/70602-1.jpg,1,435
+Tynecia,Kramer,20,778-555-0036,21305,Ideas,NA,2018,Maze,769,69.99,NA,2,576
+Jennifer,Dana,26,956-555-9719,31043,Creator,NA,2018,Chopper Transporter,124,9.99,http://images.brickset.com/sets/images/31043-1.jpg,2,22
+Jennifer,Dana,26,956-555-9719,75827,Ghostbusters,NA,2018,Firehouse Headquarters,4634,349.99,http://images.brickset.com/sets/images/75827-1.jpg,2,301
+Gabriel,Dysart,49,858-555-0076,70322,Nexo Knights,NA,2018,Axl's Tower Carrier,670,69.99,http://images.brickset.com/sets/images/70322-1.jpg,2,605
+Gabriel,Dysart,49,858-555-0076,76044,DC Comics Super Heroes,Batman v Superman: Dawn of Justice,2018,Clash of the Heroes,92,12.99,http://images.brickset.com/sets/images/76044-1.jpg,3,482
+Dylan,Mcgrath,18,229-555-1970,76050,Marvel Super Heroes,Captain America: Civil War,2018,Crossbones' Hazard Heist,179,19.99,http://images.brickset.com/sets/images/76050-1.jpg,1,493
+Dylan,Mcgrath,18,229-555-1970,71314,Bionicle,Reboot Villains,2018,Storm Beast,109,14.99,NA,1,324
+Jacob,Griffith,29,928-555-3406,70596,Ninjago,Rise of the Villains,2018,Samurai X Cave Chaos,1253,119.99,NA,1,435
+Jacob,Griffith,29,928-555-3406,853543,Ninjago,NA,2018,Ninjago Party Set,70,7.99,http://images.brickset.com/sets/images/853543-1.jpg,2,NA
+Jacob,Griffith,29,928-555-3406,10817,Duplo,NA,2018,Creative Chest,70,29.99,http://images.brickset.com/sets/images/10817-1.jpg,1,NA
+Dustin,Tennis,31,229-555-5837,60127,City,Police,2018,Prison Island Starter Set,92,9.99,http://images.brickset.com/sets/images/60127-1.jpg,1,61
+Melanie,Rollert,43,NA,75828,Ghostbusters,Reboot,2018,Ghostbusters Ecto-1 & Ecto-2,NA,59.99,http://images.brickset.com/sets/images/75828-1.jpg,2,607
+Melanie,Rollert,43,NA,41179,Elves,NA,2018,Queen Dragon's Rescue,833,69.99,NA,3,600
+Robert,Buse,38,712-555-9533,75135,Star Wars,Episode III,2018,Obi-Wan's Jedi Interceptor,215,24.99,http://images.brickset.com/sets/images/75135-1.jpg,2,168
+Robert,Buse,38,712-555-9533,75125,Star Wars,MicroFighters,2018,Resistance X-wing Fighter,87,9.99,http://images.brickset.com/sets/images/75125-1.jpg,1,184
+Robert,Buse,38,712-555-9533,41118,Friends,NA,2018,Heartlake Supermarket,313,29.99,http://images.brickset.com/sets/images/41118-1.jpg,2,494
+Jessa,Stites,51,NA,71238,Dimensions,Fun Pack,2018,Fun Pack: Cyberman,40,14.99,http://images.brickset.com/sets/images/71238-1.jpg,1,604
+Jessa,Stites,51,NA,70330,Nexo Knights,Ultimate,2018,Ultimate Clay,72,9.99,http://images.brickset.com/sets/images/70330-1.jpg,1,605
+Ryan,Marquez,25,281-555-0811,70334,Nexo Knights,Ultimate,2018,Ultimate Beast Master,65,9.99,http://images.brickset.com/sets/images/70334-1.jpg,1,605
+Ryan,Marquez,25,281-555-0811,75145,Star Wars,Original Content,2018,Eclipse Fighter,363,29.99,http://images.brickset.com/sets/images/75145-1.jpg,1,170
+Ryan,Marquez,25,281-555-0811,71238,Dimensions,Fun Pack,2018,Fun Pack: Cyberman,40,14.99,http://images.brickset.com/sets/images/71238-1.jpg,1,604
+Orion,Gates,54,214-555-0029,70600,Ninjago,Skybound,2018,Ninja Bike Chase,231,19.99,http://images.brickset.com/sets/images/70600-1.jpg,4,435
+Orion,Gates,54,214-555-0029,70592,Ninjago,Rise of the Villains,2018,Salvage M.E.C.,439,39.99,http://images.brickset.com/sets/images/70592-1.jpg,2,435
+Orion,Gates,54,214-555-0029,70593,Ninjago,Skybound,2018,The Green NRG Dragon,567,49.99,http://images.brickset.com/sets/images/70593-1.jpg,1,435
+Jenny,Tutone,35,919-867-5309,41111,Friends,Party,2018,Party Train,109,9.99,http://images.brickset.com/sets/images/41111-1.jpg,1,494
+Jenny,Tutone,35,919-867-5309,31040,Creator,NA,2018,Desert Racers,65,4.99,http://images.brickset.com/sets/images/31040-1.jpg,1,22
+Jenny,Tutone,35,919-867-5309,41120,Friends,Adventure Camp,2018,Adventure Camp Archery,114,9.99,http://images.brickset.com/sets/images/41120-1.jpg,1,494
+Josie,Paley,38,807-555-3971,853555,Gear,Stationery,2018,Campsite Scrapbook,NA,14.99,http://images.brickset.com/sets/images/853555-1.jpg,1,NA
+Josie,Paley,38,807-555-3971,75137,Star Wars,Episode V,2018,Carbon-Freezing Chamber,231,24.99,http://images.brickset.com/sets/images/75137-1.jpg,2,169
+Josie,Paley,38,807-555-3971,75116,Star Wars,Buildable Figures,2018,Finn,98,24.99,http://images.brickset.com/sets/images/75116-1.jpg,3,184
+Josie,Paley,38,807-555-3971,41573,Mixels,Series 9,2018,Sweepz,61,4.99,NA,1,589
+Josie,Paley,38,807-555-3971,75129,Star Wars,MicroFighters,2018,Wookiee Gunship,84,9.99,http://images.brickset.com/sets/images/75129-1.jpg,1,182
+Josie,Paley,38,807-555-3971,41559,Mixels,Series 7,2018,Paladum,64,4.99,http://images.brickset.com/sets/images/41559-1.jpg,2,587
+Christina,Williams,39,541-555-5085,71305,Bionicle,Toa,2018,Lewa - Uniter of Jungle,79,14.99,http://images.brickset.com/sets/images/71305-1.jpg,2,324
+Christina,Williams,39,541-555-5085,10702,Classic,NA,2018,Creative Building Set,583,29.99,http://images.brickset.com/sets/images/10702-1.jpg,1,365
+Christina,Williams,39,541-555-5085,70312,Nexo Knights,NA,2018,Lance's Mecha Horse,237,19.99,http://images.brickset.com/sets/images/70312-1.jpg,1,605
+Alexandra,Leinhart,24,551-555-8769,41121,Friends,Adventure Camp,2018,Adventure Camp Rafting,320,29.99,http://images.brickset.com/sets/images/41121-1.jpg,2,494
+Alexandra,Leinhart,24,551-555-8769,70330,Nexo Knights,Ultimate,2018,Ultimate Clay,72,9.99,http://images.brickset.com/sets/images/70330-1.jpg,1,605
+Alexandra,Leinhart,24,551-555-8769,70320,Nexo Knights,NA,2018,Aaron Fox's Aero-Striker V2,301,29.99,http://images.brickset.com/sets/images/70320-1.jpg,2,605
+Delmi,Spedding,40,758-555-3948,60111,City,Fire,2018,Fire Utility Truck,368,39.99,http://images.brickset.com/sets/images/60111-1.jpg,2,58
+Delmi,Spedding,40,758-555-3948,41120,Friends,Adventure Camp,2018,Adventure Camp Archery,114,9.99,http://images.brickset.com/sets/images/41120-1.jpg,1,494
+Peyton,Wiebe,29,281-555-8711,21128,Minecraft,Minifig-scale,2018,The Village,NA,199.99,NA,1,577
+Peyton,Wiebe,29,281-555-8711,75149,Star Wars,The Force Awakens,2018,Resistance X-wing Fighter,740,79.99,http://images.brickset.com/sets/images/75149-1.jpg,1,184
+Peyton,Wiebe,29,281-555-8711,41177,Elves,NA,2018,The Precious Crystal Mine,273,29.99,http://images.brickset.com/sets/images/41177-1.jpg,2,600
+Gunnar,Nickless,36,915-555-5334,60109,City,Fire,2018,Fire Boat,412,79.99,http://images.brickset.com/sets/images/60109-1.jpg,1,58
+Alex,Ford,33,509-555-2531,76062,DC Comics Super Heroes,Mighty Micros,2018,Robin vs. Bane,77,9.99,http://images.brickset.com/sets/images/76062-1.jpg,1,482
+Audrey,Eustace,26,NA,70603,Ninjago,Skybound,2018,Raid Zeppelin,294,29.99,http://images.brickset.com/sets/images/70603-1.jpg,1,435
+Audrey,Eustace,26,NA,853506,Gear,Role-Play toys,2018,NK Shield Standard,NA,12.99,http://images.brickset.com/sets/images/853506-1.jpg,1,NA
+Audrey,Eustace,26,NA,70326,Nexo Knights,NA,2018,The Black Knight Mech,530,39.99,NA,1,605
+Audrey,Eustace,26,NA,76064,Marvel Super Heroes,Mighty Micros,2018,Spider-Man vs. Green Goblin,85,9.99,http://images.brickset.com/sets/images/76064-1.jpg,1,482
+Jacob,Scott,23,312-555-5114,31043,Creator,NA,2018,Chopper Transporter,124,9.99,http://images.brickset.com/sets/images/31043-1.jpg,2,22
+Jacob,Scott,23,312-555-5114,71307,Bionicle,Toa,2018,Gali - Uniter of Water,87,14.99,http://images.brickset.com/sets/images/71307-1.jpg,1,324
+Daniel,Griffey,68,479-555-3648,70338,Nexo Knights,Ultimate,2018,Ultimate General Magmar,64,9.99,NA,1,605
+Daniel,Griffey,68,479-555-3648,41118,Friends,NA,2018,Heartlake Supermarket,313,29.99,http://images.brickset.com/sets/images/41118-1.jpg,2,494
+Daniel,Griffey,68,479-555-3648,41560,Mixels,Series 7,2018,Jamzy,70,4.99,http://images.brickset.com/sets/images/41560-1.jpg,4,587
+Amanda,Hunter,21,NA,10826,Duplo,Miles from Tomorrowland,2018,Miles' Stellosphere Hangar,44,34.99,http://images.brickset.com/sets/images/10826-1.jpg,2,NA
+Amanda,Hunter,21,NA,71301,Bionicle,Companions,2018,Ketar - Creature of Stone,80,9.99,http://images.brickset.com/sets/images/71301-1.jpg,1,324
+Alissa,Lamsal,27,313-555-1678,70330,Nexo Knights,Ultimate,2018,Ultimate Clay,72,9.99,http://images.brickset.com/sets/images/70330-1.jpg,2,605
+Alissa,Lamsal,27,313-555-1678,70325,Nexo Knights,NA,2018,Infernox captures the Queen,253,24.99,http://images.brickset.com/sets/images/70325-1.jpg,3,605
+Melissa,Prael,41,819-555-1361,70601,Ninjago,Skybound,2018,Sky Shark,221,19.99,http://images.brickset.com/sets/images/70601-1.jpg,1,435
+Melissa,Prael,41,819-555-1361,41567,Mixels,Series 8,2018,Skulzy,66,4.99,http://images.brickset.com/sets/images/41567-1.jpg,1,588
+Melissa,Prael,41,819-555-1361,42048,Technic,NA,2018,Race Kart,345,29.99,http://images.brickset.com/sets/images/42048-1.jpg,1,1
+Audrey,Baker,40,386-555-0465,76054,DC Comics Super Heroes,Batman,2018,Batman: Scarecrow Harvest of Fear,563,59.99,http://images.brickset.com/sets/images/76054-1.jpg,1,484
+Audrey,Baker,40,386-555-0465,75822,The Angry Birds Movie,NA,2018,Piggy Plane Attack,168,19.99,http://images.brickset.com/sets/images/75822-1.jpg,1,606
+Audrey,Baker,40,386-555-0465,42047,Technic,NA,2018,Police Interceptor,185,19.99,http://images.brickset.com/sets/images/42047-1.jpg,1,1
+Audrey,Baker,40,386-555-0465,31043,Creator,NA,2018,Chopper Transporter,124,9.99,http://images.brickset.com/sets/images/31043-1.jpg,1,22
+Ean,Kruse,53,740-555-8273,70317,Nexo Knights,NA,2018,The Fortrex,1140,99.99,http://images.brickset.com/sets/images/70317-1.jpg,1,605
+Ean,Kruse,53,740-555-8273,41113,Friends,Party,2018,Party Gift Shop,52,4.99,http://images.brickset.com/sets/images/41113-1.jpg,1,494
+Lawrence,Lewis,21,602-555-4393,21027,Architecture,Skylines,2018,Berlin,289,29.99,http://images.brickset.com/sets/images/21027-1.jpg,2,253
+Shelby,Siekmeier,56,210-555-8934,42050,Technic,NA,2018,Drag Racer,647,79.99,http://images.brickset.com/sets/images/42050-1.jpg,1,1
+Shelby,Siekmeier,56,210-555-8934,5005059,Gear,Video Games/PS3,2018,Marvel Avengers PS3 Video Game,NA,49.99,http://images.brickset.com/sets/images/5005059-1.jpg,1,NA
+Megan,Sweetman,30,567-555-4401,71309,Bionicle,Toa,2018,Onua - Uniter of Earth,143,19.99,http://images.brickset.com/sets/images/71309-1.jpg,1,324
+Megan,Sweetman,30,567-555-4401,75139,Star Wars,The Force Awakens,2018,Battle on Takodana,409,59.99,http://images.brickset.com/sets/images/75139-1.jpg,2,184
+Megan,Sweetman,30,567-555-4401,30446,DC Comics Super Heroes,Batman v Superman: Dawn of Justice,2018,The Batmobile,63,3.99,http://images.brickset.com/sets/images/30446-1.jpg,1,484
+Megan,Sweetman,30,567-555-4401,41135,Friends,Pop Star,2018,Livi's Pop Star House,597,49.99,http://images.brickset.com/sets/images/41135-1.jpg,1,494
+Dylan,Scott,53,813-555-0271,853571,Gear,Key Chains/Miscellaneous,2018,Hot Dog Guy Key Chain,NA,5.99,http://images.brickset.com/sets/images/853571-1.jpg,1,NA
+Dylan,Scott,53,813-555-0271,60116,City,Medical,2018,Ambulance Plane,183,19.99,http://images.brickset.com/sets/images/60116-1.jpg,1,60
+John,Leavell,39,843-555-8490,75127,Star Wars,MicroFighters,2018,The Ghost,104,9.99,http://images.brickset.com/sets/images/75127-1.jpg,1,159
+John,Leavell,39,843-555-8490,10804,Duplo,NA,2018,Jungle,86,49.99,http://images.brickset.com/sets/images/10804-1.jpg,1,504
+John,Leavell,39,843-555-8490,70593,Ninjago,Skybound,2018,The Green NRG Dragon,567,49.99,http://images.brickset.com/sets/images/70593-1.jpg,1,435
+John,Leavell,39,843-555-8490,71234,Dimensions,Fun Pack,2018,Fun Pack: Sensei Wu,58,14.99,http://images.brickset.com/sets/images/71234-1.jpg,1,604
+Angel,Payne,62,NA,75146,Star Wars,Seasonal,2018,Star Wars Advent Calendar,282,39.99,http://images.brickset.com/sets/images/75146-1.jpg,4,209
+Angel,Payne,62,NA,75133,Star Wars,Battlefront,2018,Rebel Alliance Battle Pack,101,12.99,http://images.brickset.com/sets/images/75133-1.jpg,1,158
+Nadia,Romero,37,702-555-1158,71307,Bionicle,Toa,2018,Gali - Uniter of Water,87,14.99,http://images.brickset.com/sets/images/71307-1.jpg,1,324
+Nadia,Romero,37,702-555-1158,30446,DC Comics Super Heroes,Batman v Superman: Dawn of Justice,2018,The Batmobile,63,3.99,http://images.brickset.com/sets/images/30446-1.jpg,1,484
+Sarah,Harris,44,787-555-1308,70593,Ninjago,Skybound,2018,The Green NRG Dragon,567,49.99,http://images.brickset.com/sets/images/70593-1.jpg,1,435
+Danait,Mckinny,33,NA,70601,Ninjago,Skybound,2018,Sky Shark,221,19.99,http://images.brickset.com/sets/images/70601-1.jpg,2,435
+Joseph,Holub,33,732-555-8846,853506,Gear,Role-Play toys,2018,NK Shield Standard,NA,12.99,http://images.brickset.com/sets/images/853506-1.jpg,3,NA
+Joseph,Holub,33,732-555-8846,41568,Mixels,Series 8,2018,Lewt,62,4.99,http://images.brickset.com/sets/images/41568-1.jpg,1,588
+Joseph,Holub,33,732-555-8846,75148,Star Wars,The Force Awakens,2018,Encounter on Jakku,530,59.99,http://images.brickset.com/sets/images/75148-1.jpg,1,184
+Joseph,Holub,33,732-555-8846,41560,Mixels,Series 7,2018,Jamzy,70,4.99,http://images.brickset.com/sets/images/41560-1.jpg,1,587
+Joseph,Holub,33,732-555-8846,75138,Star Wars,Episode V,2018,Hoth Attack,233,24.99,http://images.brickset.com/sets/images/75138-1.jpg,2,169
+Elias,Garrett,50,832-555-9165,60130,City,Police,2018,Prison Island,754,89.99,http://images.brickset.com/sets/images/60130-1.jpg,3,61
+Elias,Garrett,50,832-555-9165,75145,Star Wars,Original Content,2018,Eclipse Fighter,363,29.99,http://images.brickset.com/sets/images/75145-1.jpg,1,170
+Elias,Garrett,50,832-555-9165,41174,Elves,NA,2018,The Starlight Inn,343,29.99,http://images.brickset.com/sets/images/41174-1.jpg,1,600
+Isaac,Younger,42,345-555-2861,75824,The Angry Birds Movie,NA,2018,Pig City Teardown,386,39.99,http://images.brickset.com/sets/images/75824-1.jpg,1,606
+Isaac,Younger,42,345-555-2861,60119,City,Harbour,2018,Ferry,301,29.99,http://images.brickset.com/sets/images/60119-1.jpg,1,59
+Dominique,Kifletsion,28,647-555-6291,41115,Friends,NA,2018,Emma's Creative Workshop,108,9.99,http://images.brickset.com/sets/images/41115-1.jpg,2,494
+Dominique,Kifletsion,28,647-555-6291,76058,Marvel Super Heroes,Ultimate Spider-Man,2018,Spider-Man: Ghost Rider Team-Up,217,19.99,http://images.brickset.com/sets/images/76058-1.jpg,3,488
+Morgan,Andreas,22,785-555-6517,41563,Mixels,Series 8,2018,Splasho,67,4.99,http://images.brickset.com/sets/images/41563-1.jpg,2,588
+Morgan,Andreas,22,785-555-6517,70317,Nexo Knights,NA,2018,The Fortrex,1140,99.99,http://images.brickset.com/sets/images/70317-1.jpg,1,605
+Morgan,Andreas,22,785-555-6517,60106,City,Fire,2018,Fire Starter Set,90,9.99,http://images.brickset.com/sets/images/60106-1.jpg,1,58
+Kelly,Wilson,36,419-555-4451,31047,Creator,NA,2018,Propeller Plane,230,19.99,http://images.brickset.com/sets/images/31047-1.jpg,1,22
+Adam,Mehdinia,36,520-555-0348,853568,Gear,Key Chains/City,2018,Prison Guard Key Chain,NA,5.99,http://images.brickset.com/sets/images/853568-1.jpg,2,NA
+Katelynn,Wardlaw,35,604-555-2142,60112,City,Fire,2018,Fire Engine,376,49.99,http://images.brickset.com/sets/images/60112-1.jpg,1,58
+Autriana,Hess,26,616-555-0154,60114,City,Harbour,2018,Race Boat,95,9.99,http://images.brickset.com/sets/images/60114-1.jpg,1,52
+Autriana,Hess,26,616-555-0154,10806,Duplo,NA,2018,Horses,20,14.99,http://images.brickset.com/sets/images/10806-1.jpg,1,504
+Autriana,Hess,26,616-555-0154,41178,Elves,NA,2018,The Dragon Sanctuary,585,49.99,NA,1,600
+Christy,Larsen,26,910-555-9252,41558,Mixels,Series 7,2018,Mixadel,63,4.99,http://images.brickset.com/sets/images/41558-1.jpg,1,587
+Christy,Larsen,26,910-555-9252,41120,Friends,Adventure Camp,2018,Adventure Camp Archery,114,9.99,http://images.brickset.com/sets/images/41120-1.jpg,1,494
+Tanner,Dockstader,21,573-555-4274,75130,Star Wars,MicroFighters,2018,AT-DP,76,9.99,http://images.brickset.com/sets/images/75130-1.jpg,1,182
+Tanner,Dockstader,21,573-555-4274,31042,Creator,NA,2018,Super Soarer,100,9.99,http://images.brickset.com/sets/images/31042-1.jpg,2,22
+Tanner,Dockstader,21,573-555-4274,76058,Marvel Super Heroes,Ultimate Spider-Man,2018,Spider-Man: Ghost Rider Team-Up,217,19.99,http://images.brickset.com/sets/images/76058-1.jpg,1,488
+Tanner,Dockstader,21,573-555-4274,31044,Creator,NA,2018,Park Animals,202,14.99,http://images.brickset.com/sets/images/31044-1.jpg,2,22
+Trenidy,Embrey,26,215-555-1034,853571,Gear,Key Chains/Miscellaneous,2018,Hot Dog Guy Key Chain,NA,5.99,http://images.brickset.com/sets/images/853571-1.jpg,2,NA
+Trenidy,Embrey,26,215-555-1034,75114,Star Wars,Buildable Figures,2018,First Order Stormtrooper,81,19.99,http://images.brickset.com/sets/images/75114-1.jpg,1,184
+Trenidy,Embrey,26,215-555-1034,75132,Star Wars,The Force Awakens,2018,First Order Battle Pack,88,12.99,http://images.brickset.com/sets/images/75132-1.jpg,3,184
+Sean,Graves-Ayers,34,949-555-1759,70326,Nexo Knights,NA,2018,The Black Knight Mech,530,39.99,NA,2,605
+Sean,Graves-Ayers,34,949-555-1759,41574,Mixels,Series 9,2018,Compax,66,4.99,NA,1,589
+Paige,Ice,21,NA,60115,City,Traffic,2018,4 x 4 Off Roader,176,19.99,http://images.brickset.com/sets/images/60115-1.jpg,1,64
+Paige,Ice,21,NA,41577,Mixels,Series 9,2018,Mysto,64,4.99,NA,1,589
+Aiden,Ganley,19,786-555-5067,70324,Nexo Knights,NA,2018,Merlok's Library 2.0,288,24.99,http://images.brickset.com/sets/images/70324-1.jpg,1,605
+Aiden,Ganley,19,786-555-5067,70310,Nexo Knights,NA,2018,Knighton Battle Blaster,76,9.99,http://images.brickset.com/sets/images/70310-1.jpg,2,605
+Dustin,Vanvuuren,51,812-555-1009,10803,Duplo,NA,2018,Arctic,40,29.99,http://images.brickset.com/sets/images/10803-1.jpg,2,504
+Dustin,Vanvuuren,51,812-555-1009,71235,Dimensions,Level Pack,2018,Level Pack: Midway Arcade,96,29.99,http://images.brickset.com/sets/images/71235-1.jpg,1,604
+Dustin,Vanvuuren,51,812-555-1009,75151,Star Wars,Episode III,2018,Clone Turbo Tank,903,109.99,http://images.brickset.com/sets/images/75151-1.jpg,1,168
+Payton,Milsap,42,NA,71304,Bionicle,Companions,2018,Terak - Creature of Earth,74,9.99,http://images.brickset.com/sets/images/71304-1.jpg,1,324
+Payton,Milsap,42,NA,76063,DC Comics Super Heroes,Mighty Micros,2018,The Flash vs. Captain Cold,88,9.99,http://images.brickset.com/sets/images/76063-1.jpg,3,482
+Payton,Milsap,42,NA,60109,City,Fire,2018,Fire Boat,412,79.99,http://images.brickset.com/sets/images/60109-1.jpg,2,58
+Juana,Geisert,35,701-555-8100,75150,Star Wars,Rebels,2018,Vader's TIE Advanced vs. A-wing Fighter,702,89.99,http://images.brickset.com/sets/images/75150-1.jpg,2,182
+Juana,Geisert,35,701-555-8100,71313,Bionicle,Reboot Villains,2018,Lava Beast,114,14.99,NA,1,324
+Stephanie,Harrison,42,NA,41121,Friends,Adventure Camp,2018,Adventure Camp Rafting,320,29.99,http://images.brickset.com/sets/images/41121-1.jpg,1,494
+Benjamin,Park,33,NA,75126,Star Wars,MicroFighters,2018,First Order Snowspeeder,91,9.99,http://images.brickset.com/sets/images/75126-1.jpg,1,184
+Benjamin,Park,33,NA,75145,Star Wars,Original Content,2018,Eclipse Fighter,363,29.99,http://images.brickset.com/sets/images/75145-1.jpg,4,170
+Benjamin,Park,33,NA,853568,Gear,Key Chains/City,2018,Prison Guard Key Chain,NA,5.99,http://images.brickset.com/sets/images/853568-1.jpg,1,NA
+Benjamin,Park,33,NA,71309,Bionicle,Toa,2018,Onua - Uniter of Earth,143,19.99,http://images.brickset.com/sets/images/71309-1.jpg,2,324
+Miles,Hill,34,NA,70312,Nexo Knights,NA,2018,Lance's Mecha Horse,237,19.99,http://images.brickset.com/sets/images/70312-1.jpg,2,605
+Carolyn,Quarry,23,567-555-7649,70596,Ninjago,Rise of the Villains,2018,Samurai X Cave Chaos,1253,119.99,NA,2,435
+Carolyn,Quarry,23,567-555-7649,71311,Bionicle,Miscellaneous,2018,Kopaka and Melum - Unity set,171,24.99,http://images.brickset.com/sets/images/71311-1.jpg,2,324
+Jennifer,Reinert,29,402-555-0467,71241,Dimensions,Fun Pack,2018,Fun Pack: Slimer,33,14.99,http://images.brickset.com/sets/images/71241-1.jpg,3,604
+Natalia,Vonduyke,16,859-555-3818,853534,Gear,Key Chains/Ninjago,2018,Airjitzu Jay Key Chain,NA,5.99,http://images.brickset.com/sets/images/853534-1.jpg,2,NA
+Natalia,Vonduyke,16,859-555-3818,10814,Duplo,NA,2018,Tow Truck,28,19.99,http://images.brickset.com/sets/images/10814-1.jpg,1,504
+Natalia,Vonduyke,16,859-555-3818,70332,Nexo Knights,Ultimate,2018,Ultimate Aaron,82,9.99,http://images.brickset.com/sets/images/70332-1.jpg,1,605
+Natalia,Vonduyke,16,859-555-3818,75149,Star Wars,The Force Awakens,2018,Resistance X-wing Fighter,740,79.99,http://images.brickset.com/sets/images/75149-1.jpg,1,184
+Talise,Nieukirk,16,801-555-2343,41556,Mixels,Series 7,2018,Tiketz,62,4.99,http://images.brickset.com/sets/images/41556-1.jpg,2,587
+Spencer,Morgan,28,784-555-3455,41580,Mixels,Series 9,2018,Myke,63,4.99,NA,2,589
+Spencer,Morgan,28,784-555-3455,5005051,Gear,Digital Media,2018,Friends of Heartlake City Girlz 4 Life,NA,19.99,NA,1,NA
+Amelia,Hageman,40,336-555-1950,76063,DC Comics Super Heroes,Mighty Micros,2018,The Flash vs. Captain Cold,88,9.99,http://images.brickset.com/sets/images/76063-1.jpg,2,482
+Amelia,Hageman,40,336-555-1950,10830,Duplo,NA,2018,Minnie's Café,27,19.99,http://images.brickset.com/sets/images/10830-1.jpg,4,504

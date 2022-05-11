@@ -268,49 +268,64 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="Instrucoes_Gerais.html">Instruções Gerais</a>
+      <a href="Tarefa_Instrucoes.html">Instruções Gerais</a>
     </li>
     <li>
       <a href="Template_entregas.html">Template para entregas</a>
+    </li>
+    <li>
+      <a href="Tarefa1.html">Tarefa 1</a>
     </li>
   </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Webinars
+    Tutoriais
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="webinar1a-EDA.html">Webinar 1</a>
+      <a href="Tutorial1.html">Tutorial 1 - Tidyverse</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Labs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="webinar1a-EDA.html">Lab 1</a>
     </li>
     <li>
-      <a href="Gabarito-webinar1a.html">Webinar 1a - Gabarito</a>
+      <a href="Gabarito-webinar1a.html">Lab 1a - Gabarito</a>
     </li>
     <li>
-      <a href="Gabarito-webinar1a-output.html">Webinar 1a - Gabarito com output</a>
+      <a href="Gabarito-webinar1a-output.html">Lab 1a - Gabarito com output</a>
     </li>
     <li>
-      <a href="webinar1b-EDA.html">Webinar 1b - Gabarito com output</a>
+      <a href="webinar1b-EDA.html">Lab 1b - Gabarito com output</a>
     </li>
     <li>
-      <a href="Gabarito-webinar2.html">Webinar 2 - Dashboards em R</a>
+      <a href="Gabarito-webinar2.html">Lab 2 - Dashboards em R</a>
     </li>
     <li>
-      <a href="Gabarito-webinar3a.html">Webinar 3a - Gabarito com output</a>
+      <a href="Gabarito-webinar3a.html">Lab 3a - Gabarito com output</a>
     </li>
     <li>
-      <a href="Gabarito-webinar3b.html">Webinar 3b - Gabarito com output</a>
+      <a href="Gabarito-webinar3b.html">Lab 3b - Gabarito com output</a>
     </li>
     <li>
-      <a href="Gabarito-webinar4a.html">Webinar 4a - Gabarito com output</a>
+      <a href="Gabarito-webinar4a.html">Lab 4a - Gabarito com output</a>
     </li>
     <li>
-      <a href="Gabarito-webinar4b.html">Webinar 4b - Gabarito com output</a>
+      <a href="Gabarito-webinar4b.html">Lab 4b - Gabarito com output</a>
     </li>
     <li>
-      <a href="Gabarito-webinar5.html">Webinar 5 - Gabarito com output</a>
+      <a href="Gabarito-webinar5.html">Lab 5 - Gabarito com output</a>
     </li>
   </ul>
 </li>
@@ -415,35 +430,34 @@ summary(titanic_logistic_model)</code></pre>
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -2.8341  -0.6012  -0.3870   0.6313   2.4187  
+## -2.7997  -0.6663  -0.4095   0.6034   2.4060  
 ## 
 ## Coefficients:
 ##               Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)    4.21400    0.56411   7.470 8.01e-14 ***
-## Pclass2       -1.42323    0.33651  -4.229 2.34e-05 ***
-## Pclass3       -2.53547    0.34050  -7.446 9.60e-14 ***
-## Age           -0.04337    0.01008  -4.303 1.69e-05 ***
-## Sexmale       -2.59690    0.25623 -10.135  &lt; 2e-16 ***
-## SibSp1        -0.25159    0.27846  -0.903   0.3663    
-## SibSp2        -0.56936    0.75000  -0.759   0.4478    
-## SibSp3        -2.37964    0.99808  -2.384   0.0171 *  
-## SibSp4        -1.58443    0.95913  -1.652   0.0985 .  
-## SibSp5       -16.27419 1056.03727  -0.015   0.9877    
-## Parch1         0.28122    0.34643   0.812   0.4169    
-## Parch2         0.12224    0.45428   0.269   0.7879    
-## Parch3         0.39022    1.13490   0.344   0.7310    
-## Parch4       -15.76706 1035.74292  -0.015   0.9879    
-## Parch5        -0.54748    1.24401  -0.440   0.6599    
-## Parch6       -16.12824 2399.54475  -0.007   0.9946    
+## (Intercept)    3.99211    0.56803   7.028 2.09e-12 ***
+## Pclass2       -1.36664    0.32773  -4.170 3.05e-05 ***
+## Pclass3       -2.49172    0.34237  -7.278 3.39e-13 ***
+## Age           -0.03644    0.01018  -3.581 0.000343 ***
+## Sexmale       -2.69792    0.25859 -10.433  &lt; 2e-16 ***
+## SibSp1        -0.13781    0.27446  -0.502 0.615603    
+## SibSp2        -0.87640    0.64802  -1.352 0.176237    
+## SibSp3        -2.01396    0.92035  -2.188 0.028651 *  
+## SibSp4        -1.40588    0.83891  -1.676 0.093767 .  
+## SibSp5       -15.20624 1380.00275  -0.011 0.991208    
+## Parch1         0.41376    0.34813   1.189 0.234626    
+## Parch2         0.11774    0.48369   0.243 0.807674    
+## Parch3         0.14050    1.16029   0.121 0.903621    
+## Parch4       -15.88107 1039.57769  -0.015 0.987812    
+## Parch5        -1.12739    1.18116  -0.954 0.339846    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 717.56  on 530  degrees of freedom
-## Residual deviance: 462.79  on 515  degrees of freedom
-##   (138 observations deleted due to missingness)
-## AIC: 494.79
+##     Null deviance: 732.15  on 539  degrees of freedom
+## Residual deviance: 475.19  on 525  degrees of freedom
+##   (129 observations deleted due to missingness)
+## AIC: 505.19
 ## 
 ## Number of Fisher Scoring iterations: 15</code></pre>
 <p>Observação: Em alguns casos, vale a pena alterar o fator base de uma
@@ -463,7 +477,7 @@ glance(titanic_logistic_model) %&gt;%
 <pre><code>## # A tibble: 1 × 1
 ##     pR2
 ##   &lt;dbl&gt;
-## 1 0.355</code></pre>
+## 1 0.351</code></pre>
 <pre class="r"><code>titanic_train_clean_logistic &lt;- titanic_train_clean %&gt;% 
   filter(!is.na(Age)) %&gt;% 
   mutate(prob = predict(titanic_logistic_model, 
@@ -479,8 +493,8 @@ definir o limiar da previsão como sendo esse valor.</p>
 <pre class="r"><code>titanic_train_clean_logistic$pred &lt;- ifelse(titanic_train_clean_logistic$prob &gt; media, 1, 0)</code></pre>
 <p>Para calcular a precisão da previsão, podemos comparar as médias.</p>
 <pre class="r"><code>mean(titanic_train_clean_logistic$Survived==titanic_train_clean_logistic$pred)</code></pre>
-<pre><code>## [1] 0.8116761</code></pre>
-<p>Desta forma, chegamos ao valor de 81 %.</p>
+<pre><code>## [1] 0.7981481</code></pre>
+<p>Desta forma, chegamos ao valor de 80 %.</p>
 <p>Uma forma mais elegante de verificar a precisão do modelo é usar a
 Curva ROC.</p>
 <pre class="r"><code>confusionMatrix(as.factor(titanic_train_clean_logistic$pred),
@@ -489,26 +503,26 @@ Curva ROC.</p>
 ## 
 ##           Reference
 ## Prediction   0   1
-##          0 260  45
-##          1  55 171
+##          0 256  48
+##          1  61 175
 ##                                           
-##                Accuracy : 0.8117          
-##                  95% CI : (0.7758, 0.8441)
-##     No Information Rate : 0.5932          
+##                Accuracy : 0.7981          
+##                  95% CI : (0.7618, 0.8312)
+##     No Information Rate : 0.587           
 ##     P-Value [Acc &gt; NIR] : &lt;2e-16          
 ##                                           
-##                   Kappa : 0.6126          
+##                   Kappa : 0.5872          
 ##                                           
-##  Mcnemar&#39;s Test P-Value : 0.3681          
+##  Mcnemar&#39;s Test P-Value : 0.2504          
 ##                                           
-##             Sensitivity : 0.8254          
-##             Specificity : 0.7917          
-##          Pos Pred Value : 0.8525          
-##          Neg Pred Value : 0.7566          
-##              Prevalence : 0.5932          
-##          Detection Rate : 0.4896          
-##    Detection Prevalence : 0.5744          
-##       Balanced Accuracy : 0.8085          
+##             Sensitivity : 0.8076          
+##             Specificity : 0.7848          
+##          Pos Pred Value : 0.8421          
+##          Neg Pred Value : 0.7415          
+##              Prevalence : 0.5870          
+##          Detection Rate : 0.4741          
+##    Detection Prevalence : 0.5630          
+##       Balanced Accuracy : 0.7962          
 ##                                           
 ##        &#39;Positive&#39; Class : 0               
 ## </code></pre>
@@ -522,7 +536,7 @@ plot(ROC, col =&quot;blue&quot;)</code></pre>
 <p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <pre class="r"><code># Calculate the area under the curve (AUC)
 auc(ROC)</code></pre>
-<pre><code>## Area under the curve: 0.8656</code></pre>
+<pre><code>## Area under the curve: 0.8605</code></pre>
 </div>
 <div id="como-lidar-com-dados-faltantes" class="section level2">
 <h2>Como lidar com dados faltantes</h2>
@@ -556,35 +570,34 @@ summary(titanic_logistic_model2)</code></pre>
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -2.7623  -0.5749  -0.4263   0.5983   2.4007  
+## -2.6676  -0.6337  -0.4301   0.5572   2.4039  
 ## 
 ## Coefficients:
 ##                Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)     3.84498    0.49940   7.699 1.37e-14 ***
-## Pclass2        -1.15363    0.30600  -3.770 0.000163 ***
-## Pclass3        -2.17550    0.28423  -7.654 1.95e-14 ***
-## Sexmale        -2.77467    0.23158 -11.981  &lt; 2e-16 ***
-## SibSp1         -0.10012    0.25635  -0.391 0.696110    
-## SibSp2          0.18282    0.67985   0.269 0.788005    
-## SibSp3         -2.46238    0.94701  -2.600 0.009318 ** 
-## SibSp4         -1.54072    0.96751  -1.592 0.111284    
-## SibSp5        -16.27910 1040.07387  -0.016 0.987512    
-## SibSp8        -16.19765  990.92261  -0.016 0.986958    
-## Parch1          0.28705    0.33756   0.850 0.395118    
-## Parch2          0.12431    0.42842   0.290 0.771693    
-## Parch3          0.14343    1.13371   0.127 0.899328    
-## Parch4        -15.92760 1022.42000  -0.016 0.987571    
-## Parch5         -0.83646    1.23533  -0.677 0.498335    
-## Parch6        -16.49295 2399.54474  -0.007 0.994516    
-## imputada_age   -0.03820    0.00968  -3.946 7.94e-05 ***
+## (Intercept)   3.683e+00  5.063e-01   7.275 3.47e-13 ***
+## Pclass2      -1.092e+00  3.010e-01  -3.628 0.000286 ***
+## Pclass3      -2.220e+00  2.907e-01  -7.636 2.24e-14 ***
+## Sexmale      -2.826e+00  2.373e-01 -11.911  &lt; 2e-16 ***
+## SibSp1       -1.179e-02  2.562e-01  -0.046 0.963300    
+## SibSp2       -6.015e-01  6.053e-01  -0.994 0.320364    
+## SibSp3       -2.269e+00  8.651e-01  -2.623 0.008723 ** 
+## SibSp4       -1.230e+00  8.159e-01  -1.507 0.131695    
+## SibSp5       -1.487e+01  1.381e+03  -0.011 0.991406    
+## SibSp8       -1.565e+01  8.180e+02  -0.019 0.984740    
+## Parch1        4.775e-01  3.380e-01   1.413 0.157689    
+## Parch2       -7.663e-02  4.337e-01  -0.177 0.859754    
+## Parch3       -4.549e-02  1.165e+00  -0.039 0.968862    
+## Parch4       -1.598e+01  1.032e+03  -0.015 0.987641    
+## Parch5       -1.300e+00  1.174e+00  -1.108 0.267884    
+## imputada_age -3.264e-02  9.771e-03  -3.341 0.000836 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
 ##     Null deviance: 891.19  on 668  degrees of freedom
-## Residual deviance: 577.67  on 652  degrees of freedom
-## AIC: 611.67
+## Residual deviance: 576.24  on 653  degrees of freedom
+## AIC: 608.24
 ## 
 ## Number of Fisher Scoring iterations: 15</code></pre>
 <p>O valor do Pseudo R2 para o modelo logístico 2 é:</p>
@@ -592,7 +605,7 @@ summary(titanic_logistic_model2)</code></pre>
 <pre><code>## # A tibble: 1 × 1
 ##     pR2
 ##   &lt;dbl&gt;
-## 1 0.352</code></pre>
+## 1 0.353</code></pre>
 <p>e por fim, a curva ROC:</p>
 <pre class="r"><code>titanic_train_clean_logistic &lt;- titanic_train_clean %&gt;% 
   mutate(prob = predict(titanic_logistic_model2, 
@@ -609,7 +622,7 @@ GainCurvePlot(titanic_train_clean_logistic, &quot;prob&quot;,&quot;Survived&quot
 <p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
 <pre class="r"><code>ROCPlot(titanic_train_clean_logistic, &quot;prob&quot;,&quot;Survived&quot;,1, &quot;Curva ROC para o Modelo Logístico 2&quot;)</code></pre>
 <p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-13-3.png" width="672" /></p>
-<p>E a área abaixo da curva (AUC) é 0.8645452. Mais sobre ROC, GainCurve
+<p>E a área abaixo da curva (AUC) é 0.861183. Mais sobre ROC, GainCurve
 e Matriz de Confusão podem ser encontradas em: <a
 href="https://community.tibco.com/wiki/gains-vs-roc-curves-do-you-understand-difference"
 class="uri">https://community.tibco.com/wiki/gains-vs-roc-curves-do-you-understand-difference</a></p>
@@ -713,39 +726,39 @@ titanic_rf_model</code></pre>
 ## 
 ## Type:                             Classification 
 ## Number of trees:                  500 
-## Sample size:                      531 
+## Sample size:                      540 
 ## Number of independent variables:  5 
 ## Mtry:                             2 
 ## Target node size:                 1 
 ## Variable importance mode:         none 
 ## Splitrule:                        gini 
-## OOB prediction error:             18.46 %</code></pre>
+## OOB prediction error:             17.78 %</code></pre>
 <p>A Matriz de confusão para o modelo de Random Forest é:</p>
 <pre class="r"><code>confusionMatrix(as.factor(pred_rf),as.factor(titanic_test_clean_rf$Survived))</code></pre>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
 ## Prediction  0  1
-##          0 93 21
-##          1 16 53
+##          0 95 23
+##          1 12 44
 ##                                           
-##                Accuracy : 0.7978          
-##                  95% CI : (0.7323, 0.8535)
-##     No Information Rate : 0.5956          
-##     P-Value [Acc &gt; NIR] : 4.657e-09       
+##                Accuracy : 0.7989          
+##                  95% CI : (0.7315, 0.8557)
+##     No Information Rate : 0.6149          
+##     P-Value [Acc &gt; NIR] : 1.469e-07       
 ##                                           
-##                   Kappa : 0.5757          
+##                   Kappa : 0.5618          
 ##                                           
-##  Mcnemar&#39;s Test P-Value : 0.5108          
+##  Mcnemar&#39;s Test P-Value : 0.09097         
 ##                                           
-##             Sensitivity : 0.8532          
-##             Specificity : 0.7162          
-##          Pos Pred Value : 0.8158          
-##          Neg Pred Value : 0.7681          
-##              Prevalence : 0.5956          
-##          Detection Rate : 0.5082          
-##    Detection Prevalence : 0.6230          
-##       Balanced Accuracy : 0.7847          
+##             Sensitivity : 0.8879          
+##             Specificity : 0.6567          
+##          Pos Pred Value : 0.8051          
+##          Neg Pred Value : 0.7857          
+##              Prevalence : 0.6149          
+##          Detection Rate : 0.5460          
+##    Detection Prevalence : 0.6782          
+##       Balanced Accuracy : 0.7723          
 ##                                           
 ##        &#39;Positive&#39; Class : 0               
 ## </code></pre>

@@ -90,7 +90,7 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE)
 
 -   Por isso é importante que conferir que está entregando as versões finais dos dois arquivos (não serão aceitas novas versões posteriormente).
 
-- Adicionalmente haverá para a Tarefa 1, um quiz para informar informações específicas obtidas na análise dos dados.
+- Adicionalmente haverá para a Tarefa 1, um quiz (no moodle) para informar resultados específicos obtidos na análise dos dados. O prazo de entrega do quiz é o mesmo que o dos arquivos `.Rmd` e `.html`.
 
 -   Quaisquer dúvidas sobre a entrega e/ou elaboração das Tarefas podem ser enviadas via `Moodle` ou se for algo particular, via e-mail.
 

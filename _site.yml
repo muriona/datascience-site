@@ -10,8 +10,8 @@ navbar:
         href: Tarefa_Instrucoes.html
       - text: "Template para entregas"
         href: Template_entregas.html
-#      - text: "Tarefa 1"
-#        href: Tarefa1.html
+      - text: "Tarefa 1"
+        href: Tarefa1.html
 #      - text: "Tarefa 2"
 #        href: Tarefa2_20212.html
 #      - text: "Tarefa 3"
