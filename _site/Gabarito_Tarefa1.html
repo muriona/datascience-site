@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Tarefa 1 - Vendas de Legos</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.22/datatables.js"></script>
+<link href="site_libs/dt-core-bootstrap-1.11.3/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-bootstrap-1.11.3/css/dataTables.bootstrap.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-bootstrap-1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="site_libs/dt-core-bootstrap-1.11.3/js/dataTables.bootstrap.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="tarefas.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EPS 7008</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tarefas
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tarefa_Instrucoes.html">Instruções Gerais</a>
+    </li>
+    <li>
+      <a href="Template_entregas.html">Template para entregas</a>
+    </li>
+    <li>
+      <a href="Tarefa1.html">Tarefa 1</a>
+    </li>
+    <li>
+      <a href="Gabarito_Tarefa1.html">Gabarito - Tarefa 1</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tutoriais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tutorial1.html">Tutorial 1 - Tidyverse</a>
+    </li>
+    <li>
+      <a href="Tutorial2.html">Tutorial 2 - Ggplot e Tidyverse</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Labs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="webinar1a-EDA.html">Lab 1</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar1a.html">Lab 1a - Gabarito</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar1a-output.html">Lab 1a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="webinar1b-EDA.html">Lab 1b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar2.html">Lab 2 - Dashboards em R</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar3a.html">Lab 3a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar3b.html">Lab 3b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar4a.html">Lab 4a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar4b.html">Lab 4b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar5.html">Lab 5 - Gabarito com output</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Tarefa 1 - Vendas de Legos</h1>
+<h3 class="subtitle">Gabarito</h3>
+
+</div>
+
+
+<div class="figure">
+<img src="img/daniel-cheung-ZqqlOZyGG7g-unsplash.jpg" alt="Photo by Daniel Cheung on Unsplash" width="500" />
+<p class="caption">
+Photo by Daniel Cheung on Unsplash
+</p>
+</div>
+<p>Nesta primeira tarefa usaremos um dataset apresentando vendas de
+Legos nos Estados Unidos, junto com especificações técnicas de cada set
+de lego vendido, como o número de peças e as cores de cada peça.</p>
+<div id="dados" class="section level1">
+<h1>Dados</h1>
+<p>Os dados provém de duas fontes, o pacote <strong>dsbox</strong> que
+traz uma lista de mais de 600 vendas de legos e os dados do <a
+href="https://www.kaggle.com/datasets/rtatman/lego-database">kaggle</a>
+sobre as especificações técnicas dos conjuntos.</p>
+<p>Três arquivos fazem parte desta tarefa: <code>lego_colors.csv</code>,
+<code>lego_inventories.csv</code> e <code>lego_sales</code>.</p>
+<p><code>lego_colors.csv</code>: Lista de todas as cores utilizadas por
+peças Lego, incluindo o nome da cor, a cor em RGB e um id único para
+cada cor (<code>color_id</code>).</p>
+<p><code>lego_inventories.csv</code>: Lista de todas as peças
+(<code>set_id</code>) que fazem parte de conjuntos lego (cada conjunto
+ou set é composto por peças de vários tamanhos, cores e tipos). Esta
+lista inclui também o código de cor utilizado para cada peça
+<code>color_id</code></p>
+<p><code>lego_sales</code>: Lista das 674 vendas de conjuntos de lego,
+incluindo informações de quantidade vendida, preço unitário, nome e
+sobrenome do comprador, idade, etc. Inclui também o id de cada conjunto
+(<code>set_id</code>) de lego vendido.</p>
+</div>
+<div id="pacotes" class="section level1">
+<h1>Pacotes</h1>
+<p>Usaremos o pacote <code>tidyverse</code> para a manipulação e limpeza
+dos dados.</p>
+<p>Uma vez baixados os dados, carregue o pacote
+<code>tidyverse</code>:</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+</div>
+<div id="perguntas" class="section level1">
+<h1>Perguntas</h1>
+<div id="usando-lego_sales" class="section level2">
+<h2>Usando <code>lego_sales</code></h2>
+<p><strong>Para este primeiro grupo de perguntas, usaremos apenas o
+dataset <code>lego_sales</code>.</strong></p>
+<p>Temos dados (simulados) de vendas de Legos em 2018 para uma amostra
+de clientes que compraram legos nos EUA.</p>
+<p>O dataset conta com 674 observações (vendas) e 14 variáveis:</p>
+<pre class="r"><code>colnames(lego_sales)</code></pre>
+<pre><code>##  [1] &quot;first_name&quot;   &quot;last_name&quot;    &quot;age&quot;          &quot;phone_number&quot; &quot;set_id&quot;      
+##  [6] &quot;theme&quot;        &quot;subtheme&quot;     &quot;year&quot;         &quot;name&quot;         &quot;pieces&quot;      
+## [11] &quot;us_price&quot;     &quot;image_url&quot;    &quot;quantity&quot;     &quot;theme_id&quot;</code></pre>
+<p>Os dados podem ser observados aqui:</p>
+<pre class="r"><code>datatable(lego_sales, style = &quot;bootstrap&quot;)</code></pre>
+<div id="htmlwidget-7819bdaa0b5a43cac09a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7819bdaa0b5a43cac09a">{"x":{"style":"bootstrap","filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","263","264","265","266","267","268","269","270","271","272","273","274","275","276","277","278","279","280","281","282","283","284","285","286","287","288","289","290","291","292","293","294","295","296","297","298","299","300","301","302","303","304","305","306","307","308","309","310","311","312","313","314","315","316","317","318","319","320","321","322","323","324","325","326","327","328","329","330","331","332","333","334","335","336","337","338","339","340","341","342","343","344","345","346","347","348","349","350","351","352","353","354","355","356","357","358","359","360","361","362","363","364","365","366","367","368","369","370","371","372","373","374","375","376","377","378","379","380","381","382","383","384","385","386","387","388","389","390","391","392","393","394","395","396","397","398","399","400","401","402","403","404","405","406","407","408","409","410","411","412","413","414","415","416","417","418","419","420","421","422","423","424","425","426","427","428","429","430","431","432","433","434","435","436","437","438","439","440","441","442","443","444","445","446","447","448","449","450","451","452","453","454","455","456","457","458","459","460","461","462","463","464","465","466","467","468","469","470","471","472","473","474","475","476","477","478","479","480","481","482","483","484","485","486","487","488","489","490","491","492","493","494","495","496","497","498","499","500","501","502","503","504","505","506","507","508","509","510","511","512","513","514","515","516","517","518","519","520","521","522","523","524","525","526","527","528","529","530","531","532","533","534","535","536","537","538","539","540","541","542","543","544","545","546","547","548","549","550","551","552","553","554","555","556","557","558","559","560","561","562","563","564","565","566","567","568","569","570","571","572","573","574","575","576","577","578","579","580","581","582","583","584","585","586","587","588","589","590","591","592","593","594","595","596","597","598","599","600","601","602","603","604","605","606","607","608","609","610","611","612","613","614","615","616","617","618","619","620","621","622","623","624","625","626","627","628","629","630","631","632","633","634","635","636","637","638","639","640","641","642","643","644","645","646","647","648","649","650","651","652","653","654","655","656","657","658","659","660","661","662","663","664","665","666","667","668","669","670","671","672","673","674"],["Kimberly","Neel","Neel","Chelsea","Chelsea","Chelsea","Bryanna","Bryanna","Caleb","Caleb","Chase","Chase","Kevin","Connor","Connor","Connor","Toni","Toni","Daniel","Daniel","Judith","Nicholas","Nicholas","Amanda","Amanda","Amanda","Amanda","Jacob","Jacob","Jacob","Jacob","Hannah","Hannah","Hannah","Erik","Jackson","Jackson","Jackson","Riley","Riley","Hector","Hector","Hector","Mckenzie","Michelle","Michelle","Rebecca","Rebecca","Rebecca","Katherine","Katherine","Adoria","Amanda","Cecilia","Shina","Shina","Shina","Anthony","Anthony","Connor","Connor","Kayla","Kayla","Kayla","Lucas","Lucas","Lucas","Peggy","Maya","Keno","Lucas","Lucas","Lucas","Lucas","Lucas","Jake","Jake","Jake","Jake","Trevon","John'Dunae","Tysen","Tysen","Tysen","Janay","Janay","Janay","Eric","Eric","Eric","Carson","Carson","Samantha","Samantha","Samantha","Cameron","Cameron","Connor","Connor","Connor","Tyrii","Tyrii","Tyrii","Tyrii","Austin","Caroline","Caroline","Caroline","Caroline","Caroline","Joshua","Joshua","Binh","Binh","Binh","Nicholas","Nicholas","Nicholas","Jacob","Jacob","Madeline","Madeline","Madeline","Trevor","Trevor","Trevor","David","Adam","Manuel","Manuel","Manuel","Dakota","Dakota","Dakota","Aleksandr","Michael","Xavier","Xavier","Jaime","Jaime","Jaime","Tj","Tj","Tj","Taylor","Kaitlyn","Kaitlyn","Kaitlyn","Kaitlyn","Matthew","Matthew","Jordan","Jordan","Reyes","Reyes","Reyes","Avery","Avery","Michael","Michael","Michael","Colleen","Colleen","Colleen","Brandilyn","Brandilyn","Brandilyn","Brandilyn","Brandilyn","Son","Son","Katherine","Katherine","Katherine","Katherine","Beemnet","Beemnet","Shylynn","Shylynn","Sonny","Joshua","Joshua","Joshua","Asia","Neil","Neil","Neil","Chayanne","Chayanne","Demetri","Demetri","Demetri","Demetri","Brittany","Brittany","Joseph","Joseph","Paige","Paige","Paige","Paige","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Daianaira","Sean","Sean","Amber","Amber","Katie","Katie","Katie","Katie","Nerea","Nerea","Julianna","Julianna","Katrina","Katrina","Ramon","Ramon","Brandon","Brandon","Sagi","Sagi","Michael","Michael","Michael","Melissa","Cody","Cody","Jessie","Jessie","Jackson","Jackson","Jackson","Kelsey","Kelsey","Kalynne","Kalynne","John Jay","John Jay","Kareena","Celia","Celia","Celia","Celia","Celia","Alyssa","Alyssa","Alyssa","Tian","Tian","Tian","Elizabeth","Elizabeth","Van","Sofia","Sofia","Abigayle","Abigayle","Joseph","Joseph","Joseph","Joseph","Austin","Austin","Austin","Austin","Brenden","Darian","Elizabeth","Elizabeth","Lady","Lady","Lady","Lady","Sarah","Sarah","Sarah","Sarah","Sarah","Spencer","Spencer","Spencer","Spencer","Steven","Steven","Serena","Serena","Serena","Alejandre","Billlie","Billlie","Marisa","Marisa","Marisa","Marisa","Cartrell","Cartrell","Krista","Krista","Krista","Krista","Krista","Pa","Pa","Jessy","Jessy","Jessy","George","Abraham","Abraham","Abraham","Abraham","Abraham","Mario","Mario","Mario","Joshua","Joshua","Annabelle","Annabelle","Gabrielle","Makenzie","Makenzie","Ramses","Ramses","Ramses","Ramses","Ramses","Christian","Christian","Christian","Christian","Jeffrey","Jeffrey","Jeffrey","Jeffrey","Meagan","Meagan","Meagan","Meagan","Dakotah","Dakotah","Elaine","Chisa","Chisa","Trevor","Trevor","Senay","Senay","Senay","Senay","Shadae","Shadae","Vanessa","Vanessa","Vanessa","Vanessa","Mitchell","Mitchell","Hanibal","Holly","Holly","Mason","Mason","Jose","Jose","Jordan","Jordan","Justin","Brianna","Brianna","Sergey","Sergey","Allison","Isabel","Isabel","Isabel","Rachelle","Eden","Eden","Eden","Emilie","Emilie","Emilie","Emilie","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Seth","Sara","Sara","Siria","Siria","Blake","Blake","Blake","Lavie","Lavie","Lavie","Brianna","Brianna","Brianna","Da Som","Da Som","Alina","Alina","Alina","Alina","Alina","Ursula","Ursula","Ursula","Ursula","Ashley","Ashley","Ashley","Jackson","Jackson","Jackson","Jackson","Jackson","Jackson","Jackson","India","India","India","India","India","Alex","Alex","Carolane","Carolane","Carolane","Tristin","Tristin","Tristin","Tristin","Tristin","Aaron","Aaron","Aaron","Dominic","Michael","Michael","Michael","Elyssa","Elyssa","Francisco","Francisco","Saige","Saige","Saige","Saige","Saige","Taylor","Taylor","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Keyana","Kaitlyn","Kaitlyn","Kaitlyn","Kaitlyn","Rachael","Rachael","Keith","John","Tynecia","Tynecia","Tynecia","Jennifer","Jennifer","Gabriel","Gabriel","Dylan","Dylan","Jacob","Jacob","Jacob","Dustin","Melanie","Melanie","Robert","Robert","Robert","Jessa","Jessa","Ryan","Ryan","Ryan","Orion","Orion","Orion","Jenny","Jenny","Jenny","Josie","Josie","Josie","Josie","Josie","Josie","Christina","Christina","Christina","Alexandra","Alexandra","Alexandra","Delmi","Delmi","Peyton","Peyton","Peyton","Gunnar","Alex","Audrey","Audrey","Audrey","Audrey","Jacob","Jacob","Daniel","Daniel","Daniel","Amanda","Amanda","Alissa","Alissa","Melissa","Melissa","Melissa","Audrey","Audrey","Audrey","Audrey","Ean","Ean","Lawrence","Shelby","Shelby","Megan","Megan","Megan","Megan","Dylan","Dylan","John","John","John","John","Angel","Angel","Nadia","Nadia","Sarah","Danait","Joseph","Joseph","Joseph","Joseph","Joseph","Elias","Elias","Elias","Isaac","Isaac","Dominique","Dominique","Morgan","Morgan","Morgan","Kelly","Adam","Katelynn","Autriana","Autriana","Autriana","Christy","Christy","Tanner","Tanner","Tanner","Tanner","Trenidy","Trenidy","Trenidy","Sean","Sean","Paige","Paige","Aiden","Aiden","Dustin","Dustin","Dustin","Payton","Payton","Payton","Juana","Juana","Stephanie","Benjamin","Benjamin","Benjamin","Benjamin","Miles","Carolyn","Carolyn","Jennifer","Natalia","Natalia","Natalia","Natalia","Talise","Spencer","Spencer","Amelia","Amelia"],["Beckstead","Garvin","Garvin","Bouchard","Bouchard","Bouchard","Welsh","Welsh","Garcia-Wideman","Garcia-Wideman","Fortenberry","Fortenberry","Cruz","Brown","Brown","Brown","Borison","Borison","Hurst","Hurst","Webb","Belfageoua","Belfageoua","Tronnier","Tronnier","Tronnier","Tronnier","Nzabanita","Nzabanita","Nzabanita","Nzabanita","Drews Stunkel","Drews Stunkel","Drews Stunkel","Brownrigg","Martinez","Martinez","Martinez","Ott","Ott","Collins","Collins","Collins","Cherry","Uguccioni","Uguccioni","Duval","Duval","Duval","Hogue","Hogue","Hammond","Musick","Mauro","Hegarty","Hegarty","Hegarty","Kiyotake","Kiyotake","Fourzan","Fourzan","Rush","Rush","Rush","Montoya","Montoya","Montoya","Hiner","Wolfe","Graves","Jimenez-Dominguez","Jimenez-Dominguez","Jimenez-Dominguez","Jimenez-Dominguez","Jimenez-Dominguez","Montes Alvarez","Montes Alvarez","Montes Alvarez","Montes Alvarez","Thanh","Higgins","Banda-Chavez","Banda-Chavez","Banda-Chavez","Gienapp","Gienapp","Gienapp","Benally","Benally","Benally","Aragon","Aragon","Haberland","Haberland","Haberland","Rodriguez","Rodriguez","Padilla","Padilla","Padilla","Bloom","Bloom","Bloom","Bloom","Martinez","Holstein","Holstein","Holstein","Holstein","Holstein","Long","Long","Skalla","Skalla","Skalla","Scott","Scott","Scott","Barron","Barron","Castor","Castor","Castor","Perez","Perez","Perez","Cabral","Albornoz","Wilkerson","Wilkerson","Wilkerson","Klopp","Klopp","Klopp","Gurrola","Hernandez Muniz","Suazo","Suazo","Rideout","Rideout","Rideout","Aguon","Aguon","Aguon","Allen","Degeer","Degeer","Degeer","Degeer","Sandoval","Sandoval","West","West","Wilson","Wilson","Wilson","Leung","Leung","Williams","Williams","Williams","Galley","Galley","Galley","Robertson","Robertson","Robertson","Robertson","Robertson","Saldanha","Saldanha","Beck","Beck","Beck","Beck","Masters","Masters","Seitz","Seitz","Smith","Reyes","Reyes","Reyes","Salyer","Gabel","Gabel","Gabel","Williams","Williams","Do","Do","Do","Do","Mclellan","Mclellan","Ross","Ross","Wagner","Wagner","Wagner","Wagner","Joseph","Joseph","Joseph","Joseph","Joseph","Joseph","Joseph","Joseph","Joseph","Joseph","Joseph","Joseph","Joseph","Joseph","Joseph","Joseph","Joseph","Joseph","Joseph","Joseph","Cordova","Cordova","Terwilliger","Terwilliger","Evering","Evering","Evering","Evering","Feldman","Feldman","Stephens","Stephens","Clyman","Clyman","Walker-Reese","Walker-Reese","Lopez","Lopez","Heredia","Heredia","Cruz","Cruz","Cruz","Holmberg","Gonzales","Gonzales","Barron","Barron","Roybal","Roybal","Roybal","Schiffner","Schiffner","Kerth","Kerth","Griego","Griego","Hagar","Foley","Foley","Foley","Foley","Foley","Gorrell","Gorrell","Gorrell","Nelson","Nelson","Nelson","Kendrick","Kendrick","Rapp","Szloboda","Szloboda","Hosman","Hosman","Brown","Brown","Brown","Brown","Atencio","Atencio","Atencio","Atencio","Trujillo","Smith","Roemmich","Roemmich","Brown","Brown","Brown","Brown","Wagner","Wagner","Wagner","Wagner","Wagner","Pasillas","Pasillas","Pasillas","Pasillas","Washington","Washington","Bartkowiak","Bartkowiak","Bartkowiak","Baek","Benson","Benson","Beck","Beck","Beck","Beck","Park","Park","Gaines","Gaines","Gaines","Gaines","Gaines","Strasser","Strasser","Lopez-Itomura","Lopez-Itomura","Lopez-Itomura","Guerra","Medlock","Medlock","Medlock","Medlock","Medlock","Synn","Synn","Synn","Dillard","Dillard","Lindegren","Lindegren","Mccumiskey","Pitts","Pitts","Ackah Yensu","Ackah Yensu","Ackah Yensu","Ackah Yensu","Ackah Yensu","Ortiviz Madrid","Ortiviz Madrid","Ortiviz Madrid","Ortiviz Madrid","Cervantes","Cervantes","Cervantes","Cervantes","Burke","Burke","Burke","Burke","Baca","Baca","Richa","Pomeroy","Pomeroy","Calderon-Nava","Calderon-Nava","Hildreth","Hildreth","Hildreth","Hildreth","Chidel","Chidel","Mantey","Mantey","Mantey","Mantey","Olivo","Olivo","Vera","Klingelsmith","Klingelsmith","Perez","Perez","Downing","Downing","O'Boyle","O'Boyle","Hiner","Biery","Biery","Lapp","Lapp","English","Garrison","Garrison","Garrison","Henderson","Morgan","Morgan","Morgan","Ellis","Ellis","Ellis","Ellis","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Foley","Siegwarth","Siegwarth","Vorwald","Vorwald","Serota","Serota","Serota","Faulkner","Faulkner","Faulkner","Prisbrey","Prisbrey","Prisbrey","Roskam","Roskam","Calerich","Calerich","Calerich","Calerich","Calerich","Goyen","Goyen","Goyen","Goyen","Bletcher","Bletcher","Bletcher","Dominguez","Dominguez","Dominguez","Dominguez","Dominguez","Dominguez","Dominguez","Rudy","Rudy","Rudy","Rudy","Rudy","Martin","Martin","Levosky","Levosky","Levosky","Marcy","Marcy","Marcy","Marcy","Marcy","Bruner","Bruner","Bruner","Mayo","Donner","Donner","Donner","Nelson","Nelson","Smith","Smith","Dugger","Dugger","Dugger","Dugger","Dugger","Bruder","Bruder","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Lafay","Engel","Engel","Engel","Engel","Tilley","Tilley","Atwood","Ellis","Kramer","Kramer","Kramer","Dana","Dana","Dysart","Dysart","Mcgrath","Mcgrath","Griffith","Griffith","Griffith","Tennis","Rollert","Rollert","Buse","Buse","Buse","Stites","Stites","Marquez","Marquez","Marquez","Gates","Gates","Gates","Tutone","Tutone","Tutone","Paley","Paley","Paley","Paley","Paley","Paley","Williams","Williams","Williams","Leinhart","Leinhart","Leinhart","Spedding","Spedding","Wiebe","Wiebe","Wiebe","Nickless","Ford","Eustace","Eustace","Eustace","Eustace","Scott","Scott","Griffey","Griffey","Griffey","Hunter","Hunter","Lamsal","Lamsal","Prael","Prael","Prael","Baker","Baker","Baker","Baker","Kruse","Kruse","Lewis","Siekmeier","Siekmeier","Sweetman","Sweetman","Sweetman","Sweetman","Scott","Scott","Leavell","Leavell","Leavell","Leavell","Payne","Payne","Romero","Romero","Harris","Mckinny","Holub","Holub","Holub","Holub","Holub","Garrett","Garrett","Garrett","Younger","Younger","Kifletsion","Kifletsion","Andreas","Andreas","Andreas","Wilson","Mehdinia","Wardlaw","Hess","Hess","Hess","Larsen","Larsen","Dockstader","Dockstader","Dockstader","Dockstader","Embrey","Embrey","Embrey","Graves-Ayers","Graves-Ayers","Ice","Ice","Ganley","Ganley","Vanvuuren","Vanvuuren","Vanvuuren","Milsap","Milsap","Milsap","Geisert","Geisert","Harrison","Park","Park","Park","Park","Hill","Quarry","Quarry","Reinert","Vonduyke","Vonduyke","Vonduyke","Vonduyke","Nieukirk","Morgan","Morgan","Hageman","Hageman"],[24,35,35,41,41,41,19,19,37,37,19,19,20,36,36,36,40,40,44,44,39,46,46,45,45,45,45,31,31,31,31,55,55,55,44,43,43,43,51,51,20,20,20,37,17,17,48,48,48,27,27,40,24,50,22,22,22,22,22,32,32,25,25,25,34,34,34,21,33,51,18,18,18,18,18,30,30,30,30,25,19,43,43,43,63,63,63,20,20,20,38,38,21,21,21,48,48,36,36,36,23,23,23,23,29,38,38,38,38,38,55,55,23,23,23,57,57,57,27,27,39,39,39,39,39,39,19,36,23,23,23,33,33,33,61,62,27,27,26,26,26,47,47,47,41,24,24,24,24,22,22,56,56,33,33,33,33,33,31,31,31,31,31,31,27,27,27,27,27,30,30,45,45,45,45,41,41,28,28,24,53,53,53,24,30,30,30,17,17,21,21,21,21,25,25,33,33,35,35,35,35,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,43,43,35,35,37,37,37,37,28,28,34,34,32,32,23,23,21,21,19,19,17,17,17,36,44,44,37,37,26,26,26,37,37,46,46,50,50,23,42,42,42,42,42,38,38,38,38,38,38,35,35,51,46,46,34,34,50,50,50,50,30,30,30,30,31,24,32,32,21,21,21,21,20,20,20,20,20,44,44,44,44,16,16,16,16,16,26,50,50,37,37,37,37,49,49,24,24,24,24,24,26,26,43,43,43,35,23,23,23,23,23,59,59,59,41,41,36,36,37,25,25,38,38,38,38,38,41,41,41,41,61,61,61,61,22,22,22,22,30,30,37,39,39,47,47,30,30,30,30,20,20,42,42,42,42,41,41,54,33,33,32,32,53,53,28,28,23,20,20,56,56,20,38,38,38,50,47,47,47,33,33,33,33,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,30,30,28,28,44,44,44,41,41,41,28,28,28,36,36,22,22,22,22,22,33,33,33,33,61,61,61,40,40,40,40,40,40,40,39,39,39,39,39,32,32,37,37,37,39,39,39,39,39,18,18,18,34,18,18,18,26,26,34,34,27,27,27,27,27,56,56,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,27,27,27,27,26,26,25,24,20,20,20,26,26,49,49,18,18,29,29,29,31,43,43,38,38,38,51,51,25,25,25,54,54,54,35,35,35,38,38,38,38,38,38,39,39,39,24,24,24,40,40,29,29,29,36,33,26,26,26,26,23,23,68,68,68,21,21,27,27,41,41,41,40,40,40,40,53,53,21,56,56,30,30,30,30,53,53,39,39,39,39,62,62,37,37,44,33,33,33,33,33,33,50,50,50,42,42,28,28,22,22,22,36,36,35,26,26,26,26,26,21,21,21,21,26,26,26,34,34,21,21,19,19,51,51,51,42,42,42,35,35,42,33,33,33,33,34,23,23,29,16,16,16,16,16,28,28,40,40],["216-555-2549","819-555-3189","819-555-3189",null,null,null,null,null,"907-555-9236","907-555-9236","205-555-3704","205-555-3704","947-555-7946","516-555-4310","516-555-4310","516-555-4310","284-555-4560","284-555-4560","251-555-0845","251-555-0845","917-555-7417","606-555-4814","606-555-4814","317-555-7477","317-555-7477","317-555-7477","317-555-7477","339-555-2572","339-555-2572","339-555-2572","339-555-2572","339-555-6320","339-555-6320","339-555-6320",null,"250-555-1732","250-555-1732","250-555-1732","517-555-2093","517-555-2093","340-555-2508","340-555-2508","340-555-2508","336-555-9269",null,null,"908-555-4029","908-555-4029","908-555-4029","289-555-4928","289-555-4928","712-555-6781","878-555-7113",null,"868-555-1868","868-555-1868","868-555-1868","980-555-0099","980-555-0099","805-555-3065","805-555-3065","281-555-9341","281-555-9341","281-555-9341","616-555-2269","616-555-2269","616-555-2269","563-555-1011",null,"209-555-6030","712-555-0459","712-555-0459","712-555-0459","712-555-0459","712-555-0459","603-555-6881","603-555-6881","603-555-6881","603-555-6881",null,"813-555-5561",null,null,null,"774-555-2102","774-555-2102","774-555-2102","418-555-3696","418-555-3696","418-555-3696",null,null,"705-555-1457","705-555-1457","705-555-1457","325-555-1926","325-555-1926","441-555-6534","441-555-6534","441-555-6534","784-555-7128","784-555-7128","784-555-7128","784-555-7128",null,"318-555-7894","318-555-7894","318-555-7894","318-555-7894","318-555-7894","469-555-6245","469-555-6245",null,null,null,"418-555-1075","418-555-1075","418-555-1075","319-555-6104","319-555-6104","450-555-9877","450-555-9877","450-555-9877","878-555-5155","878-555-5155","878-555-5155","415-555-8642","418-555-2486","441-555-3652","441-555-3652","441-555-3652","970-555-9320","970-555-9320","970-555-9320","508-555-9403",null,"321-555-0605","321-555-0605","913-555-5139","913-555-5139","913-555-5139","862-555-5629","862-555-5629","862-555-5629","760-555-8123","316-555-7890","316-555-7890","316-555-7890","316-555-7890","671-555-7044","671-555-7044","810-555-1608","810-555-1608","605-555-2774","605-555-2774","605-555-2774","330-555-2699","330-555-2699","936-555-2974","936-555-2974","936-555-2974","710-555-8843","710-555-8843","710-555-8843","724-555-5496","724-555-5496","724-555-5496","724-555-5496","724-555-5496","507-555-2278","507-555-2278","209-555-7105","209-555-7105","209-555-7105","209-555-7105","902-555-8429","902-555-8429","205-555-7084","205-555-7084","246-555-7913","251-555-5985","251-555-5985","251-555-5985","508-555-0418","508-555-5700","508-555-5700","508-555-5700","869-555-6681","869-555-6681","541-555-1433","541-555-1433","541-555-1433","541-555-1433","210-555-0265","210-555-0265","254-555-7628","254-555-7628","860-555-1618","860-555-1618","860-555-1618","860-555-1618","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","714-555-9762","881-555-7280","881-555-7280","626-555-5321","626-555-5321","882-555-7296","882-555-7296","882-555-7296","882-555-7296","423-555-9631","423-555-9631","403-555-9991","403-555-9991","604-555-3882","604-555-3882",null,null,"606-555-3903","606-555-3903","989-555-3671","989-555-3671","361-555-8212","361-555-8212","361-555-8212",null,"973-555-3236","973-555-3236","918-555-7552","918-555-7552",null,null,null,"510-555-5847","510-555-5847","361-555-5328","361-555-5328","710-555-8921","710-555-8921","678-555-3786",null,null,null,null,null,"867-555-7840","867-555-7840","867-555-7840","205-555-7773","205-555-7773","205-555-7773","816-555-5138","816-555-5138","413-555-0987","602-555-2267","602-555-2267","604-555-7100","604-555-7100","801-555-2112","801-555-2112","801-555-2112","801-555-2112","225-555-7391","225-555-7391","225-555-7391","225-555-7391","928-555-1076","830-555-6006","502-555-4381","502-555-4381","856-555-0798","856-555-0798","856-555-0798","856-555-0798",null,null,null,null,null,"865-555-3503","865-555-3503","865-555-3503","865-555-3503","336-555-1433","336-555-1433","305-555-2377","305-555-2377","305-555-2377","616-555-9268","940-555-2729","940-555-2729","580-555-3417","580-555-3417","580-555-3417","580-555-3417","816-555-5191","816-555-5191","307-555-5115","307-555-5115","307-555-5115","307-555-5115","307-555-5115","830-555-7071","830-555-7071","613-555-4443","613-555-4443","613-555-4443",null,"754-555-6047","754-555-6047","754-555-6047","754-555-6047","754-555-6047","519-555-9924","519-555-9924","519-555-9924","734-555-7042","734-555-7042","662-555-9880","662-555-9880","441-555-2199",null,null,"909-555-0851","909-555-0851","909-555-0851","909-555-0851","909-555-0851","434-555-8176","434-555-8176","434-555-8176","434-555-8176","859-555-4454","859-555-4454","859-555-4454","859-555-4454","316-555-5143","316-555-5143","316-555-5143","316-555-5143","979-555-1121","979-555-1121","246-555-8048","617-555-1805","617-555-1805","778-555-6609","778-555-6609","607-555-8247","607-555-8247","607-555-8247","607-555-8247","406-555-0853","406-555-0853",null,null,null,null,"345-555-9053","345-555-9053","206-555-3697",null,null,"403-555-2627","403-555-2627","415-555-4797","415-555-4797","880-555-9695","880-555-9695","212-555-7274","443-555-5650","443-555-5650","802-555-5261","802-555-5261","308-555-8064","561-555-4014","561-555-4014","561-555-4014","636-555-3458","882-555-5047","882-555-5047","882-555-5047","806-555-3409","806-555-3409","806-555-3409","806-555-3409",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"214-555-6861","214-555-6861","716-555-2704","716-555-2704","952-555-3416","952-555-3416","952-555-3416","718-555-0575","718-555-0575","718-555-0575","580-555-3606","580-555-3606","580-555-3606","441-555-9959","441-555-9959","480-555-5897","480-555-5897","480-555-5897","480-555-5897","480-555-5897","973-555-5517","973-555-5517","973-555-5517","973-555-5517","567-555-1984","567-555-1984","567-555-1984",null,null,null,null,null,null,null,null,null,null,null,null,"612-555-6849","612-555-6849","732-555-0913","732-555-0913","732-555-0913",null,null,null,null,null,"914-555-5003","914-555-5003","914-555-5003","936-555-0956","432-555-3069","432-555-3069","432-555-3069","815-555-4287","815-555-4287","229-555-6673","229-555-6673","406-555-4946","406-555-4946","406-555-4946","406-555-4946","406-555-4946","409-555-7986","409-555-7986","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","786-555-6090","440-555-1127","440-555-1127","440-555-1127","440-555-1127","806-555-8594","806-555-8594",null,"815-555-9436","778-555-0036","778-555-0036","778-555-0036","956-555-9719","956-555-9719","858-555-0076","858-555-0076","229-555-1970","229-555-1970","928-555-3406","928-555-3406","928-555-3406","229-555-5837",null,null,"712-555-9533","712-555-9533","712-555-9533",null,null,"281-555-0811","281-555-0811","281-555-0811","214-555-0029","214-555-0029","214-555-0029","919-867-5309","919-867-5309","919-867-5309","807-555-3971","807-555-3971","807-555-3971","807-555-3971","807-555-3971","807-555-3971","541-555-5085","541-555-5085","541-555-5085","551-555-8769","551-555-8769","551-555-8769","758-555-3948","758-555-3948","281-555-8711","281-555-8711","281-555-8711","915-555-5334","509-555-2531",null,null,null,null,"312-555-5114","312-555-5114","479-555-3648","479-555-3648","479-555-3648",null,null,"313-555-1678","313-555-1678","819-555-1361","819-555-1361","819-555-1361","386-555-0465","386-555-0465","386-555-0465","386-555-0465","740-555-8273","740-555-8273","602-555-4393","210-555-8934","210-555-8934","567-555-4401","567-555-4401","567-555-4401","567-555-4401","813-555-0271","813-555-0271","843-555-8490","843-555-8490","843-555-8490","843-555-8490",null,null,"702-555-1158","702-555-1158","787-555-1308",null,"732-555-8846","732-555-8846","732-555-8846","732-555-8846","732-555-8846","832-555-9165","832-555-9165","832-555-9165","345-555-2861","345-555-2861","647-555-6291","647-555-6291","785-555-6517","785-555-6517","785-555-6517","419-555-4451","520-555-0348","604-555-2142","616-555-0154","616-555-0154","616-555-0154","910-555-9252","910-555-9252","573-555-4274","573-555-4274","573-555-4274","573-555-4274","215-555-1034","215-555-1034","215-555-1034","949-555-1759","949-555-1759",null,null,"786-555-5067","786-555-5067","812-555-1009","812-555-1009","812-555-1009",null,null,null,"701-555-8100","701-555-8100",null,null,null,null,null,null,"567-555-7649","567-555-7649","402-555-0467","859-555-3818","859-555-3818","859-555-3818","859-555-3818","801-555-2343","784-555-3455","784-555-3455","336-555-1950","336-555-1950"],["76062","70595","21031","31048","70595","10831","75138","76062","41115","21127","10801","10809","70335","71230","60112","41573","70595","10251","41558","31048","5005059","853549","70327","75139","853543","60118","5004612","41117","75133","41172","75151","70590","70593","41119","70589","71304","41559","21031","75126","70604","75116","41172","75098","853505","70310","31046","41114","41573","21028","853555","75822","10830","76054","75157","41135","41142","21028","41568","853568","853519","75130","31046","76065","75824","41555","41114","70330","41119","853549","75145","31043","41573","41140","41558","41572","41566","76066","41140","5004612","21128","76046","5005060","41564","60108","21128","41140","30349","70316","70319","41122","70319","30347","75828","71313","70333","853534","30347","71310","41556","75138","70313","41120","31044","41135","70600","75140","70331","60109","75139","76053","5005057","5005058","60118","75116","41121","70312","853549","853572","60113","75134","41567","76059","41178","41115","76048","41069","71309","42050","41174","76066","70599","75822","71235","41567","30347","76047","75114","70603","70326","10818","41114","41135","31040","10830","75147","853543","70332","41574","10251","75822","853571","41113","10807","41558","31045","75133","75116","853555","40202","71307","31041","41141","60105","71300","41069","853519","41140","70320","76047","853505","75133","10251","75139","70312","41178","60109","75135","70310","60111","76053","75146","75115","71238","76066","5005057","5005059","71307","60109","76044","21031","70588","70314","75135","21026","10818","75135","60117","41577","41176","71309","75140","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","5005059","41565","10804","41118","21127","71228","41579","75821","70332","42049","75157","31044","75138","60129","21027","75137","70318","10809","71241","41113","70325","41172","71238","70605","75132","42052","75149","31050","41115","41575","76061","31048","70601","70310","60105","70326","71229","75136","75825","71305","41119","71314","75146","21128","60116","853548","71228","70319","71316","5005051","70337","41120","70339","41562","41140","10806","70337","41140","B0189OU0JY","30347","76051","75821","42048","41580","41140","21305","41575","10251","76051","41172","71301","41118","70312","41113","71306","41179","10830","41174","41066","10817","10815","70310","30347","30349","71311","75113","40201","70603","10829","853534","70591","76058","31046","31044","41175","71235","76044","41177","76063","60117","10814","70602","75136","853505","60107","76050","31041","41573","41173","75118","10803","41570","853534","853543","41561","853506","70335","71316","30446","60130","75134","41576","853534","75132","60131","10829","75137","75116","70337","41111","70334","70601","75125","41118","60129","70600","41141","71303","5004612","21127","60129","70313","75129","5004612","76048","41176","31041","75140","70327","71309","71233","41141","41557","31050","76049","41110","41576","76055","75118","41564","41562","10819","41558","75147","71301","21026","70320","75138","10804","41113","10803","75147","70311","853555","70310","41174","41570","10808","21128","60106","70324","70315","70330","853506","41558","76065","853570","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","41113","853555","71300","31043","5005059","75126","853572","71316","75824","70592","76044","10804","71234","70333","853570","41116","41176","60130","853551","71308","70605","853555","70323","41171","41561","10803","76044","70313","21127","41569","41118","70339","41573","853572","10803","41565","71228","70321","75131","75826","70593","853555","41580","75138","41571","70315","42044","30446","5005058","60111","71300","75137","853543","71241","10803","5005060","41069","41121","60127","42046","60108","10816","41171","70320","70330","10819","75133","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","71011","21027","70601","41576","71307","41571","853547","71314","40202","41575","42048","5005058","41116","70602","21305","31043","75827","70322","76044","76050","71314","70596","853543","10817","60127","75828","41179","75135","75125","41118","71238","70330","70334","75145","71238","70600","70592","70593","41111","31040","41120","853555","75137","75116","41573","75129","41559","71305","10702","70312","41121","70330","70320","60111","41120","21128","75149","41177","60109","76062","70603","853506","70326","76064","31043","71307","70338","41118","41560","10826","71301","70330","70325","70601","41567","42048","76054","75822","42047","31043","70317","41113","21027","42050","5005059","71309","75139","30446","41135","853571","60116","75127","10804","70593","71234","75146","75133","71307","30446","70593","70601","853506","41568","75148","41560","75138","60130","75145","41174","75824","60119","41115","76058","41563","70317","60106","31047","853568","60112","60114","10806","41178","41558","41120","75130","31042","76058","31044","853571","75114","75132","70326","41574","60115","41577","70324","70310","10803","71235","75151","71304","76063","60109","75150","71313","41121","75126","75145","853568","71309","70312","70596","71311","71241","853534","10814","70332","75149","41556","41580","5005051","76063","10830"],["DC Comics Super Heroes","Ninjago","Architecture","Creator","Ninjago","Duplo","Star Wars","DC Comics Super Heroes","Friends","Minecraft","Duplo","Duplo","Nexo Knights","Dimensions","City","Mixels","Ninjago","Advanced Models","Mixels","Creator","Gear","Gear","Nexo Knights","Star Wars","Ninjago","City","Gear","Friends","Star Wars","Elves","Star Wars","Ninjago","Ninjago","Friends","Ninjago","Bionicle","Mixels","Architecture","Star Wars","Ninjago","Star Wars","Elves","Star Wars","Gear","Nexo Knights","Creator","Friends","Mixels","Architecture","Gear","The Angry Birds Movie","Duplo","DC Comics Super Heroes","Star Wars","Friends","Disney Princess","Architecture","Mixels","Gear","Gear","Star Wars","Creator","Marvel Super Heroes","The Angry Birds Movie","Mixels","Friends","Nexo Knights","Friends","Gear","Star Wars","Creator","Mixels","Disney Princess","Mixels","Mixels","Mixels","Marvel Super Heroes","Disney Princess","Gear","Minecraft","DC Comics Super Heroes","Gear","Mixels","City","Minecraft","Disney Princess","City","Nexo Knights","Nexo Knights","Friends","Nexo Knights","City","Ghostbusters","Bionicle","Nexo Knights","Gear","City","Bionicle","Mixels","Star Wars","Nexo Knights","Friends","Creator","Friends","Ninjago","Star Wars","Nexo Knights","City","Star Wars","DC Comics Super Heroes","Gear","Gear","City","Star Wars","Friends","Nexo Knights","Gear","Gear","City","Star Wars","Mixels","Marvel Super Heroes","Elves","Friends","Marvel Super Heroes","Disney Princess","Bionicle","Technic","Elves","Marvel Super Heroes","Ninjago","The Angry Birds Movie","Dimensions","Mixels","City","Marvel Super Heroes","Star Wars","Ninjago","Nexo Knights","Duplo","Friends","Friends","Creator","Duplo","Star Wars","Ninjago","Nexo Knights","Mixels","Advanced Models","The Angry Birds Movie","Gear","Friends","Duplo","Mixels","Creator","Star Wars","Star Wars","Gear","Seasonal","Bionicle","Creator","Disney Princess","City","Bionicle","Disney Princess","Gear","Disney Princess","Nexo Knights","Marvel Super Heroes","Gear","Star Wars","Advanced Models","Star Wars","Nexo Knights","Elves","City","Star Wars","Nexo Knights","City","DC Comics Super Heroes","Star Wars","Star Wars","Dimensions","Marvel Super Heroes","Gear","Gear","Bionicle","City","DC Comics Super Heroes","Architecture","Ninjago","Nexo Knights","Star Wars","Architecture","Duplo","Star Wars","City","Mixels","Elves","Bionicle","Star Wars","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Gear","Mixels","Duplo","Friends","Minecraft","Dimensions","Mixels","The Angry Birds Movie","Nexo Knights","Technic","Star Wars","Creator","Star Wars","City","Architecture","Star Wars","Nexo Knights","Duplo","Dimensions","Friends","Nexo Knights","Elves","Dimensions","Ninjago","Star Wars","Technic","Star Wars","Creator","Friends","Mixels","DC Comics Super Heroes","Creator","Ninjago","Nexo Knights","City","Nexo Knights","Dimensions","Star Wars","The Angry Birds Movie","Bionicle","Friends","Bionicle","Star Wars","Minecraft","City","Gear","Dimensions","Nexo Knights","Bionicle","Gear","Nexo Knights","Friends","Nexo Knights","Mixels","Disney Princess","Duplo","Nexo Knights","Disney Princess","Gear","City","Marvel Super Heroes","The Angry Birds Movie","Technic","Mixels","Disney Princess","Ideas","Mixels","Advanced Models","Marvel Super Heroes","Elves","Bionicle","Friends","Nexo Knights","Friends","Bionicle","Elves","Duplo","Elves","Disney Princess","Duplo","Duplo","Nexo Knights","City","City","Bionicle","Star Wars","Seasonal","Ninjago","Duplo","Gear","Ninjago","Marvel Super Heroes","Creator","Creator","Elves","Dimensions","DC Comics Super Heroes","Elves","DC Comics Super Heroes","City","Duplo","Ninjago","Star Wars","Gear","City","Marvel Super Heroes","Creator","Mixels","Elves","Star Wars","Duplo","Mixels","Gear","Ninjago","Mixels","Gear","Nexo Knights","Bionicle","DC Comics Super Heroes","City","Star Wars","Mixels","Gear","Star Wars","City","Duplo","Star Wars","Star Wars","Nexo Knights","Friends","Nexo Knights","Ninjago","Star Wars","Friends","City","Ninjago","Disney Princess","Bionicle","Gear","Minecraft","City","Nexo Knights","Star Wars","Gear","Marvel Super Heroes","Elves","Creator","Star Wars","Nexo Knights","Bionicle","Dimensions","Disney Princess","Mixels","Creator","Marvel Super Heroes","Friends","Mixels","DC Comics Super Heroes","Star Wars","Mixels","Mixels","Duplo","Mixels","Star Wars","Bionicle","Architecture","Nexo Knights","Star Wars","Duplo","Friends","Duplo","Star Wars","Nexo Knights","Gear","Nexo Knights","Elves","Mixels","Duplo","Minecraft","City","Nexo Knights","Nexo Knights","Nexo Knights","Gear","Mixels","Marvel Super Heroes","City","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Friends","Gear","Bionicle","Creator","Gear","Star Wars","Gear","Bionicle","The Angry Birds Movie","Ninjago","DC Comics Super Heroes","Duplo","Dimensions","Nexo Knights","City","Friends","Elves","City","Gear","Bionicle","Ninjago","Gear","Nexo Knights","Elves","Mixels","Duplo","DC Comics Super Heroes","Nexo Knights","Minecraft","Mixels","Friends","Nexo Knights","Mixels","Gear","Duplo","Mixels","Dimensions","Nexo Knights","Star Wars","The Angry Birds Movie","Ninjago","Gear","Mixels","Star Wars","Mixels","Nexo Knights","Technic","DC Comics Super Heroes","Gear","City","Bionicle","Star Wars","Ninjago","Dimensions","Duplo","Gear","Disney Princess","Friends","City","Technic","City","Duplo","Elves","Nexo Knights","Nexo Knights","Duplo","Star Wars","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Collectable Minifigures","Architecture","Ninjago","Mixels","Bionicle","Mixels","Gear","Bionicle","Seasonal","Mixels","Technic","Gear","Friends","Ninjago","Ideas","Creator","Ghostbusters","Nexo Knights","DC Comics Super Heroes","Marvel Super Heroes","Bionicle","Ninjago","Ninjago","Duplo","City","Ghostbusters","Elves","Star Wars","Star Wars","Friends","Dimensions","Nexo Knights","Nexo Knights","Star Wars","Dimensions","Ninjago","Ninjago","Ninjago","Friends","Creator","Friends","Gear","Star Wars","Star Wars","Mixels","Star Wars","Mixels","Bionicle","Classic","Nexo Knights","Friends","Nexo Knights","Nexo Knights","City","Friends","Minecraft","Star Wars","Elves","City","DC Comics Super Heroes","Ninjago","Gear","Nexo Knights","Marvel Super Heroes","Creator","Bionicle","Nexo Knights","Friends","Mixels","Duplo","Bionicle","Nexo Knights","Nexo Knights","Ninjago","Mixels","Technic","DC Comics Super Heroes","The Angry Birds Movie","Technic","Creator","Nexo Knights","Friends","Architecture","Technic","Gear","Bionicle","Star Wars","DC Comics Super Heroes","Friends","Gear","City","Star Wars","Duplo","Ninjago","Dimensions","Star Wars","Star Wars","Bionicle","DC Comics Super Heroes","Ninjago","Ninjago","Gear","Mixels","Star Wars","Mixels","Star Wars","City","Star Wars","Elves","The Angry Birds Movie","City","Friends","Marvel Super Heroes","Mixels","Nexo Knights","City","Creator","Gear","City","City","Duplo","Elves","Mixels","Friends","Star Wars","Creator","Marvel Super Heroes","Creator","Gear","Star Wars","Star Wars","Nexo Knights","Mixels","City","Mixels","Nexo Knights","Nexo Knights","Duplo","Dimensions","Star Wars","Bionicle","DC Comics Super Heroes","City","Star Wars","Bionicle","Friends","Star Wars","Star Wars","Gear","Bionicle","Nexo Knights","Ninjago","Bionicle","Dimensions","Gear","Duplo","Nexo Knights","Star Wars","Mixels","Mixels","Gear","DC Comics Super Heroes","Duplo"],["Mighty Micros","Rise of the Villains",null,null,"Rise of the Villains",null,"Episode V","Mighty Micros",null,"Minifig-scale",null,null,"Ultimate","Fun Pack","Fire","Series 9","Rise of the Villains","Modular Buildings","Series 7",null,"Video Games/PS3","Key Chains/Friends",null,"The Force Awakens",null,"Traffic","Watches/Clocks","Pop Star","Battlefront",null,"Episode III",null,"Skybound",null,"Rise of the Villains","Companions","Series 7",null,"MicroFighters","Skybound","Buildable Figures",null,"Ultimate Collector Series","Role-Play toys",null,null,"Party","Series 9","Skylines","Stationery",null,null,"Batman","Rebels","Pop Star","Palace Pets","Skylines","Series 8","Key Chains/City","Playmats","MicroFighters",null,"Mighty Micros",null,"Series 7","Party","Ultimate",null,"Key Chains/Friends","Original Content",null,"Series 9","Palace Pets","Series 7","Series 9","Series 8","Mighty Micros","Palace Pets","Watches/Clocks","Minifig-scale","Batman v Superman: Dawn of Justice","Video Games/3DS","Series 8","Fire","Minifig-scale","Palace Pets",null,null,null,"Adventure Camp",null,"Fire","Reboot","Reboot Villains","Ultimate","Key Chains/Ninjago","Fire","Reboot Villains","Series 7","Episode V",null,"Adventure Camp",null,"Pop Star","Skybound","The Force Awakens","Ultimate","Fire","The Force Awakens","Batman","Video Games/XBOX 360","Video Games/Wii U","Traffic","Buildable Figures","Adventure Camp",null,"Key Chains/Friends","Key Chains/Miscellaneous","Traffic","Battlefront","Series 8","Ultimate Spider-Man",null,null,"Avengers Assemble","Palace Pets","Toa",null,null,"Mighty Micros","Skybound",null,"Level Pack","Series 8","Fire","Captain America: Civil War","Buildable Figures","Skybound",null,null,"Party","Pop Star",null,null,"Original Content",null,"Ultimate","Series 9","Modular Buildings",null,"Key Chains/Miscellaneous","Party",null,"Series 7",null,"Battlefront","Buildable Figures","Stationery","Easter","Toa",null,"Palace Pets","Fire","companions","Palace Pets","Playmats","Palace Pets",null,"Captain America: Civil War","Role-Play toys","Battlefront","Modular Buildings","The Force Awakens",null,null,"Fire","Episode III",null,"Fire","Batman","Seasonal","Buildable Figures","Fun Pack","Mighty Micros","Video Games/XBOX 360","Video Games/PS3","Toa","Fire","Batman v Superman: Dawn of Justice",null,"Rise of the Villains",null,"Episode III","Skylines",null,"Episode III","Traffic","Series 9",null,"Toa","The Force Awakens","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Video Games/PS3","Series 8",null,null,"Minifig-scale","Level Pack","Series 9",null,"Ultimate",null,"Rebels",null,"Episode V","Police","Skylines","Episode V",null,null,"Fun Pack","Party",null,null,"Fun Pack","Skybound","The Force Awakens",null,"The Force Awakens",null,null,"Series 9","Mighty Micros",null,"Skybound",null,"Fire",null,"Team Pack","Episode IV",null,"Toa",null,"Reboot Villains","Seasonal","Minifig-scale","Medical","Key Chains/Friends","Level Pack",null,"Reboot Villains","Digital Media","Ultimate","Adventure Camp","Ultimate","Series 7","Palace Pets",null,"Ultimate","Palace Pets","Digital media","Fire","Captain America: Civil War",null,null,"Series 9","Palace Pets",null,"Series 9","Modular Buildings","Captain America: Civil War",null,"Companions",null,null,"Party","Toa",null,null,null,"Frozen",null,null,null,"Fire",null,"Miscellaneous","Buildable Figures","Valentine's Day","Skybound","Mickey Mouse Clubhouse","Key Chains/Ninjago","Skybound","Ultimate Spider-Man",null,null,null,"Level Pack","Batman v Superman: Dawn of Justice",null,"Mighty Micros","Traffic",null,"Skybound","Episode IV","Role-Play toys","Fire","Captain America: Civil War",null,"Series 9",null,"Buildable Figures",null,"Series 8","Key Chains/Ninjago",null,"Series 7","Role-Play toys","Ultimate","Reboot Villains","Batman v Superman: Dawn of Justice","Police","Battlefront","Series 9","Key Chains/Ninjago","The Force Awakens","Police","Mickey Mouse Clubhouse","Episode V","Buildable Figures","Ultimate","Party","Ultimate","Skybound","MicroFighters",null,"Police","Skybound","Palace Pets","Companions","Watches/Clocks","Minifig-scale","Police",null,"MicroFighters","Watches/Clocks","Avengers Assemble",null,null,"The Force Awakens",null,"Toa","Fun Pack","Palace Pets","Series 7",null,"Avengers Assemble","Party","Series 9","Batman","Buildable Figures","Series 8","Series 7",null,"Series 7","Original Content","Companions","Skylines",null,"Episode V",null,"Party",null,"Original Content",null,"Stationery",null,null,"Series 8",null,"Minifig-scale","Fire",null,null,"Ultimate","Role-Play toys","Series 7","Mighty Micros","Police","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Party","Stationery","companions",null,"Video Games/PS3","MicroFighters","Key Chains/Miscellaneous","Reboot Villains",null,"Rise of the Villains","Batman v Superman: Dawn of Justice",null,"Fun Pack","Ultimate","Police",null,null,"Police","Key Chains/Friends","Toa","Skybound","Stationery",null,null,"Series 7",null,"Batman v Superman: Dawn of Justice",null,"Minifig-scale","Series 8",null,"Ultimate","Series 9","Key Chains/Miscellaneous",null,"Series 8","Level Pack",null,"The Force Awakens",null,"Skybound","Stationery","Series 9","Episode V","Series 8",null,null,"Batman v Superman: Dawn of Justice","Video Games/Wii U","Fire","companions","Episode V",null,"Fun Pack",null,"Video Games/3DS","Palace Pets","Adventure Camp","Police",null,"Fire",null,null,null,"Ultimate",null,"Battlefront","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Series 15","Skylines","Skybound","Series 9","Toa","Series 8","Key Chains/Friends","Reboot Villains","Easter","Series 9",null,"Video Games/Wii U",null,"Skybound",null,null,null,null,"Batman v Superman: Dawn of Justice","Captain America: Civil War","Reboot Villains","Rise of the Villains",null,null,"Police","Reboot",null,"Episode III","MicroFighters",null,"Fun Pack","Ultimate","Ultimate","Original Content","Fun Pack","Skybound","Rise of the Villains","Skybound","Party",null,"Adventure Camp","Stationery","Episode V","Buildable Figures","Series 9","MicroFighters","Series 7","Toa",null,null,"Adventure Camp","Ultimate",null,"Fire","Adventure Camp","Minifig-scale","The Force Awakens",null,"Fire","Mighty Micros","Skybound","Role-Play toys",null,"Mighty Micros",null,"Toa","Ultimate",null,"Series 7","Miles from Tomorrowland","Companions","Ultimate",null,"Skybound","Series 8",null,"Batman",null,null,null,null,"Party","Skylines",null,"Video Games/PS3","Toa","The Force Awakens","Batman v Superman: Dawn of Justice","Pop Star","Key Chains/Miscellaneous","Medical","MicroFighters",null,"Skybound","Fun Pack","Seasonal","Battlefront","Toa","Batman v Superman: Dawn of Justice","Skybound","Skybound","Role-Play toys","Series 8","The Force Awakens","Series 7","Episode V","Police","Original Content",null,null,"Harbour",null,"Ultimate Spider-Man","Series 8",null,"Fire",null,"Key Chains/City","Fire","Harbour",null,null,"Series 7","Adventure Camp","MicroFighters",null,"Ultimate Spider-Man",null,"Key Chains/Miscellaneous","Buildable Figures","The Force Awakens",null,"Series 9","Traffic","Series 9",null,null,null,"Level Pack","Episode III","Companions","Mighty Micros","Fire","Rebels","Reboot Villains","Adventure Camp","MicroFighters","Original Content","Key Chains/City","Toa",null,"Rise of the Villains","Miscellaneous","Fun Pack","Key Chains/Ninjago",null,"Ultimate","The Force Awakens","Series 7","Series 9","Digital Media","Mighty Micros",null],[2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018],["Robin vs. Bane","Ultra Stealth Raider","Burj Khalifa","Lakeside Lodge","Ultra Stealth Raider","My First Caterpillar","Hoth Attack","Robin vs. Bane","Emma's Creative Workshop","The Fortress","Baby Animals","Police Patrol","Ultimate Lavaria","Fun Pack: Doc Brown","Fire Engine","Sweepz","Ultra Stealth Raider","Brick Bank","Mixadel","Lakeside Lodge","Marvel Avengers PS3 Video Game","Mia Key Chain","The King's Mech","Battle on Takodana","Ninjago Party Set","Garbage Truck","Lucy Wyldstyle Minifigure Link Watch","Pop Star TV Studio","Rebel Alliance Battle Pack","The Water Dragon Adventure","Clone Turbo Tank","Airjitzu Battle Grounds","The Green NRG Dragon","Heartlake Cupcake Cafe","Rock Roader","Terak - Creature of Earth","Paladum","Burj Khalifa","First Order Snowspeeder","Tiger Widow Island","Finn","The Water Dragon Adventure","Assault on Hoth","NK Sword Standard","Knighton Battle Blaster","Fast Car","Party Styling","Sweepz","New York City","Campsite Scrapbook","Piggy Plane Attack","Minnie's Café","Batman: Scarecrow Harvest of Fear","Captain Rex's AT-TE","Livi's Pop Star House","Palace Pets Royal Castle","New York City","Lewt","Prison Guard Key Chain","NK Playmat","AT-DP","Fast Car","Captain America vs. Red Skull","Pig City Teardown","Busto","Party Styling","Ultimate Clay","Heartlake Cupcake Cafe","Mia Key Chain","Eclipse Fighter","Chopper Transporter","Sweepz","Daisy's Beauty Salon","Mixadel","Gobbol","Sharx","Hulk vs. Ultron","Daisy's Beauty Salon","Lucy Wyldstyle Minifigure Link Watch","The Village","Heroes of Justice: Sky High Battle","Marvel Avengers Nintendo 3DS Video Game","Aquad","Fire Response Unit","The Village","Daisy's Beauty Salon","Sports Car","Jestro's Evil Mobile","Macy's Thunder Mace","Adventure Camp Tree House","Macy's Thunder Mace","Fire Car","Ghostbusters Ecto-1 &amp; Ecto-2","Lava Beast","Ultimate Robin","Airjitzu Jay Key Chain","Fire Car","Umarak the Hunter","Tiketz","Hoth Attack","Moltor's Lava Smasher","Adventure Camp Archery","Park Animals","Livi's Pop Star House","Ninja Bike Chase","Resistance Troop Transporter","Ultimate Macy","Fire Boat","Battle on Takodana","Gotham City Cycle Chase","Marvel Avengers XBOX 360 Video Game","Marvel Avengers Wii U Video Game","Garbage Truck","Finn","Adventure Camp Rafting","Lance's Mecha Horse","Mia Key Chain","Bumble Bee Key Chain","Rally Car","Galactic Empire Battle Pack","Skulzy","Spider-Man: Doc Ock's Tentacle Trap","The Dragon Sanctuary","Emma's Creative Workshop","Iron Skull Sub Attack","Treasure's Day at the Pool","Onua - Uniter of Earth","Drag Racer","The Starlight Inn","Hulk vs. Ultron","Cole's Dragon","Piggy Plane Attack","Level Pack: Midway Arcade","Skulzy","Fire Car","Black Panther Pursuit","First Order Stormtrooper","Raid Zeppelin","The Black Knight Mech","My First Truck","Party Styling","Livi's Pop Star House","Desert Racers","Minnie's Café","Star Scavenger","Ninjago Party Set","Ultimate Aaron","Compax","Brick Bank","Piggy Plane Attack","Hot Dog Guy Key Chain","Party Gift Shop","Horse Trailer","Mixadel","Ocean Explorer","Rebel Alliance Battle Pack","Finn","Campsite Scrapbook","Easter Chick","Gali - Uniter of Water","Construction Vehicles","Pumpkin's Royal Carriage","Fire ATV","Uxar - Creature of Jungle","Treasure's Day at the Pool","NK Playmat","Daisy's Beauty Salon","Aaron Fox's Aero-Striker V2","Black Panther Pursuit","NK Sword Standard","Rebel Alliance Battle Pack","Brick Bank","Battle on Takodana","Lance's Mecha Horse","The Dragon Sanctuary","Fire Boat","Obi-Wan's Jedi Interceptor","Knighton Battle Blaster","Fire Utility Truck","Gotham City Cycle Chase","Star Wars Advent Calendar","Poe Dameron","Fun Pack: Cyberman","Hulk vs. Ultron","Marvel Avengers XBOX 360 Video Game","Marvel Avengers PS3 Video Game","Gali - Uniter of Water","Fire Boat","Clash of the Heroes","Burj Khalifa","Titanium Ninja Tumbler","Beast Master's Chaos Chariot","Obi-Wan's Jedi Interceptor","Venice","My First Truck","Obi-Wan's Jedi Interceptor","Van &amp; Caravan","Mysto","The Secret Market Place","Onua - Uniter of Earth","Resistance Troop Transporter","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","Marvel Avengers PS3 Video Game","Hydro","Jungle","Heartlake Supermarket","The Fortress","Level Pack: Ghostbusters","Camsta","Piggy Car Escape","Ultimate Aaron","Mine Loader","Captain Rex's AT-TE","Park Animals","Hoth Attack","Police Patrol Boat","Berlin","Carbon-Freezing Chamber","The Glob Lobber","Police Patrol","Fun Pack: Slimer","Party Gift Shop","Infernox captures the Queen","The Water Dragon Adventure","Fun Pack: Cyberman","Misfortune's Keep","First Order Battle Pack","Heavy Lift Helicopter","Resistance X-wing Fighter","Corner Deli","Emma's Creative Workshop","Cobrax","Batman vs. Catwoman","Lakeside Lodge","Sky Shark","Knighton Battle Blaster","Fire ATV","The Black Knight Mech","Team Pack: Joker and Harley Quinn","Droid Escape Pod","Piggy Pirate Ship","Lewa - Uniter of Jungle","Heartlake Cupcake Cafe","Storm Beast","Star Wars Advent Calendar","The Village","Ambulance Plane","Andrea Key Chain","Level Pack: Ghostbusters","Macy's Thunder Mace","Umarak the Destroyer","Friends of Heartlake City Girlz 4 Life","Ultimate Lance","Adventure Camp Archery","Ultimate Flama","Trumpsy","Daisy's Beauty Salon","Horses","Ultimate Lance","Daisy's Beauty Salon","LEGO Star Wars: Droid Tales","Fire Car","Super Hero Airport Battle","Piggy Car Escape","Race Kart","Myke","Daisy's Beauty Salon","Maze","Cobrax","Brick Bank","Super Hero Airport Battle","The Water Dragon Adventure","Ketar - Creature of Stone","Heartlake Supermarket","Lance's Mecha Horse","Party Gift Shop","Pohatu - Uniter of Stone","Queen Dragon's Rescue","Minnie's Café","The Starlight Inn","Anna &amp; Kristoff's Sleigh Adventure","Creative Chest","My First Rocket","Knighton Battle Blaster","Fire Car","Sports Car","Kopaka and Melum - Unity set","Rey","Valentine's Cupid Dog","Raid Zeppelin","Mickey's Workshop","Airjitzu Jay Key Chain","Kryptarium Prison Breakout","Spider-Man: Ghost Rider Team-Up","Fast Car","Park Animals","Fire Dragon's Lava Cave","Level Pack: Midway Arcade","Clash of the Heroes","The Precious Crystal Mine","The Flash vs. Captain Cold","Van &amp; Caravan","Tow Truck","Jay's Elemental Dragon","Droid Escape Pod","NK Sword Standard","Fire Ladder Truck","Crossbones' Hazard Heist","Construction Vehicles","Sweepz","Elvendale School of Dragons","Captain Phasma","Arctic","Skrubz","Airjitzu Jay Key Chain","Ninjago Party Set","Tapsy","NK Shield Standard","Ultimate Lavaria","Umarak the Destroyer","The Batmobile","Prison Island","Galactic Empire Battle Pack","Spinza","Airjitzu Jay Key Chain","First Order Battle Pack","Crooks Island","Mickey's Workshop","Carbon-Freezing Chamber","Finn","Ultimate Lance","Party Train","Ultimate Beast Master","Sky Shark","Resistance X-wing Fighter","Heartlake Supermarket","Police Patrol Boat","Ninja Bike Chase","Pumpkin's Royal Carriage","Ikir - Creature of Fire","Lucy Wyldstyle Minifigure Link Watch","The Fortress","Police Patrol Boat","Moltor's Lava Smasher","Wookiee Gunship","Lucy Wyldstyle Minifigure Link Watch","Iron Skull Sub Attack","The Secret Market Place","Construction Vehicles","Resistance Troop Transporter","The King's Mech","Onua - Uniter of Earth","Fun Pack: Stay Puft","Pumpkin's Royal Carriage","Camillot","Corner Deli","Avenjet Space Mission","Birthday Party","Spinza","Batman: Killer Croc Sewer Smash","Captain Phasma","Aquad","Trumpsy","My First Garden","Mixadel","Star Scavenger","Ketar - Creature of Stone","Venice","Aaron Fox's Aero-Striker V2","Hoth Attack","Jungle","Party Gift Shop","Arctic","Star Scavenger","Chaos Catapult","Campsite Scrapbook","Knighton Battle Blaster","The Starlight Inn","Skrubz","Little Plane","The Village","Fire Starter Set","Merlok's Library 2.0","Clay's Rumble Blade","Ultimate Clay","NK Shield Standard","Mixadel","Captain America vs. Red Skull","Police Accessory Set","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","Party Gift Shop","Campsite Scrapbook","Uxar - Creature of Jungle","Chopper Transporter","Marvel Avengers PS3 Video Game","First Order Snowspeeder","Bumble Bee Key Chain","Umarak the Destroyer","Pig City Teardown","Salvage M.E.C.","Clash of the Heroes","Jungle","Fun Pack: Sensei Wu","Ultimate Robin","Police Accessory Set","Olivia's Exploration Car","The Secret Market Place","Prison Island","Olivia Key Chain","Tahu - Uniter of Fire","Misfortune's Keep","Campsite Scrapbook","Jestro's Volcano Lair","Emily Jones &amp; the Baby Wind Dragon","Tapsy","Arctic","Clash of the Heroes","Moltor's Lava Smasher","The Fortress","Surgeo","Heartlake Supermarket","Ultimate Flama","Sweepz","Bumble Bee Key Chain","Arctic","Hydro","Level Pack: Ghostbusters","General Magmar's Siege Machine of Doom","Resistance Trooper Battle Pack","King Pig's Castle","The Green NRG Dragon","Campsite Scrapbook","Myke","Hoth Attack","Tuth","Clay's Rumble Blade","Display Team Jet","The Batmobile","Marvel Avengers Wii U Video Game","Fire Utility Truck","Uxar - Creature of Jungle","Carbon-Freezing Chamber","Ninjago Party Set","Fun Pack: Slimer","Arctic","Marvel Avengers Nintendo 3DS Video Game","Treasure's Day at the Pool","Adventure Camp Rafting","Prison Island Starter Set","Getaway Racer","Fire Response Unit","My First Cars and Trucks","Emily Jones &amp; the Baby Wind Dragon","Aaron Fox's Aero-Striker V2","Ultimate Clay","My First Garden","Rebel Alliance Battle Pack","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","LEGO Minifigures - Series 15 - Sealed Box","Berlin","Sky Shark","Spinza","Gali - Uniter of Water","Tuth","Emma Key Chain","Storm Beast","Easter Chick","Cobrax","Race Kart","Marvel Avengers Wii U Video Game","Olivia's Exploration Car","Jay's Elemental Dragon","Maze","Chopper Transporter","Firehouse Headquarters","Axl's Tower Carrier","Clash of the Heroes","Crossbones' Hazard Heist","Storm Beast","Samurai X Cave Chaos","Ninjago Party Set","Creative Chest","Prison Island Starter Set","Ghostbusters Ecto-1 &amp; Ecto-2","Queen Dragon's Rescue","Obi-Wan's Jedi Interceptor","Resistance X-wing Fighter","Heartlake Supermarket","Fun Pack: Cyberman","Ultimate Clay","Ultimate Beast Master","Eclipse Fighter","Fun Pack: Cyberman","Ninja Bike Chase","Salvage M.E.C.","The Green NRG Dragon","Party Train","Desert Racers","Adventure Camp Archery","Campsite Scrapbook","Carbon-Freezing Chamber","Finn","Sweepz","Wookiee Gunship","Paladum","Lewa - Uniter of Jungle","Creative Building Set","Lance's Mecha Horse","Adventure Camp Rafting","Ultimate Clay","Aaron Fox's Aero-Striker V2","Fire Utility Truck","Adventure Camp Archery","The Village","Resistance X-wing Fighter","The Precious Crystal Mine","Fire Boat","Robin vs. Bane","Raid Zeppelin","NK Shield Standard","The Black Knight Mech","Spider-Man vs. Green Goblin","Chopper Transporter","Gali - Uniter of Water","Ultimate General Magmar","Heartlake Supermarket","Jamzy","Miles' Stellosphere Hangar","Ketar - Creature of Stone","Ultimate Clay","Infernox captures the Queen","Sky Shark","Skulzy","Race Kart","Batman: Scarecrow Harvest of Fear","Piggy Plane Attack","Police Interceptor","Chopper Transporter","The Fortrex","Party Gift Shop","Berlin","Drag Racer","Marvel Avengers PS3 Video Game","Onua - Uniter of Earth","Battle on Takodana","The Batmobile","Livi's Pop Star House","Hot Dog Guy Key Chain","Ambulance Plane","The Ghost","Jungle","The Green NRG Dragon","Fun Pack: Sensei Wu","Star Wars Advent Calendar","Rebel Alliance Battle Pack","Gali - Uniter of Water","The Batmobile","The Green NRG Dragon","Sky Shark","NK Shield Standard","Lewt","Encounter on Jakku","Jamzy","Hoth Attack","Prison Island","Eclipse Fighter","The Starlight Inn","Pig City Teardown","Ferry","Emma's Creative Workshop","Spider-Man: Ghost Rider Team-Up","Splasho","The Fortrex","Fire Starter Set","Propeller Plane","Prison Guard Key Chain","Fire Engine","Race Boat","Horses","The Dragon Sanctuary","Mixadel","Adventure Camp Archery","AT-DP","Super Soarer","Spider-Man: Ghost Rider Team-Up","Park Animals","Hot Dog Guy Key Chain","First Order Stormtrooper","First Order Battle Pack","The Black Knight Mech","Compax","4 x 4 Off Roader","Mysto","Merlok's Library 2.0","Knighton Battle Blaster","Arctic","Level Pack: Midway Arcade","Clone Turbo Tank","Terak - Creature of Earth","The Flash vs. Captain Cold","Fire Boat","Vader's TIE Advanced vs. A-wing Fighter","Lava Beast","Adventure Camp Rafting","First Order Snowspeeder","Eclipse Fighter","Prison Guard Key Chain","Onua - Uniter of Earth","Lance's Mecha Horse","Samurai X Cave Chaos","Kopaka and Melum - Unity set","Fun Pack: Slimer","Airjitzu Jay Key Chain","Tow Truck","Ultimate Aaron","Resistance X-wing Fighter","Tiketz","Myke","Friends of Heartlake City Girlz 4 Life","The Flash vs. Captain Cold","Minnie's Café"],[77,1093,333,368,1093,19,233,77,108,null,13,15,69,69,376,61,1093,2380,63,368,null,null,375,409,70,248,null,194,101,212,903,666,567,439,406,74,64,333,91,450,98,212,2144,null,76,222,54,61,598,null,168,27,563,972,597,186,598,62,null,null,76,222,95,386,69,54,72,439,null,363,124,61,98,63,62,55,80,98,null,null,517,null,70,257,null,98,47,658,202,726,202,53,null,114,75,null,53,172,62,233,187,114,202,597,231,646,101,412,409,224,null,null,248,98,320,237,null,null,104,109,66,446,585,108,335,70,143,647,343,80,98,168,96,66,53,287,81,294,530,29,54,597,65,27,558,70,82,66,2380,168,null,52,15,63,213,101,98,null,111,87,64,79,64,89,70,null,98,301,287,null,101,2380,409,237,585,412,215,76,368,224,282,102,40,80,null,null,87,412,92,333,342,314,215,212,29,215,250,64,691,143,646,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,70,86,313,null,115,62,74,82,476,972,202,233,200,289,231,95,15,33,52,253,212,40,754,88,1042,740,467,108,64,79,368,221,76,64,530,92,197,620,79,439,109,282,null,183,null,115,202,191,null,75,114,67,54,98,20,75,98,null,53,807,74,345,63,98,769,64,2380,807,212,80,313,237,52,90,833,27,343,174,70,18,76,53,47,171,84,150,294,18,null,207,217,222,202,441,96,92,273,88,250,28,350,197,null,214,179,64,61,230,82,40,68,null,70,57,null,69,191,63,754,109,60,null,88,244,18,231,98,75,109,65,221,87,313,200,231,79,77,null,null,200,187,84,null,335,691,64,646,375,143,65,79,64,467,523,191,60,759,82,70,54,25,63,558,80,212,301,233,86,52,40,558,93,null,76,343,68,13,null,90,288,367,72,null,63,95,26,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,52,null,89,124,null,91,null,191,386,439,92,86,58,75,26,185,691,754,null,132,754,null,1186,80,57,40,92,187,null,63,313,67,61,null,40,70,115,516,112,859,567,null,63,233,67,367,113,63,null,368,89,231,70,33,40,null,70,320,92,170,257,36,80,301,72,25,101,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,289,221,60,87,67,null,109,111,64,345,null,185,350,769,124,4634,670,92,179,109,1253,70,70,92,null,833,215,87,313,40,72,65,363,40,231,439,567,109,65,114,null,231,98,61,84,64,79,583,237,320,72,301,368,114,null,740,273,412,77,294,null,530,85,124,87,64,313,70,44,80,72,253,221,66,345,563,168,185,124,1140,52,289,647,null,143,409,63,597,null,183,104,86,567,58,282,101,87,63,567,221,null,62,530,70,233,754,363,343,386,301,108,217,67,1140,90,230,null,376,95,20,585,63,114,76,100,217,202,null,81,88,530,66,176,64,288,76,40,96,903,74,88,412,702,114,320,91,363,null,143,237,1253,171,33,null,28,82,740,62,63,null,88,27],[9.99,119.99,39.99,29.99,119.99,9.99,24.99,9.99,9.99,109.99,9.99,14.99,9.99,14.99,49.99,4.99,119.99,169.99,4.99,29.99,49.99,5.99,29.99,59.99,7.99,19.99,24.99,19.99,12.99,19.99,109.99,59.99,49.99,39.99,39.99,9.99,4.99,39.99,9.99,49.99,24.99,19.99,249.99,9.99,9.99,19.99,4.99,4.99,59.99,14.99,19.99,19.99,59.99,119.99,49.99,19.99,59.99,4.99,5.99,14.99,9.99,19.99,9.99,39.99,4.99,4.99,9.99,39.99,5.99,29.99,9.99,4.99,9.99,4.99,4.99,4.99,9.99,9.99,24.99,199.99,59.99,29.99,4.99,39.99,199.99,9.99,3.99,59.99,19.99,79.99,19.99,3.99,59.99,14.99,9.99,5.99,3.99,19.99,4.99,24.99,19.99,9.99,14.99,49.99,19.99,69.99,9.99,79.99,59.99,19.99,49.99,49.99,19.99,24.99,29.99,19.99,5.99,5.99,9.99,12.99,4.99,39.99,49.99,9.99,29.99,5.99,19.99,79.99,29.99,9.99,9.99,19.99,29.99,4.99,3.99,29.99,19.99,29.99,39.99,19.99,4.99,49.99,4.99,19.99,49.99,7.99,9.99,4.99,169.99,19.99,5.99,4.99,19.99,4.99,14.99,12.99,24.99,14.99,9.99,14.99,4.99,9.99,6.99,9.99,5.99,14.99,9.99,29.99,29.99,9.99,12.99,169.99,59.99,19.99,49.99,79.99,24.99,9.99,39.99,19.99,39.99,24.99,14.99,9.99,49.99,49.99,14.99,79.99,12.99,39.99,29.99,29.99,24.99,29.99,19.99,24.99,19.99,4.99,59.99,19.99,69.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,49.99,4.99,49.99,29.99,109.99,29.99,4.99,12.99,9.99,49.99,119.99,14.99,24.99,49.99,29.99,24.99,9.99,14.99,14.99,4.99,24.99,19.99,14.99,79.99,12.99,139.99,79.99,39.99,9.99,4.99,9.99,29.99,19.99,9.99,6.99,39.99,24.99,24.99,59.99,14.99,39.99,14.99,39.99,199.99,19.99,5.99,29.99,19.99,24.99,19.99,9.99,9.99,9.99,4.99,9.99,14.99,9.99,9.99,19.99,3.99,79.99,12.99,29.99,4.99,9.99,69.99,4.99,169.99,79.99,19.99,9.99,29.99,19.99,4.99,14.99,69.99,19.99,29.99,29.99,29.99,9.99,9.99,3.99,3.99,24.99,19.99,9.99,29.99,19.99,5.99,19.99,19.99,19.99,14.99,39.99,29.99,12.99,29.99,9.99,19.99,19.99,29.99,24.99,9.99,24.99,19.99,4.99,4.99,19.99,24.99,29.99,4.99,5.99,7.99,4.99,12.99,9.99,24.99,3.99,89.99,12.99,4.99,5.99,12.99,29.99,19.99,24.99,24.99,9.99,9.99,9.99,19.99,9.99,29.99,49.99,19.99,9.99,9.99,24.99,109.99,49.99,19.99,9.99,24.99,29.99,59.99,4.99,69.99,29.99,19.99,14.99,9.99,4.99,39.99,59.99,19.99,4.99,79.99,24.99,4.99,4.99,19.99,4.99,49.99,9.99,29.99,29.99,24.99,49.99,4.99,29.99,49.99,9.99,14.99,9.99,29.99,4.99,9.99,199.99,9.99,24.99,39.99,9.99,12.99,4.99,9.99,14.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,4.99,14.99,9.99,9.99,49.99,9.99,5.99,24.99,39.99,39.99,12.99,49.99,14.99,9.99,14.99,14.99,59.99,89.99,5.99,19.99,79.99,14.99,119.99,9.99,4.99,29.99,12.99,19.99,109.99,4.99,29.99,9.99,4.99,5.99,29.99,4.99,29.99,49.99,12.99,89.99,49.99,14.99,4.99,24.99,4.99,39.99,12.99,3.99,49.99,39.99,9.99,24.99,7.99,14.99,29.99,29.99,5.99,29.99,9.99,19.99,39.99,19.99,9.99,29.99,9.99,19.99,12.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,3.99,29.99,19.99,4.99,14.99,4.99,5.99,14.99,9.99,4.99,29.99,49.99,14.99,29.99,69.99,9.99,349.99,69.99,12.99,19.99,14.99,119.99,7.99,29.99,9.99,59.99,69.99,24.99,9.99,29.99,14.99,9.99,9.99,29.99,14.99,19.99,39.99,49.99,9.99,4.99,9.99,14.99,24.99,24.99,4.99,9.99,4.99,14.99,29.99,19.99,29.99,9.99,29.99,39.99,9.99,199.99,79.99,29.99,79.99,9.99,29.99,12.99,39.99,9.99,9.99,14.99,9.99,29.99,4.99,34.99,9.99,9.99,24.99,19.99,4.99,29.99,59.99,19.99,19.99,9.99,99.99,4.99,29.99,79.99,49.99,19.99,59.99,3.99,49.99,5.99,19.99,9.99,49.99,49.99,14.99,39.99,12.99,14.99,3.99,49.99,19.99,12.99,4.99,59.99,4.99,24.99,89.99,29.99,29.99,39.99,29.99,9.99,19.99,4.99,99.99,9.99,19.99,5.99,49.99,9.99,14.99,49.99,4.99,9.99,9.99,9.99,19.99,14.99,5.99,19.99,12.99,39.99,4.99,19.99,4.99,24.99,9.99,29.99,29.99,109.99,9.99,9.99,79.99,89.99,14.99,29.99,9.99,29.99,5.99,19.99,19.99,119.99,24.99,14.99,5.99,19.99,9.99,79.99,4.99,4.99,19.99,9.99,19.99],["http://images.brickset.com/sets/images/76062-1.jpg","http://images.brickset.com/sets/images/70595-1.jpg","http://images.brickset.com/sets/images/21031-1.jpg","http://images.brickset.com/sets/images/31048-1.jpg","http://images.brickset.com/sets/images/70595-1.jpg","http://images.brickset.com/sets/images/10831-1.jpg","http://images.brickset.com/sets/images/75138-1.jpg","http://images.brickset.com/sets/images/76062-1.jpg","http://images.brickset.com/sets/images/41115-1.jpg","http://images.brickset.com/sets/images/21127-1.jpg","http://images.brickset.com/sets/images/10801-1.jpg","http://images.brickset.com/sets/images/10809-1.jpg","http://images.brickset.com/sets/images/70335-1.jpg","http://images.brickset.com/sets/images/71230-1.jpg","http://images.brickset.com/sets/images/60112-1.jpg",null,"http://images.brickset.com/sets/images/70595-1.jpg","http://images.brickset.com/sets/images/10251-1.jpg","http://images.brickset.com/sets/images/41558-1.jpg","http://images.brickset.com/sets/images/31048-1.jpg","http://images.brickset.com/sets/images/5005059-1.jpg","http://images.brickset.com/sets/images/853549-1.jpg","http://images.brickset.com/sets/images/70327-1.jpg","http://images.brickset.com/sets/images/75139-1.jpg","http://images.brickset.com/sets/images/853543-1.jpg","http://images.brickset.com/sets/images/60118-1.jpg","http://images.brickset.com/sets/images/5004612-1.jpg","http://images.brickset.com/sets/images/41117-1.jpg","http://images.brickset.com/sets/images/75133-1.jpg","http://images.brickset.com/sets/images/41172-1.jpg","http://images.brickset.com/sets/images/75151-1.jpg",null,"http://images.brickset.com/sets/images/70593-1.jpg","http://images.brickset.com/sets/images/41119-1.jpg","http://images.brickset.com/sets/images/70589-1.jpg","http://images.brickset.com/sets/images/71304-1.jpg","http://images.brickset.com/sets/images/41559-1.jpg","http://images.brickset.com/sets/images/21031-1.jpg","http://images.brickset.com/sets/images/75126-1.jpg","http://images.brickset.com/sets/images/70604-1.jpg","http://images.brickset.com/sets/images/75116-1.jpg","http://images.brickset.com/sets/images/41172-1.jpg","http://images.brickset.com/sets/images/75098-1.jpg","http://images.brickset.com/sets/images/853505-1.jpg","http://images.brickset.com/sets/images/70310-1.jpg","http://images.brickset.com/sets/images/31046-1.jpg","http://images.brickset.com/sets/images/41114-1.jpg",null,"http://images.brickset.com/sets/images/21028-1.jpg","http://images.brickset.com/sets/images/853555-1.jpg","http://images.brickset.com/sets/images/75822-1.jpg","http://images.brickset.com/sets/images/10830-1.jpg","http://images.brickset.com/sets/images/76054-1.jpg","http://images.brickset.com/sets/images/75157-1.jpg","http://images.brickset.com/sets/images/41135-1.jpg","http://images.brickset.com/sets/images/41142-1.jpg","http://images.brickset.com/sets/images/21028-1.jpg","http://images.brickset.com/sets/images/41568-1.jpg","http://images.brickset.com/sets/images/853568-1.jpg","http://images.brickset.com/sets/images/853519-1.jpg","http://images.brickset.com/sets/images/75130-1.jpg","http://images.brickset.com/sets/images/31046-1.jpg","http://images.brickset.com/sets/images/76065-1.jpg","http://images.brickset.com/sets/images/75824-1.jpg","http://images.brickset.com/sets/images/41555-1.jpg","http://images.brickset.com/sets/images/41114-1.jpg","http://images.brickset.com/sets/images/70330-1.jpg","http://images.brickset.com/sets/images/41119-1.jpg","http://images.brickset.com/sets/images/853549-1.jpg","http://images.brickset.com/sets/images/75145-1.jpg","http://images.brickset.com/sets/images/31043-1.jpg",null,"http://images.brickset.com/sets/images/41140-1.jpg","http://images.brickset.com/sets/images/41558-1.jpg",null,"http://images.brickset.com/sets/images/41566-1.jpg","http://images.brickset.com/sets/images/76066-1.jpg","http://images.brickset.com/sets/images/41140-1.jpg","http://images.brickset.com/sets/images/5004612-1.jpg",null,"http://images.brickset.com/sets/images/76046-1.jpg","http://images.brickset.com/sets/images/5005060-1.jpg","http://images.brickset.com/sets/images/41564-1.jpg","http://images.brickset.com/sets/images/60108-1.jpg",null,"http://images.brickset.com/sets/images/41140-1.jpg","http://images.brickset.com/sets/images/30349-1.jpg","http://images.brickset.com/sets/images/70316-1.jpg","http://images.brickset.com/sets/images/70319-1.jpg","http://images.brickset.com/sets/images/41122-1.jpg","http://images.brickset.com/sets/images/70319-1.jpg","http://images.brickset.com/sets/images/30347-1.jpg","http://images.brickset.com/sets/images/75828-1.jpg",null,"http://images.brickset.com/sets/images/70333-1.jpg","http://images.brickset.com/sets/images/853534-1.jpg","http://images.brickset.com/sets/images/30347-1.jpg","http://images.brickset.com/sets/images/71310-1.jpg","http://images.brickset.com/sets/images/41556-1.jpg","http://images.brickset.com/sets/images/75138-1.jpg","http://images.brickset.com/sets/images/70313-1.jpg","http://images.brickset.com/sets/images/41120-1.jpg","http://images.brickset.com/sets/images/31044-1.jpg","http://images.brickset.com/sets/images/41135-1.jpg","http://images.brickset.com/sets/images/70600-1.jpg","http://images.brickset.com/sets/images/75140-1.jpg","http://images.brickset.com/sets/images/70331-1.jpg","http://images.brickset.com/sets/images/60109-1.jpg","http://images.brickset.com/sets/images/75139-1.jpg","http://images.brickset.com/sets/images/76053-1.jpg","http://images.brickset.com/sets/images/5005057-1.jpg","http://images.brickset.com/sets/images/5005058-1.jpg","http://images.brickset.com/sets/images/60118-1.jpg","http://images.brickset.com/sets/images/75116-1.jpg","http://images.brickset.com/sets/images/41121-1.jpg","http://images.brickset.com/sets/images/70312-1.jpg","http://images.brickset.com/sets/images/853549-1.jpg","http://images.brickset.com/sets/images/853572-1.jpg","http://images.brickset.com/sets/images/60113-1.jpg","http://images.brickset.com/sets/images/75134-1.jpg","http://images.brickset.com/sets/images/41567-1.jpg","http://images.brickset.com/sets/images/76059-1.jpg",null,"http://images.brickset.com/sets/images/41115-1.jpg","http://images.brickset.com/sets/images/76048-1.jpg","http://images.brickset.com/sets/images/41069-1.jpg","http://images.brickset.com/sets/images/71309-1.jpg","http://images.brickset.com/sets/images/42050-1.jpg","http://images.brickset.com/sets/images/41174-1.jpg","http://images.brickset.com/sets/images/76066-1.jpg","http://images.brickset.com/sets/images/70599-1.jpg","http://images.brickset.com/sets/images/75822-1.jpg","http://images.brickset.com/sets/images/71235-1.jpg","http://images.brickset.com/sets/images/41567-1.jpg","http://images.brickset.com/sets/images/30347-1.jpg","http://images.brickset.com/sets/images/76047-1.jpg","http://images.brickset.com/sets/images/75114-1.jpg","http://images.brickset.com/sets/images/70603-1.jpg",null,"http://images.brickset.com/sets/images/10818-1.jpg","http://images.brickset.com/sets/images/41114-1.jpg","http://images.brickset.com/sets/images/41135-1.jpg","http://images.brickset.com/sets/images/31040-1.jpg","http://images.brickset.com/sets/images/10830-1.jpg","http://images.brickset.com/sets/images/75147-1.jpg","http://images.brickset.com/sets/images/853543-1.jpg","http://images.brickset.com/sets/images/70332-1.jpg",null,"http://images.brickset.com/sets/images/10251-1.jpg","http://images.brickset.com/sets/images/75822-1.jpg","http://images.brickset.com/sets/images/853571-1.jpg","http://images.brickset.com/sets/images/41113-1.jpg","http://images.brickset.com/sets/images/10807-1.jpg","http://images.brickset.com/sets/images/41558-1.jpg","http://images.brickset.com/sets/images/31045-1.jpg","http://images.brickset.com/sets/images/75133-1.jpg","http://images.brickset.com/sets/images/75116-1.jpg","http://images.brickset.com/sets/images/853555-1.jpg",null,"http://images.brickset.com/sets/images/71307-1.jpg","http://images.brickset.com/sets/images/31041-1.jpg","http://images.brickset.com/sets/images/41141-1.jpg","http://images.brickset.com/sets/images/60105-1.jpg","http://images.brickset.com/sets/images/71300-1.jpg","http://images.brickset.com/sets/images/41069-1.jpg","http://images.brickset.com/sets/images/853519-1.jpg","http://images.brickset.com/sets/images/41140-1.jpg","http://images.brickset.com/sets/images/70320-1.jpg","http://images.brickset.com/sets/images/76047-1.jpg","http://images.brickset.com/sets/images/853505-1.jpg","http://images.brickset.com/sets/images/75133-1.jpg","http://images.brickset.com/sets/images/10251-1.jpg","http://images.brickset.com/sets/images/75139-1.jpg","http://images.brickset.com/sets/images/70312-1.jpg",null,"http://images.brickset.com/sets/images/60109-1.jpg","http://images.brickset.com/sets/images/75135-1.jpg","http://images.brickset.com/sets/images/70310-1.jpg","http://images.brickset.com/sets/images/60111-1.jpg","http://images.brickset.com/sets/images/76053-1.jpg","http://images.brickset.com/sets/images/75146-1.jpg","http://images.brickset.com/sets/images/75115-1.jpg","http://images.brickset.com/sets/images/71238-1.jpg","http://images.brickset.com/sets/images/76066-1.jpg","http://images.brickset.com/sets/images/5005057-1.jpg","http://images.brickset.com/sets/images/5005059-1.jpg","http://images.brickset.com/sets/images/71307-1.jpg","http://images.brickset.com/sets/images/60109-1.jpg","http://images.brickset.com/sets/images/76044-1.jpg","http://images.brickset.com/sets/images/21031-1.jpg",null,"http://images.brickset.com/sets/images/70314-1.jpg","http://images.brickset.com/sets/images/75135-1.jpg","http://images.brickset.com/sets/images/21026-1.jpg","http://images.brickset.com/sets/images/10818-1.jpg","http://images.brickset.com/sets/images/75135-1.jpg","http://images.brickset.com/sets/images/60117-1.jpg",null,"http://images.brickset.com/sets/images/41176-1.jpg","http://images.brickset.com/sets/images/71309-1.jpg","http://images.brickset.com/sets/images/75140-1.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/5005059-1.jpg","http://images.brickset.com/sets/images/41565-1.jpg","http://images.brickset.com/sets/images/10804-1.jpg","http://images.brickset.com/sets/images/41118-1.jpg","http://images.brickset.com/sets/images/21127-1.jpg","http://images.brickset.com/sets/images/71228-1.jpg",null,"http://images.brickset.com/sets/images/75821-1.jpg","http://images.brickset.com/sets/images/70332-1.jpg","http://images.brickset.com/sets/images/42049-1.jpg","http://images.brickset.com/sets/images/75157-1.jpg","http://images.brickset.com/sets/images/31044-1.jpg","http://images.brickset.com/sets/images/75138-1.jpg","http://images.brickset.com/sets/images/60129-1.jpg","http://images.brickset.com/sets/images/21027-1.jpg","http://images.brickset.com/sets/images/75137-1.jpg","http://images.brickset.com/sets/images/70318-1.jpg","http://images.brickset.com/sets/images/10809-1.jpg","http://images.brickset.com/sets/images/71241-1.jpg","http://images.brickset.com/sets/images/41113-1.jpg","http://images.brickset.com/sets/images/70325-1.jpg","http://images.brickset.com/sets/images/41172-1.jpg","http://images.brickset.com/sets/images/71238-1.jpg","http://images.brickset.com/sets/images/70605-1.jpg","http://images.brickset.com/sets/images/75132-1.jpg","http://images.brickset.com/sets/images/42052-1.jpg","http://images.brickset.com/sets/images/75149-1.jpg","http://images.brickset.com/sets/images/31050-1.jpg","http://images.brickset.com/sets/images/41115-1.jpg",null,"http://images.brickset.com/sets/images/76061-1.jpg","http://images.brickset.com/sets/images/31048-1.jpg","http://images.brickset.com/sets/images/70601-1.jpg","http://images.brickset.com/sets/images/70310-1.jpg","http://images.brickset.com/sets/images/60105-1.jpg",null,"http://images.brickset.com/sets/images/71229-1.jpg","http://images.brickset.com/sets/images/75136-1.jpg","http://images.brickset.com/sets/images/75825-1.jpg","http://images.brickset.com/sets/images/71305-1.jpg","http://images.brickset.com/sets/images/41119-1.jpg",null,"http://images.brickset.com/sets/images/75146-1.jpg",null,"http://images.brickset.com/sets/images/60116-1.jpg","http://images.brickset.com/sets/images/853548-1.jpg","http://images.brickset.com/sets/images/71228-1.jpg","http://images.brickset.com/sets/images/70319-1.jpg",null,null,null,"http://images.brickset.com/sets/images/41120-1.jpg",null,"http://images.brickset.com/sets/images/41562-1.jpg","http://images.brickset.com/sets/images/41140-1.jpg","http://images.brickset.com/sets/images/10806-1.jpg",null,"http://images.brickset.com/sets/images/41140-1.jpg","http://images.brickset.com/sets/images/B0189OU0JY-1.jpg","http://images.brickset.com/sets/images/30347-1.jpg","http://images.brickset.com/sets/images/76051-1.jpg","http://images.brickset.com/sets/images/75821-1.jpg","http://images.brickset.com/sets/images/42048-1.jpg",null,"http://images.brickset.com/sets/images/41140-1.jpg",null,null,"http://images.brickset.com/sets/images/10251-1.jpg","http://images.brickset.com/sets/images/76051-1.jpg","http://images.brickset.com/sets/images/41172-1.jpg","http://images.brickset.com/sets/images/71301-1.jpg","http://images.brickset.com/sets/images/41118-1.jpg","http://images.brickset.com/sets/images/70312-1.jpg","http://images.brickset.com/sets/images/41113-1.jpg","http://images.brickset.com/sets/images/71306-1.jpg",null,"http://images.brickset.com/sets/images/10830-1.jpg","http://images.brickset.com/sets/images/41174-1.jpg","http://images.brickset.com/sets/images/41066-1.jpg","http://images.brickset.com/sets/images/10817-1.jpg","http://images.brickset.com/sets/images/10815-1.jpg","http://images.brickset.com/sets/images/70310-1.jpg","http://images.brickset.com/sets/images/30347-1.jpg","http://images.brickset.com/sets/images/30349-1.jpg","http://images.brickset.com/sets/images/71311-1.jpg","http://images.brickset.com/sets/images/75113-1.jpg","http://images.brickset.com/sets/images/40201-1.jpg","http://images.brickset.com/sets/images/70603-1.jpg","http://images.brickset.com/sets/images/10829-1.jpg","http://images.brickset.com/sets/images/853534-1.jpg","http://images.brickset.com/sets/images/70591-1.jpg","http://images.brickset.com/sets/images/76058-1.jpg","http://images.brickset.com/sets/images/31046-1.jpg","http://images.brickset.com/sets/images/31044-1.jpg","http://images.brickset.com/sets/images/41175-1.jpg","http://images.brickset.com/sets/images/71235-1.jpg","http://images.brickset.com/sets/images/76044-1.jpg","http://images.brickset.com/sets/images/41177-1.jpg","http://images.brickset.com/sets/images/76063-1.jpg","http://images.brickset.com/sets/images/60117-1.jpg","http://images.brickset.com/sets/images/10814-1.jpg","http://images.brickset.com/sets/images/70602-1.jpg","http://images.brickset.com/sets/images/75136-1.jpg","http://images.brickset.com/sets/images/853505-1.jpg","http://images.brickset.com/sets/images/60107-1.jpg","http://images.brickset.com/sets/images/76050-1.jpg","http://images.brickset.com/sets/images/31041-1.jpg",null,"http://images.brickset.com/sets/images/41173-1.jpg","http://images.brickset.com/sets/images/75118-1.jpg","http://images.brickset.com/sets/images/10803-1.jpg","http://images.brickset.com/sets/images/41570-1.jpg","http://images.brickset.com/sets/images/853534-1.jpg","http://images.brickset.com/sets/images/853543-1.jpg","http://images.brickset.com/sets/images/41561-1.jpg","http://images.brickset.com/sets/images/853506-1.jpg","http://images.brickset.com/sets/images/70335-1.jpg",null,"http://images.brickset.com/sets/images/30446-1.jpg","http://images.brickset.com/sets/images/60130-1.jpg","http://images.brickset.com/sets/images/75134-1.jpg",null,"http://images.brickset.com/sets/images/853534-1.jpg","http://images.brickset.com/sets/images/75132-1.jpg","http://images.brickset.com/sets/images/60131-1.jpg","http://images.brickset.com/sets/images/10829-1.jpg","http://images.brickset.com/sets/images/75137-1.jpg","http://images.brickset.com/sets/images/75116-1.jpg",null,"http://images.brickset.com/sets/images/41111-1.jpg","http://images.brickset.com/sets/images/70334-1.jpg","http://images.brickset.com/sets/images/70601-1.jpg","http://images.brickset.com/sets/images/75125-1.jpg","http://images.brickset.com/sets/images/41118-1.jpg","http://images.brickset.com/sets/images/60129-1.jpg","http://images.brickset.com/sets/images/70600-1.jpg","http://images.brickset.com/sets/images/41141-1.jpg","http://images.brickset.com/sets/images/71303-1.jpg","http://images.brickset.com/sets/images/5004612-1.jpg","http://images.brickset.com/sets/images/21127-1.jpg","http://images.brickset.com/sets/images/60129-1.jpg","http://images.brickset.com/sets/images/70313-1.jpg","http://images.brickset.com/sets/images/75129-1.jpg","http://images.brickset.com/sets/images/5004612-1.jpg","http://images.brickset.com/sets/images/76048-1.jpg","http://images.brickset.com/sets/images/41176-1.jpg","http://images.brickset.com/sets/images/31041-1.jpg","http://images.brickset.com/sets/images/75140-1.jpg","http://images.brickset.com/sets/images/70327-1.jpg","http://images.brickset.com/sets/images/71309-1.jpg","http://images.brickset.com/sets/images/71233-1.jpg","http://images.brickset.com/sets/images/41141-1.jpg","http://images.brickset.com/sets/images/41557-1.jpg","http://images.brickset.com/sets/images/31050-1.jpg","http://images.brickset.com/sets/images/76049-1.jpg","http://images.brickset.com/sets/images/41110-1.jpg",null,"http://images.brickset.com/sets/images/76055-1.jpg","http://images.brickset.com/sets/images/75118-1.jpg","http://images.brickset.com/sets/images/41564-1.jpg","http://images.brickset.com/sets/images/41562-1.jpg","http://images.brickset.com/sets/images/10819-1.jpg","http://images.brickset.com/sets/images/41558-1.jpg","http://images.brickset.com/sets/images/75147-1.jpg","http://images.brickset.com/sets/images/71301-1.jpg","http://images.brickset.com/sets/images/21026-1.jpg","http://images.brickset.com/sets/images/70320-1.jpg","http://images.brickset.com/sets/images/75138-1.jpg","http://images.brickset.com/sets/images/10804-1.jpg","http://images.brickset.com/sets/images/41113-1.jpg","http://images.brickset.com/sets/images/10803-1.jpg","http://images.brickset.com/sets/images/75147-1.jpg","http://images.brickset.com/sets/images/70311-1.jpg","http://images.brickset.com/sets/images/853555-1.jpg","http://images.brickset.com/sets/images/70310-1.jpg","http://images.brickset.com/sets/images/41174-1.jpg","http://images.brickset.com/sets/images/41570-1.jpg","http://images.brickset.com/sets/images/10808-1.jpg",null,"http://images.brickset.com/sets/images/60106-1.jpg","http://images.brickset.com/sets/images/70324-1.jpg","http://images.brickset.com/sets/images/70315-1.jpg","http://images.brickset.com/sets/images/70330-1.jpg","http://images.brickset.com/sets/images/853506-1.jpg","http://images.brickset.com/sets/images/41558-1.jpg","http://images.brickset.com/sets/images/76065-1.jpg","http://images.brickset.com/sets/images/853570-1.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/41113-1.jpg","http://images.brickset.com/sets/images/853555-1.jpg","http://images.brickset.com/sets/images/71300-1.jpg","http://images.brickset.com/sets/images/31043-1.jpg","http://images.brickset.com/sets/images/5005059-1.jpg","http://images.brickset.com/sets/images/75126-1.jpg","http://images.brickset.com/sets/images/853572-1.jpg",null,"http://images.brickset.com/sets/images/75824-1.jpg","http://images.brickset.com/sets/images/70592-1.jpg","http://images.brickset.com/sets/images/76044-1.jpg","http://images.brickset.com/sets/images/10804-1.jpg","http://images.brickset.com/sets/images/71234-1.jpg","http://images.brickset.com/sets/images/70333-1.jpg","http://images.brickset.com/sets/images/853570-1.jpg","http://images.brickset.com/sets/images/41116-1.jpg","http://images.brickset.com/sets/images/41176-1.jpg","http://images.brickset.com/sets/images/60130-1.jpg","http://images.brickset.com/sets/images/853551-1.jpg","http://images.brickset.com/sets/images/71308-1.jpg","http://images.brickset.com/sets/images/70605-1.jpg","http://images.brickset.com/sets/images/853555-1.jpg","http://images.brickset.com/sets/images/70323-1.jpg","http://images.brickset.com/sets/images/41171-1.jpg","http://images.brickset.com/sets/images/41561-1.jpg","http://images.brickset.com/sets/images/10803-1.jpg","http://images.brickset.com/sets/images/76044-1.jpg","http://images.brickset.com/sets/images/70313-1.jpg","http://images.brickset.com/sets/images/21127-1.jpg","http://images.brickset.com/sets/images/41569-1.jpg","http://images.brickset.com/sets/images/41118-1.jpg",null,null,"http://images.brickset.com/sets/images/853572-1.jpg","http://images.brickset.com/sets/images/10803-1.jpg","http://images.brickset.com/sets/images/41565-1.jpg","http://images.brickset.com/sets/images/71228-1.jpg","http://images.brickset.com/sets/images/70321-1.jpg","http://images.brickset.com/sets/images/75131-1.jpg","http://images.brickset.com/sets/images/75826-1.jpg","http://images.brickset.com/sets/images/70593-1.jpg","http://images.brickset.com/sets/images/853555-1.jpg",null,"http://images.brickset.com/sets/images/75138-1.jpg","http://images.brickset.com/sets/images/41571-1.jpg","http://images.brickset.com/sets/images/70315-1.jpg","http://images.brickset.com/sets/images/42044-1.jpg","http://images.brickset.com/sets/images/30446-1.jpg","http://images.brickset.com/sets/images/5005058-1.jpg","http://images.brickset.com/sets/images/60111-1.jpg","http://images.brickset.com/sets/images/71300-1.jpg","http://images.brickset.com/sets/images/75137-1.jpg","http://images.brickset.com/sets/images/853543-1.jpg","http://images.brickset.com/sets/images/71241-1.jpg","http://images.brickset.com/sets/images/10803-1.jpg","http://images.brickset.com/sets/images/5005060-1.jpg","http://images.brickset.com/sets/images/41069-1.jpg","http://images.brickset.com/sets/images/41121-1.jpg","http://images.brickset.com/sets/images/60127-1.jpg","http://images.brickset.com/sets/images/42046-1.jpg","http://images.brickset.com/sets/images/60108-1.jpg","http://images.brickset.com/sets/images/10816-1.jpg","http://images.brickset.com/sets/images/41171-1.jpg","http://images.brickset.com/sets/images/70320-1.jpg","http://images.brickset.com/sets/images/70330-1.jpg","http://images.brickset.com/sets/images/10819-1.jpg","http://images.brickset.com/sets/images/75133-1.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/71011-18.jpg","http://images.brickset.com/sets/images/21027-1.jpg","http://images.brickset.com/sets/images/70601-1.jpg",null,"http://images.brickset.com/sets/images/71307-1.jpg","http://images.brickset.com/sets/images/41571-1.jpg","http://images.brickset.com/sets/images/853547-1.jpg",null,null,null,"http://images.brickset.com/sets/images/42048-1.jpg","http://images.brickset.com/sets/images/5005058-1.jpg","http://images.brickset.com/sets/images/41116-1.jpg","http://images.brickset.com/sets/images/70602-1.jpg",null,"http://images.brickset.com/sets/images/31043-1.jpg","http://images.brickset.com/sets/images/75827-1.jpg","http://images.brickset.com/sets/images/70322-1.jpg","http://images.brickset.com/sets/images/76044-1.jpg","http://images.brickset.com/sets/images/76050-1.jpg",null,null,"http://images.brickset.com/sets/images/853543-1.jpg","http://images.brickset.com/sets/images/10817-1.jpg","http://images.brickset.com/sets/images/60127-1.jpg","http://images.brickset.com/sets/images/75828-1.jpg",null,"http://images.brickset.com/sets/images/75135-1.jpg","http://images.brickset.com/sets/images/75125-1.jpg","http://images.brickset.com/sets/images/41118-1.jpg","http://images.brickset.com/sets/images/71238-1.jpg","http://images.brickset.com/sets/images/70330-1.jpg","http://images.brickset.com/sets/images/70334-1.jpg","http://images.brickset.com/sets/images/75145-1.jpg","http://images.brickset.com/sets/images/71238-1.jpg","http://images.brickset.com/sets/images/70600-1.jpg","http://images.brickset.com/sets/images/70592-1.jpg","http://images.brickset.com/sets/images/70593-1.jpg","http://images.brickset.com/sets/images/41111-1.jpg","http://images.brickset.com/sets/images/31040-1.jpg","http://images.brickset.com/sets/images/41120-1.jpg","http://images.brickset.com/sets/images/853555-1.jpg","http://images.brickset.com/sets/images/75137-1.jpg","http://images.brickset.com/sets/images/75116-1.jpg",null,"http://images.brickset.com/sets/images/75129-1.jpg","http://images.brickset.com/sets/images/41559-1.jpg","http://images.brickset.com/sets/images/71305-1.jpg","http://images.brickset.com/sets/images/10702-1.jpg","http://images.brickset.com/sets/images/70312-1.jpg","http://images.brickset.com/sets/images/41121-1.jpg","http://images.brickset.com/sets/images/70330-1.jpg","http://images.brickset.com/sets/images/70320-1.jpg","http://images.brickset.com/sets/images/60111-1.jpg","http://images.brickset.com/sets/images/41120-1.jpg",null,"http://images.brickset.com/sets/images/75149-1.jpg","http://images.brickset.com/sets/images/41177-1.jpg","http://images.brickset.com/sets/images/60109-1.jpg","http://images.brickset.com/sets/images/76062-1.jpg","http://images.brickset.com/sets/images/70603-1.jpg","http://images.brickset.com/sets/images/853506-1.jpg",null,"http://images.brickset.com/sets/images/76064-1.jpg","http://images.brickset.com/sets/images/31043-1.jpg","http://images.brickset.com/sets/images/71307-1.jpg",null,"http://images.brickset.com/sets/images/41118-1.jpg","http://images.brickset.com/sets/images/41560-1.jpg","http://images.brickset.com/sets/images/10826-1.jpg","http://images.brickset.com/sets/images/71301-1.jpg","http://images.brickset.com/sets/images/70330-1.jpg","http://images.brickset.com/sets/images/70325-1.jpg","http://images.brickset.com/sets/images/70601-1.jpg","http://images.brickset.com/sets/images/41567-1.jpg","http://images.brickset.com/sets/images/42048-1.jpg","http://images.brickset.com/sets/images/76054-1.jpg","http://images.brickset.com/sets/images/75822-1.jpg","http://images.brickset.com/sets/images/42047-1.jpg","http://images.brickset.com/sets/images/31043-1.jpg","http://images.brickset.com/sets/images/70317-1.jpg","http://images.brickset.com/sets/images/41113-1.jpg","http://images.brickset.com/sets/images/21027-1.jpg","http://images.brickset.com/sets/images/42050-1.jpg","http://images.brickset.com/sets/images/5005059-1.jpg","http://images.brickset.com/sets/images/71309-1.jpg","http://images.brickset.com/sets/images/75139-1.jpg","http://images.brickset.com/sets/images/30446-1.jpg","http://images.brickset.com/sets/images/41135-1.jpg","http://images.brickset.com/sets/images/853571-1.jpg","http://images.brickset.com/sets/images/60116-1.jpg","http://images.brickset.com/sets/images/75127-1.jpg","http://images.brickset.com/sets/images/10804-1.jpg","http://images.brickset.com/sets/images/70593-1.jpg","http://images.brickset.com/sets/images/71234-1.jpg","http://images.brickset.com/sets/images/75146-1.jpg","http://images.brickset.com/sets/images/75133-1.jpg","http://images.brickset.com/sets/images/71307-1.jpg","http://images.brickset.com/sets/images/30446-1.jpg","http://images.brickset.com/sets/images/70593-1.jpg","http://images.brickset.com/sets/images/70601-1.jpg","http://images.brickset.com/sets/images/853506-1.jpg","http://images.brickset.com/sets/images/41568-1.jpg","http://images.brickset.com/sets/images/75148-1.jpg","http://images.brickset.com/sets/images/41560-1.jpg","http://images.brickset.com/sets/images/75138-1.jpg","http://images.brickset.com/sets/images/60130-1.jpg","http://images.brickset.com/sets/images/75145-1.jpg","http://images.brickset.com/sets/images/41174-1.jpg","http://images.brickset.com/sets/images/75824-1.jpg","http://images.brickset.com/sets/images/60119-1.jpg","http://images.brickset.com/sets/images/41115-1.jpg","http://images.brickset.com/sets/images/76058-1.jpg","http://images.brickset.com/sets/images/41563-1.jpg","http://images.brickset.com/sets/images/70317-1.jpg","http://images.brickset.com/sets/images/60106-1.jpg","http://images.brickset.com/sets/images/31047-1.jpg","http://images.brickset.com/sets/images/853568-1.jpg","http://images.brickset.com/sets/images/60112-1.jpg","http://images.brickset.com/sets/images/60114-1.jpg","http://images.brickset.com/sets/images/10806-1.jpg",null,"http://images.brickset.com/sets/images/41558-1.jpg","http://images.brickset.com/sets/images/41120-1.jpg","http://images.brickset.com/sets/images/75130-1.jpg","http://images.brickset.com/sets/images/31042-1.jpg","http://images.brickset.com/sets/images/76058-1.jpg","http://images.brickset.com/sets/images/31044-1.jpg","http://images.brickset.com/sets/images/853571-1.jpg","http://images.brickset.com/sets/images/75114-1.jpg","http://images.brickset.com/sets/images/75132-1.jpg",null,null,"http://images.brickset.com/sets/images/60115-1.jpg",null,"http://images.brickset.com/sets/images/70324-1.jpg","http://images.brickset.com/sets/images/70310-1.jpg","http://images.brickset.com/sets/images/10803-1.jpg","http://images.brickset.com/sets/images/71235-1.jpg","http://images.brickset.com/sets/images/75151-1.jpg","http://images.brickset.com/sets/images/71304-1.jpg","http://images.brickset.com/sets/images/76063-1.jpg","http://images.brickset.com/sets/images/60109-1.jpg","http://images.brickset.com/sets/images/75150-1.jpg",null,"http://images.brickset.com/sets/images/41121-1.jpg","http://images.brickset.com/sets/images/75126-1.jpg","http://images.brickset.com/sets/images/75145-1.jpg","http://images.brickset.com/sets/images/853568-1.jpg","http://images.brickset.com/sets/images/71309-1.jpg","http://images.brickset.com/sets/images/70312-1.jpg",null,"http://images.brickset.com/sets/images/71311-1.jpg","http://images.brickset.com/sets/images/71241-1.jpg","http://images.brickset.com/sets/images/853534-1.jpg","http://images.brickset.com/sets/images/10814-1.jpg","http://images.brickset.com/sets/images/70332-1.jpg","http://images.brickset.com/sets/images/75149-1.jpg","http://images.brickset.com/sets/images/41556-1.jpg",null,null,"http://images.brickset.com/sets/images/76063-1.jpg","http://images.brickset.com/sets/images/10830-1.jpg"],[1,1,1,1,1,1,1,3,1,2,1,1,2,1,1,1,1,1,1,1,2,1,1,1,2,1,1,1,2,1,1,1,3,1,1,1,2,3,2,1,1,1,1,1,1,1,2,1,2,2,1,1,2,3,3,3,1,1,1,1,1,1,1,1,2,2,2,1,1,1,2,1,1,2,1,1,1,2,3,1,1,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,3,2,1,1,1,1,3,1,1,1,1,1,1,1,2,1,2,1,1,1,1,1,1,2,1,1,1,2,1,2,2,1,2,1,1,2,2,2,1,1,1,2,1,2,1,2,1,1,1,1,1,1,2,1,1,1,1,1,2,1,1,1,3,1,1,2,2,2,1,1,2,1,1,1,2,1,1,2,3,1,3,2,1,1,2,1,1,4,2,1,2,1,4,2,1,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5,1,2,1,1,2,2,2,2,2,1,1,1,1,1,1,1,1,3,1,1,1,1,1,1,3,1,1,1,1,1,2,1,1,1,2,1,1,1,1,3,2,1,2,1,1,4,1,1,1,1,2,2,2,1,1,1,1,2,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5,2,1,1,2,1,1,1,1,2,2,1,1,1,1,2,2,1,1,2,2,1,3,1,1,2,1,3,1,1,3,2,1,1,1,2,2,1,2,1,1,1,2,2,3,1,1,2,1,1,1,1,1,1,1,1,1,1,2,1,2,3,1,3,2,1,2,2,1,1,2,1,1,1,1,2,4,1,3,1,1,1,1,2,1,2,1,1,1,1,1,1,1,1,2,1,2,1,1,2,1,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,2,1,2,2,1,2,1,3,1,2,1,2,1,2,1,2,1,4,1,2,1,2,1,1,3,4,1,2,2,2,1,1,1,1,1,1,1,2,1,1,1,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,2,2,1,2,1,1,1,1,1,2,2,2,2,3,1,1,1,2,1,1,2,3,2,1,2,1,1,1,1,1,4,2,1,1,1,1,1,2,3,1,1,2,2,1,1,2,1,2,2,1,1,1,2,1,1,1,1,1,1,2,1,1,2,4,2,1,2,3,1,1,1,1,1,1,1,1,1,2,1,1,1,2,1,1,1,1,1,1,1,1,4,1,1,1,1,2,3,1,1,1,2,3,1,1,1,1,2,3,2,1,1,1,2,1,1,1,1,1,1,1,2,1,2,2,1,3,2,1,1,1,1,2,2,1,1,1,3,2,2,1,1,1,4,1,2,2,2,2,3,2,1,1,1,2,2,1,2,4],[482,435,252,22,435,504,169,482,494,577,504,null,605,604,58,589,435,155,587,22,null,null,605,184,null,52,501,494,158,600,168,436,435,494,435,324,587,252,184,435,184,600,174,null,605,22,494,589,253,null,606,504,484,182,494,579,253,588,null,null,182,22,482,606,587,494,605,494,null,170,22,589,579,587,589,588,482,579,501,577,482,null,588,58,577,579,52,605,605,494,605,58,607,324,605,null,58,324,587,169,605,494,22,494,435,184,605,58,184,484,null,null,52,184,494,605,null,null,63,158,588,488,600,494,487,579,324,1,600,482,435,606,604,588,58,493,184,435,605,504,494,494,22,504,170,null,605,589,155,606,null,494,null,587,22,158,184,null,229,324,22,579,58,324,579,null,579,605,493,null,158,155,184,605,600,58,168,605,58,484,209,184,604,482,null,null,324,58,482,252,435,605,168,253,504,168,63,589,600,324,184,554,554,554,554,554,554,554,554,554,554,554,554,554,554,554,554,554,554,554,null,588,504,494,577,604,589,606,605,1,182,22,169,61,253,169,605,null,604,494,605,600,604,435,184,1,184,22,494,589,482,22,435,605,58,605,604,169,606,324,494,324,209,577,60,null,604,605,324,null,605,494,605,587,579,504,605,579,null,58,482,606,1,589,579,576,589,155,482,600,324,494,605,494,324,600,504,600,579,null,null,605,58,52,324,184,232,435,504,null,435,488,22,22,600,604,482,600,482,63,504,435,169,null,58,493,22,589,600,184,504,588,null,null,587,null,605,324,484,61,158,589,null,184,61,504,169,184,605,494,605,435,184,494,61,435,579,324,501,577,61,605,182,501,487,600,22,184,605,324,604,579,587,22,487,494,589,484,184,588,587,null,587,170,324,253,605,169,504,494,504,170,605,null,605,600,588,504,577,58,605,605,605,null,587,482,null,554,554,554,554,554,554,554,554,554,554,554,554,554,554,554,554,554,554,554,494,null,324,22,null,184,null,324,606,435,482,504,604,605,null,494,600,61,null,324,435,null,605,600,587,504,482,605,577,588,494,605,589,null,504,588,604,605,184,606,435,null,589,169,588,605,1,484,null,58,324,169,null,604,504,null,579,494,61,1,58,null,600,605,605,null,158,554,554,554,554,554,554,554,554,554,554,554,554,554,554,554,554,554,554,554,253,435,589,324,588,null,324,229,589,1,null,494,435,576,22,301,605,482,493,324,435,null,null,61,607,600,168,184,494,604,605,605,170,604,435,435,435,494,22,494,null,169,184,589,182,587,324,365,605,494,605,605,58,494,577,184,600,58,482,435,null,605,482,22,324,605,494,587,null,324,605,605,435,588,1,484,606,1,22,605,494,253,1,null,324,184,484,494,null,60,159,504,435,604,209,158,324,484,435,435,null,588,184,587,169,61,170,600,606,59,494,488,588,605,58,22,null,58,52,504,600,587,494,182,22,488,22,null,184,184,605,589,64,589,605,605,504,604,168,324,482,58,182,324,494,184,170,null,324,605,435,324,604,null,504,605,184,587,589,null,482,504]],"container":"<table class=\"table table-striped table-hover row-border order-column display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>first_name<\/th>\n      <th>last_name<\/th>\n      <th>age<\/th>\n      <th>phone_number<\/th>\n      <th>set_id<\/th>\n      <th>theme<\/th>\n      <th>subtheme<\/th>\n      <th>year<\/th>\n      <th>name<\/th>\n      <th>pieces<\/th>\n      <th>us_price<\/th>\n      <th>image_url<\/th>\n      <th>quantity<\/th>\n      <th>theme_id<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,8,10,11,13,14]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p>A partir dos dados acima, responda as seguintes perguntas utilizando
+os comandos aprendidos em aula. Para cada pergunta, escreva a sua
+resposta em uma frase, por exemplo: “Os três nomes mais comuns de
+compradores são…”.</p>
+<ol style="list-style-type: decimal">
+<li>Quais são os dez nomes (<code>first_name</code>) mais comuns de
+compradores?</li>
+</ol>
+<pre class="r"><code>lego_sales %&gt;% 
+  group_by(first_name) %&gt;% 
+  summarize(n=n()) %&gt;% 
+  arrange(desc(n))</code></pre>
+<pre><code>## # A tibble: 211 × 2
+##    first_name     n
+##    &lt;chr&gt;      &lt;int&gt;
+##  1 Keyana        22
+##  2 Seth          22
+##  3 Daianaira     20
+##  4 Jackson       13
+##  5 Jacob         11
+##  6 Joseph        11
+##  7 Michael       10
+##  8 Audrey         8
+##  9 Connor         8
+## 10 Kaitlyn        8
+## # … with 201 more rows</code></pre>
+<p>Desta lista, informe no <code>moodle</code> o nome do 4o (quarto)
+comprador mais frequente.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Quais foram os dez temas dos conjuntos de lego mais comprados? Dica:
+use a coluna <code>quantity</code>. Mostre em formato de tabela.</li>
+</ol>
+<pre class="r"><code>lego_sales %&gt;% 
+  group_by(theme) %&gt;% 
+  summarize(n=n(),
+            q=sum(quantity)) %&gt;% 
+  arrange(desc(q))</code></pre>
+<pre><code>## # A tibble: 25 × 3
+##    theme                       n     q
+##    &lt;chr&gt;                   &lt;int&gt; &lt;dbl&gt;
+##  1 Star Wars                  75   117
+##  2 Nexo Knights               64    93
+##  3 Mixels                     55    83
+##  4 Gear                       55    79
+##  5 City                       45    65
+##  6 Ninjago                    38    59
+##  7 Collectable Minifigures    57    57
+##  8 Friends                    42    56
+##  9 Duplo                      35    50
+## 10 Bionicle                   34    46
+## # … with 15 more rows</code></pre>
+<p>Desta lista, informe no <code>moodle</code>, o nome do 4o (quarto)
+tema mais comprado.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Do tema mais comprado (referente à questão anterior), qual é o
+subtema mais comum e quantas unidades foram vendidas?</li>
+</ol>
+<pre class="r"><code>lego_sales %&gt;% 
+  filter(theme==&quot;Star Wars&quot;) %&gt;% 
+  group_by(subtheme) %&gt;% 
+  summarize(n=n(),
+            q=sum(quantity)) %&gt;% 
+  arrange(desc(q))</code></pre>
+<pre><code>## # A tibble: 11 × 3
+##    subtheme                      n     q
+##    &lt;chr&gt;                     &lt;int&gt; &lt;dbl&gt;
+##  1 The Force Awakens            15    21
+##  2 Buildable Figures            11    18
+##  3 Episode V                    10    15
+##  4 Battlefront                   7    12
+##  5 MicroFighters                10    11
+##  6 Original Content              7    11
+##  7 Episode III                   6    10
+##  8 Seasonal                      3     8
+##  9 Rebels                        3     7
+## 10 Episode IV                    2     3
+## 11 Ultimate Collector Series     1     1</code></pre>
+<p>Desta lista, informe no <code>moodle</code>, o nome do 4o (quarto)
+sub-tema mais comprado.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Escolha o tema <code>Architecture</code> e calcule qual foi o
+faturamento total dele. Dica: <span
+class="math inline">\(Faturamento=us_{price}quantity\)</span></li>
+</ol>
+<pre class="r"><code>lego_sales %&gt;% 
+  filter(theme==&quot;Architecture&quot;) %&gt;% 
+  mutate(Faturamento = us_price*quantity) %&gt;% 
+  summarize(Fat_Total = sum(Faturamento))</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##   Fat_Total
+##       &lt;dbl&gt;
+## 1      590.</code></pre>
+<p>Informe no <code>moodle</code>, este valor de faturamento.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Crie uma nova variável do tipo <code>factor</code> e agrupe as
+idades nas seguintes categorias: “18 e inferior”, “19 - 25”, “26 - 35”,
+“36 - 50”, “51 e superior”. Qual faixa etária adquiriu o maior número de
+conjuntos de lego? Dica: lembre da coluna <code>quantity</code> e
+verifique a função <code>cut()</code>.</li>
+</ol>
+<pre class="r"><code>lego_sales$age_group &lt;- cut(lego_sales$age, 
+                            breaks = c(0,18,25,35,50,100),
+                            labels=c(&quot;&lt;=18&quot;, &quot;19-25&quot;,&quot;26-35&quot;,                                                            &quot;36-50&quot;,&quot;&gt;=51&quot;)) </code></pre>
+<pre class="r"><code>lego_sales %&gt;% 
+  group_by(age_group) %&gt;% 
+  summarize(q=sum(quantity)) %&gt;% 
+  arrange(desc(q))</code></pre>
+<p>Informe no <code>moodle</code>, o grupo com maior quantidade
+comprada.</p>
+<ol start="6" style="list-style-type: decimal">
+<li>Qual faixa etária gastou mais dinheiro com legos? Dica: lembre da
+equação de <span class="math inline">\(Faturamento\)</span>.</li>
+</ol>
+<pre class="r"><code>lego_sales %&gt;% 
+  group_by(age_group) %&gt;% 
+  mutate(faturamento=us_price*quantity) %&gt;% 
+  summarize(fat_total=sum(faturamento)) %&gt;% 
+  arrange(desc(fat_total))</code></pre>
+<pre><code>## # A tibble: 5 × 2
+##   age_group fat_total
+##   &lt;fct&gt;         &lt;dbl&gt;
+## 1 36-50         9533.
+## 2 26-35         7648.
+## 3 19-25         5011.
+## 4 &gt;=51          2547.
+## 5 &lt;=18           949.</code></pre>
+<p>Informe no <code>moodle</code>, o valor total gasto pelo grupo etário
+que mais gastou.</p>
+<ol start="7" style="list-style-type: decimal">
+<li>Quais são os cinco conjuntos de Lego mais caros? mostre como
+tabela.</li>
+</ol>
+<pre class="r"><code>theme &lt;- lego_sales %&gt;% 
+  group_by(theme) %&gt;% 
+  select(theme, us_price) %&gt;% 
+  top_n(1, wt = us_price) %&gt;% 
+  arrange(desc(us_price))
+
+head(unique(theme),5) %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">theme</th>
+<th align="right">us_price</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Ghostbusters</td>
+<td align="right">349.99</td>
+</tr>
+<tr class="even">
+<td align="left">Star Wars</td>
+<td align="right">249.99</td>
+</tr>
+<tr class="odd">
+<td align="left">Minecraft</td>
+<td align="right">199.99</td>
+</tr>
+<tr class="even">
+<td align="left">Advanced Models</td>
+<td align="right">169.99</td>
+</tr>
+<tr class="odd">
+<td align="left">Technic</td>
+<td align="right">139.99</td>
+</tr>
+</tbody>
+</table>
+<p>Informe no <code>moodle</code>, o valor do 4o (quarto) conjunto mais
+caro de Lego.</p>
+</div>
+<div id="usando-todos-os-datasets" class="section level2">
+<h2>Usando todos os datasets</h2>
+<p><strong>Para este segundo grupo de perguntas, usaremos os três
+datasets.</strong></p>
+<p>Para estas últimas perguntas, verifique inicialmente o enunciado no
+moodle, que indica qual <code>set</code> de Lego escolher.</p>
+<pre class="r"><code>lego_inventories &lt;- read_csv(&quot;data_tarefa1/lego_inventories.csv&quot;)
+
+lego_colors &lt;- read_csv(&quot;data_tarefa1/lego_colors.csv&quot;)
+
+lego_set &lt;- &quot;76062&quot;
+
+
+custom_theme &lt;- lego_sales %&gt;% filter(set_id==lego_set)</code></pre>
+<ol style="list-style-type: decimal">
+<li>Para o <code>set_id</code> definido no <code>moodle</code>,
+identifique as cores mais frequentes usadas nele. Por exemplo, para o
+conjunto “76062”, do DC Comics Super Heroes com o nome Robin vs. Bane o
+resultado deve parecer-se com a tabela a seguir:</li>
+</ol>
+<pre class="r"><code>lego_inventories$color_id &lt;- as.factor(lego_inventories$color_id)
+
+lego_colors$color_id &lt;- as.factor(lego_colors$color_id)
+
+lego_custom_color &lt;- lego_inventories %&gt;% 
+  filter(set_id == lego_set) %&gt;% 
+  left_join(lego_colors, by=&quot;color_id&quot;) %&gt;% 
+  group_by(color_id) %&gt;% 
+  summarize(n=n(), name=name, rgb=rgb) %&gt;% 
+  arrange(desc(n)) %&gt;% 
+  ungroup() %&gt;% 
+  select(name, rgb, n, -color_id) %&gt;% 
+  rename(Cor = name, RGB = rgb, Frequencia = n)
+
+unique(lego_custom_color) %&gt;% 
+  kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Cor</th>
+<th align="left">RGB</th>
+<th align="right">Frequencia</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Black</td>
+<td align="left">05131D</td>
+<td align="right">9</td>
+</tr>
+<tr class="even">
+<td align="left">Red</td>
+<td align="left">C91A09</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td align="left">Yellow</td>
+<td align="left">F2CD37</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left">Flat Silver</td>
+<td align="left">898788</td>
+<td align="right">6</td>
+</tr>
+<tr class="odd">
+<td align="left">Lime</td>
+<td align="left">BBE90B</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">Light Bluish Gray</td>
+<td align="left">A0A5A9</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">Dark Bluish Gray</td>
+<td align="left">6C6E68</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">Green</td>
+<td align="left">237841</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">Orange</td>
+<td align="left">FE8A18</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">Trans-Red</td>
+<td align="left">C91A09</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">Trans-Black</td>
+<td align="left">635F52</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">Trans-Yellow</td>
+<td align="left">F5CD2F</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">Trans-Clear</td>
+<td align="left">FCFCFC</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">Dark Tan</td>
+<td align="left">958A73</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Reddish Brown</td>
+<td align="left">582A12</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Light Flesh</td>
+<td align="left">F6D7B3</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Trans-Orange</td>
+<td align="left">F08F1C</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p>Para fins de referência, o conjunto escolhido anteriormente é <img
+src="https://images.brickset.com/sets/images/76062-1.jpg"
+alt="Conjunto 76062" />.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Inclua uma imagem do conjunto lego escolhido, similar ao exemplo
+anterior. Pode usar o comando: <code>![Conjunto xxxx](url)</code>. Obs.:
+a url de cada conjunto aparece na coluna <code>image_url</code> do
+dataset <code>lego_sales.csv</code>, por exemplo, para o conjunto 76062,
+o código é:
+<code>![Conjunto 76062](https://images.brickset.com/sets/images/76062-1.jpg)</code></li>
+</ol>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

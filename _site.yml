@@ -12,6 +12,8 @@ navbar:
         href: Template_entregas.html
       - text: "Tarefa 1"
         href: Tarefa1.html
+      - text: "Gabarito - Tarefa 1"
+        href: Gabarito_Tarefa1.html
 #      - text: "Tarefa 2"
 #        href: Tarefa2_20212.html
 #      - text: "Tarefa 3"
@@ -22,6 +24,8 @@ navbar:
       menu: 
       - text: "Tutorial 1 - Tidyverse"
         href: Tutorial1.html
+      - text: "Tutorial 2 - Ggplot e Tidyverse"
+        href: Tutorial2.html
     - text: "Labs"
       menu: 
       - text: "Lab 1"
