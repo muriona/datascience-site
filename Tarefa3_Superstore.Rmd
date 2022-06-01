@@ -1,0 +1,127 @@
+---
+title: "Tarefa 3 - Dashboards em R"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: paper
+link-citations: yes
+---
+
+```{css, echo = FALSE}
+
+@import url('https://fonts.googleapis.com/css?family=Muli:400,400i,700&display=swap');
+
+/*------------- Whole Document---------------- */
+
+body {
+    font-family: 'Muli';
+    font-size: 19px;
+}
+
+/*----------------ADDING WHITE SPACE-------------*/
+
+.title {
+  margin-top: 2em !important;
+  margin-bottom: 0.75em;
+}
+
+.section h1,
+.section h2, 
+.section h3, 
+.section h4, 
+.section h5 { 
+  padding-top: 3em !important; /*adding so much padding because theme adds a margin-top: -65px by default */
+  margin-bottom: 0.75em;
+}
+
+.list-group-item {
+    color: #7b8a8b;
+    font-size: 16px;
+}
+.list-group-item.active {
+    color: white;
+    background-color: #e32d91;
+    border: none;
+}
+.list-group-item:hover, 
+.list-group-item.active:hover {
+    color: #ffffff;
+    background-color: #e32d91;
+}
+
+/* headers */
+
+h1, h2, h3, h4, h5 {
+  color:#e32d91;
+}
+```
+
+```{r photo, fig.margin = TRUE, echo = FALSE, fig.width=3, fig.cap="Photo by Martin Vorel on libreshot"}
+knitr::include_graphics("img/business-analysis.jpg")
+
+```
+
+Nesta terceira tarefa vocês terão a oportunidade de criar um Dashboard responsivo a partir do dataset a seguir:
+
+* Global Superstore Orders 2016.xlsx 
+* Global Superstore Returns 2016.csv
+
+# Pacotes
+
+Usaremos os pacotes (bibliotecas) `tidyverse` e `flexdashboard` de forma obrigatória. Outras bibliotecas podem se instaladas por cada equipe, de acordo com as necessidades específicas do dashboard.
+
+```{r load-package, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+```
+
+```{r bibliotecas}
+library(tidyverse)
+library(flexdashboard)
+
+```
+
+# Dados
+
+Os dados incluem as vendas fictícias de uma grande loja, chamada de Global SuperStore, incluindo ordem de pedido, data de compra, data de expedição, nome do cliente, categoria do produto, valor da venda e prioridade, dentre outros.
+
+```{r}
+library(readxl)
+library(knitr)
+
+global <- read_xlsx("/Users/mauricio/Dropbox/mauricio/10. R Studio/eps7008-site/data_tarefa3/Global Superstore Orders 2016.xlsx")
+
+```
+
+A seguir, mostram-se as primeiras linhas do dataset.
+
+```{r}
+library(kableExtra)
+global %>% 
+  head() %>% 
+  kbl() %>% 
+  kable_styling(bootstrap_options = c("striped","hover","condensed"), font_size = 11)
+```
+
+
+Você pode baixar os dados
+```{r}
+xfun::pkg_load2(c('htmltools', 'mime'))
+xfun::embed_dir("data_tarefa3/", text = "aqui.")
+```
+
+
+# Instruções
+
+A ideia desta terceira e última Tarefa é demonstrar tudo que aprenderam ao longo do semestre em termos de programação em R com o objetivo de construir um Dashboard que seja informativo e gere insights para tomada de decisão.
+
+Vocês são livres de escolher o tipo e número de visualizações que irão apresentar. Apenas lhes pedimos que incluam controles responsivos e algumas visualizações que usem pelo menos uma das técnicas de machine learning.
+
+A avaliação levará em conta a sua capacidade de criar visualizações que sigam as boas práticas, que informem e que tragam à tona os aspectos mais importantes dos dados escolhidos. 
+
+**Dica** Vocês podem incluir novas colunas, realizar cálculos de novos indicadores, incluir dados de longitude e latitude (criar mapas), integrar outros datasets, criar mais de uma aba de dashboard ou outras ações que vejam convenientes. Apenas descrevam esse processo no seu arquivo .Rmd.
+
+Para esta tarefa, o arquivo a ser entregue pelo moodle será o .Rmd, além de prints do dashboard. Em paralelo, nós avaliaremos o dashboard criado, diretamente no RStudio.
+
+

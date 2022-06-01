@@ -1,0 +1,60 @@
+---
+title: "Tarefa 2 - Dashboards em R"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: paper
+    css: tarefas.css
+link-citations: yes
+---
+
+```{r grassmarket, fig.margin = TRUE, echo = FALSE, warning=FALSE, message=FALSE, fig.width=3, fig.cap="Photo by Javier Quesada on Unsplash"}
+
+knitr::include_graphics("img/javier-quesada-qYfwGVNJqSA-unsplash.jpg")
+
+knitr::opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE)
+
+library(tidyverse)
+library(knitr)
+
+colorize <- function(x, color) {
+  if (knitr::is_latex_output()) {
+    sprintf("\\textcolor{%s}{%s}", color, x)
+  } else if (knitr::is_html_output()) {
+    sprintf("<span style='color: %s;'>%s</span>", color,
+      x)
+  } else x
+}
+```
+
+Esta Tarefa 2 servirá para vocês aplicarem os conhecimentos de visualização de dados e de apresentação das visualizações em formato de relatório (PDF) e de Dashboard.
+
+Para isto, cada um de vocês deverá escolher um dataset, alguns sites onde vocês podem localizar potenciais datasets são: [kaggle](https://www.kaggle.com/datasets), [FiveThirtyEight](https://data.fivethirtyeight.com/), [Portal Brasileiro de Dados Abertos](https://dados.gov.br/dataset), o [Open Data do Banco Mundial](https://datacatalog.worldbank.org/home) e [tidytuesdday](https://github.com/rfordatascience/tidytuesday). **Considerando a ampla variedade de dados será portanto, improvável ter dois datasets identicos.**
+
+Para garantir que não haverão dois datasets iguais, peço-lhes preencher [esta planilha](https://docs.google.com/spreadsheets/d/1nTPGJM0Ulj3v2kfgXYPQsztGDe29fDf4a1FnicAfICY/edit#gid=0) com os dados do dataset escolhido bem como de revisá-la para verificar os datasets escolhidos pelos colegas e assim evitar duplicidades.
+
+**dica**: Podem procurar por assuntos que tenham afinidade ou curiosidade, quanto mais singular for o dataset, mais divertida e informativa será a visualização de dados.
+
+# Instruções
+
+A entrega necessariamente exige:
+
+-   Apresentação de análises exploratórias, em formato de gráficos (principalmente) e tabelas e sua discussão.
+-   Para as análises exploratórias devem usar-se gráficos diversos (revisar material do Datacamp sobre visualização. Podem usar-se vários dos tipos de gráficos aprendidos além de outros e também indicadores numéricos ou KPIs (p.ex. médias, total de contagens, etc.).
+-   Construção de dashboard retratando a síntese das informações (gráficas e numéricas) mais importantes (usando Flexdashboard e Shiny em R).
+-   Arquivo `Rmd` do dashboard
+-   Relatório (`r colorize("knitado", "#e32d91")`) em PDF, detalhando todas as ações feitas: limpeza de dados, agrupamentos, filtragens etc, bem como as análises e visualização de dados.
+
+# Rúbrica
+
+A rúbrica a seguir mostra os critérios de avaliação que serão usados no Moodle.
+
+| Critérios                                       | Não concluído                                                                                                                          | Insatisfatório                                                                                                                                                                                                                                                                                                                                                             | Satisfatório                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Excelente                                                                                                                                                                                                                                                                                                                                                                                              |
+|-------------|-------------|-------------|---------------------|--------------|
+| **Uso de gráficos univariados e multivariados** | Não foram apresentados gráficos (0 pontos)                                                                                             | Os gráficos são pobremente usados ou não ajudam na interpretação das análises propostas. As explicações não estão bem fundamentadas nos dados e são incompletas. A análise gráfica e visual não é exaustiva. Não são gerados insights significativos e nem informações que ajudem na tomada de decisão. (1 ponto)                                                          | Nem todos os gráficos usados ajudam na interpretação das análises propostas. Ou as explicações são incompletas ou apenas parcialmente baseadas nos dados. A análise gráfica e visual é ampla porém não é exaustiva e dá a impressão que mais poderia ter sido feito. Os insights são tanto quanto óbvios e não necessariamente ajudam a informar a tomada de decisão. Os recursos simples do ggplot bem aplicados enquanto os mais complexos não, apresentando sobreposicões ou legendas mal posicionadas ou não seguindo outras boas práticas de visualização. (2 pontos) | Os gráficos usados são adequados para as análises propostas e as explicações são claramente baseadas nos dados coletados. A análise gráfica e visual é exaustiva - de qualidade - e ajuda a identificar insights interessantes e informativos para a tomada de decisão. Há um uso de diversos recursos simples e complexos do ggplot. E as boas práticas de visualização são sempre usadas. (3 pontos) |
+| **Uso do dataset fornecido**                    | O dataset não está limpo, não teve colunas renomeadas e não reclassifica as colunas de caracteres em outras mais adequadas. (0 pontos) | O uso do dataset é pobre. Apenas poucas informações são utilizadas para gerar os gráficos e análises exploratórias. Quando usados, os dados são usados sem apresentar sínteses ou agrupamentos que ajudem a lidar com o volume amplo de informações. Portanto, os gráficos e as análises exploratórias são pobres pois não ajudam a tirar conclusões relevantes. (1 ponto) | O dataset é explorado parcialmente. Nem todas as informações nele foram sintetizadas para serem usadas em sua totalidade ou não se procuraram formas para agrupar essas informações. Portanto, os gráficos e as análises exploratórias são parciais porém suficientes como para tirar conclusões relevantes. Houve uma limpeza adequada dos dados. (2 pontos)                                                                                                                                                                                                              | O dataset é amplamente explorado, de forma que ele é usado por completo seja para a confecção dos gráficos bem como das análises exploratórias. Isso inclui um uso exaustivo e de qualidade de todas as informações (colunas) providas no dataset. Há portanto um cuidado com a limpeza dos dados, reformatação de colunas e seleção das que de fato serão usadas.                                     |
+| **Dashboard**                                   | O código fornecido não compila um dashboard. (0 pontos)                                                                                | O dashboard apresenta sérios problemas de consistência com os dados (p.ex. Resultados diferentes dos encontrados no relatório). Há vários problemas estéticos e de funcionamento no dashboard, tais como controles inoperantes ou produzindo erros e distribuição (layout) mal planejada e combinação de cores inadequada. (1 ponto)                                       | O dashboard é relativamente consistente com os dados, mas apresenta alguns problemas de estética, tais como cores inconsistentes, disposição (layout) inadequada e elementos (gráficos e números) mal distribuídos ou pobremente usados. Há controles interativos simples, porém que ajudam suficientemente o usuário a navegar pelas informações. (2 pontos)                                                                                                                                                                                                              | O dashboard é consistente com os dados analisados, é esteticamente agradável e segue as boas práticas de construção de dashboards, tais como paleta de cores previamente definida, disposição (layout) estético das informações e um mix entre gráficos e números (KPI). Além disso, o dashboard inclui controles interativos que facilitam a manipulação do usuário. (3 pontos)                       |
+| **Qualidade do Relatório**                      | Não existe relatório, ou o código fornecido não compila o PDF (0 pontos).                                                              | O relatório apresenta vários problemas de escrita e de formatação no Rmd ou no PDF. Por exemplo, erros de código que não geram os gráficos no PDF. O relatório não conduz o leitor ao longo das análises feitas (gráficas e numéricas) e portanto geram dificuldades para entender como se chegaram às conclusões apresentadas. (0,33 pontos)                              | O relatório está bem escrito, porém com alguns erros de português e/ou formatação no Rmd ou no PDF. O relatório conduz o leitor ao longo das análises feitas, porém com certas inconsistências ou falta de clareza, porém sem dificultar demais a compreensão dos resultados e conclusões apresentadas. (0,66 pontos)                                                                                                                                                                                                                                                      | Relatório bem escrito, sem erros de português e nem de formatação (tanto no Rmd quanto no PDF) e retratando claramente as análises gráficas e numéricas. O relatório conduz o leitor ao longo das análises feitas, ajudando na compreensão dos resultados e conclusões apresentadas. (1 ponto)                                                                                                         |
+
+: Criterios da Rúbrica

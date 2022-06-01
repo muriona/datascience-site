@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Tutorial 2 - Ggplot e Tidyverse</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="tarefas.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EPS 7008</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tarefas
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tarefa_Instrucoes.html">Instruções Gerais</a>
+    </li>
+    <li>
+      <a href="Template_entregas.html">Template para entregas</a>
+    </li>
+    <li>
+      <a href="Tarefa1.html">Tarefa 1</a>
+    </li>
+    <li>
+      <a href="Gabarito_Tarefa1.html">Gabarito - Tarefa 1</a>
+    </li>
+    <li>
+      <a href="Tarefa2_20221.html">Tarefa 2</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tutoriais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tutorial1.html">Tutorial 1 - Tidyverse</a>
+    </li>
+    <li>
+      <a href="Tutorial2.html">Tutorial 2 - Ggplot e Tidyverse</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Labs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="webinar1a-EDA.html">Lab 1</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar1a.html">Lab 1a - Gabarito</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar1a-output.html">Lab 1a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="webinar1b-EDA.html">Lab 1b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar2.html">Lab 2 - Dashboards em R</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar3a.html">Lab 3a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar3b.html">Lab 3b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar4a.html">Lab 4a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar4b.html">Lab 4b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar5.html">Lab 5 - Gabarito com output</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Tutorial 2 - Ggplot e Tidyverse</h1>
+<h3 class="subtitle">Gabarito</h3>
+<h4 class="date">Última versão em 01/06/22</h4>
+
+</div>
+
+
+<div id="carregando-os-dados" class="section level1">
+<h1>Carregando os dados</h1>
+<p>Neste tutorial vamos aprender um pouco mais sobre o
+<code>ggplot</code> em conjunto com os outros pacotes do
+<code>tidyverse</code>.</p>
+<p>Para praticar, vamos usar o dataset
+<code>netflix_series_limpo.xlsx</code>, o dataset
+<code>NetflixViewingHistory.csv</code> e o dataset
+<code>imdb_series.xlsx</code> e o dataset <code>imdb.rds</code> de
+filmes. Portanto, o primeiro passo será carregar os datasets:</p>
+<pre class="r"><code>library(tidyverse)
+library(readxl) # para fazer leitura de arquivos excel
+library(knitr) # para formatar tabelas
+
+netflix &lt;- read_xlsx(&quot;data1ggplot/netflix_series_limpo.xlsx&quot;)
+
+imdb &lt;- read_xlsx(&quot;data1ggplot/imdb_series.xlsx&quot;)
+
+imdb_filmes &lt;- read_rds(&quot;data1ggplot/imdb.rds&quot;) #está usando uma função do pacote readr do tidyverse
+
+netflix_filmes &lt;- read_csv(&quot;data1ggplot/NetflixViewingHistory.csv&quot;) %&gt;% 
+  separate(Title, c(&quot;movie_title&quot;,&quot;season&quot;,&quot;episode&quot;),&quot;:&quot;) %&gt;% 
+  filter(is.na(episode)) %&gt;% 
+  select(movie_title, Date) %&gt;% 
+  mutate(Date = lubridate::as_date(Date, format=&quot;%m/%d/%y&quot;)) %&gt;% 
+  left_join(imdb_filmes, by=c(&quot;movie_title&quot;=&quot;titulo&quot;)) %&gt;% 
+  filter(!is.na(id_filme))</code></pre>
+</div>
+<div id="gráfico-de-dispersão" class="section level1">
+<h1>Gráfico de Dispersão</h1>
+<div id="exemplo-base" class="section level2">
+<h2>Exemplo Base</h2>
+<p>Para realizar gráficos de dispersão, precisamos passar a função
+<code>geom_point()</code> como uma nova camada do <code>ggplot</code>.
+As coordenadas <code>x</code> e <code>y</code> devem ser numéricas
+necessariamente. Vamos usar como exemplo, o dataframe
+<code>imdb_filmes</code>.</p>
+<p>No exemplo, a posição do ponto no eixo <code>x</code> pode ser dada
+pela coluna <code>orcamento</code> e a posição do ponto no eixo
+<code>y</code> pela coluna <code>receita</code>.</p>
+<pre class="r"><code>imdb_filmes %&gt;% 
+  ggplot()</code></pre>
+<p><img src="Tutorial2_gabarito_files/figure-html/dispersao-1.png" width="672" /></p>
+</div>
+<div id="adicionando-cores" class="section level2">
+<h2>Adicionando cores</h2>
+<p>Podemos adicionar cores grupalmente para todos os pontos ou podemos
+usar alguma outra variável para criar cores em gradiente</p>
+<p>Para ver mais detalhamento da função <code>geom_point()</code>
+recomenda-se a leitura do Capítulo 8 do Livro <a
+href="https://livro.curso-r.com/8-1-o-pacote-ggplot2.html#gr%C3%A1ficos-de-pontos-dispers%C3%A3o">“Curso-R”</a>.</p>
+</div>
+</div>
+<div id="gráfico-de-barras" class="section level1">
+<h1>Gráfico de Barras</h1>
+<div id="exemplo-base-1" class="section level2">
+<h2>Exemplo Base</h2>
+<p>Para realizar gráficos de barras usamos <code>geom_col()</code>.
+Vamos usar o dataframe <code>imdb_filmes</code> para exemplificar,
+ordenando as linhas por ordem decrescente de <code>UserRating</code>.
+Primeiro vamos gerar o gráfico com as configuração padrão.</p>
+<pre class="r"><code>imdb_filmes %&gt;% 
+  arrange(desc(nota_imdb)) %&gt;% 
+  head(10)  # adicionar código do ggplot</code></pre>
+<pre><code>## # A tibble: 10 × 20
+##    id_filme  titulo   ano data_lancamento generos duracao pais  idioma orcamento
+##    &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;
+##  1 tt102189… As I …  2019 2019-12-06      Drama,…      62 USA   Engli…     10000
+##  2 tt6735740 Love …  2019 2019-06-23      Comedy      100 USA   Engli…   3000000
+##  3 tt0111161 The S…  1994 1995-02-10      Drama       142 USA   Engli…  25000000
+##  4 tt0068646 The G…  1972 1972-09-21      Crime,…     175 USA   Engli…   6000000
+##  5 tt5980638 The T…  2018 2020-06-19      Music,…      96 USA   Engli…     90000
+##  6 tt0071562 The G…  1974 1975-09-25      Crime,…     202 USA   Engli…  13000000
+##  7 tt0050083 12 An…  1957 1957-09-04      Crime,…      96 USA   Engli…    350000
+##  8 tt0110912 Pulp …  1994 1994-10-28      Crime,…     154 USA   Engli…   8000000
+##  9 tt0108052 Schin…  1993 1994-03-11      Biogra…     195 USA   Engli…  22000000
+## 10 tt0419781 Grave…  2005 2005-04-22      Thrill…      90 USA   Engli…   1930000
+## # … with 11 more variables: receita &lt;dbl&gt;, receita_eua &lt;dbl&gt;, nota_imdb &lt;dbl&gt;,
+## #   num_avaliacoes &lt;dbl&gt;, direcao &lt;chr&gt;, roteiro &lt;chr&gt;, producao &lt;chr&gt;,
+## #   elenco &lt;chr&gt;, descricao &lt;chr&gt;, num_criticas_publico &lt;dbl&gt;,
+## #   num_criticas_critica &lt;dbl&gt;</code></pre>
+</div>
+<div id="mudando-os-eixos-e-adicionando-cores" class="section level2">
+<h2>Mudando os eixos e adicionando cores</h2>
+<p>Podemos mudar os eixos (trocar de eixo) usando a função
+<code>coord_flip()</code></p>
+<pre class="r"><code>imdb_filmes %&gt;% 
+  arrange(desc(nota_imdb)) %&gt;% 
+  head(10)</code></pre>
+<pre><code>## # A tibble: 10 × 20
+##    id_filme  titulo   ano data_lancamento generos duracao pais  idioma orcamento
+##    &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;
+##  1 tt102189… As I …  2019 2019-12-06      Drama,…      62 USA   Engli…     10000
+##  2 tt6735740 Love …  2019 2019-06-23      Comedy      100 USA   Engli…   3000000
+##  3 tt0111161 The S…  1994 1995-02-10      Drama       142 USA   Engli…  25000000
+##  4 tt0068646 The G…  1972 1972-09-21      Crime,…     175 USA   Engli…   6000000
+##  5 tt5980638 The T…  2018 2020-06-19      Music,…      96 USA   Engli…     90000
+##  6 tt0071562 The G…  1974 1975-09-25      Crime,…     202 USA   Engli…  13000000
+##  7 tt0050083 12 An…  1957 1957-09-04      Crime,…      96 USA   Engli…    350000
+##  8 tt0110912 Pulp …  1994 1994-10-28      Crime,…     154 USA   Engli…   8000000
+##  9 tt0108052 Schin…  1993 1994-03-11      Biogra…     195 USA   Engli…  22000000
+## 10 tt0419781 Grave…  2005 2005-04-22      Thrill…      90 USA   Engli…   1930000
+## # … with 11 more variables: receita &lt;dbl&gt;, receita_eua &lt;dbl&gt;, nota_imdb &lt;dbl&gt;,
+## #   num_avaliacoes &lt;dbl&gt;, direcao &lt;chr&gt;, roteiro &lt;chr&gt;, producao &lt;chr&gt;,
+## #   elenco &lt;chr&gt;, descricao &lt;chr&gt;, num_criticas_publico &lt;dbl&gt;,
+## #   num_criticas_critica &lt;dbl&gt;</code></pre>
+<p>Vamos aplicar tudo o aprendido num segundo exemplo, usando o
+dataframe <code>imdb</code> para mostrar os seriados com maior número de
+votos <code>UserVotes</code>.</p>
+<pre class="r"><code>imdb %&gt;% 
+  group_by(series_name) %&gt;% 
+  summarize(Votos = sum(UserVotes)) %&gt;% 
+  arrange(desc(Votos)) #adicionar ggplot</code></pre>
+<pre><code>## # A tibble: 27 × 2
+##    series_name                  Votos
+##    &lt;chr&gt;                        &lt;dbl&gt;
+##  1 The Walking Dead           2394586
+##  2 Arquivo X                   969628
+##  3 Friends                     853287
+##  4 Sobrenatural                499046
+##  5 Era Uma Vez                 397332
+##  6 Stranger Things             391288
+##  7 Sherlock                    373114
+##  8 Lúcifer                     298412
+##  9 Dark                        264631
+## 10 Como Defender um Assassino  228352
+## # … with 17 more rows</code></pre>
+<p>Você pode ver mais exemplos no Capítulo 8 do livro <a
+href="https://livro.curso-r.com/8-1-o-pacote-ggplot2.html#gr%C3%A1ficos-de-barras">Curso-R</a></p>
+</div>
+</div>
+<div id="gráfico-de-linha" class="section level1">
+<h1>Gráfico de linha</h1>
+<div id="exemplo-base-2" class="section level2">
+<h2>Exemplo Base</h2>
+<p>Vamos fazer um gráfico de linha usando a função
+<code>geom_line()</code> como camada do <code>ggplot</code> usando o
+dataset <code>netflix_filmes</code> para mostrar o total de capítulos
+assistidos por dia.</p>
+<pre class="r"><code>netflix_filmes %&gt;%  #colocar código ggplot
+  group_by(Date) %&gt;% 
+  summarize(filmes=n())</code></pre>
+<pre><code>## # A tibble: 114 × 2
+##    Date       filmes
+##    &lt;date&gt;      &lt;int&gt;
+##  1 2015-08-24      2
+##  2 2015-10-12      1
+##  3 2015-11-16      1
+##  4 2015-12-23      1
+##  5 2016-01-17      2
+##  6 2016-01-31      1
+##  7 2016-12-29      1
+##  8 2017-01-29      1
+##  9 2017-03-05      2
+## 10 2017-03-12      1
+## # … with 104 more rows</code></pre>
+<p>Podemos agrupar contagens usando a função <code>floor_date</code> do
+pacote <code>lubridate</code> para meses, trimestres, etc.
+Adicionalmente, podemos incluir cores.</p>
+<pre class="r"><code>netflix_filmes %&gt;% 
+  count(mes = lubridate::floor_date(Date, &quot;month&quot;))</code></pre>
+<pre><code>## # A tibble: 48 × 2
+##    mes            n
+##    &lt;date&gt;     &lt;int&gt;
+##  1 2015-08-01     2
+##  2 2015-10-01     1
+##  3 2015-11-01     1
+##  4 2015-12-01     1
+##  5 2016-01-01     3
+##  6 2016-12-01     1
+##  7 2017-01-01     1
+##  8 2017-03-01     3
+##  9 2017-05-01     1
+## 10 2017-06-01     8
+## # … with 38 more rows</code></pre>
+</div>
+<div id="adicionando-mais-de-uma-linha" class="section level2">
+<h2>Adicionando mais de uma linha</h2>
+<p>Vamos usar o dataset <code>imdb_filmes</code> para comparar o
+desempenho dos filmes (nota imdb) em função de ter lucro ou não. Vamos
+adicionar também uma camada extra para nos mostrar a tendência de ambas
+curvas, usando <code>geom_smooth()</code>.</p>
+<pre class="r"><code>imdb_filmes %&gt;% 
+  mutate(lucro = receita - orcamento,
+         lucro_factor = ifelse(lucro &gt; 0, &quot;Sim&quot;,&quot;Não&quot;)) %&gt;% 
+  filter(!is.na(lucro)) %&gt;% 
+  group_by(lucro_factor,ano) %&gt;% 
+  summarise(nota_media=mean(nota_imdb,na.rm=TRUE))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;lucro_factor&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 169 × 3
+## # Groups:   lucro_factor [2]
+##    lucro_factor   ano nota_media
+##    &lt;chr&gt;        &lt;dbl&gt;      &lt;dbl&gt;
+##  1 Não           1921       8.3 
+##  2 Não           1923       7   
+##  3 Não           1925       8.2 
+##  4 Não           1927       7.8 
+##  5 Não           1928       8.1 
+##  6 Não           1931       7.85
+##  7 Não           1932       7.9 
+##  8 Não           1933       7.65
+##  9 Não           1934       7.55
+## 10 Não           1935       7.3 
+## # … with 159 more rows</code></pre>
+<p>Você pode ver mais exemplos do <code>geom_line()</code> no livro <a
+href="https://livro.curso-r.com/8-1-o-pacote-ggplot2.html#gr%C3%A1ficos-de-linhas">Curso-R</a></p>
+</div>
+</div>
+<div id="gráfico-de-boxplot" class="section level1">
+<h1>Gráfico de Boxplot</h1>
+<div id="exemplo-base-3" class="section level2">
+<h2>Exemplo Base</h2>
+<p>Boxplots servem para comparar a distribuição dos dados em diferentes
+categorias. Vamos usar os dados do dataset <code>imdb</code> para
+comparar as notas de <code>UserRating</code> em cada temporada do
+seriado <code>The Walking Dead</code>.</p>
+<pre class="r"><code>seriado_escolhido &lt;- &quot;The Walking Dead&quot;
+
+imdb %&gt;% 
+  filter(series_name == seriado_escolhido) %&gt;% 
+  select(1,2,4,7) </code></pre>
+<pre><code>## # A tibble: 288 × 4
+##    series_name      Episode                     season UserRating
+##    &lt;chr&gt;            &lt;chr&gt;                        &lt;dbl&gt;      &lt;dbl&gt;
+##  1 The Walking Dead Seed                             3        8.9
+##  2 The Walking Dead Sick                             3        8.6
+##  3 The Walking Dead Walk with Me                     3        8.2
+##  4 The Walking Dead Killer Within                    3        9.3
+##  5 The Walking Dead Say the Word                     3        8.2
+##  6 The Walking Dead Hounded                          3        8.3
+##  7 The Walking Dead When the Dead Come Knocking      3        8.6
+##  8 The Walking Dead Made to Suffer                   3        9  
+##  9 The Walking Dead The Suicide King                 3        8.2
+## 10 The Walking Dead Home                             3        8.7
+## # … with 278 more rows</code></pre>
+</div>
+<div id="adicionando-cores-por-meio-de-paletas-pré-definidas"
+class="section level2">
+<h2>Adicionando cores por meio de paletas pré-definidas</h2>
+<p>Vamos adicionar cores para cada temporada, para isto precisamos
+incluir o argumento <code>fill</code> dentro da camada de estetica
+<code>aes</code>. Podemos também escolher as cores de paletas
+pré-definidas como: <code>scale_fill_viridis_d()</code> e
+<code>scale_fill_brewer()</code></p>
+<pre class="r"><code>imdb %&gt;% 
+  filter(series_name == seriado_escolhido) %&gt;% 
+  select(1,2,4,7) </code></pre>
+<pre><code>## # A tibble: 288 × 4
+##    series_name      Episode                     season UserRating
+##    &lt;chr&gt;            &lt;chr&gt;                        &lt;dbl&gt;      &lt;dbl&gt;
+##  1 The Walking Dead Seed                             3        8.9
+##  2 The Walking Dead Sick                             3        8.6
+##  3 The Walking Dead Walk with Me                     3        8.2
+##  4 The Walking Dead Killer Within                    3        9.3
+##  5 The Walking Dead Say the Word                     3        8.2
+##  6 The Walking Dead Hounded                          3        8.3
+##  7 The Walking Dead When the Dead Come Knocking      3        8.6
+##  8 The Walking Dead Made to Suffer                   3        9  
+##  9 The Walking Dead The Suicide King                 3        8.2
+## 10 The Walking Dead Home                             3        8.7
+## # … with 278 more rows</code></pre>
+</div>
+</div>
+<div id="gráfico-de-histograma" class="section level1">
+<h1>Gráfico de Histograma</h1>
+<p>O Histograma serve para observar a distribuição dos dados e
+eventualmente serve para comparar mais de uma distribuição.</p>
+<div id="exemplo-base-4" class="section level2">
+<h2>Exemplo Base</h2>
+<p>Vamos continuar com os dados sobre <code>UserRating</code> usados
+anteriormente para graficar Boxplots. Neste caso, vamos graficar a
+distribuição do <code>UserRating</code> considerando apenas a contagem.
+Podemos usar o argumento <code>bins</code> ou <code>binwidth</code> para
+ajustar melhor o resultado.</p>
+<pre class="r"><code>imdb %&gt;% 
+  filter(series_name == seriado_escolhido) %&gt;% 
+  select(1,2,4,7) </code></pre>
+<pre><code>## # A tibble: 288 × 4
+##    series_name      Episode                     season UserRating
+##    &lt;chr&gt;            &lt;chr&gt;                        &lt;dbl&gt;      &lt;dbl&gt;
+##  1 The Walking Dead Seed                             3        8.9
+##  2 The Walking Dead Sick                             3        8.6
+##  3 The Walking Dead Walk with Me                     3        8.2
+##  4 The Walking Dead Killer Within                    3        9.3
+##  5 The Walking Dead Say the Word                     3        8.2
+##  6 The Walking Dead Hounded                          3        8.3
+##  7 The Walking Dead When the Dead Come Knocking      3        8.6
+##  8 The Walking Dead Made to Suffer                   3        9  
+##  9 The Walking Dead The Suicide King                 3        8.2
+## 10 The Walking Dead Home                             3        8.7
+## # … with 278 more rows</code></pre>
+<p>Agora, vamos usar o dataset <code>imdb_filmes</code> para verificar
+quão lucrativo é um determinado genero.</p>
+<pre class="r"><code>genero_escolhido &lt;- &quot;Comedy&quot;
+
+imdb_filmes %&gt;% 
+  #filter(str_detect(string = generos, pattern = genero_escolhido)) %&gt;% 
+  filter(generos == genero_escolhido) %&gt;% 
+  mutate(lucro = receita - orcamento)</code></pre>
+<pre><code>## # A tibble: 560 × 21
+##    id_filme  titulo   ano data_lancamento generos duracao pais  idioma orcamento
+##    &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;
+##  1 tt0183505 Me, M…  2000 2000-09-08      Comedy      116 USA   Engli…  51000000
+##  2 tt1242423 Dear …  2009 2011-07-01      Comedy       87 USA   Engli…        NA
+##  3 tt0120434 Vegas…  1997 1997-02-14      Comedy       93 USA   Engli…  25000000
+##  4 tt5617916 Airpl…  2019 2019-08-02      Comedy       80 USA   Engli…        NA
+##  5 tt7054636 A Mad…  2019 2019-03-01      Comedy      109 USA   Engli…  20000000
+##  6 tt0460925 The S…  2006 2006-01-01      Comedy       86 USA   Engli…        NA
+##  7 tt0071514 For P…  1974 1974-09-13      Comedy       90 USA   Engli…        NA
+##  8 tt0064683 Mondo…  1969 1969-03-14      Comedy       95 USA   Engli…      2100
+##  9 tt1073498 Meet …  2008 2008-04-24      Comedy       87 USA   Engli…  30000000
+## 10 tt0489085 I-See…  2006 2006-03-08      Comedy       92 USA   Engli…   6200000
+## # … with 550 more rows, and 12 more variables: receita &lt;dbl&gt;,
+## #   receita_eua &lt;dbl&gt;, nota_imdb &lt;dbl&gt;, num_avaliacoes &lt;dbl&gt;, direcao &lt;chr&gt;,
+## #   roteiro &lt;chr&gt;, producao &lt;chr&gt;, elenco &lt;chr&gt;, descricao &lt;chr&gt;,
+## #   num_criticas_publico &lt;dbl&gt;, num_criticas_critica &lt;dbl&gt;, lucro &lt;dbl&gt;</code></pre>
+</div>
+<div id="adicionando-cores-1" class="section level2">
+<h2>Adicionando cores</h2>
+<p>Podemos melhorar a apresentação, escolhendo cores diferentes
+adicionando o argumento <code>fill</code> dentro de
+<code>geom_histogram()</code>.</p>
+<pre class="r"><code>imdb_filmes %&gt;% 
+  #filter(str_detect(string = generos, pattern = genero_escolhido)) %&gt;% 
+  filter(generos == genero_escolhido) %&gt;% 
+  mutate(lucro = receita - orcamento) </code></pre>
+<pre><code>## # A tibble: 560 × 21
+##    id_filme  titulo   ano data_lancamento generos duracao pais  idioma orcamento
+##    &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;
+##  1 tt0183505 Me, M…  2000 2000-09-08      Comedy      116 USA   Engli…  51000000
+##  2 tt1242423 Dear …  2009 2011-07-01      Comedy       87 USA   Engli…        NA
+##  3 tt0120434 Vegas…  1997 1997-02-14      Comedy       93 USA   Engli…  25000000
+##  4 tt5617916 Airpl…  2019 2019-08-02      Comedy       80 USA   Engli…        NA
+##  5 tt7054636 A Mad…  2019 2019-03-01      Comedy      109 USA   Engli…  20000000
+##  6 tt0460925 The S…  2006 2006-01-01      Comedy       86 USA   Engli…        NA
+##  7 tt0071514 For P…  1974 1974-09-13      Comedy       90 USA   Engli…        NA
+##  8 tt0064683 Mondo…  1969 1969-03-14      Comedy       95 USA   Engli…      2100
+##  9 tt1073498 Meet …  2008 2008-04-24      Comedy       87 USA   Engli…  30000000
+## 10 tt0489085 I-See…  2006 2006-03-08      Comedy       92 USA   Engli…   6200000
+## # … with 550 more rows, and 12 more variables: receita &lt;dbl&gt;,
+## #   receita_eua &lt;dbl&gt;, nota_imdb &lt;dbl&gt;, num_avaliacoes &lt;dbl&gt;, direcao &lt;chr&gt;,
+## #   roteiro &lt;chr&gt;, producao &lt;chr&gt;, elenco &lt;chr&gt;, descricao &lt;chr&gt;,
+## #   num_criticas_publico &lt;dbl&gt;, num_criticas_critica &lt;dbl&gt;, lucro &lt;dbl&gt;</code></pre>
+<p>Você pode ver mais exemplos do Histogramas e Boxplots no Cap. 8 do
+livro <a
+href="https://livro.curso-r.com/8-1-o-pacote-ggplot2.html#histogramas-e-boxplots">Curso-R</a></p>
+<p>Podemos usar alternativamente um outro tipo de visualização muito
+similar, que é a <code>geom_density()</code>. Vamos usar os mesmos
+exemplos anteriores.</p>
+<pre class="r"><code>imdb %&gt;% 
+  filter(series_name == seriado_escolhido) %&gt;% 
+  select(1,2,4,7)</code></pre>
+<pre><code>## # A tibble: 288 × 4
+##    series_name      Episode                     season UserRating
+##    &lt;chr&gt;            &lt;chr&gt;                        &lt;dbl&gt;      &lt;dbl&gt;
+##  1 The Walking Dead Seed                             3        8.9
+##  2 The Walking Dead Sick                             3        8.6
+##  3 The Walking Dead Walk with Me                     3        8.2
+##  4 The Walking Dead Killer Within                    3        9.3
+##  5 The Walking Dead Say the Word                     3        8.2
+##  6 The Walking Dead Hounded                          3        8.3
+##  7 The Walking Dead When the Dead Come Knocking      3        8.6
+##  8 The Walking Dead Made to Suffer                   3        9  
+##  9 The Walking Dead The Suicide King                 3        8.2
+## 10 The Walking Dead Home                             3        8.7
+## # … with 278 more rows</code></pre>
+<p>Podemos também customizar a cor da linha e da área abaixo da
+densidade usando os argumentos <code>fill</code> e <code>color</code>
+dentro do <code>geom_density()</code> bem como a transparência usando
+<code>alpha</code>.</p>
+<pre class="r"><code>imdb_filmes %&gt;% 
+  #filter(str_detect(string = generos, pattern = genero_escolhido)) %&gt;% 
+  filter(generos == genero_escolhido) %&gt;% 
+  mutate(lucro = receita - orcamento)</code></pre>
+<pre><code>## # A tibble: 560 × 21
+##    id_filme  titulo   ano data_lancamento generos duracao pais  idioma orcamento
+##    &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;
+##  1 tt0183505 Me, M…  2000 2000-09-08      Comedy      116 USA   Engli…  51000000
+##  2 tt1242423 Dear …  2009 2011-07-01      Comedy       87 USA   Engli…        NA
+##  3 tt0120434 Vegas…  1997 1997-02-14      Comedy       93 USA   Engli…  25000000
+##  4 tt5617916 Airpl…  2019 2019-08-02      Comedy       80 USA   Engli…        NA
+##  5 tt7054636 A Mad…  2019 2019-03-01      Comedy      109 USA   Engli…  20000000
+##  6 tt0460925 The S…  2006 2006-01-01      Comedy       86 USA   Engli…        NA
+##  7 tt0071514 For P…  1974 1974-09-13      Comedy       90 USA   Engli…        NA
+##  8 tt0064683 Mondo…  1969 1969-03-14      Comedy       95 USA   Engli…      2100
+##  9 tt1073498 Meet …  2008 2008-04-24      Comedy       87 USA   Engli…  30000000
+## 10 tt0489085 I-See…  2006 2006-03-08      Comedy       92 USA   Engli…   6200000
+## # … with 550 more rows, and 12 more variables: receita &lt;dbl&gt;,
+## #   receita_eua &lt;dbl&gt;, nota_imdb &lt;dbl&gt;, num_avaliacoes &lt;dbl&gt;, direcao &lt;chr&gt;,
+## #   roteiro &lt;chr&gt;, producao &lt;chr&gt;, elenco &lt;chr&gt;, descricao &lt;chr&gt;,
+## #   num_criticas_publico &lt;dbl&gt;, num_criticas_critica &lt;dbl&gt;, lucro &lt;dbl&gt;</code></pre>
+<p>E por fim, podemos comparar duas ou mais categorias. Vamos fazer
+isso, comparando os generos “Comedy” e “Drama” para saber se há
+diferenças significativas em termos de lucro. Para isto, vamos incluir o
+argumento <code>group</code> dentro da camada <code>aes</code> além de
+<code>fill</code> e <code>color</code>. Adicionalmente podemos incluir
+<code>alpha</code> dentro de <code>geom_density()</code>.</p>
+<pre class="r"><code>imdb_filmes %&gt;% 
+  #filter(str_detect(string = generos, pattern = genero_escolhido)) %&gt;% 
+  filter(generos %in% c(&quot;Comedy&quot;,&quot;Drama&quot;)) %&gt;% 
+  mutate(lucro = receita - orcamento)</code></pre>
+<pre><code>## # A tibble: 1,188 × 21
+##    id_filme  titulo   ano data_lancamento generos duracao pais  idioma orcamento
+##    &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;
+##  1 tt0183505 Me, M…  2000 2000-09-08      Comedy      116 USA   Engli…  51000000
+##  2 tt3703836 Henry…  2015 2016-01-08      Drama        87 USA   Engli…        NA
+##  3 tt1142798 The F…  2008 2008-09-12      Drama       111 USA   Engli…        NA
+##  4 tt1242423 Dear …  2009 2011-07-01      Comedy       87 USA   Engli…        NA
+##  5 tt0109514 Curse…  1994 1995-05-05      Drama       102 USA   Engli…  12577385
+##  6 tt0120434 Vegas…  1997 1997-02-14      Comedy       93 USA   Engli…  25000000
+##  7 tt0068528 The E…  1972 1973-05-30      Drama       100 USA   Engli…        NA
+##  8 tt5617916 Airpl…  2019 2019-08-02      Comedy       80 USA   Engli…        NA
+##  9 tt0049800 Storm…  1956 1956-07-31      Drama        85 USA   Engli…        NA
+## 10 tt7054636 A Mad…  2019 2019-03-01      Comedy      109 USA   Engli…  20000000
+## # … with 1,178 more rows, and 12 more variables: receita &lt;dbl&gt;,
+## #   receita_eua &lt;dbl&gt;, nota_imdb &lt;dbl&gt;, num_avaliacoes &lt;dbl&gt;, direcao &lt;chr&gt;,
+## #   roteiro &lt;chr&gt;, producao &lt;chr&gt;, elenco &lt;chr&gt;, descricao &lt;chr&gt;,
+## #   num_criticas_publico &lt;dbl&gt;, num_criticas_critica &lt;dbl&gt;, lucro &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div id="outras-customizações" class="section level1">
+<h1>Outras customizações</h1>
+<p>O ggplot inclui praticamente customizações infinitas, desde as mais
+simples, como atribuir títulos aos eixos até mudar as escalas, por
+exemplo usando transformações logarítmicas.</p>
+<pre class="r"><code>imdb_filmes %&gt;% 
+  mutate(lucro = receita-orcamento) %&gt;% 
+  ggplot(aes(x = orcamento, y = receita, color=lucro)) +
+  geom_point(alpha=0.5)+
+  scale_y_log10()+
+  scale_x_log10()+
+  geom_smooth(method = &quot;lm&quot;, se=FALSE)+
+  theme_bw()+
+  scale_color_gradient(low = &quot;red&quot;, high = &quot;green&quot;)</code></pre>
+<pre><code>## Warning: Transformation introduced infinite values in continuous x-axis
+## Transformation introduced infinite values in continuous x-axis</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 7004 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 7004 rows containing missing values (geom_point).</code></pre>
+<p><img src="Tutorial2_gabarito_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Tarefa 2 - Dashboards em R</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="tarefas.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EPS 7008</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tarefas
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tarefa_Instrucoes.html">Instruções Gerais</a>
+    </li>
+    <li>
+      <a href="Template_entregas.html">Template para entregas</a>
+    </li>
+    <li>
+      <a href="Tarefa1.html">Tarefa 1</a>
+    </li>
+    <li>
+      <a href="Gabarito_Tarefa1.html">Gabarito - Tarefa 1</a>
+    </li>
+    <li>
+      <a href="Tarefa2_20221.html">Tarefa 2</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tutoriais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tutorial1.html">Tutorial 1 - Tidyverse</a>
+    </li>
+    <li>
+      <a href="Tutorial2.html">Tutorial 2 - Ggplot e Tidyverse</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Labs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="webinar1a-EDA.html">Lab 1</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar1a.html">Lab 1a - Gabarito</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar1a-output.html">Lab 1a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="webinar1b-EDA.html">Lab 1b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar2.html">Lab 2 - Dashboards em R</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar3a.html">Lab 3a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar3b.html">Lab 3b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar4a.html">Lab 4a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar4b.html">Lab 4b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar5.html">Lab 5 - Gabarito com output</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Tarefa 2 - Dashboards em R</h1>
+
+</div>
+
+
+<div class="figure">
+<img src="img/daniel-cheung-ZqqlOZyGG7g-unsplash.jpg" alt="Photo by Daniel Cheung on Unsplash" width="500" />
+<p class="caption">
+Photo by Daniel Cheung on Unsplash
+</p>
+</div>
+<p>Esta Tarefa 2 servirá para vocês aplicarem os conhecimentos de
+visualização de dados e de apresentação das visualizações em formato de
+relatório (PDF) e de Dashboard.</p>
+<p>Para isto, cada um de vocês deverá escolher um dataset, alguns sites
+onde vocês podem localizar potenciais datasets são: <a
+href="https://www.kaggle.com/datasets">kaggle</a>, <a
+href="https://data.fivethirtyeight.com/">FiveThirtyEight</a>, <a
+href="https://dados.gov.br/dataset">Portal Brasileiro de Dados
+Abertos</a>, o <a href="https://datacatalog.worldbank.org/home">Open
+Data do Banco Mundial</a> e <a
+href="https://github.com/rfordatascience/tidytuesday">tidytuesdday</a>.
+<strong>Considerando a ampla variedade de dados será portanto,
+improvável ter dois datasets identicos.</strong></p>
+<p>Para garantir que não haverão dois datasets iguais, peço-lhes
+preencher <a
+href="https://docs.google.com/spreadsheets/d/1nTPGJM0Ulj3v2kfgXYPQsztGDe29fDf4a1FnicAfICY/edit#gid=0">esta
+planilha</a> com os dados do dataset escolhido bem como de revisá-la
+para verificar os datasets escolhidos pelos colegas e assim evitar
+duplicidades.</p>
+<p><strong>dica</strong>: Podem procurar por assuntos que tenham
+afinidade ou curiosidade, quanto mais singular for o dataset, mais
+divertida e informativa será a visualização de dados.</p>
+<div id="instruções" class="section level1">
+<h1>Instruções</h1>
+<p>A entrega necessariamente exige:</p>
+<ul>
+<li>Apresentação de análises exploratórias, em formato de gráficos
+(principalmente) e tabelas e sua discussão.</li>
+<li>Para as análises exploratórias devem usar-se gráficos diversos
+(revisar material do Datacamp sobre visualização. Podem usar-se vários
+dos tipos de gráficos aprendidos além de outros e também indicadores
+numéricos ou KPIs (p.ex. médias, total de contagens, etc.).</li>
+<li>Construção de dashboard retratando a síntese das informações
+(gráficas e numéricas) mais importantes (usando Flexdashboard e Shiny em
+R).</li>
+<li>Arquivo <code>Rmd</code> do dashboard</li>
+<li>Relatório (<span style="color: #e32d91;">knitado</span>) em PDF,
+detalhando todas as ações feitas: limpeza de dados, agrupamentos,
+filtragens etc, bem como as análises e visualização de dados.</li>
+</ul>
+</div>
+<div id="rúbrica" class="section level1">
+<h1>Rúbrica</h1>
+<p>A rúbrica a seguir mostra os critérios de avaliação que serão usados
+no Moodle.</p>
+<table>
+<caption>Criterios da Rúbrica</caption>
+<colgroup>
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="28%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Critérios</th>
+<th>Não concluído</th>
+<th>Insatisfatório</th>
+<th>Satisfatório</th>
+<th>Excelente</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Uso de gráficos univariados e multivariados</strong></td>
+<td>Não foram apresentados gráficos (0 pontos)</td>
+<td>Os gráficos são pobremente usados ou não ajudam na interpretação das
+análises propostas. As explicações não estão bem fundamentadas nos dados
+e são incompletas. A análise gráfica e visual não é exaustiva. Não são
+gerados insights significativos e nem informações que ajudem na tomada
+de decisão. (1 ponto)</td>
+<td>Nem todos os gráficos usados ajudam na interpretação das análises
+propostas. Ou as explicações são incompletas ou apenas parcialmente
+baseadas nos dados. A análise gráfica e visual é ampla porém não é
+exaustiva e dá a impressão que mais poderia ter sido feito. Os insights
+são tanto quanto óbvios e não necessariamente ajudam a informar a tomada
+de decisão. Os recursos simples do ggplot bem aplicados enquanto os mais
+complexos não, apresentando sobreposicões ou legendas mal posicionadas
+ou não seguindo outras boas práticas de visualização. (2 pontos)</td>
+<td>Os gráficos usados são adequados para as análises propostas e as
+explicações são claramente baseadas nos dados coletados. A análise
+gráfica e visual é exaustiva - de qualidade - e ajuda a identificar
+insights interessantes e informativos para a tomada de decisão. Há um
+uso de diversos recursos simples e complexos do ggplot. E as boas
+práticas de visualização são sempre usadas. (3 pontos)</td>
+</tr>
+<tr class="even">
+<td><strong>Uso do dataset fornecido</strong></td>
+<td>O dataset não está limpo, não teve colunas renomeadas e não
+reclassifica as colunas de caracteres em outras mais adequadas. (0
+pontos)</td>
+<td>O uso do dataset é pobre. Apenas poucas informações são utilizadas
+para gerar os gráficos e análises exploratórias. Quando usados, os dados
+são usados sem apresentar sínteses ou agrupamentos que ajudem a lidar
+com o volume amplo de informações. Portanto, os gráficos e as análises
+exploratórias são pobres pois não ajudam a tirar conclusões relevantes.
+(1 ponto)</td>
+<td>O dataset é explorado parcialmente. Nem todas as informações nele
+foram sintetizadas para serem usadas em sua totalidade ou não se
+procuraram formas para agrupar essas informações. Portanto, os gráficos
+e as análises exploratórias são parciais porém suficientes como para
+tirar conclusões relevantes. Houve uma limpeza adequada dos dados. (2
+pontos)</td>
+<td>O dataset é amplamente explorado, de forma que ele é usado por
+completo seja para a confecção dos gráficos bem como das análises
+exploratórias. Isso inclui um uso exaustivo e de qualidade de todas as
+informações (colunas) providas no dataset. Há portanto um cuidado com a
+limpeza dos dados, reformatação de colunas e seleção das que de fato
+serão usadas.</td>
+</tr>
+<tr class="odd">
+<td><strong>Dashboard</strong></td>
+<td>O código fornecido não compila um dashboard. (0 pontos)</td>
+<td>O dashboard apresenta sérios problemas de consistência com os dados
+(p.ex. Resultados diferentes dos encontrados no relatório). Há vários
+problemas estéticos e de funcionamento no dashboard, tais como controles
+inoperantes ou produzindo erros e distribuição (layout) mal planejada e
+combinação de cores inadequada. (1 ponto)</td>
+<td>O dashboard é relativamente consistente com os dados, mas apresenta
+alguns problemas de estética, tais como cores inconsistentes, disposição
+(layout) inadequada e elementos (gráficos e números) mal distribuídos ou
+pobremente usados. Há controles interativos simples, porém que ajudam
+suficientemente o usuário a navegar pelas informações. (2 pontos)</td>
+<td>O dashboard é consistente com os dados analisados, é esteticamente
+agradável e segue as boas práticas de construção de dashboards, tais
+como paleta de cores previamente definida, disposição (layout) estético
+das informações e um mix entre gráficos e números (KPI). Além disso, o
+dashboard inclui controles interativos que facilitam a manipulação do
+usuário. (3 pontos)</td>
+</tr>
+<tr class="even">
+<td><strong>Qualidade do Relatório</strong></td>
+<td>Não existe relatório, ou o código fornecido não compila o PDF (0
+pontos).</td>
+<td>O relatório apresenta vários problemas de escrita e de formatação no
+Rmd ou no PDF. Por exemplo, erros de código que não geram os gráficos no
+PDF. O relatório não conduz o leitor ao longo das análises feitas
+(gráficas e numéricas) e portanto geram dificuldades para entender como
+se chegaram às conclusões apresentadas. (0,33 pontos)</td>
+<td>O relatório está bem escrito, porém com alguns erros de português
+e/ou formatação no Rmd ou no PDF. O relatório conduz o leitor ao longo
+das análises feitas, porém com certas inconsistências ou falta de
+clareza, porém sem dificultar demais a compreensão dos resultados e
+conclusões apresentadas. (0,66 pontos)</td>
+<td>Relatório bem escrito, sem erros de português e nem de formatação
+(tanto no Rmd quanto no PDF) e retratando claramente as análises
+gráficas e numéricas. O relatório conduz o leitor ao longo das análises
+feitas, ajudando na compreensão dos resultados e conclusões
+apresentadas. (1 ponto)</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
