@@ -1,6 +1,6 @@
 ---
 title: "Tutorial 2 - Ggplot e Tidyverse"
-subtitle: Gabarito
+subtitle: "Gabarito"
 output: 
   html_document:
     toc: true
@@ -8,6 +8,7 @@ output:
     code_download: false
     theme: paper
     css: tarefas.css
+
 date: "Última versão em `r format(Sys.time(), '%d/%m/%y')`"
 ---
 
@@ -21,7 +22,7 @@ Neste tutorial vamos aprender um pouco mais sobre o `ggplot` em conjunto com os 
 
 Para praticar, vamos usar o dataset `netflix_series_limpo.xlsx`, o dataset `NetflixViewingHistory.csv` e o dataset `imdb_series.xlsx` e o dataset `imdb.rds` de filmes. Portanto, o primeiro passo será carregar os datasets:
 
-```{r tidyverse, message=FALSE, warning=FALSE}
+```{r tidyverse, message=FALSE, warning=FALSE, echo=FALSE}
 library(tidyverse)
 library(readxl) # para fazer leitura de arquivos excel
 library(knitr) # para formatar tabelas
@@ -54,7 +55,21 @@ No exemplo, a posição do ponto no eixo `x` pode ser dada pela coluna `orcament
 ```{r dispersao}
 
 imdb_filmes %>% 
-  ggplot()
+  ggplot(aes(orcamento/1000000,receita/1000000000))+
+  geom_point()+
+  scale_x_continuous(labels = scales::dollar,
+                     breaks = c(0, 50, 100,150,               200,250,300,350))+
+  scale_y_continuous(labels=scales::dollar,
+                     n.breaks = 8)+
+  labs(x="Orçamento em Milhões de $",
+       y="Receita em Bilhões de $")+
+  theme(panel.background = element_rect(fill = "#fbeca5",                 color = "black",
+                                        size = 2),
+        panel.grid = element_line(color= "white"))+
+  coord_cartesian(ylim = c(0,6),
+                  xlim = c(0,450))
+
+
 
 ```
 
@@ -65,6 +80,10 @@ imdb_filmes %>%
 Podemos adicionar cores grupalmente para todos os pontos ou podemos usar alguma outra variável para criar cores em gradiente
 
 ```{r dispersao-cores}
+
+imdb_filmes %>% 
+  ggplot(aes(orcamento,receita))+
+  geom_point(color="#e38421", size=5)
 
 ```
 
@@ -80,7 +99,17 @@ Para realizar gráficos de barras usamos `geom_col()`. Vamos usar o dataframe `i
 ```{r barras}
 imdb_filmes %>% 
   arrange(desc(nota_imdb)) %>% 
-  head(10)  # adicionar código do ggplot
+  head(10) %>%
+  ggplot(aes(titulo, nota_imdb,label = nota_imdb))+
+  geom_col()+
+  geom_label()+
+  theme_minimal()+
+  labs(x="",y="",
+       title = "Filmes com maior nota no imdb")+
+  scale_y_continuous(
+    breaks = c(0,2,4,6,8,10),
+    limits=c(0,10))+
+  coord_flip()
 
 ```
 
@@ -91,7 +120,24 @@ Podemos mudar os eixos (trocar de eixo) usando a função `coord_flip()`
 ```{r barras-add}
 imdb_filmes %>% 
   arrange(desc(nota_imdb)) %>% 
-  head(10)
+  head(10) %>% 
+  ggplot(aes(reorder(titulo,nota_imdb), nota_imdb))+
+  geom_col(fill="#650871")+
+  coord_flip()
+
+imdb_filmes %>% 
+  arrange(desc(nota_imdb)) %>% 
+  head(10) %>% 
+  ggplot(aes(reorder(titulo,nota_imdb),
+             nota_imdb, 
+             fill=titulo,
+             label=nota_imdb))+
+  geom_col()+
+  geom_label()+
+  coord_flip()+
+  theme_minimal()+
+  theme(legend.position = "none")
+
 
 ```
 
@@ -101,7 +147,12 @@ Vamos aplicar tudo o aprendido num segundo exemplo, usando o dataframe `imdb` pa
 imdb %>% 
   group_by(series_name) %>% 
   summarize(Votos = sum(UserVotes)) %>% 
-  arrange(desc(Votos)) #adicionar ggplot
+  arrange(desc(Votos)) %>% 
+  ggplot(aes(reorder(series_name,
+                     Votos), 
+             Votos))+
+  geom_col(fill="#c53a48")+
+  coord_flip()
 
 ```
 
@@ -117,15 +168,21 @@ Vamos fazer um gráfico de linha usando a função `geom_line()` como camada do 
 
 netflix_filmes %>%  #colocar código ggplot
   group_by(Date) %>% 
-  summarize(filmes=n())
+  summarize(filmes=n()) %>% 
+  ggplot(aes(Date,filmes))+
+  geom_point(size=5, color="black")+
+  geom_line(size=1.2, color="#c53a48")
 ```
 
 Podemos agrupar contagens usando a função `floor_date` do pacote `lubridate` para meses, trimestres, etc. Adicionalmente, podemos incluir cores.
 
 ```{r linha-mes}
+library(lubridate)
 
 netflix_filmes %>% 
-  count(mes = lubridate::floor_date(Date, "month"))
+  count(mes = floor_date(Date, "month")) %>% 
+  ggplot(aes(mes,n))+
+  geom_line(size=1.2, color="#502846")
 ```
 
 
@@ -139,7 +196,10 @@ imdb_filmes %>%
          lucro_factor = ifelse(lucro > 0, "Sim","Não")) %>% 
   filter(!is.na(lucro)) %>% 
   group_by(lucro_factor,ano) %>% 
-  summarise(nota_media=mean(nota_imdb,na.rm=TRUE))
+  summarise(nota_media=mean(nota_imdb,na.rm=TRUE)) %>% 
+  ggplot(aes(ano,nota_media,color=lucro_factor))+
+  geom_line(size=1.5)+
+  geom_smooth()
 
 ```
 
@@ -159,7 +219,9 @@ seriado_escolhido <- "The Walking Dead"
 
 imdb %>% 
   filter(series_name == seriado_escolhido) %>% 
-  select(1,2,4,7) 
+  select(1,2,4,7) %>% 
+  ggplot(aes(factor(season), UserRating))+
+  geom_boxplot()
 
 ```
 
@@ -171,7 +233,10 @@ Vamos adicionar cores para cada temporada, para isto precisamos incluir o argume
 
 imdb %>% 
   filter(series_name == seriado_escolhido) %>% 
-  select(1,2,4,7) 
+  select(1,2,4,7) %>% 
+  ggplot(aes(factor(season), UserRating, fill=factor(season)))+
+  geom_boxplot() + 
+  scale_fill_viridis_d(alpha=0.6)
 
 ```
 
@@ -187,7 +252,9 @@ Vamos continuar com os dados sobre `UserRating` usados anteriormente para grafic
 ```{r histo1}
 imdb %>% 
   filter(series_name == seriado_escolhido) %>% 
-  select(1,2,4,7) 
+  select(1,2,4,7) %>% 
+  ggplot(aes(UserRating))+
+  geom_histogram(binwidth = 0.5)
 ```
 
 
@@ -200,7 +267,9 @@ genero_escolhido <- "Comedy"
 imdb_filmes %>% 
   #filter(str_detect(string = generos, pattern = genero_escolhido)) %>% 
   filter(generos == genero_escolhido) %>% 
-  mutate(lucro = receita - orcamento)
+  mutate(lucro = receita - orcamento) %>% 
+  ggplot(aes(lucro))+
+  geom_histogram(bins = 10)
 
 ```
 
@@ -213,7 +282,9 @@ Podemos melhorar a apresentação, escolhendo cores diferentes adicionando o arg
 imdb_filmes %>% 
   #filter(str_detect(string = generos, pattern = genero_escolhido)) %>% 
   filter(generos == genero_escolhido) %>% 
-  mutate(lucro = receita - orcamento) 
+  mutate(lucro = receita - orcamento) %>% 
+  ggplot(aes(lucro))+
+  geom_histogram(bins = 50, fill="#cde55a")
 ```
 
 Você pode ver mais exemplos do Histogramas e Boxplots no Cap. 8 do livro [Curso-R](https://livro.curso-r.com/8-1-o-pacote-ggplot2.html#histogramas-e-boxplots)
@@ -222,9 +293,15 @@ Você pode ver mais exemplos do Histogramas e Boxplots no Cap. 8 do livro [Curso
 Podemos usar alternativamente um outro tipo de visualização muito similar, que é a `geom_density()`. Vamos usar os mesmos exemplos anteriores.
 
 ```{r density1}
-imdb %>% 
-  filter(series_name == seriado_escolhido) %>% 
-  select(1,2,4,7)
+
+imdb_filmes %>% 
+  #filter(str_detect(string = generos, pattern = genero_escolhido)) %>% 
+  filter(generos == genero_escolhido) %>% 
+  mutate(lucro = receita - orcamento) %>% 
+  ggplot(aes(lucro))+
+  geom_density()
+
+
 ```
 
 Podemos também customizar a cor da linha e da área abaixo da densidade usando os argumentos `fill` e `color` dentro do `geom_density()` bem como a transparência usando `alpha`.
@@ -234,7 +311,11 @@ Podemos também customizar a cor da linha e da área abaixo da densidade usando 
 imdb_filmes %>% 
   #filter(str_detect(string = generos, pattern = genero_escolhido)) %>% 
   filter(generos == genero_escolhido) %>% 
-  mutate(lucro = receita - orcamento)
+  mutate(lucro = receita - orcamento) %>% 
+  ggplot(aes(lucro))+
+  geom_density(fill="#e99d4e", alpha = 0.9,
+               color = "#e99d4e")
+
 ```
 
 E por fim, podemos comparar duas ou mais categorias. Vamos fazer isso, comparando os generos "Comedy" e "Drama" para saber se há diferenças significativas em termos de lucro. Para isto, vamos incluir o argumento `group` dentro da camada `aes` além de `fill` e `color`. Adicionalmente podemos incluir `alpha` dentro de `geom_density()`.
@@ -243,7 +324,9 @@ E por fim, podemos comparar duas ou mais categorias. Vamos fazer isso, comparand
 imdb_filmes %>% 
   #filter(str_detect(string = generos, pattern = genero_escolhido)) %>% 
   filter(generos %in% c("Comedy","Drama")) %>% 
-  mutate(lucro = receita - orcamento)
+  mutate(lucro = receita - orcamento) %>% 
+  ggplot(aes(lucro, group=generos, fill=generos, color=generos))+
+  geom_density(alpha=0.5)
 ```
 
 

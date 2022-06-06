@@ -26,6 +26,8 @@ navbar:
         href: Tutorial1.html
       - text: "Tutorial 2 - Ggplot e Tidyverse"
         href: Tutorial2.html
+      - text: "Tutorial 2 - Ggplot e Tidyverse - Gabarito"
+        href: Tutorial2_gabarito.html
     - text: "Labs"
       menu: 
       - text: "Lab 1"
