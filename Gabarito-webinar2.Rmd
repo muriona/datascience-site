@@ -1,6 +1,12 @@
 ---
 title: "Webinar 2 - Dashboards em R"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    code_download: false
+    theme: paper
+date: "Última versão em `r format(Sys.time(), '%d/%m/%y')`"
 
 ---
 
