@@ -28,6 +28,8 @@ navbar:
         href: Tutorial2.html
       - text: "Tutorial 2 - Ggplot e Tidyverse - Gabarito"
         href: Tutorial2_gabarito.html
+      - text: "Tutorial 3 - Regressão Linear"
+        href: Tutorial3.html
     - text: "Labs"
       menu: 
       - text: "Lab 1"
@@ -52,9 +54,7 @@ navbar:
         href: Gabarito-webinar3a.html
       - text: "Lab 3b - Gabarito com output"
         href: Gabarito-webinar3b.html
-      - text: "Lab 4a - Gabarito com output"
-        href: Gabarito-webinar4a.html
-      - text: "Lab 4b - Gabarito com output"
+      - text: "Lab 4 - Gabarito com output"
         href: Gabarito-webinar4b.html
       - text: "Lab 5 - Gabarito com output"
         href: Gabarito-webinar5.html

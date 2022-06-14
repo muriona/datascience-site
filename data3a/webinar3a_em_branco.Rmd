@@ -23,6 +23,8 @@ library(ggrepel)
 library(caret)
 library(ranger)
 library(viridisLite)
+library(tidymodels)
+library(WVPlots)
 
 seed <- 2020
 ```

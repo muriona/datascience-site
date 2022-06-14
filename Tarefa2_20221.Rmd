@@ -13,7 +13,7 @@ link-citations: yes
 
 knitr::include_graphics("img/javier-quesada-qYfwGVNJqSA-unsplash.jpg")
 
-knitr::opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(cache = TRUE, message = FALSE, warning = FALSE)
 
 library(tidyverse)
 library(knitr)
@@ -28,7 +28,13 @@ colorize <- function(x, color) {
 }
 ```
 
-Esta Tarefa 2 servirá para vocês aplicarem os conhecimentos de visualização de dados e de apresentação das visualizações em formato de relatório (PDF) e de Dashboard.
+Esta Tarefa 2 servirá para vocês aplicarem os conhecimentos de visualização de dados e de apresentação das visualizações em formato de relatório (PDF) e de Dashboard. O template para PDF pode ser baixado
+
+```{r zip, echo = FALSE, eval=TRUE}
+xfun::pkg_load2(c('htmltools', 'mime'))
+xfun::embed_dir("template_pdf/", text = "aqui.")
+
+```
 
 Para isto, cada um de vocês deverá escolher um dataset, alguns sites onde vocês podem localizar potenciais datasets são: [kaggle](https://www.kaggle.com/datasets), [FiveThirtyEight](https://data.fivethirtyeight.com/), [Portal Brasileiro de Dados Abertos](https://dados.gov.br/dataset), o [Open Data do Banco Mundial](https://datacatalog.worldbank.org/home) e [tidytuesdday](https://github.com/rfordatascience/tidytuesday). **Considerando a ampla variedade de dados será portanto, improvável ter dois datasets identicos.**
 

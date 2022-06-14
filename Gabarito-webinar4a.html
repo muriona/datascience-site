@@ -11,7 +11,7 @@
 
 
 
-<title>Webinar 4 - Métodos Supervisionados em Machine Learning</title>
+<title>Webinar 4a - Métodos Supervisionados em Machine Learning</title>
 
 <script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -30,6 +30,8 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -56,6 +58,11 @@ if (window.hljs) {
 
 
 
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
 
 
 <link rel="stylesheet" href="dd_cv_milz.css" type="text/css" />
@@ -221,6 +228,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -341,66 +351,238 @@ $(document).ready(function () {
 
 <div id="header">
 
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
 
 
-<h1 class="title toc-ignore">Webinar 4 - Métodos Supervisionados em
+
+<h1 class="title toc-ignore">Webinar 4a - Métodos Supervisionados em
 Machine Learning</h1>
 <h3 class="subtitle">Regressão Linear</h3>
 
 </div>
 
 
-<div id="carregando-os-dados" class="section level1">
-<h1>Carregando os dados</h1>
+<p><a href="data:application/zip;base64,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" download="data4.zip">Você pode baixar os dados aqui.</a></p>
+<div id="exemplo-01-salário-vs-experiência" class="section level1">
+<h1>Exemplo 01 Salário vs Experiência</h1>
+<p>Vamos ajustar a pasta com que iremos trabalhar</p>
+<p>Importando os dados:</p>
+<pre class="r"><code>library(tidyverse)
+
+dataset &lt;- read.csv(&#39;data4/Salary_Data.csv&#39;)
+dataset %&gt;% 
+  ggplot(aes(YearsExperience, Salary))+
+  geom_point()</code></pre>
+<p><img src="Gabarito-webinar4a_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Vamos separar os dados do dataset em training_set e test_set</p>
+<pre class="r"><code>library(caret)
+
+seed &lt;- 2020
+
+split &lt;- createDataPartition(y=dataset$Salary,
+                               p = 0.75, list = FALSE)
+
+training_set &lt;- dataset[split,]
+test_set &lt;- dataset[-split,]</code></pre>
+<p>Agora opcionalmente podemos transformar os dados para uma escala
+entre 0 e 1</p>
+<pre class="r"><code># training_set = scale(training_set)
+# test_set = scale(test_set)</code></pre>
+<p>Neste espaço do template, sempre iremos inserir um model para o
+objeto Regressor, neste exemplo utilizamos lm.</p>
+<pre class="r"><code>regressor &lt;- lm(formula = Salary ~ YearsExperience,
+              data = dataset)
+
+#summary(regressor)</code></pre>
+<p>A função predict utiliza o regressor para prever a var dependente a
+partir das var independentes do test_set.</p>
+<pre class="r"><code>y_pred = predict(regressor, data = dataset)</code></pre>
+<p>Visualizações, prestem atenção que diretamente no geom_line,
+utilizamo para aes(y) a função predict de forma integral, ou seja, não é
+necessário utilizá-la previamente.</p>
+<pre class="r"><code>dataset &lt;- dataset %&gt;% 
+  mutate(pred = y_pred)
+
+dataset %&gt;% 
+  ggplot(aes(YearsExperience, Salary)) +
+  geom_point()+
+  geom_line(aes(x = YearsExperience, y = pred,
+             colour = &#39;pred&#39;),
+             size=1) +
+  labs(title = &#39;Salary vs Experience&#39;,
+       x = &#39;Years of Experience&#39;,
+       y= &#39;Salary&#39;)</code></pre>
+<p><img src="Gabarito-webinar4a_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="exemplo-02---gpa" class="section level1">
+<h1>Exemplo 02 - GPA</h1>
 <p>A regressão linear é talvez o método mais conhecido para realizar
 previsões quando o comportamento dos dados remete a uma forma linear.
-Para mostrar a utilidade deste método iremos usar três datasets,
-<code>Salary.csv</code>, <code>GPA.csv</code> e
-<code>real_estate_price_size</code>.</p>
-<p><a href="data:application/zip;base64,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" download="data4.zip">Você pode baixar os dados aqui.</a></p>
-</div>
-<div id="carregando-pacotes" class="section level1">
-<h1>Carregando pacotes</h1>
-<pre class="r"><code>library(tidyverse)
-library(readxl)
+Para mostrar a utilidade deste método iremos usar dois datasets,
+<code>GPA.csv</code> e <code>real_estate_price_size</code>.</p>
+<div id="carregando-pacotes" class="section level2">
+<h2>Carregando pacotes</h2>
+<pre class="r"><code>library(readxl)
 library(ggrepel)
 library(caret)
 library(viridisLite)
 
 seed &lt;- 2020</code></pre>
 </div>
-<div id="exemplo-1-salário-vs-experiência" class="section level1">
-<h1>Exemplo 1: Salário vs experiência</h1>
-<p>Vamos ajustar a pasta com que iremos trabalhar</p>
-<p>Importando os dados:</p>
-<p>Vamos separar os dados do dataset em training_set e test_set</p>
-<p>Agora opcionalmente podemos transformar os dados para uma escala
-entre 0 e 1</p>
-<p>Neste espaço do template, sempre iremos inserir um model para o
-objeto Regressor, neste exemplo utilizamos lm.</p>
-<p>A função <code>predict()</code> utiliza o regressor para prever a var
-dependente a partir das var independentes do test_set.</p>
-<p>Visualizações, prestem atenção que diretamente no geom_line,
-utilizamo para aes(y) a função predict de forma integral, ou seja, não é
-necessário utilizá-la previamente.</p>
-</div>
-<div id="exemplo-2-gpa---grade-point-average" class="section level1">
-<h1>Exemplo 2: GPA - Grade Point Average</h1>
-<p>Vamos carregar os dados, e vamos plotar um gráfico de disperção:</p>
+<div id="gpa---grade-point-average" class="section level2">
+<h2>GPA - Grade Point Average</h2>
+<p>Vamos carregar os dados, e vamos plotar um gráfico de dispersão:</p>
+<pre class="r"><code>gpa &lt;- read.csv(&quot;data4/GPA.csv&quot;)
+
+ggplot(gpa, aes(SAT, GPA))+
+  geom_point()</code></pre>
+<p><img src="Gabarito-webinar4a_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>summary(gpa)</code></pre>
+<pre><code>##       SAT            GPA       
+##  Min.   :1634   Min.   :2.400  
+##  1st Qu.:1772   1st Qu.:3.190  
+##  Median :1846   Median :3.380  
+##  Mean   :1845   Mean   :3.330  
+##  3rd Qu.:1934   3rd Qu.:3.502  
+##  Max.   :2050   Max.   :3.810</code></pre>
+<pre class="r"><code>str(gpa)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    84 obs. of  2 variables:
+##  $ SAT: int  1714 1664 1760 1685 1693 1670 1764 1764 1792 1850 ...
+##  $ GPA: num  2.4 2.52 2.54 2.74 2.83 2.91 3 3 3.01 3.01 ...</code></pre>
 <p>Como pode ser observado, não temos suficientes dados como para fazer
 o split em treino e teste. Por este motivo, iremos usar o método de
 Cross-Validation, usando a função <code>trainControl</code> da
 biblioteca <code>caret</code>. Vamos iniciar pelo dataframe
 <code>gpa</code>.</p>
+<p>install.packages(“vtreat”)</p>
+<pre class="r"><code>library(vtreat)
+
+fmla &lt;- GPA~SAT
+
+train_control &lt;- trainControl(method=&quot;cv&quot;, number = 3)
+
+
+train(GPA~SAT, data=gpa, trControl=train_control, method = &quot;lm&quot; )</code></pre>
+<pre><code>## Linear Regression 
+## 
+## 84 samples
+##  1 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (3 fold) 
+## Summary of sample sizes: 57, 56, 55 
+## Resampling results:
+## 
+##   RMSE       Rsquared   MAE      
+##   0.2114062  0.4045372  0.1576123
+## 
+## Tuning parameter &#39;intercept&#39; was held constant at a value of TRUE</code></pre>
+<pre class="r"><code>model &lt;- train(GPA~SAT, data=gpa, trControl=train_control, method = &quot;lm&quot; )
+
+gpa$pred.cv &lt;- predict(model, gpa)
+
+gpa %&gt;% 
+  mutate(residuo = pred.cv - GPA) %&gt;% 
+  summarize(rmse = sqrt(mean(residuo^2)))</code></pre>
+<pre><code>##        rmse
+## 1 0.2080886</code></pre>
 <p>Para comparar, vamos rodar o modelo usando todos os dados:</p>
+<pre class="r"><code>pred &lt;- predict(lm(GPA~SAT, data=gpa))
+
+gpa %&gt;% 
+  mutate(residuo = pred - GPA) %&gt;% 
+  summarize(rmse = sqrt(mean(residuo^2)))</code></pre>
+<pre><code>##        rmse
+## 1 0.2080886</code></pre>
+<pre class="r"><code>summary(lm(GPA~SAT, data=gpa))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = GPA ~ SAT, data = gpa)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.71289 -0.12825  0.03256  0.11660  0.43957 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 0.2750403  0.4087394   0.673    0.503    
+## SAT         0.0016557  0.0002212   7.487  7.2e-11 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.2106 on 82 degrees of freedom
+## Multiple R-squared:  0.406,  Adjusted R-squared:  0.3988 
+## F-statistic: 56.05 on 1 and 82 DF,  p-value: 7.2e-11</code></pre>
+<pre class="r"><code>###### visualizar
+ggplot() +
+  geom_point(aes(x = gpa$SAT, y = gpa$pred.cv),
+             colour = &#39;red&#39;) +
+  geom_point(aes(x = gpa$SAT, y = gpa$GPA),
+             colour = &#39;purple&#39;) +
+  geom_line(aes(x = gpa$SAT, y = pred),
+            colour = &#39;blue&#39;) +
+  ggtitle(&#39;GPA&#39;) +
+  xlab(&#39;SAT&#39;) +
+  ylab(&#39;GPA&#39;)</code></pre>
+<p><img src="Gabarito-webinar4a_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
-<div id="exemplo-3---real-state" class="section level1">
-<h1>Exemplo 3 - Real State</h1>
+</div>
+<div id="exemplo-3-real-state" class="section level1">
+<h1>Exemplo 3 Real State</h1>
 <p>Vamos carregar os dados, e vamos plotar um gráfico de disperção:</p>
+<pre class="r"><code>real_state &lt;- read.csv(&quot;data4/real_estate_price_size.csv&quot;)
+
+ggplot(real_state, aes(size, price))+
+  geom_point()</code></pre>
+<p><img src="Gabarito-webinar4a_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<pre class="r"><code>summary(real_state)</code></pre>
+<pre><code>##      price             size       
+##  Min.   :154282   Min.   : 479.8  
+##  1st Qu.:234280   1st Qu.: 643.3  
+##  Median :280591   Median : 696.4  
+##  Mean   :292290   Mean   : 853.0  
+##  3rd Qu.:335724   3rd Qu.:1029.3  
+##  Max.   :500681   Max.   :1842.5</code></pre>
+<pre class="r"><code>str(real_state)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    100 obs. of  2 variables:
+##  $ price: num  234314 228582 281626 401256 458674 ...
+##  $ size : num  643 656 487 1505 1275 ...</code></pre>
 <p>Agora, vamos fazer o mesmo procedimento para o dataframe
 <code>real_state</code>:</p>
+<pre class="r"><code>fmla &lt;- price~size
+
+train(fmla, data=real_state, trControl=train_control, method = &quot;lm&quot; )</code></pre>
+<pre><code>## Linear Regression 
+## 
+## 100 samples
+##   1 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (3 fold) 
+## Summary of sample sizes: 65, 68, 67 
+## Resampling results:
+## 
+##   RMSE      Rsquared  MAE     
+##   38887.35  0.73872   32690.34
+## 
+## Tuning parameter &#39;intercept&#39; was held constant at a value of TRUE</code></pre>
+<pre class="r"><code>model &lt;- train(fmla, data=real_state, trControl=train_control, method = &quot;lm&quot; )
+
+real_state$pred.cv &lt;- predict(model, real_state)
+
+real_state %&gt;% 
+  mutate(residuo = pred.cv - price) %&gt;% 
+  summarize(rmse = sqrt(mean(residuo^2)))</code></pre>
+<pre><code>##       rmse
+## 1 38733.97</code></pre>
 </div>
 
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiV2ViaW5hciA0YSAtIE3DqXRvZG9zIFN1cGVydmlzaW9uYWRvcyBlbSBNYWNoaW5lIExlYXJuaW5nIgpzdWJ0aXRsZTogIlJlZ3Jlc3PDo28gTGluZWFyIgpvdXRwdXQ6IAogIGh0bWxfZG9jdW1lbnQ6CiAgICBjb2RlX2Rvd25sb2FkOiB0cnVlCi0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0UpCmBgYAoKYGBge3IgZWNobyA9IEZBTFNFLCBldmFsPVRSVUV9CnhmdW46OnBrZ19sb2FkMihjKCdodG1sdG9vbHMnLCAnbWltZScpKQp4ZnVuOjplbWJlZF9kaXIoImRhdGE0LyIsIHRleHQgPSAiVm9jw6ogcG9kZSBiYWl4YXIgb3MgZGFkb3MgYXF1aS4iKQoKYGBgCgojIEV4ZW1wbG8gMDEgU2Fsw6FyaW8gdnMgRXhwZXJpw6puY2lhCgpWYW1vcyBhanVzdGFyIGEgcGFzdGEgY29tIHF1ZSBpcmVtb3MgdHJhYmFsaGFyCgpJbXBvcnRhbmRvIG9zIGRhZG9zOgoKYGBge3J9CgpsaWJyYXJ5KHRpZHl2ZXJzZSkKCmRhdGFzZXQgPC0gcmVhZC5jc3YoJ2RhdGE0L1NhbGFyeV9EYXRhLmNzdicpCmRhdGFzZXQgJT4lIAogIGdncGxvdChhZXMoWWVhcnNFeHBlcmllbmNlLCBTYWxhcnkpKSsKICBnZW9tX3BvaW50KCkKCmBgYAoKVmFtb3Mgc2VwYXJhciBvcyBkYWRvcyBkbyBkYXRhc2V0IGVtIHRyYWluaW5nX3NldCBlIHRlc3Rfc2V0CgpgYGB7cn0KbGlicmFyeShjYXJldCkKCnNlZWQgPC0gMjAyMAoKc3BsaXQgPC0gY3JlYXRlRGF0YVBhcnRpdGlvbih5PWRhdGFzZXQkU2FsYXJ5LAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcCA9IDAuNzUsIGxpc3QgPSBGQUxTRSkKCnRyYWluaW5nX3NldCA8LSBkYXRhc2V0W3NwbGl0LF0KdGVzdF9zZXQgPC0gZGF0YXNldFstc3BsaXQsXQoKYGBgCgpBZ29yYSBvcGNpb25hbG1lbnRlIHBvZGVtb3MgdHJhbnNmb3JtYXIgb3MgZGFkb3MgcGFyYSB1bWEgZXNjYWxhIGVudHJlIDAgZSAxCgpgYGB7cn0KIyB0cmFpbmluZ19zZXQgPSBzY2FsZSh0cmFpbmluZ19zZXQpCiMgdGVzdF9zZXQgPSBzY2FsZSh0ZXN0X3NldCkKYGBgCgpOZXN0ZSBlc3Bhw6dvIGRvIHRlbXBsYXRlLCBzZW1wcmUgaXJlbW9zIGluc2VyaXIgdW0gbW9kZWwgcGFyYSBvIG9iamV0byBSZWdyZXNzb3IsIG5lc3RlIGV4ZW1wbG8gdXRpbGl6YW1vcyBsbS4KCmBgYHtyfQpyZWdyZXNzb3IgPC0gbG0oZm9ybXVsYSA9IFNhbGFyeSB+IFllYXJzRXhwZXJpZW5jZSwKICAgICAgICAgICAgICBkYXRhID0gZGF0YXNldCkKCiNzdW1tYXJ5KHJlZ3Jlc3NvcikKYGBgCgpBIGZ1bsOnw6NvIHByZWRpY3QgdXRpbGl6YSBvIHJlZ3Jlc3NvciBwYXJhIHByZXZlciBhIHZhciBkZXBlbmRlbnRlIGEgcGFydGlyIGRhcyB2YXIgaW5kZXBlbmRlbnRlcyBkbyB0ZXN0X3NldC4KCmBgYHtyfQp5X3ByZWQgPSBwcmVkaWN0KHJlZ3Jlc3NvciwgZGF0YSA9IGRhdGFzZXQpCgpgYGAKClZpc3VhbGl6YcOnw7VlcywgcHJlc3RlbSBhdGVuw6fDo28gcXVlIGRpcmV0YW1lbnRlIG5vIGdlb21fbGluZSwgdXRpbGl6YW1vIHBhcmEgYWVzKHkpIGEgZnVuw6fDo28gcHJlZGljdCBkZSBmb3JtYSBpbnRlZ3JhbCwgb3Ugc2VqYSwgbsOjbyDDqSBuZWNlc3PDoXJpbyB1dGlsaXrDoS1sYSBwcmV2aWFtZW50ZS4KCmBgYHtyfQoKZGF0YXNldCA8LSBkYXRhc2V0ICU+JSAKICBtdXRhdGUocHJlZCA9IHlfcHJlZCkKCmRhdGFzZXQgJT4lIAogIGdncGxvdChhZXMoWWVhcnNFeHBlcmllbmNlLCBTYWxhcnkpKSArCiAgZ2VvbV9wb2ludCgpKwogIGdlb21fbGluZShhZXMoeCA9IFllYXJzRXhwZXJpZW5jZSwgeSA9IHByZWQsCiAgICAgICAgICAgICBjb2xvdXIgPSAncHJlZCcpLAogICAgICAgICAgICAgc2l6ZT0xKSArCiAgbGFicyh0aXRsZSA9ICdTYWxhcnkgdnMgRXhwZXJpZW5jZScsCiAgICAgICB4ID0gJ1llYXJzIG9mIEV4cGVyaWVuY2UnLAogICAgICAgeT0gJ1NhbGFyeScpCgoKYGBgCgojIEV4ZW1wbG8gMDIgLSBHUEEKCkEgcmVncmVzc8OjbyBsaW5lYXIgw6kgdGFsdmV6IG8gbcOpdG9kbyBtYWlzIGNvbmhlY2lkbyBwYXJhIHJlYWxpemFyIHByZXZpc8O1ZXMgcXVhbmRvIG8gY29tcG9ydGFtZW50byBkb3MgZGFkb3MgcmVtZXRlIGEgdW1hIGZvcm1hIGxpbmVhci4gUGFyYSBtb3N0cmFyIGEgdXRpbGlkYWRlIGRlc3RlIG3DqXRvZG8gaXJlbW9zIHVzYXIgZG9pcyBkYXRhc2V0cywgYEdQQS5jc3ZgIGUgYHJlYWxfZXN0YXRlX3ByaWNlX3NpemVgLgoKIyMgQ2FycmVnYW5kbyBwYWNvdGVzCgpgYGB7ciBwYWNvdGVzfQoKbGlicmFyeShyZWFkeGwpCmxpYnJhcnkoZ2dyZXBlbCkKbGlicmFyeShjYXJldCkKbGlicmFyeSh2aXJpZGlzTGl0ZSkKCnNlZWQgPC0gMjAyMApgYGAKCiMjIEdQQSAtIEdyYWRlIFBvaW50IEF2ZXJhZ2UKClZhbW9zIGNhcnJlZ2FyIG9zIGRhZG9zLCBlIHZhbW9zIHBsb3RhciB1bSBncsOhZmljbyBkZSBkaXNwZXJzw6NvOgoKYGBge3J9CgpncGEgPC0gcmVhZC5jc3YoImRhdGE0L0dQQS5jc3YiKQoKZ2dwbG90KGdwYSwgYWVzKFNBVCwgR1BBKSkrCiAgZ2VvbV9wb2ludCgpCgpzdW1tYXJ5KGdwYSkKc3RyKGdwYSkKCmBgYAoKQ29tbyBwb2RlIHNlciBvYnNlcnZhZG8sIG7Do28gdGVtb3Mgc3VmaWNpZW50ZXMgZGFkb3MgY29tbyBwYXJhIGZhemVyIG8gc3BsaXQgZW0gdHJlaW5vIGUgdGVzdGUuIFBvciBlc3RlIG1vdGl2bywgaXJlbW9zIHVzYXIgbyBtw6l0b2RvIGRlIENyb3NzLVZhbGlkYXRpb24sIHVzYW5kbyBhIGZ1bsOnw6NvIGB0cmFpbkNvbnRyb2xgIGRhIGJpYmxpb3RlY2EgYGNhcmV0YC4gVmFtb3MgaW5pY2lhciBwZWxvIGRhdGFmcmFtZSBgZ3BhYC4KCmluc3RhbGwucGFja2FnZXMoInZ0cmVhdCIpCgpgYGB7cn0KbGlicmFyeSh2dHJlYXQpCgpmbWxhIDwtIEdQQX5TQVQKCnRyYWluX2NvbnRyb2wgPC0gdHJhaW5Db250cm9sKG1ldGhvZD0iY3YiLCBudW1iZXIgPSAzKQoKCnRyYWluKEdQQX5TQVQsIGRhdGE9Z3BhLCB0ckNvbnRyb2w9dHJhaW5fY29udHJvbCwgbWV0aG9kID0gImxtIiApCgoKCm1vZGVsIDwtIHRyYWluKEdQQX5TQVQsIGRhdGE9Z3BhLCB0ckNvbnRyb2w9dHJhaW5fY29udHJvbCwgbWV0aG9kID0gImxtIiApCgpncGEkcHJlZC5jdiA8LSBwcmVkaWN0KG1vZGVsLCBncGEpCgpncGEgJT4lIAogIG11dGF0ZShyZXNpZHVvID0gcHJlZC5jdiAtIEdQQSkgJT4lIAogIHN1bW1hcml6ZShybXNlID0gc3FydChtZWFuKHJlc2lkdW9eMikpKQpgYGAKClBhcmEgY29tcGFyYXIsIHZhbW9zIHJvZGFyIG8gbW9kZWxvIHVzYW5kbyB0b2RvcyBvcyBkYWRvczoKCmBgYHtyfQpwcmVkIDwtIHByZWRpY3QobG0oR1BBflNBVCwgZGF0YT1ncGEpKQoKZ3BhICU+JSAKICBtdXRhdGUocmVzaWR1byA9IHByZWQgLSBHUEEpICU+JSAKICBzdW1tYXJpemUocm1zZSA9IHNxcnQobWVhbihyZXNpZHVvXjIpKSkKCnN1bW1hcnkobG0oR1BBflNBVCwgZGF0YT1ncGEpKQpgYGAKCmBgYHtyfQojIyMjIyMgdmlzdWFsaXphcgpnZ3Bsb3QoKSArCiAgZ2VvbV9wb2ludChhZXMoeCA9IGdwYSRTQVQsIHkgPSBncGEkcHJlZC5jdiksCiAgICAgICAgICAgICBjb2xvdXIgPSAncmVkJykgKwogIGdlb21fcG9pbnQoYWVzKHggPSBncGEkU0FULCB5ID0gZ3BhJEdQQSksCiAgICAgICAgICAgICBjb2xvdXIgPSAncHVycGxlJykgKwogIGdlb21fbGluZShhZXMoeCA9IGdwYSRTQVQsIHkgPSBwcmVkKSwKICAgICAgICAgICAgY29sb3VyID0gJ2JsdWUnKSArCiAgZ2d0aXRsZSgnR1BBJykgKwogIHhsYWIoJ1NBVCcpICsKICB5bGFiKCdHUEEnKQpgYGAKCiMgRXhlbXBsbyAzIFJlYWwgU3RhdGUKClZhbW9zIGNhcnJlZ2FyIG9zIGRhZG9zLCBlIHZhbW9zIHBsb3RhciB1bSBncsOhZmljbyBkZSBkaXNwZXLDp8OjbzoKCmBgYHtyfQoKcmVhbF9zdGF0ZSA8LSByZWFkLmNzdigiZGF0YTQvcmVhbF9lc3RhdGVfcHJpY2Vfc2l6ZS5jc3YiKQoKZ2dwbG90KHJlYWxfc3RhdGUsIGFlcyhzaXplLCBwcmljZSkpKwogIGdlb21fcG9pbnQoKQoKc3VtbWFyeShyZWFsX3N0YXRlKQpzdHIocmVhbF9zdGF0ZSkKYGBgCgpBZ29yYSwgdmFtb3MgZmF6ZXIgbyBtZXNtbyBwcm9jZWRpbWVudG8gcGFyYSBvIGRhdGFmcmFtZSBgcmVhbF9zdGF0ZWA6CgpgYGB7cn0KZm1sYSA8LSBwcmljZX5zaXplCgp0cmFpbihmbWxhLCBkYXRhPXJlYWxfc3RhdGUsIHRyQ29udHJvbD10cmFpbl9jb250cm9sLCBtZXRob2QgPSAibG0iICkKCm1vZGVsIDwtIHRyYWluKGZtbGEsIGRhdGE9cmVhbF9zdGF0ZSwgdHJDb250cm9sPXRyYWluX2NvbnRyb2wsIG1ldGhvZCA9ICJsbSIgKQoKcmVhbF9zdGF0ZSRwcmVkLmN2IDwtIHByZWRpY3QobW9kZWwsIHJlYWxfc3RhdGUpCgpyZWFsX3N0YXRlICU+JSAKICBtdXRhdGUocmVzaWR1byA9IHByZWQuY3YgLSBwcmljZSkgJT4lIAogIHN1bW1hcml6ZShybXNlID0gc3FydChtZWFuKHJlc2lkdW9eMikpKQpgYGAK</div>
 
 
 
@@ -434,6 +616,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("Gabarito-webinar4a.Rmd");
+});
+</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

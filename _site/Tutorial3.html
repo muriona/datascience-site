@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Tutorial 3 - Métodos Supervisionados em Machine Learning</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="tarefas.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EPS 7008</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tarefas
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tarefa_Instrucoes.html">Instruções Gerais</a>
+    </li>
+    <li>
+      <a href="Template_entregas.html">Template para entregas</a>
+    </li>
+    <li>
+      <a href="Tarefa1.html">Tarefa 1</a>
+    </li>
+    <li>
+      <a href="Gabarito_Tarefa1.html">Gabarito - Tarefa 1</a>
+    </li>
+    <li>
+      <a href="Tarefa2_20221.html">Tarefa 2</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tutoriais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tutorial1.html">Tutorial 1 - Tidyverse</a>
+    </li>
+    <li>
+      <a href="Tutorial2.html">Tutorial 2 - Ggplot e Tidyverse</a>
+    </li>
+    <li>
+      <a href="Tutorial2_gabarito.html">Tutorial 2 - Ggplot e Tidyverse - Gabarito</a>
+    </li>
+    <li>
+      <a href="Tutorial3.html">Tutorial 3 - Regressão Linear</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Labs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="webinar1a-EDA.html">Lab 1</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar1a.html">Lab 1a - Gabarito</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar1a-output.html">Lab 1a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="webinar1b-EDA.html">Lab 1b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar2.html">Lab 2 - Dashboards em R</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar3a.html">Lab 3a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar3b.html">Lab 3b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar4b.html">Lab 4 - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar5.html">Lab 5 - Gabarito com output</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Tutorial 3 - Métodos Supervisionados em
+Machine Learning</h1>
+<h3 class="subtitle">Regressão Linear</h3>
+<h4 class="date">Última versão em 14/06/22</h4>
+
+</div>
+
+
+<div id="carregando-os-dados" class="section level1">
+<h1>Carregando os dados</h1>
+<p>A regressão linear é talvez o método mais conhecido para realizar
+previsões quando o comportamento dos dados remete a uma forma linear.
+Para mostrar a utilidade deste método iremos usar três datasets,
+<code>Salary.csv</code>, <code>GPA.csv</code> e
+<code>real_estate_price_size</code>.</p>
+<p><a href="data:application/zip;base64,UEsDBBQAAgAIALdgflLQJ+8J0gAAAMYBAAAPAAAAU2FsYXJ5X0RhdGEuY3N2TdBLSsVQDAbgueBOQsn7sQBX4MhhuXRwQUTqRHdvbFO1s48k/2nysq37x9Pn+7bft7fbBs/r67p/PT7QQiAlKgvijwTUGW1kIBFCh3hBUDG2Efdc1lUrMHflQ50FjmQ4YjBVtV/5PwVYUNaowIUpD2mnmEXpn7wsRtRzmDQycOpv1ClRcqZYd7oj10ggBfOqFSSJn7t7v1BSiqOEopiU6JRKDhkVEJLguW72SkSSdDG6Wjpn64ebZslD62Yvr6E32WUujv2DxCxz13a390XinP4GUEsDBBQAAgAIAE9yzlQ5ugk8pwEAAIUDAAAKAAAAc3R5bGVzLmNzc4VS227bMAx991dwKNBsQWzn0quDYiuWYuvDhgEd0GfZYiyhkilYcrO02L9PshvUTlOMgB/II/OQ5/CL1IZqB02tPo6Ec8ZmabqmytmkJCoVMiNtUpBOC2s/r5mWanv1o1EyO5lOJ/6Tk/Pp9JhLaxTbXtkNM6NPyyhKx3E/4F6QQlhR0WisXLwXME6jKCe+hecIfIQB4o4sg1GgGy1fASufMIPZqfmzjP6+ofJxvVrd/vwG999vf9/A3a/rrzcDOJAlTjo/UKDTrC5lFTsyGSxQw4dOEla55Suak3OkM5ijbkkTi4WTVIGYTXrJfAK9bDHITgbZKTyDb28Y57IqD7JDOu5QsAS6KcTuNeRYsMYiOIEawRctsMEe8ZlXB/ItcFyzRrkg8Pu7KGldXNbUmFg6P0NnQkGK6gyOzvMLdpG/1f+s03//74T5DR9x2GQjPNS1yFnxEF5XPN4x4GLOL2cvMNUcfbGiCg+1zwQ9Yh2kPMzb4XsrrNv4L397TCCQ+Qlse5Pe3dbUYGUwMNgW7fr25n7nYPtyXQa5XkoblKVwmV9WcU/7D1BLAwQUAAIACABGdM5Uf5jptewDAAB0BwAAFwAAAHR1dG9yaWFsM19lbV9icmFuY28uUm1krVVNbxs3EL3zVwzcGrGBleK4N6E5GIYbFHAKw0591VLLkcSEu9ySXMVykT/SW9BDkNz7C/aP9Q13NxJ67kVYfszjzHtvRrPZTCWbHC/o5F2XfLDa0U80o7f91+SNj/TQtRx2NlrfaFlzTW91tbUN0y3r0Nhmc6Jit5pQ7nkTOMb+b0+3uKTDifJdaru0IEW0TbVbGl91NTdpgQ2i5KsFpdDxtFqundfpaK/yhhH0scG+WdBauzhe3nKNN1uNFIebMSJOB17rOMdCGZ0kqf4vl2ytacchZ4YiykBrH2qdzh72cY5TPjsv6MWpeXlavzzdvzgvT9QM7KiyLP8MFDl1bUG2qVxn+PUvV7cPN5/Uh8amsFj4NsVlte2aDz/i3hlXW0+v6d397zcF1SBDbxjrHFPQx4G0aeNcHlDqB7rWIfBGN8YTaDZCtlJXFA58uswn9V9RotvxM3mqB5mo1jaCp2bLlcWy1UEjUjv7jIA2MATs/+FIf3TDA7hbtz4kLTp4MtOLCKo5MWnqQFcmaHx2TncCWvuYAjBxIVlnEcRkOCJkSsUCAkBdxK0U+m+CnDR4iQWVD9rpsIc0u7IgKt/cXeVvYuiBdJdAgmLLNtiKl9E+czn/DzetrnziOOkyLj8p5ewKie3PkjV70ZnPv28B2jy5w3oDSls+2qhgmXRY7mywxsZbmwCiIrOhn2d0eXF5MYl188R16zy9WhBK6j8H62mH5niCE23/ramsVupRCxH6fYeihLFW40OYhww88QQ2V9ptdVDq10GSYwcsJpTIomn4fgDJJl7FzUCx4qplXhMYSfIJA208VPNtJf3rRG2mFv00Pt3ErPERbraOiM+xgliEiMB0AdBXSv2WlebY6v6LuAYPgQYoViDBGj6bqrJNBBEBQHCMYTdaEoWt3jMMN04JHwpqBsyR0Oyq51xy6WpR/4rWXdN/kQYo8YKxVTo7L6eLgAwT1vCGuJ2F7h3KMtC5Mblq4T8k5GR0zGe2OZzGoZiBNTz6aGM3dM+x2pcLgmMxHd8E8f2dt02iK7yGBp+EqgarHhgtQN0uHwFCjABONqH/vLYVKET32NgOYwliK3Xta58VAqMAWeF3BxjwJAykzG7sEGzHvLNqVY6S8tf6WeIots6O1mDb+NEUjDYGUUPD+mR3AD5u2MNEQQLXwcc4e9TS5gn+KeSOuFMfSZKdd+3hEu9KZEMru3IWPVlpKnNflXMaqIFD0ReQSfwg5l0HzB8qN60WoZXKE0Ymk1i9GFkL3gyJDT4aUxj+nI7a5Fgn+QO7xzihB5km/5MyuZOmpCaWMd2F+OArGHOYpaPRj+rLky0PtlKA/gVQSwMEFAACAAgAcRBYT2OyDZtpAwAAcAcAABoAAAByZWFsX2VzdGF0ZV9wcmljZV9zaXplLmNzdk1VO64bQQzrA+QmC0F/ac4TpEgXJF1OH0rrZy/cGNoZfSiS8/vPrx8/r7+//v38/k3NTZzE/Uo34oOQdrRQaF8ZSaoItaQmmeXlXaQ45SwaQcl9SbBTBWLRWU4aeYlWkCeuenAwIVkgIpM/Q/QQpyPE1AhJRUmSo6IigopmIixk01cr6WSSTuOtmMfRH0J1Ak3wQUFOJsMxP17VdI5e0q4UMlfDS0nY31ddugIDT//MB00j5i5H75gx05l0zopGUlDC6lBNWW+zokQypvBFUVATZ1KNzkQ0PIROT/9CXAid4xjy1DSrRTUz4aNigHvwkoFCMBQpwPFDOUjjRB7CAECVixydSpsHYg1YpckaoWx27GZgRcpGLksNmZYvgGlkAxiy45/oG3vn7FAyYCNmoMJ0WgU0/dO7ZZ9uckMqP7lAG0taIPsgKADfXmMjmX6m5ipsAZBdcYpm2Ue8E7Xz3SgYpwBOAE1HLaQG2GcFyKQK0Aarg/QTaZzVuYZ+MY1y7zSzQj16EvDNKhoM7GVgDTDYVi91DQt3NA4QsAgsae5JeeKzPvjWZcHvYi4+X9L7gRNQc/In/cAbTlkqv8opO4bZvafZLQGW4Sg/T0W1AmF5nEp1FI9hrRRxLL6jSXSeGAkBQwsgx82p1yhQIdh5M/srlieQiqHMAvV6YIlIyHDq3akCjWNpoqvopp4tKINoEAxSGZQxAyITFrqa0zbq6QJNVO3VnvQjgABKUB/WNeyV2pCARA2MZ1RZ/o/QQfNcICZVnPEQcA9kh7+sF2DLuFePfQFRGyKvvu49Yxcx5lS6TYyVWYBhQvqR+AgATlaYaPQ1OBxcw3r8k8lHu7qgfpFdK+EXlPboQVqmYMxi4Z2+jOiD9MOIt3cKKvri9VURsAmWoZ+K2jAYoQ9prRXzkwzyEPtaqeVslo7lh4EhAeLxh7XmukodDx60B0BpNhjHLYpbls5Lkh5bEwjMfITJ+C1J3uptOBQo+HgejG2E/FSYFYwGTHh6KRwXl5cSPrY5O8NqYA5y665vwARV4ciYKcdmZ4Ib/T2mBsO0mzoO75/WXgZu1ryeO0UL79Wqv2Vs7fFCZGb72s9baZAVyNqRD/Gpj+F9bQgOAUNa8oL3sNyRQtvYXeTjwYMcxePO7q9U5bCpzV7g74T+A1BLAwQUAAIACABxEFhPTaBhR0MBAACaAwAABwAAAEdQQS5jc3ZNkjtuAzEMRPsAucnCkMR/6SptgOS2LnykXCE7I0vrah+41JBD8u/x/Ln/Hl/f98+PHl2PcdOT3EE2EPQGZDTtxCCWnJgCDCRUZ64e8v6tccit4VdaWxhiQIoHMa5oso+xMeTEjtwMRDtzzRZ66MLUKyEdWOylbxxjoTt0B00FCI0VtQb85YDAYAszIRntLxxttJ1QutFrYckVpctRHMOF2TYqngnn1BKIzsqgIEoF9CB0KX2j20aOV1jYfWE0GBaUqGobB55Nl/qiMl8xQymd86iFSaWJtKDssMVCp12di+IzinF2OvfbFpbJjmZfmEWcFihWex4TC88Mw1ekWr+CREGPPNo5DuLcA+83eQo2t/OGVOCBRC4s7sy3gHPneOQd2PmbBQoeXfdRuHGlUA2OUXxh9rajHE0I7aLxYAk2nmfCP1BLAQIeAxQAAgAIALdgflLQJ+8J0gAAAMYBAAAPAAAAAAAAAAEAAACkgQAAAABTYWxhcnlfRGF0YS5jc3ZQSwECHgMUAAIACABPcs5UOboJPKcBAACFAwAACgAAAAAAAAABAAAApIH/AAAAc3R5bGVzLmNzc1BLAQIeAxQAAgAIAEZ0zlR/mOm17AMAAHQHAAAXAAAAAAAAAAEAAACkgc4CAAB0dXRvcmlhbDNfZW1fYnJhbmNvLlJtZFBLAQIeAxQAAgAIAHEQWE9jsg2baQMAAHAHAAAaAAAAAAAAAAEAAACkge8GAAByZWFsX2VzdGF0ZV9wcmljZV9zaXplLmNzdlBLAQIeAxQAAgAIAHEQWE9NoGFHQwEAAJoDAAAHAAAAAAAAAAEAAACkgZAKAABHUEEuY3N2UEsFBgAAAAAFAAUANwEAAPgLAAAAAA==" download="data4.zip">Você pode baixar os dados aqui.</a></p>
+</div>
+<div id="exemplo-01-salário-vs-experiência" class="section level1">
+<h1>Exemplo 01 Salário vs Experiência</h1>
+<p>Vamos ajustar a pasta com que iremos trabalhar</p>
+<p>Importando os dados:</p>
+<pre class="r"><code>library(tidyverse)
+
+dataset &lt;- read.csv(&#39;data4/Salary_Data.csv&#39;)
+dataset %&gt;% 
+  ggplot(aes(YearsExperience, Salary))+
+  geom_point()</code></pre>
+<p><img src="Tutorial3_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Vamos separar os dados do dataset em training_set e test_set</p>
+<pre class="r"><code>library(caret)
+
+seed &lt;- 2020
+
+split &lt;- createDataPartition(y=dataset$Salary,
+                               p = 0.75, list = FALSE)
+
+training_set &lt;- dataset[split,]
+test_set &lt;- dataset[-split,]</code></pre>
+<p>Agora opcionalmente podemos transformar os dados para uma escala
+entre 0 e 1</p>
+<pre class="r"><code># training_set = scale(training_set)
+# test_set = scale(test_set)</code></pre>
+<p>Neste espaço do template, sempre iremos inserir um model para o
+objeto Regressor, neste exemplo utilizamos <code>lm</code>.</p>
+<pre class="r"><code>regressor &lt;- lm(formula = Salary ~ YearsExperience,
+              data = dataset)
+
+#summary(regressor)</code></pre>
+<p>A função predict utiliza o regressor para prever a var dependente a
+partir das var independentes do test_set.</p>
+<pre class="r"><code>y_pred = predict(regressor, data = dataset)</code></pre>
+<p>Visualizações, prestem atenção que diretamente no geom_line,
+utilizamo para aes(y) a função predict de forma integral, ou seja, não é
+necessário utilizá-la previamente.</p>
+<pre class="r"><code>dataset &lt;- dataset %&gt;% 
+  mutate(pred = y_pred)
+
+dataset %&gt;% 
+  ggplot(aes(YearsExperience, Salary)) +
+  geom_point()+
+  geom_line(aes(x = YearsExperience, y = pred,
+             colour = &#39;pred&#39;),
+             size=1) +
+  labs(title = &#39;Salary vs Experience&#39;,
+       x = &#39;Years of Experience&#39;,
+       y= &#39;Salary&#39;)</code></pre>
+<p><img src="Tutorial3_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="exemplo-02---gpa" class="section level1">
+<h1>Exemplo 02 - GPA</h1>
+<p>A regressão linear é talvez o método mais conhecido para realizar
+previsões quando o comportamento dos dados remete a uma forma linear.
+Para mostrar a utilidade deste método iremos usar dois datasets,
+<code>GPA.csv</code> e <code>real_estate_price_size</code>.</p>
+<div id="carregando-pacotes" class="section level2">
+<h2>Carregando pacotes</h2>
+<pre class="r"><code>library(readxl)
+library(ggrepel)
+library(caret)
+library(viridisLite)
+
+seed &lt;- 2020</code></pre>
+</div>
+<div id="gpa---grade-point-average" class="section level2">
+<h2>GPA - Grade Point Average</h2>
+<p>Vamos carregar os dados, e vamos plotar um gráfico de dispersão:</p>
+<pre class="r"><code>gpa &lt;- read.csv(&quot;data4/GPA.csv&quot;)
+
+ggplot(gpa, aes(SAT, GPA))+
+  geom_point()</code></pre>
+<p><img src="Tutorial3_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>summary(gpa)</code></pre>
+<pre><code>##       SAT            GPA       
+##  Min.   :1634   Min.   :2.400  
+##  1st Qu.:1772   1st Qu.:3.190  
+##  Median :1846   Median :3.380  
+##  Mean   :1845   Mean   :3.330  
+##  3rd Qu.:1934   3rd Qu.:3.502  
+##  Max.   :2050   Max.   :3.810</code></pre>
+<pre class="r"><code>str(gpa)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    84 obs. of  2 variables:
+##  $ SAT: int  1714 1664 1760 1685 1693 1670 1764 1764 1792 1850 ...
+##  $ GPA: num  2.4 2.52 2.54 2.74 2.83 2.91 3 3 3.01 3.01 ...</code></pre>
+<p>Como pode ser observado, não temos suficientes dados como para fazer
+o split em treino e teste. Por este motivo, iremos usar o método de
+Cross-Validation, usando a função <code>trainControl</code> da
+biblioteca <code>caret</code>. Vamos iniciar pelo dataframe
+<code>gpa</code>.</p>
+<p>install.packages(“vtreat”)</p>
+<pre class="r"><code>library(vtreat)
+
+fmla &lt;- GPA~SAT
+
+train_control &lt;- trainControl(method=&quot;cv&quot;, number = 3)
+
+
+train(GPA~SAT, data=gpa, trControl=train_control, method = &quot;lm&quot; )</code></pre>
+<pre><code>## Linear Regression 
+## 
+## 84 samples
+##  1 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (3 fold) 
+## Summary of sample sizes: 56, 56, 56 
+## Resampling results:
+## 
+##   RMSE       Rsquared   MAE      
+##   0.2116703  0.4381039  0.1567771
+## 
+## Tuning parameter &#39;intercept&#39; was held constant at a value of TRUE</code></pre>
+<pre class="r"><code>model &lt;- train(GPA~SAT, data=gpa, trControl=train_control, method = &quot;lm&quot; )
+
+gpa$pred.cv &lt;- predict(model, gpa)
+
+gpa %&gt;% 
+  mutate(residuo = pred.cv - GPA) %&gt;% 
+  summarize(rmse = sqrt(mean(residuo^2)))</code></pre>
+<pre><code>##        rmse
+## 1 0.2080886</code></pre>
+<p>Para comparar, vamos rodar o modelo usando todos os dados:</p>
+<pre class="r"><code>pred &lt;- predict(lm(GPA~SAT, data=gpa))
+
+gpa %&gt;% 
+  mutate(residuo = pred - GPA) %&gt;% 
+  summarize(rmse = sqrt(mean(residuo^2)))</code></pre>
+<pre><code>##        rmse
+## 1 0.2080886</code></pre>
+<pre class="r"><code>summary(lm(GPA~SAT, data=gpa))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = GPA ~ SAT, data = gpa)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.71289 -0.12825  0.03256  0.11660  0.43957 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 0.2750403  0.4087394   0.673    0.503    
+## SAT         0.0016557  0.0002212   7.487  7.2e-11 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.2106 on 82 degrees of freedom
+## Multiple R-squared:  0.406,  Adjusted R-squared:  0.3988 
+## F-statistic: 56.05 on 1 and 82 DF,  p-value: 7.2e-11</code></pre>
+<pre class="r"><code>###### visualizar
+ggplot() +
+  geom_point(aes(x = gpa$SAT, y = gpa$pred.cv),
+             colour = &#39;red&#39;) +
+  geom_point(aes(x = gpa$SAT, y = gpa$GPA),
+             colour = &#39;purple&#39;) +
+  geom_line(aes(x = gpa$SAT, y = pred),
+            colour = &#39;blue&#39;) +
+  ggtitle(&#39;GPA&#39;) +
+  xlab(&#39;SAT&#39;) +
+  ylab(&#39;GPA&#39;)</code></pre>
+<p><img src="Tutorial3_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+</div>
+<div id="exemplo-3-real-state" class="section level1">
+<h1>Exemplo 3 Real State</h1>
+<p>Vamos carregar os dados, e vamos plotar um gráfico de disperção:</p>
+<pre class="r"><code>real_state &lt;- read.csv(&quot;data4/real_estate_price_size.csv&quot;)
+
+ggplot(real_state, aes(size, price))+
+  geom_point()</code></pre>
+<p><img src="Tutorial3_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<pre class="r"><code>summary(real_state)</code></pre>
+<pre><code>##      price             size       
+##  Min.   :154282   Min.   : 479.8  
+##  1st Qu.:234280   1st Qu.: 643.3  
+##  Median :280591   Median : 696.4  
+##  Mean   :292290   Mean   : 853.0  
+##  3rd Qu.:335724   3rd Qu.:1029.3  
+##  Max.   :500681   Max.   :1842.5</code></pre>
+<pre class="r"><code>str(real_state)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    100 obs. of  2 variables:
+##  $ price: num  234314 228582 281626 401256 458674 ...
+##  $ size : num  643 656 487 1505 1275 ...</code></pre>
+<p>Agora, vamos fazer o mesmo procedimento para o dataframe
+<code>real_state</code>:</p>
+<pre class="r"><code>fmla &lt;- price~size
+
+train(fmla, data=real_state, trControl=train_control, method = &quot;lm&quot; )</code></pre>
+<pre><code>## Linear Regression 
+## 
+## 100 samples
+##   1 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (3 fold) 
+## Summary of sample sizes: 67, 65, 68 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE     
+##   39700.59  0.7566338  33471.52
+## 
+## Tuning parameter &#39;intercept&#39; was held constant at a value of TRUE</code></pre>
+<pre class="r"><code>model &lt;- train(fmla, data=real_state, trControl=train_control, method = &quot;lm&quot; )
+
+real_state$pred.cv &lt;- predict(model, real_state)
+
+real_state %&gt;% 
+  mutate(residuo = pred.cv - price) %&gt;% 
+  summarize(rmse = sqrt(mean(residuo^2)))</code></pre>
+<pre><code>##       rmse
+## 1 38733.97</code></pre>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

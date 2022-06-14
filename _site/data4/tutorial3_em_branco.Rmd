@@ -1,9 +1,14 @@
 ---
-title: "Webinar 4 - Métodos Supervisionados em Machine Learning"
+title: "Tutorial 3 - Métodos Supervisionados em Machine Learning"
 subtitle: "Regressão Linear"
 output: 
   html_document:
-    code_download: true
+    toc: true
+    toc_float: true
+    code_download: false
+    theme: paper
+    css: tarefas.css
+date: "Última versão em `r format(Sys.time(), '%d/%m/%y')`"
 ---
 
 ```{r setup, include=FALSE}
@@ -37,15 +42,15 @@ Vamos separar os dados do dataset em training_set e test_set
 
 Agora opcionalmente podemos transformar os dados para uma escala entre 0 e 1
 
-Neste espaço do template, sempre iremos inserir um model para o objeto Regressor, neste exemplo utilizamos lm.
+Neste espaço do template, sempre iremos inserir um modelo para o objeto Regressor, neste exemplo utilizamos `lm`.
 
 A função `predict()` utiliza o regressor para prever a var dependente a partir das var independentes do test_set.
 
-Visualizações, prestem atenção que diretamente no geom_line, utilizamo para aes(y) a função predict de forma integral, ou seja, não é necessário utilizá-la previamente. 
+Visualizar
 
 # Exemplo 2: GPA - Grade Point Average
 
-Vamos carregar os dados, e vamos plotar um gráfico de disperção:
+Vamos carregar os dados, e vamos plotar um gráfico de dispersão:
 
 
 
@@ -59,7 +64,7 @@ Para comparar, vamos rodar o modelo usando todos os dados:
 
 # Exemplo 3 - Real State
 
-Vamos carregar os dados, e vamos plotar um gráfico de disperção:
+Vamos carregar os dados, e vamos plotar um gráfico de dispersão:
 
 
 Agora, vamos fazer o mesmo procedimento para o dataframe `real_state`:

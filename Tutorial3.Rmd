@@ -1,10 +1,20 @@
 ---
-title: "Webinar 4a - Métodos Supervisionados em Machine Learning"
+title: "Tutorial 3 - Métodos Supervisionados em Machine Learning"
 subtitle: "Regressão Linear"
 output: 
   html_document:
-    code_download: true
+    toc: true
+    toc_float: true
+    code_download: false
+    theme: paper
+    css: tarefas.css
+date: "Última versão em `r format(Sys.time(), '%d/%m/%y')`"
+
 ---
+
+# Carregando os dados
+
+A regressão linear é talvez o método mais conhecido para realizar previsões quando o comportamento dos dados remete a uma forma linear. Para mostrar a utilidade deste método iremos usar três datasets, `Salary.csv`,  `GPA.csv` e `real_estate_price_size`.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
@@ -55,7 +65,7 @@ Agora opcionalmente podemos transformar os dados para uma escala entre 0 e 1
 # test_set = scale(test_set)
 ```
 
-Neste espaço do template, sempre iremos inserir um model para o objeto Regressor, neste exemplo utilizamos lm.
+Neste espaço do template, sempre iremos inserir um model para o objeto Regressor, neste exemplo utilizamos `lm`.
 
 ```{r}
 regressor <- lm(formula = Salary ~ YearsExperience,
