@@ -1,0 +1,97 @@
+---
+title: "Tarefa 1 - Fundos Imobiliários"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: paper
+link-citations: yes
+---
+
+```{css, echo = FALSE}
+
+@import url('https://fonts.googleapis.com/css?family=Muli:400,400i,700&display=swap');
+
+/*------------- Whole Document---------------- */
+
+body {
+    font-family: 'Muli';
+    font-size: 19px;
+}
+
+/*----------------ADDING WHITE SPACE-------------*/
+
+.title {
+  margin-top: 2em !important;
+  margin-bottom: 0.75em;
+}
+
+.section h1,
+.section h2, 
+.section h3, 
+.section h4, 
+.section h5 { 
+  padding-top: 3em !important; /*adding so much padding because theme adds a margin-top: -65px by default */
+  margin-bottom: 0.75em;
+}
+
+.list-group-item {
+    color: #7b8a8b;
+    font-size: 16px;
+}
+.list-group-item.active {
+    color: white;
+    background-color: #e32d91;
+    border: none;
+}
+.list-group-item:hover, 
+.list-group-item.active:hover {
+    color: #ffffff;
+    background-color: #e32d91;
+}
+
+/* headers */
+
+h1, h2, h3, h4, h5 {
+  color:#e32d91;
+}
+```
+
+```{r grassmarket, fig.margin = TRUE, echo = FALSE, warning=FALSE, message=FALSE, fig.width=3, fig.cap="Photo by Javier Quesada on Unsplash"}
+knitr::include_graphics("img/javier-quesada-qYfwGVNJqSA-unsplash.jpg")
+
+```
+
+Nesta Tarefa 1, vocês irão analisar um dataset sobre Fundos Imobiliários no Brasil.
+
+O nível de análise e o quê analisar será definido pela equipe e deverá ser explicado no documento (relatório) a ser entregue. Alguns exemplos de tipos de análise podem ser:
+
+-   Análise da liquidez ao longo do tempo
+-   Acumulação de dividendos num determinado período
+-   Média móvel de dividendos dos últimos 12 meses
+-   Variação de preço
+-   Diferenças entre setores e entre fundos do mesmo setor
+
+A entrega necessariamente exige:
+
+-   Apresentação de análises exploratórias, em formato de gráficos (principalmente) e tabelas e sua discussão.
+-   Para as análises exploratórias devem usar-se gráficos diversos (revisar material do Datacamp sobre visualização. ( Eventualmente podem usar-se indicadores (p.ex. médias) para facilitar a análise e discussão dos resultados.
+-   Construção de dashboard retratando a síntese das informações (gráficas e numéricas) mais importantes (em Tableau ou no R).
+-   Relatório escrito em Rmd (e visualizado em html) detalhando todas as análises feitas bem como suas discussões.
+
+Você pode baixar os dados:
+
+```{r echo = FALSE, eval=TRUE}
+xfun::pkg_load2(c('htmltools', 'mime'))
+xfun::embed_dir("data_tarefa1_20212/", text = "aqui.")
+
+```
+
+## Rúbrica
+
+| **Critério**                                | **Excelente**                                                                                                                                                                                                                                                                                                                                                                | **Satisfatório**                                                                                                                                                                                                                                                                                                                                                              | **Insatisfatório**                                                                                                                                                                                                                                                                                                                                                                                 |
+|---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Uso de gráficos univariados e multivariados | Os gráficos usados são adequados para as análises propostas e as explicações são claramente baseadas nos dados coletados. A análise gráfica e visual é exaustiva e ajuda a identificar insights interessantes e informativos para a tomada de decisão (3pt).                                                                                                                 | Nem todos os gráficos usados ajudam na interpretação das análises propostas. Ou as explicações são incompletas ou apenas parcialmente baseadas nos dados. A análise gráfica e visual é ampla porém não é exaustiva e dá a impressão que mais poderia ter sido feito. Os insights são tanto quanto óbvios e não necessariamente ajudam a informar a tomada de decisão (1,5pt). | Os gráficos são pobremente usados ou não ajudam na interpretação das análises propostas. As explicações não são fundamentadas nos dados e são incompletas. A análise gráfica e visual não é exaustiva. Não são gerados insights e nem informações que ajudem na tomada de decisão (0pt.)                                                                                                           |
+| Uso do dataset fornecido                    | O dataset é amplamente explorado, de forma que ele é usado por completo seja para a confecção dos gráficos bem como das análises exploratórias.  Isso inclui um uso exaustivo de todos os fundos bem como das outras informações (colunas) providas no dataset (3pt.)                                                                                                        | O dataset é explorado parcialmente. Nem todas as informações nele foram sintetizadas para serem usadas em sua totalidade. Por exemplo, nem todos os fundos foram analisados e não se procuraram formas para agrupar essas informações. Portanto, os gráficos e as análises exploratórias são parciais porém suficientes como para tirar conclusões relevantes (1,5pt).        | O uso do dataset é pobre. Apenas poucas informações são utilizadas para gerar os gráficos e análises exploratórias. Por exemplo, poucos fundos. Quando usados, os dados são usados sem apresentar sínteses ou agrupamentos que ajudem a lidar com o volume amplo de informações. Portanto, os gráficos e as análises exploratórias são pobres pois não ajudam a tirar conclusões relevantes (0pt.) |
+| Dashboard                                   | O dashboard é consistente com os dados analisados, é esteticamente agradável e segue as boas práticas de construção de dashboards, tais como paleta de cores previamente definida, disposição (layout) estético das informações e um mix entre gráficos e números (KPI). Além disso, o dashboard inclui controles interativos que facilitam a manipulação do usuário  (3pt.) | O dashboard é relativamente consistente com os dados, mas apresenta alguns problemas de estética, tais como cores inconsistentes, disposição (layout) inadequada e elementos (gráficos e números) mal distribuídos ou pobremente usados. Há controles interativos simples, porém que ajudam suficientemente o usuário a navegar pelas informações (1,5pt.)                    | O dashboard apresenta sérios problemas de consistência com os dados (p.ex. Resultados diferentes dos encontrados no relatório). Há vários problemas estéticos e de funcionamento no dashboard, tais como controles inoperantes ou produzindo erros até distribuição (layout) mal planejada e combinação de cores inadequada (0pt.)                                                                 |
+| Relatório                                   | Relatório bem escrito, sem erros de português e nem de formatação (tanto no Rmd quanto no html) e retratando claramente as análises gráficas e numéricas. O relatório conduz o leitor ao longo das análises feitas, ajudando na compreensão dos resultados e conclusões às quais o grupo chegou (1pt.)                                                                       | O relatório está bem escrito, porém com alguns erros de português e/ou formatação no Rmd ou no html. O relatório conduz o leitor ao longo das análises feitas, porém com certas inconsistências ou falta de clareza, porém sem dificultar demais a compreensão dos resultados e conclusões às quais o grupo chegou (0,5pt.)                                                   | O relatório apresenta vários problemas de escrita e de formatação no Rmd ou no html. Por exemplo, erros de código ou gráficos não gerados no html. O relatório não conduz o leitor ao longo das análises feitas (gráficas e numéricas) e portanto geram dificuldades para entender como se chegaram às conclusões mostradas pelo grupo (0pt.)                                                      |

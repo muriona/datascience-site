@@ -16,7 +16,7 @@
 <script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -29,9 +29,10 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
-<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -58,11 +59,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-#rmd-source-code {
-  display: none;
-}
-</style>
 
 
 <link rel="stylesheet" href="dd_cv_milz.css" type="text/css" />
@@ -228,10 +224,70 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
 
 
 
@@ -241,6 +297,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -351,18 +417,12 @@ $(document).ready(function () {
 
 <div id="header">
 
-<div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
-<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
-</ul>
-</div>
-
 
 
 <h1 class="title toc-ignore">Webinar 3a - Business Analytics e Data
 Mining</h1>
 <h3 class="subtitle">Previsão de sobrevivientes do Titanic</h3>
+<h4 class="date">Última versão em 21/06/22</h4>
 
 </div>
 
@@ -399,7 +459,7 @@ class="uri">https://www.kaggle.com/c/titanic/data</a></p>
 titanic_test &lt;- read.csv(&quot;data3a/test.csv&quot;)</code></pre>
 <p>Uma vez que os dados os carregados, várias das variáveis devem ser
 convertidas a fatores.</p>
-<pre class="r"><code>titanic$Survived &lt;- factor(titanic$Survived)
+<pre class="r"><code>#titanic$Survived &lt;- factor(titanic$Survived)
 titanic$Pclass &lt;- factor(titanic$Pclass)
 titanic$Sex &lt;- factor(titanic$Sex)</code></pre>
 <p>Primeiramente, precisamos limpar os dados. Por exemplo, o
@@ -413,48 +473,205 @@ selecionaremos as colunas restantes usando a função
 <pre class="r"><code>titanic_df &lt;- titanic %&gt;% 
   select(-PassengerId,-Name,-Ticket, -Cabin, -Embarked) %&gt;% 
   rename(Siblings_and_Spouses = SibSp,
-         Parents_and_Children = Parch)
-
-relevel(titanic_df$Survived, ref=&quot;1&quot;)</code></pre>
-<pre><code>##   [1] 0 1 1 1 0 0 0 0 1 1 1 1 0 0 0 1 0 1 0 1 0 1 1 1 0 1 0 0 1 0 0 1 1 0 0 0 1
-##  [38] 0 0 1 0 0 0 1 1 0 0 1 0 0 0 0 1 1 0 1 1 0 1 0 0 1 0 0 0 1 1 0 1 0 0 0 0 0
-##  [75] 1 0 0 0 1 1 0 1 1 0 1 1 0 0 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 1 1 0 1 0
-## [112] 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 0 0 0 1 0 0 1 0 0 0 0 1 1 0 0 0 1 0
-## [149] 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 1
-## [186] 0 1 1 0 0 1 0 1 1 1 1 0 0 1 0 0 0 0 0 1 0 0 1 1 1 0 1 0 0 0 1 1 0 1 0 1 0
-## [223] 0 0 1 0 1 0 0 0 1 0 0 1 0 0 0 1 0 0 0 1 0 0 0 0 0 1 1 0 0 0 0 0 0 1 1 1 1
-## [260] 1 0 1 0 0 0 0 0 1 1 1 0 1 1 0 1 1 0 0 0 1 0 0 0 1 0 0 1 0 1 1 1 1 0 0 0 0
-## [297] 0 0 1 1 1 1 0 1 0 1 1 1 0 1 1 1 0 0 0 1 1 0 1 1 0 0 1 1 0 1 0 1 1 1 1 0 0
-## [334] 0 1 0 0 1 1 0 1 1 0 0 0 1 1 1 1 0 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 0 1 1 1 1
-## [371] 1 0 0 0 0 1 1 0 0 0 1 1 0 1 0 0 0 1 0 1 1 1 0 1 1 0 0 0 0 1 1 0 0 0 0 0 0
-## [408] 1 0 0 0 0 1 0 1 0 1 1 0 0 0 0 0 0 0 0 1 1 0 1 1 1 1 0 0 1 0 1 0 0 1 0 0 1
-## [445] 1 1 1 1 1 1 0 0 0 1 0 1 0 1 1 0 1 0 0 0 0 0 0 0 0 1 0 0 1 1 0 0 0 0 0 1 0
-## [482] 0 0 1 1 0 1 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 1 1 0 1 1 0 1 1 0 0 1 0
-## [519] 1 0 1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 1 0 1 0 1 1 0 0 1 0 0 1 1 0 1 1 0 0 1 1
-## [556] 0 1 0 1 1 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 0 1 1 0 1 1 1 0 0 0 1 0 1 0 0 0 1
-## [593] 0 0 0 0 1 0 0 1 1 0 0 0 1 0 0 1 1 1 0 0 1 0 0 1 0 0 1 0 0 1 1 0 0 0 0 1 0
-## [630] 0 1 0 1 0 0 1 0 0 0 0 0 1 0 1 1 1 0 1 0 1 0 1 0 1 0 0 0 0 0 0 1 0 0 0 1 0
-## [667] 0 0 0 1 1 0 0 1 0 0 0 1 0 1 0 1 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 1 0 0 1 1 0
-## [704] 0 0 0 1 1 1 1 1 0 1 0 0 0 1 1 0 0 1 0 0 0 1 0 1 1 0 0 1 0 0 0 0 0 0 1 0 0
-## [741] 1 0 1 0 1 0 0 1 0 0 1 1 0 0 1 1 0 0 0 1 0 0 1 1 0 1 0 0 0 0 0 0 0 0 1 0 0
-## [778] 1 0 1 1 1 0 0 0 0 1 0 1 0 0 0 0 0 0 0 1 1 0 0 0 1 1 1 1 0 0 0 0 1 0 0 0 0
-## [815] 0 0 0 0 0 0 1 1 0 1 0 0 0 1 1 1 1 1 0 0 0 1 0 0 1 1 0 0 1 0 0 0 0 0 0 1 0
-## [852] 0 0 1 0 1 1 1 1 0 0 0 1 0 0 1 1 0 0 1 0 1 0 0 1 1 0 0 0 1 1 0 0 0 0 0 0 1
-## [889] 0 1 0
-## Levels: 1 0</code></pre>
+         Parents_and_Children = Parch)</code></pre>
 <div id="criar-test-e-train-datasets" class="section level2">
 <h2>Criar test e train datasets</h2>
 <p>Podemos usar a função <code>initial_split()</code> do pacote
 <code>tidymodels</code>.</p>
-<pre class="r"><code>seed &lt;- 2020
+<pre class="r"><code>set.seed &lt;- 2020
 
 #split &lt;- initial_split(titanic_df, strata =Survived)
 
 #titanic_train &lt;- training(split)
 #titanic_test &lt;- testing(split)</code></pre>
 <p>Mas neste caso, o kaggle já nos deu os datasets separados, portanto,
-o nosso dataset <code>titanic_df</code> é o dataset de treino:</p>
-<pre class="r"><code>titanic_train &lt;- titanic_df</code></pre>
+o nosso dataset <code>titanic_df</code> é o dataset de treino. Além
+disso, vamos retirar eventuais observações com <code>NA</code>.</p>
+<pre class="r"><code>library(skimr)
+
+skim(titanic_df)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">titanic_df</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">891</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">7</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="12%" />
+<col width="17%" />
+<col width="10%" />
+<col width="11%" />
+<col width="29%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Pclass</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">3</td>
+<td align="left">3: 491, 1: 216, 2: 184</td>
+</tr>
+<tr class="even">
+<td align="left">Sex</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">mal: 577, fem: 314</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="10%" />
+<col width="15%" />
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="4%" />
+<col width="7%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Survived</td>
+<td align="right">0</td>
+<td align="right">1.0</td>
+<td align="right">0.38</td>
+<td align="right">0.49</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">1</td>
+<td align="right">1.00</td>
+<td align="left">▇▁▁▁▅</td>
+</tr>
+<tr class="even">
+<td align="left">Age</td>
+<td align="right">177</td>
+<td align="right">0.8</td>
+<td align="right">29.70</td>
+<td align="right">14.53</td>
+<td align="right">0.42</td>
+<td align="right">20.12</td>
+<td align="right">28.00</td>
+<td align="right">38</td>
+<td align="right">80.00</td>
+<td align="left">▂▇▅▂▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Siblings_and_Spouses</td>
+<td align="right">0</td>
+<td align="right">1.0</td>
+<td align="right">0.52</td>
+<td align="right">1.10</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">1</td>
+<td align="right">8.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">Parents_and_Children</td>
+<td align="right">0</td>
+<td align="right">1.0</td>
+<td align="right">0.38</td>
+<td align="right">0.81</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0</td>
+<td align="right">6.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Fare</td>
+<td align="right">0</td>
+<td align="right">1.0</td>
+<td align="right">32.20</td>
+<td align="right">49.69</td>
+<td align="right">0.00</td>
+<td align="right">7.91</td>
+<td align="right">14.45</td>
+<td align="right">31</td>
+<td align="right">512.33</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>titanic_df &lt;- titanic_df %&gt;% 
+  filter(!is.na(Age))
+
+titanic_train &lt;- titanic_df</code></pre>
 <p>Nesta análise, vamos formular algumas perguntas:</p>
 <ul>
 <li><p>Qual é a relação entre as características e as chances de
@@ -462,10 +679,65 @@ sobrevivência de um passageiro.</p></li>
 <li><p>Previsão de sobrevivência para o navio inteiro.</p></li>
 </ul>
 </div>
+<div id="regressão-linear" class="section level2">
+<h2>Regressão Linear</h2>
+<p>Vamos usar primeiramente um modelo linear para fazer a previsão de
+sobrevivência.</p>
+<pre class="r"><code>titanic_lm &lt;- lm(Survived~., data=titanic_train)
+summary(titanic_lm)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Survived ~ ., data = titanic_train)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.12858 -0.23132 -0.06947  0.23280  0.99556 
+## 
+## Coefficients:
+##                        Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)           1.1740788  0.0652667  17.989  &lt; 2e-16 ***
+## Pclass2              -0.1980470  0.0481540  -4.113 4.37e-05 ***
+## Pclass3              -0.3892163  0.0472077  -8.245 8.07e-16 ***
+## Sexmale              -0.4886489  0.0314332 -15.546  &lt; 2e-16 ***
+## Age                  -0.0065370  0.0011327  -5.771 1.18e-08 ***
+## Siblings_and_Spouses -0.0533662  0.0173869  -3.069  0.00223 ** 
+## Parents_and_Children -0.0120393  0.0190338  -0.633  0.52725    
+## Fare                  0.0002971  0.0003564   0.834  0.40480    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3824 on 706 degrees of freedom
+## Multiple R-squared:  0.4006, Adjusted R-squared:  0.3947 
+## F-statistic: 67.41 on 7 and 706 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Note que <code>Parents</code> e <code>Fare</code> não são
+significativos pois os valores <code>p</code> são 0,52725 e 0,4048
+respectivamente, ambos maiores a 0,05 de nível de significância.</p>
+<p>Porém, o valor de <code>Survived</code> inicia com um intercepto de
+1,1740, ou seja, acima do valor de <code>1</code> que indicaria
+sobrevivência.</p>
+<p>Vamos calcular a probabilidade de sobrevivência para cada passageiro
+e plotar um gráfico para reforçar este argumento.</p>
+<pre class="r"><code>pred_lm &lt;- predict(titanic_lm, data=titanic_train)
+
+titanic_df &lt;- titanic_df %&gt;% 
+  mutate(prob_lm = pred_lm)
+
+
+titanic_df %&gt;% 
+  ggplot(aes(factor(Survived),prob_lm,
+             color=factor(Survived)))+
+  geom_boxplot()+
+  scale_y_continuous(limits = c(-0.2,1.1),
+                     n.breaks = 12)+
+  scale_color_brewer(palette = &quot;Dark2&quot;)+
+  theme_minimal()</code></pre>
+<p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
 <div id="regressão-logística" class="section level2">
 <h2>Regressão Logística</h2>
-<p>O primeiro modelo que usaremos é o modelo de regressão logística.
-Podemos ver os resultados do modelo abaixo.</p>
+<p>Um modelo que responde melhor quando a variável de saída está entre
+<code>0</code> e <code>1</code> é o de regressão logística. Podemos ver
+os resultados do modelo abaixo.</p>
 <pre class="r"><code>titanic_logistic_model &lt;- glm(Survived~., 
                       data = titanic_train, 
                       family = &quot;binomial&quot;)
@@ -496,7 +768,6 @@ summary(titanic_logistic_model)</code></pre>
 ## 
 ##     Null deviance: 964.52  on 713  degrees of freedom
 ## Residual deviance: 635.78  on 706  degrees of freedom
-##   (177 observations deleted due to missingness)
 ## AIC: 651.78
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
@@ -549,83 +820,57 @@ glance(titanic_logistic_model) %&gt;%
 ##     pR2
 ##   &lt;dbl&gt;
 ## 1 0.341</code></pre>
-<pre class="r"><code>titanic_train_logistic &lt;- titanic_train %&gt;% 
-  filter(!is.na(Age)) %&gt;% 
-  mutate(prob = predict(titanic_logistic_model, 
+<pre class="r"><code>titanic_df &lt;- titanic_df %&gt;% 
+  mutate(prob_log = predict(titanic_logistic_model, 
                         type = &quot;response&quot;))
 
-titanic_train_logistic$Survived &lt;- as.character(titanic_train_logistic$Survived)
-
-titanic_train_logistic$Survived &lt;- as.numeric(titanic_train_logistic$Survived)
-
-media &lt;- mean(titanic_train_logistic$Survived)</code></pre>
+media &lt;- mean(titanic_train$Survived)</code></pre>
+<pre class="r"><code>titanic_df %&gt;% 
+  ggplot(aes(factor(Survived),prob_log,
+             color=factor(Survived)))+
+  geom_boxplot()+
+  scale_y_continuous(limits = c(-0.2,1.1),
+                     n.breaks = 12)+
+  scale_color_brewer(palette = &quot;Dark2&quot;)+
+  theme_minimal()</code></pre>
+<p><img src="Gabarito-webinar3a_files/figure-html/boxplot-log-1.png" width="672" /></p>
 <p>A probabilidade média de sobrevivência é 0.41, portanto podemos
 definir o limiar da previsão como sendo esse valor.</p>
-<pre class="r"><code>titanic_train_logistic$pred &lt;- ifelse(titanic_train_logistic$prob &gt; media, 1, 0)</code></pre>
+<pre class="r"><code>titanic_df$pred_log &lt;- ifelse(titanic_df$prob_log &gt; media, 1, 0)</code></pre>
 <p>Para calcular a precisão da previsão, podemos comparar as médias.</p>
-<pre class="r"><code>mean(titanic_train_logistic$Survived==titanic_train_logistic$pred)</code></pre>
-<pre><code>## [1] 0.7927171</code></pre>
-<p>Desta forma, chegamos ao valor de 79 %.</p>
+<pre class="r"><code>pred_log &lt;- mean(titanic_df$Survived==titanic_df$pred_log)</code></pre>
+<p>Desta forma, chegamos ao valor de 79.27 %.</p>
 <p>Uma forma mais elegante de verificar a precisão do modelo é usar a
-Curva ROC.</p>
-<pre class="r"><code>caret::confusionMatrix(as.factor(titanic_train_logistic$pred),
-                as.factor(titanic_train_logistic$Survived))</code></pre>
-<pre><code>## Confusion Matrix and Statistics
-## 
-##           Reference
-## Prediction   0   1
-##          0 340  64
-##          1  84 226
-##                                           
-##                Accuracy : 0.7927          
-##                  95% CI : (0.7611, 0.8219)
-##     No Information Rate : 0.5938          
-##     P-Value [Acc &gt; NIR] : &lt;2e-16          
-##                                           
-##                   Kappa : 0.5749          
-##                                           
-##  Mcnemar&#39;s Test P-Value : 0.1183          
-##                                           
-##             Sensitivity : 0.8019          
-##             Specificity : 0.7793          
-##          Pos Pred Value : 0.8416          
-##          Neg Pred Value : 0.7290          
-##              Prevalence : 0.5938          
-##          Detection Rate : 0.4762          
-##    Detection Prevalence : 0.5658          
-##       Balanced Accuracy : 0.7906          
-##                                           
-##        &#39;Positive&#39; Class : 0               
-## </code></pre>
-<pre class="r"><code>library(pROC)
-# Create a ROC curve
-ROC &lt;- roc(titanic_train_logistic$Survived,
-           titanic_train_logistic$prob)
+Curva ROC e o valor de AUC.</p>
+<pre class="r"><code>titanic_df$Survived &lt;- factor(titanic_df$Survived, levels=c(1,0))
 
-# Plot the ROC curve
-plot(ROC, col =&quot;blue&quot;)</code></pre>
-<p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<pre class="r"><code># Calculate the area under the curve (AUC)
-auc(ROC)</code></pre>
-<pre><code>## Area under the curve: 0.8592</code></pre>
+autoplot(roc_curve(titanic_df, Survived, prob_log))</code></pre>
+<p><img src="Gabarito-webinar3a_files/figure-html/auclog-1.png" width="672" /></p>
+<pre class="r"><code>roc_auc(titanic_df, Survived, prob_log)</code></pre>
+<pre><code>## # A tibble: 1 × 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 roc_auc binary         0.859</code></pre>
 </div>
 <div id="como-lidar-com-dados-faltantes" class="section level2">
 <h2>Como lidar com dados faltantes</h2>
 <p>Como vimos anteriormente, o dataset continha um grande número de
 valores <code>NA</code> na variável <code>Age</code>. No procedimento
 anterior, simplesmente eliminamos as linhas com <code>NA</code>, ou
-seja, 134 de um total de 669.</p>
+seja, 177 de um total de 891.</p>
 <p>Vamos conhecer um método de inputar valores para esses
 <code>NA</code>, e ver o efeito que pode dar nosso modelo. Vamos
-retornar ao dataframe <code>titanic_train_clean</code> e a partir dele,
-criar um novo dataframe de teste.</p>
+retornar ao dataframe <code>titanic</code>.</p>
 <pre class="r"><code># Imputar usando média
-titanic_train_age &lt;- titanic_train %&gt;% 
-  mutate(imputada_age = ifelse(is.na(Age),
+titanic_train_age &lt;- titanic %&gt;% 
+  mutate(Age_imputada = ifelse(is.na(Age),
                                round(mean(Age,na.rm=TRUE),digits = 2),
                                Age)) %&gt;% 
 # Criar indicador para saber qual foi imputado e qual não
-  mutate(faltante_age = ifelse(is.na(Age),1,0))</code></pre>
+  mutate(faltante_age = ifelse(is.na(Age),1,0)) %&gt;% 
+  select(-PassengerId,-Name,-Ticket, -Cabin, -Embarked) %&gt;% 
+  rename(Siblings_and_Spouses = SibSp,
+         Parents_and_Children = Parch)</code></pre>
 <p>Uma vez imputados os valores de idade, podemos calcular novamente o
 modelo logístico:</p>
 <pre class="r"><code>titanic_train_age &lt;- titanic_train_age %&gt;% 
@@ -652,7 +897,7 @@ summary(titanic_logistic_model2)</code></pre>
 ## Siblings_and_Spouses -0.350082   0.109612  -3.194 0.001404 ** 
 ## Parents_and_Children -0.113337   0.117621  -0.964 0.335258    
 ## Fare                  0.002991   0.002447   1.223 0.221493    
-## imputada_age         -0.039490   0.007843  -5.035 4.78e-07 ***
+## Age_imputada         -0.039490   0.007843  -5.035 4.78e-07 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -669,24 +914,27 @@ summary(titanic_logistic_model2)</code></pre>
 ##     pR2
 ##   &lt;dbl&gt;
 ## 1 0.335</code></pre>
-<p>e por fim, a curva ROC:</p>
-<pre class="r"><code>titanic_train_logistic &lt;- titanic_train %&gt;% 
-  mutate(prob = predict(titanic_logistic_model2, 
+<p>e por fim, a curva ROC e o valor de AUC:</p>
+<pre class="r"><code>titanic_train_age &lt;- titanic_train_age %&gt;% 
+  mutate(prob_log_age = predict(titanic_logistic_model2, 
                         type = &quot;response&quot;))
 
-ROC2 &lt;- roc(titanic_train_logistic$Survived,
-           titanic_train_logistic$prob)
+titanic_train_age$Survived &lt;- factor(titanic_train_age$Survived, levels=c(1,0))
 
-# Plot the ROC curve
-plot(ROC2, col =&quot;blue&quot;)</code></pre>
-<p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+autoplot(roc_curve(titanic_train_age, Survived, prob_log_age))</code></pre>
+<p><img src="Gabarito-webinar3a_files/figure-html/faltantes4-1.png" width="672" /></p>
+<pre class="r"><code>roc_auc &lt;- roc_auc(titanic_train_age, Survived, prob_log_age)
+
+roc_auc</code></pre>
+<pre><code>## # A tibble: 1 × 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 roc_auc binary         0.856</code></pre>
 <pre class="r"><code>library(WVPlots)
-GainCurvePlot(titanic_train_logistic, &quot;prob&quot;,&quot;Survived&quot;,&quot;Curva de Ganho&quot;)</code></pre>
-<p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
-<pre class="r"><code>ROCPlot(titanic_train_logistic, &quot;prob&quot;,&quot;Survived&quot;,1, &quot;Curva ROC para o Modelo Logístico 2&quot;)</code></pre>
-<p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-12-3.png" width="672" /></p>
-<p>E a área abaixo da curva (AUC) é 0.8560088. Mais sobre ROC, GainCurve
-e Matriz de Confusão podem ser encontradas em: <a
+GainCurvePlot(titanic_train_age, &quot;prob_log_age&quot;,&quot;Survived&quot;,&quot;Curva de Ganho&quot;)</code></pre>
+<p><img src="Gabarito-webinar3a_files/figure-html/faltantes4-2.png" width="672" /></p>
+<p>E a área abaixo da curva (AUC) é roc_auc, binary, 0.8560088. Mais
+sobre ROC, GainCurve e Matriz de Confusão podem ser encontradas em: <a
 href="https://community.tibco.com/wiki/gains-vs-roc-curves-do-you-understand-difference"
 class="uri">https://community.tibco.com/wiki/gains-vs-roc-curves-do-you-understand-difference</a></p>
 </div>
@@ -705,9 +953,9 @@ titanic_tree_model &lt;- rpart(Survived~.,
 
 # Plot the loan_model with default settings
 rpart.plot(titanic_tree_model)</code></pre>
-<p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <pre class="r"><code>rpart.plot(titanic_tree_model, type = 3, box.palette = c(&quot;#f16727&quot;, &quot;#1a954d&quot;), fallen.leaves = TRUE)</code></pre>
-<p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
 <p>Agora que a árvore de decisão foi criada, podemos verificar a sua
 precisão comparando as previsões com a coluna <code>Survived</code>.</p>
 <pre class="r"><code>pred_tree &lt;- predict(titanic_tree_model, titanic_train,
@@ -719,69 +967,76 @@ caret::confusionMatrix(as.factor(pred_tree),as.factor(titanic_train$Survived))</
 ## 
 ##           Reference
 ## Prediction   0   1
-##          0 507  83
-##          1  42 259
-##                                           
-##                Accuracy : 0.8597          
-##                  95% CI : (0.8352, 0.8819)
-##     No Information Rate : 0.6162          
-##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
-##                                           
-##                   Kappa : 0.6965          
-##                                           
-##  Mcnemar&#39;s Test P-Value : 0.0003466       
-##                                           
-##             Sensitivity : 0.9235          
-##             Specificity : 0.7573          
-##          Pos Pred Value : 0.8593          
-##          Neg Pred Value : 0.8605          
-##              Prevalence : 0.6162          
-##          Detection Rate : 0.5690          
-##    Detection Prevalence : 0.6622          
-##       Balanced Accuracy : 0.8404          
-##                                           
-##        &#39;Positive&#39; Class : 0               
+##          0 391  69
+##          1  33 221
+##                                          
+##                Accuracy : 0.8571         
+##                  95% CI : (0.8293, 0.882)
+##     No Information Rate : 0.5938         
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16      
+##                                          
+##                   Kappa : 0.6979         
+##                                          
+##  Mcnemar&#39;s Test P-Value : 0.0005292      
+##                                          
+##             Sensitivity : 0.9222         
+##             Specificity : 0.7621         
+##          Pos Pred Value : 0.8500         
+##          Neg Pred Value : 0.8701         
+##              Prevalence : 0.5938         
+##          Detection Rate : 0.5476         
+##    Detection Prevalence : 0.6443         
+##       Balanced Accuracy : 0.8421         
+##                                          
+##        &#39;Positive&#39; Class : 0              
 ## </code></pre>
-<p>Vamos calcular a ROC e GainCurve para o modelo de Árvore:</p>
-<pre class="r"><code>titanic_train &lt;- titanic_train %&gt;% 
-  mutate(pred_tree = pred_tree)
+<pre class="r"><code>titanic_df &lt;- titanic_df %&gt;% 
+  mutate(pred_tree=pred_tree) 
 
-titanic_train$Survived &lt;- as.character(titanic_train$Survived)
-titanic_train$Survived &lt;- as.numeric(titanic_train$Survived)
-titanic_train$pred_tree &lt;- as.character(titanic_train$pred_tree)
-titanic_train$pred_tree &lt;- as.numeric(titanic_train$pred_tree)
+titanic_df$pred_tree &lt;- factor(titanic_df$pred_tree, levels = c(1,0))
 
-ROCPlot(titanic_train, &quot;pred_tree&quot;,&quot;Survived&quot;,1, &quot;Curva ROC para o Modelo Arvore de Decisão&quot;)</code></pre>
-<p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<pre class="r"><code>GainCurvePlot(titanic_train, &quot;pred_tree&quot;,&quot;Survived&quot;,&quot;Gain Curve para o Modelo Arvore de Decisão&quot;)</code></pre>
-<p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+titanic_df %&gt;%   
+  conf_mat(Survived, pred_tree)</code></pre>
+<pre><code>##           Truth
+## Prediction   1   0
+##          1 221  33
+##          0  69 391</code></pre>
+<p>Vamos calcular a curva ROC, AUC e GainCurve para o modelo de
+Árvore:</p>
+<pre class="r"><code>titanic_df$pred_tree &lt;- as.character(titanic_df$pred_tree)
+titanic_df$pred_tree &lt;- as.numeric(titanic_df$pred_tree)
+
+autoplot(roc_curve(titanic_df, truth = Survived, estimate = pred_tree))</code></pre>
+<p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>roc_auc(titanic_df, truth = Survived, estimate = pred_tree)</code></pre>
+<pre><code>## # A tibble: 1 × 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 roc_auc binary         0.842</code></pre>
+<pre class="r"><code>GainCurvePlot(titanic_df, &quot;pred_tree&quot;,&quot;Survived&quot;,&quot;Gain Curve para o Modelo Arvore de Decisão&quot;)</code></pre>
+<p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
 </div>
 <div id="random-forest" class="section level2">
 <h2>Random Forest</h2>
 <p>Para construir o modelo RF, é necessário eliminar os <code>NAs</code>
-que aparecem na variável <code>Age</code>.</p>
-<pre class="r"><code>titanic_train_clean_rf &lt;- titanic_train %&gt;% 
-  filter(!is.na(Age)) %&gt;% 
-  select(-pred_tree)
-
-
-
-titanic_rf_model &lt;- ranger(Survived~., # formula 
-                         titanic_train_clean_rf, # data
+que aparecem na variável <code>Age</code>. Como nosso dataset não tem
+mais <code>NAs</code>, podemos continuar com a previsão.</p>
+<pre class="r"><code>titanic_rf_model &lt;- ranger(Survived~., # formula 
+                         titanic_train, # data
                          num.trees = 500, 
                          respect.unordered.factors = &quot;order&quot;, 
-                         seed = seed,
+                         seed = set.seed,
                          classification = TRUE)</code></pre>
 <p>Agora sim, podemos usar o modelo para fazer as previsões usando
 <code>predict</code></p>
-<pre class="r"><code>pred_rf &lt;- predict(titanic_rf_model, titanic_train_clean_rf)$predictions
+<pre class="r"><code>pred_rf &lt;- predict(titanic_rf_model, titanic_train)$predictions
 
 
 titanic_rf_model</code></pre>
 <pre><code>## Ranger result
 ## 
 ## Call:
-##  ranger(Survived ~ ., titanic_train_clean_rf, num.trees = 500,      respect.unordered.factors = &quot;order&quot;, seed = seed, classification = TRUE) 
+##  ranger(Survived ~ ., titanic_train, num.trees = 500, respect.unordered.factors = &quot;order&quot;,      seed = set.seed, classification = TRUE) 
 ## 
 ## Type:                             Classification 
 ## Number of trees:                  500 
@@ -792,45 +1047,32 @@ titanic_rf_model</code></pre>
 ## Variable importance mode:         none 
 ## Splitrule:                        gini 
 ## OOB prediction error:             17.79 %</code></pre>
-<pre class="r"><code>titanic_train_clean_rf &lt;- titanic_train_clean_rf %&gt;% 
+<pre class="r"><code>titanic_df &lt;- titanic_df %&gt;% 
   mutate(pred_rf = pred_rf)</code></pre>
-<p>A Matriz de confusão para o modelo de Random Forest é:</p>
-<pre class="r"><code>caret::confusionMatrix(as.factor(titanic_train_clean_rf$pred_rf),as.factor(titanic_train_clean_rf$Survived))</code></pre>
-<pre><code>## Confusion Matrix and Statistics
-## 
-##           Reference
-## Prediction   0   1
-##          0 410  46
-##          1  14 244
-##                                           
-##                Accuracy : 0.916           
-##                  95% CI : (0.8932, 0.9353)
-##     No Information Rate : 0.5938          
-##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
-##                                           
-##                   Kappa : 0.8227          
-##                                           
-##  Mcnemar&#39;s Test P-Value : 6.279e-05       
-##                                           
-##             Sensitivity : 0.9670          
-##             Specificity : 0.8414          
-##          Pos Pred Value : 0.8991          
-##          Neg Pred Value : 0.9457          
-##              Prevalence : 0.5938          
-##          Detection Rate : 0.5742          
-##    Detection Prevalence : 0.6387          
-##       Balanced Accuracy : 0.9042          
-##                                           
-##        &#39;Positive&#39; Class : 0               
-## </code></pre>
-<pre class="r"><code>ROCPlot(titanic_train_clean_rf, &quot;pred_rf&quot;,&quot;Survived&quot;,1, &quot;Curva ROC para o Modelo Random Forest&quot;)</code></pre>
-<p><img src="Gabarito-webinar3a_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>A curva ROC, o AUC:</p>
+<pre class="r"><code>autoplot(roc_curve(titanic_df, truth = Survived, estimate = pred_rf))</code></pre>
+<p><img src="Gabarito-webinar3a_files/figure-html/predrfplot-1.png" width="672" /></p>
+<pre class="r"><code>roc_auc(titanic_df, truth = Survived, estimate = pred_rf)</code></pre>
+<pre><code>## # A tibble: 1 × 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 roc_auc binary         0.904</code></pre>
+<p>E a Matriz de confusão para o modelo de Random Forest é:</p>
+<pre class="r"><code>titanic_df$pred_rf &lt;- factor(titanic_df$pred_rf, levels = c(1,0))
+
+titanic_df %&gt;%   
+  conf_mat(Survived, pred_rf)</code></pre>
+<pre><code>##           Truth
+## Prediction   1   0
+##          1 244  14
+##          0  46 410</code></pre>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiV2ViaW5hciAzYSAtIEJ1c2luZXNzIEFuYWx5dGljcyBlIERhdGEgTWluaW5nIgpzdWJ0aXRsZTogIlByZXZpc8OjbyBkZSBzb2JyZXZpdmllbnRlcyBkbyBUaXRhbmljIgpvdXRwdXQ6IAogIGh0bWxfZG9jdW1lbnQ6CiAgICBjb2RlX2Rvd25sb2FkOiB0cnVlCi0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0UpCmBgYAoKIyBDYXJyZWdhbmRvIG9zIGRhZG9zCgpQYXJhIGVzdGUgd2ViaW5hciB2YW1vcyB1c2FyIGRhZG9zIGRvIFRpdGFuaWMgKHBhcmEgb3MgbcOpdG9kb3Mgc3VwZXJ2aXNpb25hZG9zIGEgcGFydGlyIGRlIFtrYWdnbGVdKGh0dHBzOi8vd3d3LmthZ2dsZS5jb20vY29tcGV0aXRpb25zL3RpdGFuaWMvb3ZlcnZpZXcpKSBlIHVtIGRhdGFzZXQgaGlwb3TDqXRpY28gc29icmUgY2xpZW50ZXMgKHBhcmEgbyBtw6l0b2RvIG7Do28gc3VwZXJ2aXNpb25hZG8pCgpgYGB7ciBlY2hvID0gRkFMU0UsIGV2YWw9VFJVRX0KeGZ1bjo6cGtnX2xvYWQyKGMoJ2h0bWx0b29scycsICdtaW1lJykpCnhmdW46OmVtYmVkX2RpcigiZGF0YTNhLyIsIHRleHQgPSAiVm9jw6ogcG9kZSBiYWl4YXIgb3MgZGFkb3MgYXF1aS4iKQoKYGBgCgojIENhcnJlZ2FuZG8gcGFjb3RlcwoKYGBge3IgcGFjb3Rlc30KCmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KHJlYWR4bCkKbGlicmFyeShnZ3JlcGVsKQpsaWJyYXJ5KHRpZHltb2RlbHMpCmxpYnJhcnkocmFuZ2VyKQpsaWJyYXJ5KHZpcmlkaXNMaXRlKQoKCmBgYAoKIyBNw6l0b2RvcyBTdXBlcnZpc2lvbmFkb3MKClBhcmEgbW9zdHJhciBhIHV0aWxpZGFkZSBkZXN0ZXMgbW9kZWxvcywgdmFtb3MgdXNhciB1bSBkYXRhc2V0IHNvYnJlIG9zIHNvYnJldml2aWVudGVzIGRvIFRpdGFuaWMuIEjDoSB2w6FyaWFzIGZvcm1hcyBkZSBjYXJyZWdhciBvcyBkYWRvcywgaW5jbHVpbmRvIG8gcGFjb3RlIFRpdGFuaWMuIE9zIGRhZG9zIG1vc3RyYW0gY2FkYSB1bSBkb3MgcGFzc2FnZWlyb3MgZG8gVGl0YW5pYywgaW5jbHVpbmRvIGluZm9ybWHDp8O1ZXMgY29tbyBvIG5vbWUsIGEgaWRhZGUsIHNlIGVzdGF2YW0gY29tIGZpbGhvcywgZXNwb3Nvcy9lc3Bvc2FzLCBlbSBxdWFsIGNhdGVnb3JpYSBkZSBjYWJpbmUgc2UgZW5jb250cmF2YW0sIHF1YW50byBwYWdhcmFtIHBlbGEgcGFzc2FnZW0sIGV0Yy4gTWFpcyBpbmZvcm1hw6fDtWVzIHBvZGVtIHNlciBlbmNvbnRyYWRhcyBlbTogPGh0dHBzOi8vd3d3LmthZ2dsZS5jb20vYy90aXRhbmljL2RhdGE+CgpgYGB7cn0KCnRpdGFuaWMgPC0gcmVhZC5jc3YoImRhdGEzYS90cmFpbi5jc3YiKQp0aXRhbmljX3Rlc3QgPC0gcmVhZC5jc3YoImRhdGEzYS90ZXN0LmNzdiIpCmBgYAoKVW1hIHZleiBxdWUgb3MgZGFkb3Mgb3MgY2FycmVnYWRvcywgdsOhcmlhcyBkYXMgdmFyacOhdmVpcyBkZXZlbSBzZXIgY29udmVydGlkYXMgYSBmYXRvcmVzLgoKYGBge3J9CnRpdGFuaWMkU3Vydml2ZWQgPC0gZmFjdG9yKHRpdGFuaWMkU3Vydml2ZWQpCnRpdGFuaWMkUGNsYXNzIDwtIGZhY3Rvcih0aXRhbmljJFBjbGFzcykKdGl0YW5pYyRTZXggPC0gZmFjdG9yKHRpdGFuaWMkU2V4KQoKCmBgYAoKUHJpbWVpcmFtZW50ZSwgcHJlY2lzYW1vcyBsaW1wYXIgb3MgZGFkb3MuIFBvciBleGVtcGxvLCBvIGBQYXNzZW5nZXJJRGAgw6kgdW0gaWRlbnRpZmljYWRvciDDum5pY28gcGFyYSBvcyByZWdpc3Ryb3MgZGUgY2FkYSBwYXNzYWdlaXJvLCBtYXMgbsOjbyBub3MgZGl6IG5hZGEgc29icmUgYSBzb2JyZXZpdsOqbmNpYSBvdSBuw6NvLiBJbnR1aXRpdmFtZW50ZSwgYXMgdmFyacOhdmVpcyBgTmFtZWAsIGBDYWJpbmAsIGBFbWJhcnF1ZWRgIGUgYFRpY2tldGAgdGFtYsOpbSBuw6NvIGRlY2lkaXLDo28gYSBzb2JyZXZpdsOqbmNpYSwgcG9yIGlzc28gcHJlY2lzYW1vcyByZXRpcsOhLWxvcyB0YW1iw6ltLiBBc3NpbSwgc2VsZWNpb25hcmVtb3MgYXMgY29sdW5hcyByZXN0YW50ZXMgdXNhbmRvIGEgZnVuw6fDo28gYHNlbGVjdCgpYCBkYSBiaWJsaW90ZWNhIGBkcGx5cmA6CgpgYGB7ciBzZWxlY3Rpbmd9Cgp0aXRhbmljX2RmIDwtIHRpdGFuaWMgJT4lIAogIHNlbGVjdCgtUGFzc2VuZ2VySWQsLU5hbWUsLVRpY2tldCwgLUNhYmluLCAtRW1iYXJrZWQpICU+JSAKICByZW5hbWUoU2libGluZ3NfYW5kX1Nwb3VzZXMgPSBTaWJTcCwKICAgICAgICAgUGFyZW50c19hbmRfQ2hpbGRyZW4gPSBQYXJjaCkKCnJlbGV2ZWwodGl0YW5pY19kZiRTdXJ2aXZlZCwgcmVmPSIxIikKYGBgCgojIyBDcmlhciB0ZXN0IGUgdHJhaW4gZGF0YXNldHMKClBvZGVtb3MgdXNhciBhIGZ1bsOnw6NvIGBpbml0aWFsX3NwbGl0KClgIGRvIHBhY290ZSBgdGlkeW1vZGVsc2AuCgpgYGB7cn0KCnNlZWQgPC0gMjAyMAoKI3NwbGl0IDwtIGluaXRpYWxfc3BsaXQodGl0YW5pY19kZiwgc3RyYXRhID1TdXJ2aXZlZCkKCiN0aXRhbmljX3RyYWluIDwtIHRyYWluaW5nKHNwbGl0KQojdGl0YW5pY190ZXN0IDwtIHRlc3Rpbmcoc3BsaXQpCgpgYGAKCk1hcyBuZXN0ZSBjYXNvLCBvIGthZ2dsZSBqw6Egbm9zIGRldSBvcyBkYXRhc2V0cyBzZXBhcmFkb3MsIHBvcnRhbnRvLCBvIG5vc3NvIGRhdGFzZXQgYHRpdGFuaWNfZGZgIMOpIG8gZGF0YXNldCBkZSB0cmVpbm86CgpgYGB7ciB0cmVpbm99Cgp0aXRhbmljX3RyYWluIDwtIHRpdGFuaWNfZGYKCmBgYAoKCk5lc3RhIGFuw6FsaXNlLCB2YW1vcyBmb3JtdWxhciBhbGd1bWFzIHBlcmd1bnRhczoKCi0gICBRdWFsIMOpIGEgcmVsYcOnw6NvIGVudHJlIGFzIGNhcmFjdGVyw61zdGljYXMgZSBhcyBjaGFuY2VzIGRlIHNvYnJldml2w6puY2lhIGRlIHVtIHBhc3NhZ2Vpcm8uCgotICAgUHJldmlzw6NvIGRlIHNvYnJldml2w6puY2lhIHBhcmEgbyBuYXZpbyBpbnRlaXJvLgoKCiMjIFJlZ3Jlc3PDo28gTG9nw61zdGljYQoKTyBwcmltZWlybyBtb2RlbG8gcXVlIHVzYXJlbW9zIMOpIG8gbW9kZWxvIGRlIHJlZ3Jlc3PDo28gbG9nw61zdGljYS4gUG9kZW1vcyB2ZXIgb3MgcmVzdWx0YWRvcyBkbyBtb2RlbG8gYWJhaXhvLgoKYGBge3IgbG9naXN0aWN9Cgp0aXRhbmljX2xvZ2lzdGljX21vZGVsIDwtIGdsbShTdXJ2aXZlZH4uLCAKICAgICAgICAgICAgICAgICAgICAgIGRhdGEgPSB0aXRhbmljX3RyYWluLCAKICAgICAgICAgICAgICAgICAgICAgIGZhbWlseSA9ICJiaW5vbWlhbCIpCgpzdW1tYXJ5KHRpdGFuaWNfbG9naXN0aWNfbW9kZWwpCgpgYGAKT3MgY29lZmljaWVudGVzIGRvIG1vZGVsbyBsb2fDrXN0aWNvIHPDo28gZGlmw61jZWlzIGRlIGludGVwcmV0YXIuIFBhcmEgdmFyacOhdmVpcyBjYXRlZ8OzcmljYXMgKGZhdG9yZXMpLCBvIGNvZWZpY2llbnRlIHJlcHJlc2VudGEgbyAqKm9kZHMgcmF0aW8qKiBlbnRyZSBwb3IgZXhlbXBsbyBwYXJhIGEgdmFyacOhdmVsICdTZXgnLCBhIGludGVycHJldGHDp8OjbyDDqToKCiQkbG9nKG9kZHNyYXRpbyk9bG9nKFxiZXRhKSQkIHBvcnRhbnRvLCAkJG9kZHNyYXRpbz1lXntcYmV0YX09ZV57LTIuNjM3NH09MC4wNzE1NCQkCk91IHNlamEsIHVtIHBhc3NhZ2Vpcm8gaG9tZW0gdGluaGEgJDAsMDcxNTQkIHZlemVzIG1lbm9zIGNoYW5jZXMgKCpvZGRzKikgZGUgc29icmV2aXbDqm5jaWEgZG8gcXVlIHVtYSBwYXNzYWdlaXJhIG11bGhlci4gT3UgZW0gb3V0cmFzIHBhbGF2cmFzIHVtYSBwYXNzYWdlaXJhIG11bGhlciB0aW5oYSAkMS8wLDA3MTU0PTEzLjk3JCB2ZXplcyBtYWlzIGNoYW5jZXMgZGUgc29icmV2aXbDqm5jaWEuCgpOb3RhOiAkb2Rkcz1cZnJhY3twfXsxLXB9JCAsIHNlbmRvICRwJCBhIHByb2JhYmlsaWRhZGUgZGUgdW0gZXZlbnRvIGFjb250ZWNlci4KCklndWFsbWVudGUsIHBvZGVtb3MgaW50ZXJwcmV0YXIgb3MgY29lZmljaWVudGVzIHJlbGFjaW9uYWRvcyBjb20gYSBjbGFzc2U6IHVtIHBhc3NhZ2Vpcm8gbmEgMmEgY2xhc3NlIHRpbmhhICRlXnstMS4yOTI1Mzh9PTAsMjc0NSQgdmV6ZXMgbWVub3MgY2hhbmNlcyBkZSBzb2JyZXZpdsOqbmNpYSBkbyBxdWUgdW0gcGFzc2FnZWlybyBkYSAxYSBjbGFzc2UgKG91IHVtIHBhc3NhZ2Vpcm8gZGUgMWEgY2xhc3NlIHRpbmhhICQxLzAsMjc0NT0zLDY0JCB2ZXplcyBtYWlzIGNoYW5jZXMgZGUgc29icmV2aXbDqm5jaWEgZG8gcXVlIHVtIGRlIDJhIGNsYXNzZSkuIApKw6EsIHVtIHBhc3NhZ2Vpcm8gZGEgM2EgY2xhc3NlIHRpbmhhICRlXnstMi41MDEwNjl9PTAsMDgxOSQgdmV6ZXMgbWVub3MgY2hhbmNlcyBkZSBzb2JyZXZpdsOqbmNpYSBkbyBxdWUgdW0gcGFzc2FnZWlybyBkYSAxYSBjbGFzc2UgKG91IHVtIHBhc3NhZ2Vpcm8gZGUgMWEgY2xhc3NlIHRpbmhhICQxLzAsMDgxOT0xMiwyMSQgdmV6ZXMgbWFpcyBjaGFuY2VzIGRlIHNvYnJldml2w6puY2lhIGRvIHF1ZSB1bSBkZSAzYSBjbGFzc2UpLgoKUGFyYSBhcyB2YXJpw6F2ZWlzIGNvbnRpbnVhcywgYSBpbnRlcnByZXRhw6fDo28gw6kgdW0gcG91Y28gbWFpcyBkaXJldGEuIFBvciBleGVtcGxvLCBwYXJhIGNhZGEgYWRpY2lvbmFsIGRlIGlkYWRlLCBhcyBjaGFuY2VzIGRlIHNvYnJldml2w6puY2lhIHJlZHV6ZW0gZW0gJGVeey0wLjA0NDF9PTAsOTU2OCQgdmV6ZXMgKGFwcm94aW1hZGFtZW50ZSBlbSA1MCUgZGUgcHJvYmFiaWxpZGFkZSkuCgpPYnNlcnZhw6fDo286IEVtIGFsZ3VucyBjYXNvcywgdmFsZSBhIHBlbmEgYWx0ZXJhciBvIGZhdG9yIGJhc2UgZGUgdW1hIGRldGVybWluYWRhIHZhcmnDoXZlbCwgcHJpbmNpcGFsbWVudGUgcXVhbmRvIG9zIG7DrXZlaXMgZG8gZmF0b3IgcG9zc3VlbSB1bSB2YWxvciBkZSByZWZlcsOqbmNpYS4gTmVzdGUgY2FzbyBwb2RlIHVzYXItc2UgYSBmdW7Dp8OjbyBgcmVsZXZlbGAuCgpBZ29yYSBxdWUgdGVtb3MgdW0gb2JqZXRvIGRlbm9taW5hZG8gYHRpdGFuaWNfbG9naXN0aWNfbW9kZWxgLCBwb2RlbW9zIHByZXZlciBvcyB2YWxvcmVzIGRlIHNvYnJldml2w6puY2lhICgwLDEpIHBhcmEgbyBub3NzbyBkYXRhc2V0IGRlIHRyZWlubywgdXNhbmRvIGEgZnVuw6fDo28gYHByZWRpY3RgLiBBcMOzcywgbW9zdHJhcmVtb3MgdW1hIHByaW1laXJhIG1lZGlkYSBkZSBwcmVjaXPDo28gZG8gbW9kZWxvIHF1ZSDDqSBjYWxjdWxhciBvIFBzZXVkbyAkUl57Mn0kOgoKYGBge3J9CmxpYnJhcnkoYnJvb20pCgpnbGFuY2UodGl0YW5pY19sb2dpc3RpY19tb2RlbCkgJT4lIAogIHN1bW1hcml6ZShwUjIgPSAxIC0gZGV2aWFuY2UgLyBudWxsLmRldmlhbmNlKQoKCnRpdGFuaWNfdHJhaW5fbG9naXN0aWMgPC0gdGl0YW5pY190cmFpbiAlPiUgCiAgZmlsdGVyKCFpcy5uYShBZ2UpKSAlPiUgCiAgbXV0YXRlKHByb2IgPSBwcmVkaWN0KHRpdGFuaWNfbG9naXN0aWNfbW9kZWwsIAogICAgICAgICAgICAgICAgICAgICAgICB0eXBlID0gInJlc3BvbnNlIikpCgp0aXRhbmljX3RyYWluX2xvZ2lzdGljJFN1cnZpdmVkIDwtIGFzLmNoYXJhY3Rlcih0aXRhbmljX3RyYWluX2xvZ2lzdGljJFN1cnZpdmVkKQoKdGl0YW5pY190cmFpbl9sb2dpc3RpYyRTdXJ2aXZlZCA8LSBhcy5udW1lcmljKHRpdGFuaWNfdHJhaW5fbG9naXN0aWMkU3Vydml2ZWQpCgptZWRpYSA8LSBtZWFuKHRpdGFuaWNfdHJhaW5fbG9naXN0aWMkU3Vydml2ZWQpCgpgYGAKCkEgcHJvYmFiaWxpZGFkZSBtw6lkaWEgZGUgc29icmV2aXbDqm5jaWEgw6kgYHIgcm91bmQobWVkaWEsIGRpZ2l0cyA9IDIpYCwgcG9ydGFudG8gcG9kZW1vcyBkZWZpbmlyIG8gbGltaWFyIGRhIHByZXZpc8OjbyBjb21vIHNlbmRvIGVzc2UgdmFsb3IuCgpgYGB7cn0KdGl0YW5pY190cmFpbl9sb2dpc3RpYyRwcmVkIDwtIGlmZWxzZSh0aXRhbmljX3RyYWluX2xvZ2lzdGljJHByb2IgPiBtZWRpYSwgMSwgMCkKYGBgCgpQYXJhIGNhbGN1bGFyIGEgcHJlY2lzw6NvIGRhIHByZXZpc8OjbywgcG9kZW1vcyBjb21wYXJhciBhcyBtw6lkaWFzLgoKYGBge3J9Cm1lYW4odGl0YW5pY190cmFpbl9sb2dpc3RpYyRTdXJ2aXZlZD09dGl0YW5pY190cmFpbl9sb2dpc3RpYyRwcmVkKQpgYGAKCkRlc3RhIGZvcm1hLCBjaGVnYW1vcyBhbyB2YWxvciBkZSBgciByb3VuZChtZWFuKHRpdGFuaWNfdHJhaW5fbG9naXN0aWMkU3Vydml2ZWQ9PXRpdGFuaWNfdHJhaW5fbG9naXN0aWMkcHJlZCksIGRpZ2l0cyA9IDIpKjEwMGAgJS4KClVtYSBmb3JtYSBtYWlzIGVsZWdhbnRlIGRlIHZlcmlmaWNhciBhIHByZWNpc8OjbyBkbyBtb2RlbG8gw6kgdXNhciBhIEN1cnZhIFJPQy4KCmBgYHtyfQoKCmNhcmV0Ojpjb25mdXNpb25NYXRyaXgoYXMuZmFjdG9yKHRpdGFuaWNfdHJhaW5fbG9naXN0aWMkcHJlZCksCiAgICAgICAgICAgICAgICBhcy5mYWN0b3IodGl0YW5pY190cmFpbl9sb2dpc3RpYyRTdXJ2aXZlZCkpCgpsaWJyYXJ5KHBST0MpCiMgQ3JlYXRlIGEgUk9DIGN1cnZlClJPQyA8LSByb2ModGl0YW5pY190cmFpbl9sb2dpc3RpYyRTdXJ2aXZlZCwKICAgICAgICAgICB0aXRhbmljX3RyYWluX2xvZ2lzdGljJHByb2IpCgojIFBsb3QgdGhlIFJPQyBjdXJ2ZQpwbG90KFJPQywgY29sID0iYmx1ZSIpCgoKIyBDYWxjdWxhdGUgdGhlIGFyZWEgdW5kZXIgdGhlIGN1cnZlIChBVUMpCmF1YyhST0MpCmBgYAoKIyMgQ29tbyBsaWRhciBjb20gZGFkb3MgZmFsdGFudGVzCgpDb21vIHZpbW9zIGFudGVyaW9ybWVudGUsIG8gZGF0YXNldCBjb250aW5oYSB1bSBncmFuZGUgbsO6bWVybyBkZSB2YWxvcmVzIGBOQWAgbmEgdmFyacOhdmVsIGBBZ2VgLiBObyBwcm9jZWRpbWVudG8gYW50ZXJpb3IsIHNpbXBsZXNtZW50ZSBlbGltaW5hbW9zIGFzIGxpbmhhcyBjb20gYE5BYCwgb3Ugc2VqYSwgMTM0IGRlIHVtIHRvdGFsIGRlIDY2OS4KClZhbW9zIGNvbmhlY2VyIHVtIG3DqXRvZG8gZGUgaW5wdXRhciB2YWxvcmVzIHBhcmEgZXNzZXMgYE5BYCwgZSB2ZXIgbyBlZmVpdG8gcXVlIHBvZGUgZGFyIG5vc3NvIG1vZGVsby4gVmFtb3MgcmV0b3JuYXIgYW8gZGF0YWZyYW1lIGB0aXRhbmljX3RyYWluX2NsZWFuYCBlIGEgcGFydGlyIGRlbGUsIGNyaWFyIHVtIG5vdm8gZGF0YWZyYW1lIGRlIHRlc3RlLgoKYGBge3J9CgoKIyBJbXB1dGFyIHVzYW5kbyBtw6lkaWEKdGl0YW5pY190cmFpbl9hZ2UgPC0gdGl0YW5pY190cmFpbiAlPiUgCiAgbXV0YXRlKGltcHV0YWRhX2FnZSA9IGlmZWxzZShpcy5uYShBZ2UpLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcm91bmQobWVhbihBZ2UsbmEucm09VFJVRSksZGlnaXRzID0gMiksCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBBZ2UpKSAlPiUgCiMgQ3JpYXIgaW5kaWNhZG9yIHBhcmEgc2FiZXIgcXVhbCBmb2kgaW1wdXRhZG8gZSBxdWFsIG7Do28KICBtdXRhdGUoZmFsdGFudGVfYWdlID0gaWZlbHNlKGlzLm5hKEFnZSksMSwwKSkKYGBgCgpVbWEgdmV6IGltcHV0YWRvcyBvcyB2YWxvcmVzIGRlIGlkYWRlLCBwb2RlbW9zIGNhbGN1bGFyIG5vdmFtZW50ZSBvIG1vZGVsbyBsb2fDrXN0aWNvOgoKYGBge3J9CnRpdGFuaWNfdHJhaW5fYWdlIDwtIHRpdGFuaWNfdHJhaW5fYWdlICU+JSAKICBzZWxlY3QoLUFnZSwgLWZhbHRhbnRlX2FnZSkKCnRpdGFuaWNfbG9naXN0aWNfbW9kZWwyIDwtIGdsbShTdXJ2aXZlZH4uLCAKICAgICAgICAgICAgICAgICAgICAgIGRhdGEgPSB0aXRhbmljX3RyYWluX2FnZSwgZmFtaWx5ID0gImJpbm9taWFsIikKCnN1bW1hcnkodGl0YW5pY19sb2dpc3RpY19tb2RlbDIpCmBgYAoKTyB2YWxvciBkbyBQc2V1ZG8gUjIgcGFyYSBvIG1vZGVsbyBsb2fDrXN0aWNvIDIgw6k6CgpgYGB7cn0KZ2xhbmNlKHRpdGFuaWNfbG9naXN0aWNfbW9kZWwyKSAlPiUgc3VtbWFyaXplKHBSMiA9IDEtZGV2aWFuY2UvbnVsbC5kZXZpYW5jZSkKYGBgCgplIHBvciBmaW0sIGEgY3VydmEgUk9DOgoKYGBge3J9Cgp0aXRhbmljX3RyYWluX2xvZ2lzdGljIDwtIHRpdGFuaWNfdHJhaW4gJT4lIAogIG11dGF0ZShwcm9iID0gcHJlZGljdCh0aXRhbmljX2xvZ2lzdGljX21vZGVsMiwgCiAgICAgICAgICAgICAgICAgICAgICAgIHR5cGUgPSAicmVzcG9uc2UiKSkKClJPQzIgPC0gcm9jKHRpdGFuaWNfdHJhaW5fbG9naXN0aWMkU3Vydml2ZWQsCiAgICAgICAgICAgdGl0YW5pY190cmFpbl9sb2dpc3RpYyRwcm9iKQoKIyBQbG90IHRoZSBST0MgY3VydmUKcGxvdChST0MyLCBjb2wgPSJibHVlIikKCmxpYnJhcnkoV1ZQbG90cykKR2FpbkN1cnZlUGxvdCh0aXRhbmljX3RyYWluX2xvZ2lzdGljLCAicHJvYiIsIlN1cnZpdmVkIiwiQ3VydmEgZGUgR2FuaG8iKQpST0NQbG90KHRpdGFuaWNfdHJhaW5fbG9naXN0aWMsICJwcm9iIiwiU3Vydml2ZWQiLDEsICJDdXJ2YSBST0MgcGFyYSBvIE1vZGVsbyBMb2fDrXN0aWNvIDIiKQpgYGAKCkUgYSDDoXJlYSBhYmFpeG8gZGEgY3VydmEgKEFVQykgw6kgYHIgYXVjKFJPQzIpYC4gTWFpcyBzb2JyZSBST0MsIEdhaW5DdXJ2ZSBlIE1hdHJpeiBkZSBDb25mdXPDo28gcG9kZW0gc2VyIGVuY29udHJhZGFzIGVtOiA8aHR0cHM6Ly9jb21tdW5pdHkudGliY28uY29tL3dpa2kvZ2FpbnMtdnMtcm9jLWN1cnZlcy1kby15b3UtdW5kZXJzdGFuZC1kaWZmZXJlbmNlPgoKIyMgw4Fydm9yZXMgZGUgRGVjaXPDo28KClVzYXJlbW9zIG8gZGF0YWZyYW1lIGB0aXRhbmljX3RyYWluYC4KCmBgYHtyfQpsaWJyYXJ5KHJwYXJ0KQpsaWJyYXJ5KHJwYXJ0LnBsb3QpCgoKCnRpdGFuaWNfdHJlZV9tb2RlbCA8LSBycGFydChTdXJ2aXZlZH4uLAogICAgICAgICAgICAgICAgICAgIGRhdGEgPSB0aXRhbmljX3RyYWluLCAKICAgICAgICAgICAgICAgICAgICBtZXRob2QgPSAiY2xhc3MiLCAKICAgICAgICAgICAgICAgICAgICBjb250cm9sID0gcnBhcnQuY29udHJvbChjcCA9IDApKQoKIyBQbG90IHRoZSBsb2FuX21vZGVsIHdpdGggZGVmYXVsdCBzZXR0aW5ncwpycGFydC5wbG90KHRpdGFuaWNfdHJlZV9tb2RlbCkKCnJwYXJ0LnBsb3QodGl0YW5pY190cmVlX21vZGVsLCB0eXBlID0gMywgYm94LnBhbGV0dGUgPSBjKCIjZjE2NzI3IiwgIiMxYTk1NGQiKSwgZmFsbGVuLmxlYXZlcyA9IFRSVUUpCmBgYAoKQWdvcmEgcXVlIGEgw6Fydm9yZSBkZSBkZWNpc8OjbyBmb2kgY3JpYWRhLCBwb2RlbW9zIHZlcmlmaWNhciBhIHN1YSBwcmVjaXPDo28gY29tcGFyYW5kbyBhcyBwcmV2aXPDtWVzIGNvbSBhIGNvbHVuYSBgU3Vydml2ZWRgLgoKYGBge3J9CgpwcmVkX3RyZWUgPC0gcHJlZGljdCh0aXRhbmljX3RyZWVfbW9kZWwsIHRpdGFuaWNfdHJhaW4sCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdHlwZSA9ICJjbGFzcyIpCgoKY2FyZXQ6OmNvbmZ1c2lvbk1hdHJpeChhcy5mYWN0b3IocHJlZF90cmVlKSxhcy5mYWN0b3IodGl0YW5pY190cmFpbiRTdXJ2aXZlZCkpCmBgYAoKVmFtb3MgY2FsY3VsYXIgYSBST0MgZSBHYWluQ3VydmUgcGFyYSBvIG1vZGVsbyBkZSDDgXJ2b3JlOgoKYGBge3J9Cgp0aXRhbmljX3RyYWluIDwtIHRpdGFuaWNfdHJhaW4gJT4lIAogIG11dGF0ZShwcmVkX3RyZWUgPSBwcmVkX3RyZWUpCgp0aXRhbmljX3RyYWluJFN1cnZpdmVkIDwtIGFzLmNoYXJhY3Rlcih0aXRhbmljX3RyYWluJFN1cnZpdmVkKQp0aXRhbmljX3RyYWluJFN1cnZpdmVkIDwtIGFzLm51bWVyaWModGl0YW5pY190cmFpbiRTdXJ2aXZlZCkKdGl0YW5pY190cmFpbiRwcmVkX3RyZWUgPC0gYXMuY2hhcmFjdGVyKHRpdGFuaWNfdHJhaW4kcHJlZF90cmVlKQp0aXRhbmljX3RyYWluJHByZWRfdHJlZSA8LSBhcy5udW1lcmljKHRpdGFuaWNfdHJhaW4kcHJlZF90cmVlKQoKUk9DUGxvdCh0aXRhbmljX3RyYWluLCAicHJlZF90cmVlIiwiU3Vydml2ZWQiLDEsICJDdXJ2YSBST0MgcGFyYSBvIE1vZGVsbyBBcnZvcmUgZGUgRGVjaXPDo28iKQoKR2FpbkN1cnZlUGxvdCh0aXRhbmljX3RyYWluLCAicHJlZF90cmVlIiwiU3Vydml2ZWQiLCJHYWluIEN1cnZlIHBhcmEgbyBNb2RlbG8gQXJ2b3JlIGRlIERlY2lzw6NvIikKYGBgCgojIyBSYW5kb20gRm9yZXN0CgpQYXJhIGNvbnN0cnVpciBvIG1vZGVsbyBSRiwgw6kgbmVjZXNzw6FyaW8gZWxpbWluYXIgb3MgYE5Bc2AgcXVlIGFwYXJlY2VtIG5hIHZhcmnDoXZlbCBgQWdlYC4KCmBgYHtyfQoKdGl0YW5pY190cmFpbl9jbGVhbl9yZiA8LSB0aXRhbmljX3RyYWluICU+JSAKICBmaWx0ZXIoIWlzLm5hKEFnZSkpICU+JSAKICBzZWxlY3QoLXByZWRfdHJlZSkKCgoKdGl0YW5pY19yZl9tb2RlbCA8LSByYW5nZXIoU3Vydml2ZWR+LiwgIyBmb3JtdWxhIAogICAgICAgICAgICAgICAgICAgICAgICAgdGl0YW5pY190cmFpbl9jbGVhbl9yZiwgIyBkYXRhCiAgICAgICAgICAgICAgICAgICAgICAgICBudW0udHJlZXMgPSA1MDAsIAogICAgICAgICAgICAgICAgICAgICAgICAgcmVzcGVjdC51bm9yZGVyZWQuZmFjdG9ycyA9ICJvcmRlciIsIAogICAgICAgICAgICAgICAgICAgICAgICAgc2VlZCA9IHNlZWQsCiAgICAgICAgICAgICAgICAgICAgICAgICBjbGFzc2lmaWNhdGlvbiA9IFRSVUUpCmBgYAoKQWdvcmEgc2ltLCBwb2RlbW9zIHVzYXIgbyBtb2RlbG8gcGFyYSBmYXplciBhcyBwcmV2aXPDtWVzIHVzYW5kbyBgcHJlZGljdGAKCmBgYHtyfQoKCnByZWRfcmYgPC0gcHJlZGljdCh0aXRhbmljX3JmX21vZGVsLCB0aXRhbmljX3RyYWluX2NsZWFuX3JmKSRwcmVkaWN0aW9ucwoKCnRpdGFuaWNfcmZfbW9kZWwKCnRpdGFuaWNfdHJhaW5fY2xlYW5fcmYgPC0gdGl0YW5pY190cmFpbl9jbGVhbl9yZiAlPiUgCiAgbXV0YXRlKHByZWRfcmYgPSBwcmVkX3JmKQpgYGAKCkEgTWF0cml6IGRlIGNvbmZ1c8OjbyBwYXJhIG8gbW9kZWxvIGRlIFJhbmRvbSBGb3Jlc3Qgw6k6CgpgYGB7cn0KY2FyZXQ6OmNvbmZ1c2lvbk1hdHJpeChhcy5mYWN0b3IodGl0YW5pY190cmFpbl9jbGVhbl9yZiRwcmVkX3JmKSxhcy5mYWN0b3IodGl0YW5pY190cmFpbl9jbGVhbl9yZiRTdXJ2aXZlZCkpCgoKUk9DUGxvdCh0aXRhbmljX3RyYWluX2NsZWFuX3JmLCAicHJlZF9yZiIsIlN1cnZpdmVkIiwxLCAiQ3VydmEgUk9DIHBhcmEgbyBNb2RlbG8gUmFuZG9tIEZvcmVzdCIpCgoKYGBgCgo=</div>
 
 
+</div>
+</div>
 
 </div>
 
@@ -862,12 +1104,36 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+
 <script>
-$(document).ready(function () {
-  window.initializeSourceEmbed("Gabarito-webinar3a.Rmd");
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
 });
 </script>
-
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

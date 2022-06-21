@@ -3,11 +3,15 @@ title: "Webinar 3a - Business Analytics e Data Mining"
 subtitle: "Previsão de sobrevivientes do Titanic"
 output: 
   html_document:
-    code_download: true
+    toc: true
+    toc_float: true
+    code_download: false
+    theme: paper
+date: "Última versão em `r format(Sys.time(), '%d/%m/%y')`"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE,cache = TRUE)
 ```
 
 # Carregando os dados
@@ -47,7 +51,7 @@ titanic_test <- read.csv("data3a/test.csv")
 Uma vez que os dados os carregados, várias das variáveis devem ser convertidas a fatores.
 
 ```{r}
-titanic$Survived <- factor(titanic$Survived)
+#titanic$Survived <- factor(titanic$Survived)
 titanic$Pclass <- factor(titanic$Pclass)
 titanic$Sex <- factor(titanic$Sex)
 
@@ -63,7 +67,7 @@ titanic_df <- titanic %>%
   rename(Siblings_and_Spouses = SibSp,
          Parents_and_Children = Parch)
 
-relevel(titanic_df$Survived, ref="1")
+
 ```
 
 ## Criar test e train datasets
@@ -72,7 +76,7 @@ Podemos usar a função `initial_split()` do pacote `tidymodels`.
 
 ```{r}
 
-seed <- 2020
+set.seed <- 2020
 
 #split <- initial_split(titanic_df, strata =Survived)
 
@@ -81,9 +85,15 @@ seed <- 2020
 
 ```
 
-Mas neste caso, o kaggle já nos deu os datasets separados, portanto, o nosso dataset `titanic_df` é o dataset de treino:
+Mas neste caso, o kaggle já nos deu os datasets separados, portanto, o nosso dataset `titanic_df` é o dataset de treino. Além disso, vamos retirar eventuais observações com `NA`.
 
 ```{r treino}
+library(skimr)
+
+skim(titanic_df)
+
+titanic_df <- titanic_df %>% 
+  filter(!is.na(Age))
 
 titanic_train <- titanic_df
 
@@ -97,9 +107,45 @@ Nesta análise, vamos formular algumas perguntas:
 -   Previsão de sobrevivência para o navio inteiro.
 
 
+## Regressão Linear
+
+Vamos usar primeiramente um modelo linear para fazer a previsão de sobrevivência.
+
+```{r ols}
+
+titanic_lm <- lm(Survived~., data=titanic_train)
+summary(titanic_lm)
+```
+
+Note que `Parents` e `Fare` não são significativos pois os valores `p` são 0,52725 e 0,4048 respectivamente, ambos maiores a 0,05 de nível de significância.
+
+Porém, o valor de `Survived` inicia com um intercepto de 1,1740, ou seja, acima do valor de `1` que indicaria sobrevivência. 
+
+Vamos calcular a probabilidade de sobrevivência para cada passageiro e plotar um gráfico para reforçar este argumento.
+
+```{r}
+
+pred_lm <- predict(titanic_lm, data=titanic_train)
+
+titanic_df <- titanic_df %>% 
+  mutate(prob_lm = pred_lm)
+
+
+titanic_df %>% 
+  ggplot(aes(factor(Survived),prob_lm,
+             color=factor(Survived)))+
+  geom_boxplot()+
+  scale_y_continuous(limits = c(-0.2,1.1),
+                     n.breaks = 12)+
+  scale_color_brewer(palette = "Dark2")+
+  theme_minimal()
+  
+```
+
+
 ## Regressão Logística
 
-O primeiro modelo que usaremos é o modelo de regressão logística. Podemos ver os resultados do modelo abaixo.
+Um modelo que responde melhor quando a variável de saída está entre `0` e `1` é o de regressão logística. Podemos ver os resultados do modelo abaixo.
 
 ```{r logistic}
 
@@ -133,75 +179,79 @@ glance(titanic_logistic_model) %>%
   summarize(pR2 = 1 - deviance / null.deviance)
 
 
-titanic_train_logistic <- titanic_train %>% 
-  filter(!is.na(Age)) %>% 
-  mutate(prob = predict(titanic_logistic_model, 
+titanic_df <- titanic_df %>% 
+  mutate(prob_log = predict(titanic_logistic_model, 
                         type = "response"))
 
-titanic_train_logistic$Survived <- as.character(titanic_train_logistic$Survived)
+media <- mean(titanic_train$Survived)
 
-titanic_train_logistic$Survived <- as.numeric(titanic_train_logistic$Survived)
+```
 
-media <- mean(titanic_train_logistic$Survived)
+```{r boxplot-log}
+titanic_df %>% 
+  ggplot(aes(factor(Survived),prob_log,
+             color=factor(Survived)))+
+  geom_boxplot()+
+  scale_y_continuous(limits = c(-0.2,1.1),
+                     n.breaks = 12)+
+  scale_color_brewer(palette = "Dark2")+
+  theme_minimal()
+
 
 ```
 
 A probabilidade média de sobrevivência é `r round(media, digits = 2)`, portanto podemos definir o limiar da previsão como sendo esse valor.
 
+
 ```{r}
-titanic_train_logistic$pred <- ifelse(titanic_train_logistic$prob > media, 1, 0)
+titanic_df$pred_log <- ifelse(titanic_df$prob_log > media, 1, 0)
 ```
 
 Para calcular a precisão da previsão, podemos comparar as médias.
 
-```{r}
-mean(titanic_train_logistic$Survived==titanic_train_logistic$pred)
+```{r predlog}
+pred_log <- mean(titanic_df$Survived==titanic_df$pred_log)
 ```
 
-Desta forma, chegamos ao valor de `r round(mean(titanic_train_logistic$Survived==titanic_train_logistic$pred), digits = 2)*100` %.
+Desta forma, chegamos ao valor de `r round(pred_log*100, digits = 2)` %.
 
-Uma forma mais elegante de verificar a precisão do modelo é usar a Curva ROC.
+Uma forma mais elegante de verificar a precisão do modelo é usar a Curva ROC e o valor de AUC.
 
-```{r}
-
-
-caret::confusionMatrix(as.factor(titanic_train_logistic$pred),
-                as.factor(titanic_train_logistic$Survived))
-
-library(pROC)
-# Create a ROC curve
-ROC <- roc(titanic_train_logistic$Survived,
-           titanic_train_logistic$prob)
-
-# Plot the ROC curve
-plot(ROC, col ="blue")
+```{r auclog}
 
 
-# Calculate the area under the curve (AUC)
-auc(ROC)
+titanic_df$Survived <- factor(titanic_df$Survived, levels=c(1,0))
+
+autoplot(roc_curve(titanic_df, Survived, prob_log))
+
+roc_auc(titanic_df, Survived, prob_log)
+
 ```
 
 ## Como lidar com dados faltantes
 
-Como vimos anteriormente, o dataset continha um grande número de valores `NA` na variável `Age`. No procedimento anterior, simplesmente eliminamos as linhas com `NA`, ou seja, 134 de um total de 669.
+Como vimos anteriormente, o dataset continha um grande número de valores `NA` na variável `Age`. No procedimento anterior, simplesmente eliminamos as linhas com `NA`, ou seja, 177 de um total de 891.
 
-Vamos conhecer um método de inputar valores para esses `NA`, e ver o efeito que pode dar nosso modelo. Vamos retornar ao dataframe `titanic_train_clean` e a partir dele, criar um novo dataframe de teste.
+Vamos conhecer um método de inputar valores para esses `NA`, e ver o efeito que pode dar nosso modelo. Vamos retornar ao dataframe `titanic`.
 
-```{r}
+```{r faltantes1}
 
 
 # Imputar usando média
-titanic_train_age <- titanic_train %>% 
-  mutate(imputada_age = ifelse(is.na(Age),
+titanic_train_age <- titanic %>% 
+  mutate(Age_imputada = ifelse(is.na(Age),
                                round(mean(Age,na.rm=TRUE),digits = 2),
                                Age)) %>% 
 # Criar indicador para saber qual foi imputado e qual não
-  mutate(faltante_age = ifelse(is.na(Age),1,0))
+  mutate(faltante_age = ifelse(is.na(Age),1,0)) %>% 
+  select(-PassengerId,-Name,-Ticket, -Cabin, -Embarked) %>% 
+  rename(Siblings_and_Spouses = SibSp,
+         Parents_and_Children = Parch)
 ```
 
 Uma vez imputados os valores de idade, podemos calcular novamente o modelo logístico:
 
-```{r}
+```{r faltantes2}
 titanic_train_age <- titanic_train_age %>% 
   select(-Age, -faltante_age)
 
@@ -213,30 +263,32 @@ summary(titanic_logistic_model2)
 
 O valor do Pseudo R2 para o modelo logístico 2 é:
 
-```{r}
+```{r faltantes3}
 glance(titanic_logistic_model2) %>% summarize(pR2 = 1-deviance/null.deviance)
 ```
 
-e por fim, a curva ROC:
+e por fim, a curva ROC e o valor de AUC:
 
-```{r}
+```{r faltantes4}
 
-titanic_train_logistic <- titanic_train %>% 
-  mutate(prob = predict(titanic_logistic_model2, 
+titanic_train_age <- titanic_train_age %>% 
+  mutate(prob_log_age = predict(titanic_logistic_model2, 
                         type = "response"))
 
-ROC2 <- roc(titanic_train_logistic$Survived,
-           titanic_train_logistic$prob)
+titanic_train_age$Survived <- factor(titanic_train_age$Survived, levels=c(1,0))
 
-# Plot the ROC curve
-plot(ROC2, col ="blue")
+autoplot(roc_curve(titanic_train_age, Survived, prob_log_age))
+
+roc_auc <- roc_auc(titanic_train_age, Survived, prob_log_age)
+
+roc_auc
 
 library(WVPlots)
-GainCurvePlot(titanic_train_logistic, "prob","Survived","Curva de Ganho")
-ROCPlot(titanic_train_logistic, "prob","Survived",1, "Curva ROC para o Modelo Logístico 2")
+GainCurvePlot(titanic_train_age, "prob_log_age","Survived","Curva de Ganho")
+
 ```
 
-E a área abaixo da curva (AUC) é `r auc(ROC2)`. Mais sobre ROC, GainCurve e Matriz de Confusão podem ser encontradas em: <https://community.tibco.com/wiki/gains-vs-roc-curves-do-you-understand-difference>
+E a área abaixo da curva (AUC) é `r roc_auc`. Mais sobre ROC, GainCurve e Matriz de Confusão podem ser encontradas em: <https://community.tibco.com/wiki/gains-vs-roc-curves-do-you-understand-difference>
 
 ## Árvores de Decisão
 
@@ -268,42 +320,42 @@ pred_tree <- predict(titanic_tree_model, titanic_train,
 
 
 caret::confusionMatrix(as.factor(pred_tree),as.factor(titanic_train$Survived))
+
+titanic_df <- titanic_df %>% 
+  mutate(pred_tree=pred_tree) 
+
+titanic_df$pred_tree <- factor(titanic_df$pred_tree, levels = c(1,0))
+
+titanic_df %>%   
+  conf_mat(Survived, pred_tree)
 ```
 
-Vamos calcular a ROC e GainCurve para o modelo de Árvore:
+Vamos calcular a curva ROC, AUC e GainCurve para o modelo de Árvore:
 
 ```{r}
 
-titanic_train <- titanic_train %>% 
-  mutate(pred_tree = pred_tree)
+titanic_df$pred_tree <- as.character(titanic_df$pred_tree)
+titanic_df$pred_tree <- as.numeric(titanic_df$pred_tree)
 
-titanic_train$Survived <- as.character(titanic_train$Survived)
-titanic_train$Survived <- as.numeric(titanic_train$Survived)
-titanic_train$pred_tree <- as.character(titanic_train$pred_tree)
-titanic_train$pred_tree <- as.numeric(titanic_train$pred_tree)
+autoplot(roc_curve(titanic_df, truth = Survived, estimate = pred_tree))
 
-ROCPlot(titanic_train, "pred_tree","Survived",1, "Curva ROC para o Modelo Arvore de Decisão")
+roc_auc(titanic_df, truth = Survived, estimate = pred_tree)
 
-GainCurvePlot(titanic_train, "pred_tree","Survived","Gain Curve para o Modelo Arvore de Decisão")
+GainCurvePlot(titanic_df, "pred_tree","Survived","Gain Curve para o Modelo Arvore de Decisão")
 ```
 
 ## Random Forest
 
-Para construir o modelo RF, é necessário eliminar os `NAs` que aparecem na variável `Age`.
+Para construir o modelo RF, é necessário eliminar os `NAs` que aparecem na variável `Age`. Como nosso dataset não tem mais `NAs`, podemos continuar com a previsão.
 
 ```{r}
 
-titanic_train_clean_rf <- titanic_train %>% 
-  filter(!is.na(Age)) %>% 
-  select(-pred_tree)
-
-
 
 titanic_rf_model <- ranger(Survived~., # formula 
-                         titanic_train_clean_rf, # data
+                         titanic_train, # data
                          num.trees = 500, 
                          respect.unordered.factors = "order", 
-                         seed = seed,
+                         seed = set.seed,
                          classification = TRUE)
 ```
 
@@ -312,23 +364,35 @@ Agora sim, podemos usar o modelo para fazer as previsões usando `predict`
 ```{r}
 
 
-pred_rf <- predict(titanic_rf_model, titanic_train_clean_rf)$predictions
+pred_rf <- predict(titanic_rf_model, titanic_train)$predictions
 
 
 titanic_rf_model
 
-titanic_train_clean_rf <- titanic_train_clean_rf %>% 
+titanic_df <- titanic_df %>% 
   mutate(pred_rf = pred_rf)
-```
-
-A Matriz de confusão para o modelo de Random Forest é:
-
-```{r}
-caret::confusionMatrix(as.factor(titanic_train_clean_rf$pred_rf),as.factor(titanic_train_clean_rf$Survived))
-
-
-ROCPlot(titanic_train_clean_rf, "pred_rf","Survived",1, "Curva ROC para o Modelo Random Forest")
-
 
 ```
 
+
+A curva ROC, o AUC:
+
+```{r predrfplot}
+
+autoplot(roc_curve(titanic_df, truth = Survived, estimate = pred_rf))
+
+
+roc_auc(titanic_df, truth = Survived, estimate = pred_rf)
+```
+
+E a Matriz de confusão para o modelo de Random Forest é:
+
+```{r confmatpredrf}
+
+titanic_df$pred_rf <- factor(titanic_df$pred_rf, levels = c(1,0))
+
+titanic_df %>%   
+  conf_mat(Survived, pred_rf)
+
+
+```
