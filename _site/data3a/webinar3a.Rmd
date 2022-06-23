@@ -109,6 +109,7 @@ Vamos usar primeiramente um modelo linear para fazer a previsão de sobrevivênc
 ```{r ols}
 
 titanic_lm <- lm(Survived~., data=titanic_train)
+
 summary(titanic_lm)
 ```
 
