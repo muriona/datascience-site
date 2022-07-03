@@ -16,8 +16,10 @@ navbar:
         href: Gabarito_Tarefa1.html
       - text: "Tarefa 2"
         href: Tarefa2_20221.html
-#      - text: "Tarefa 3"
-#        href: Tarefa3.html
+      - text: "Tarefa 3 - Regressão"
+        href: Tarefa3_DCbike.html
+      - text: "Tarefa 3 - Classificação"
+        href: Tarefa3_DCbike_class.html
 #    - text: "Notas"
 #      href: notas.html
     - text: "Tutoriais"

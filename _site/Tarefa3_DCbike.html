@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Tarefa 3 - Machine Learning em R</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="tarefas.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EPS 7008</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tarefas
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tarefa_Instrucoes.html">Instruções Gerais</a>
+    </li>
+    <li>
+      <a href="Template_entregas.html">Template para entregas</a>
+    </li>
+    <li>
+      <a href="Tarefa1.html">Tarefa 1</a>
+    </li>
+    <li>
+      <a href="Gabarito_Tarefa1.html">Gabarito - Tarefa 1</a>
+    </li>
+    <li>
+      <a href="Tarefa2_20221.html">Tarefa 2</a>
+    </li>
+    <li>
+      <a href="Tarefa3_DCbike.html">Tarefa 3 - Regressão</a>
+    </li>
+    <li>
+      <a href="Tarefa3_DCbike_class.html">Tarefa 3 - Classificação</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tutoriais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tutorial1.html">Tutorial 1 - Tidyverse</a>
+    </li>
+    <li>
+      <a href="Tutorial2.html">Tutorial 2 - Ggplot e Tidyverse</a>
+    </li>
+    <li>
+      <a href="Tutorial2_gabarito.html">Tutorial 2 - Ggplot e Tidyverse - Gabarito</a>
+    </li>
+    <li>
+      <a href="Tutorial3.html">Tutorial 3 - Regressão Linear</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Labs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="webinar1a-EDA.html">Lab 1</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar1a.html">Lab 1a - Gabarito</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar1a-output.html">Lab 1a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="webinar1b-EDA.html">Lab 1b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar2.html">Lab 2 - Dashboards em R</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar3a.html">Lab 3a - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar3b.html">Lab 3b - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar4b.html">Lab 4 - Gabarito com output</a>
+    </li>
+    <li>
+      <a href="Gabarito-webinar5.html">Lab 5 - Gabarito com output</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Tarefa 3 - Machine Learning em R</h1>
+<h3 class="subtitle">Métodos Supervisionados de Regressão</h3>
+
+</div>
+
+
+<div class="figure">
+<img src="img/fabio-fistarol-Nnl2c0NFKwE-unsplash.jpg" alt="Photo by Fabio Fistarol on Unsplash" width="2120" />
+<p class="caption">
+Photo by Fabio Fistarol on Unsplash
+</p>
+</div>
+<p>Nesta terceira tarefa usaremos um dataset relacionado com o serviço
+de aluguel de bikes em DC, EUA, com registros por hora de aluguel de
+bikes para o período 2011 a 2012.</p>
+<div id="sobre-o-aluguel-de-bikes-em-dc-eua" class="section level2">
+<h2>Sobre o aluguel de bikes em DC, EUA</h2>
+<p>Os sistemas de compartilhamento de bicicletas são a nova geração de
+sistemas tradicionais de aluguel de bicicletas onde todo o processo de
+adesão, aluguel e retorno se tornou automático. Através destes sistemas,
+o usuário é capaz de alugar facilmente uma bicicleta de uma determinada
+posição e retornar em outra posição. Atualmente, existem cerca de 500
+programas de compartilhamento de bicicletas em todo o mundo, que é
+composto de mais de 500 mil bicicletas. Hoje, existe um grande interesse
+nestes sistemas devido ao seu importante papel em questões de tráfego,
+meio ambiente e saúde.</p>
+<p>Além das aplicações interessantes no mundo real dos sistemas de
+aluguel de bicicletas, as características dos dados gerados por estes
+sistemas os tornam atraentes para a pesquisa. Ao contrário de outros
+serviços de transporte, como ônibus ou metrô, a duração da viagem,
+posição de partida e chegada é explicitamente registrada nestes
+sistemas. Esta característica transforma o sistema de compartilhamento
+de bicicletas em uma rede virtual de sensores que pode ser usada para a
+detecção da mobilidade na cidade. Portanto, espera-se que a maioria dos
+eventos importantes na cidade possam ser detectados através do
+monitoramento destes dados.</p>
+<p>Fonte: <a
+href="http://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset">UCI
+Machine Learning Repository - Bike Sharing Dataset</a></p>
+</div>
+<div id="dados" class="section level2">
+<h2>Dados</h2>
+<p>Os dados incluem contagens por hora do aluguel de bicicletas (por
+membros e usuários casuais) da “Capital Bikeshare” em Washington, DC
+entre 2011 e 2012, bem como informações meteorológicas sobre esses
+dias.</p>
+<p>Você pode baixar os dados (aqui)[<a
+href="https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip"
+class="uri">https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip</a>]</p>
+<p>As fontes de dados originais se encontram em: <a
+href="http://capitalbikeshare.com/system-data"
+class="uri">http://capitalbikeshare.com/system-data</a> e <a
+href="http://www.freemeteo.com"
+class="uri">http://www.freemeteo.com</a>.</p>
+<p>O dataset chama-se <code>hour.csv</code>. A descrição de cada uma das
+variáveis pode ser encontrada no arquivo de ajuda do dataset, que pode
+ser acessado executando <code>?dcbikeshare</code> em seu Console.</p>
+<div id="exercícios" class="section level3">
+<h3>Exercícios</h3>
+<ol style="list-style-type: decimal">
+<li><p>Recodificar a variável <code>season</code> para um fator com
+nomes mais significativos para cada nível, recodificando a “primavera”
+(spring) como categoria base (considerando que winter = 1, spring = 2,
+summer = 3 e fall = 4).</p></li>
+<li><p>Recodificar as variáveis binárias <code>holiday</code> e
+<code>workingday</code> para serem fatores com níveis <code>no</code>
+(0) e <code>yes</code> (1), com <code>no</code> como categoria
+base.</p></li>
+<li><p>Recodificar a variável <code>yr</code> para ser um fator com
+níveis <span class="math inline">\(2011\)</span> e <span
+class="math inline">\(2012\)</span>, com <span
+class="math inline">\(2011\)</span> como categoria base.</p></li>
+<li><p>Recodifique a variável <code>weathersit</code> para
+<code>factor</code>: 1 - <code>claro</code>, 2 - <code>névoa</code>, 3 -
+<code>precip leve</code>, e 4 - <code>precip pesada</code>, com
+<code>claro</code> como categoria base.</p></li>
+<li><p>As colunas temperatura (<code>temp</code>), sensação térmica
+(<code>atemp</code>), umidade (<code>hum</code>) e velocidade do vento
+(<code>windspeed</code>) estão normalizadas (0-1). Crie novas variáveis
+para cada uma, calculando os valores brutos.</p></li>
+</ol>
+<ul>
+<li>temp: para converter a graus Celsius multiplique por 41 (valor
+máximo)</li>
+<li>atemp: idem anterior, multiplique por 50 (valor máximo)</li>
+<li>hum: multiplique por 100 (valor máximo)</li>
+<li>windspeed: multiplique por 67 (valor máximo)</li>
+</ul>
+<ol start="6" style="list-style-type: decimal">
+<li><p>Recodifique a variavel <code>weekday</code> para
+<code>factor</code>: 1: 2a-f, 2: 3a-f, 3: 4a-f, 4: 5a-f, 5: 6a-f, 6:
+sabado, 7: domingo, com <code>2a-f</code> como categoria base.</p></li>
+<li><p>Recodifique as variáveis <code>hr</code> para <code>factor</code>
+com 24 níveis (de 0 a 23) e <code>mnth</code> para <code>factor</code>
+com 12 níveis (janeiro a dezembro).</p></li>
+<li><p>Recrie a seguinte visualização, e interprete-a no contexto dos
+dados. <strong>Dica</strong>: Você precisará usar uma das variáveis que
+você criou acima. A temperatura plotada é a
+<code>sensação térmica</code>. Antes de realizar o gráfico verifique que
+o tipo da variável <code>dteday</code> deve ser <code>Date</code> e não
+<code>chr</code></p></li>
+</ol>
+<p><img src="Tarefa3_DCbike_files/figure-html/unnamed-chunk-9-1.png" width="576" /></p>
+<ol start="9" style="list-style-type: decimal">
+<li>Recrie a visualização abaixo, mostrando a relação entre o aluguel de
+bicicletas e a estação do ano (<code>season</code>). Interprete-a no
+contexto dos dados.</li>
+</ol>
+<p><img src="Tarefa3_DCbike_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<ol start="10" style="list-style-type: decimal">
+<li><p>Separe o dataset em dois grupos, treinamento e teste, sendo a
+proporção 75 e 25 respectivamente, use obrigatoriamente o
+<code>tidymodels</code> (escoha quais atributos irá usar e quais não e
+justifique suas escolhas).</p></li>
+<li><p>Crie um objeto de validação cruzada, com k=10 usando
+<code>tidymodels</code>, mostre o código. Use este objeto para todas as
+questões a seguir.</p></li>
+<li><p>Ajuste um modelo linear prevendo o total de aluguéis de
+bicicletas a partir dos atributos presentes no dataset. Calcule o <span
+class="math inline">\(R^2\)</span>, o <span
+class="math inline">\(RMSE\)</span> e o <span
+class="math inline">\(MAE\)</span>.</p></li>
+<li><p>Ajuste um modelo de árvore de decisão prevendo o total de
+aluguéis de bicicletas a partir dos atributos presentes no dataset.
+Calcule o <span class="math inline">\(R^2\)</span>, o <span
+class="math inline">\(RMSE\)</span> e o <span
+class="math inline">\(MAE\)</span>.</p></li>
+<li><p>Utilize o algoritmo Random Forests para prever o total de
+aluguéis de bicicletas a partir dos atributos presentes no dataset.
+Calcule o <span class="math inline">\(R^2\)</span>, o <span
+class="math inline">\(RMSE\)</span> e o <span
+class="math inline">\(MAE\)</span>.</p></li>
+<li><p>Qual dos três modelos foi melhor? <strong>dica</strong>: compare
+os <span class="math inline">\(R^2\)</span>, os <span
+class="math inline">\(RMSE\)</span> e os <span
+class="math inline">\(MAE\)</span> usando uma tabela.</p></li>
+<li><p>Use o melhor modelo para calcular o <span
+class="math inline">\(R^2\)</span>, o <span
+class="math inline">\(RMSE\)</span> e o <span
+class="math inline">\(MAE\)</span> no dataset de teste. Grafique o total
+de aluguéis (<code>cnt</code>) no eixo <span
+class="math inline">\(x\)</span> e o valor estimado no eixo <span
+class="math inline">\(y\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div id="sobre-a-forma-de-avaliação" class="section level2">
+<h2>Sobre a Forma de Avaliação</h2>
+<p>Seguindo a cultura de competições de machine learning, a avaliação
+desta tarefa seguirá o formato de competição.</p>
+<p>A escolha de atributos que devem compor um modelo de machine learning
+define, de certa forma, a qualidade das previsões. Neste sentido, a nota
+final da tarefa será ponderada de acordo ao ranking de melhores
+previsões, a partir da média aritmética entre as notas individuais de
+cada indicador no dataset de teste - da questão 16 - (<span
+class="math inline">\(R^2\)</span>, o <span
+class="math inline">\(RMSE\)</span> e o <span
+class="math inline">\(MAE\)</span>) e organizada por percentis:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Percentil</th>
+<th>Nota</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>75 a 100</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>50 a 74</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td>abaixo de 49</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>fez apenas as questões 1 a 9 (cada uma delas vale 0,4)</td>
+<td>0 a 3,6</td>
+</tr>
+</tbody>
+</table>
+<p>Obs: a entrega parcial das questões 10 a 16 não será pontuada.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
