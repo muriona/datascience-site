@@ -16,7 +16,7 @@
 <script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -29,11 +29,19 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
-<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -58,11 +66,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-#rmd-source-code {
-  display: none;
-}
-</style>
 
 
 <link rel="stylesheet" href="dd_cv_milz.css" type="text/css" />
@@ -228,10 +231,70 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
 
 
 
@@ -241,6 +304,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -357,17 +430,11 @@ $(document).ready(function () {
 
 <div id="header">
 
-<div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
-<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
-</ul>
-</div>
-
 
 
 <h1 class="title toc-ignore">Webinar 5 - Machine Learning</h1>
 <h3 class="subtitle">Métodos Não Supervisionados: Clustering</h3>
+<h4 class="date">Última versão em 05/07/22</h4>
 
 </div>
 
@@ -390,10 +457,12 @@ agrupamento de profissões com crescimento de salários similares).</li>
 <pre class="r"><code>library(tidyverse)
 library(dendextend) # para colorir os agrupamentos do cluster hirárquico
 library(cluster) #para usar função pam
-library(cowplot) #para plotar vários gráficos juntos</code></pre>
+library(cowplot) #para plotar vários gráficos juntos
+library(plotly)
+library(factoextra)</code></pre>
 </div>
-<div id="segmentação-de-clientes---exemplo-1" class="section level2">
-<h2>Segmentação de clientes - Exemplo 1</h2>
+<div id="segmentação-de-clientes---k-means" class="section level2">
+<h2>Segmentação de clientes - K-means</h2>
 <p>Vamos começar com um exemplo simples de segmentação de clientes,
 usando apenas dois atributos: a satisfação do cliente e a sua
 lealdade.</p>
@@ -411,16 +480,21 @@ model &lt;- kmeans(customers_df, centers = 2)
 
 cluster_km &lt;- model$cluster
 
-customers_df %&gt;% 
+ggplotly(customers_df %&gt;% 
   mutate(cluster = cluster_km) %&gt;% 
   ggplot(aes(Satisfaction, Loyalty, color = factor(cluster)))+
-  geom_point(size=3)</code></pre>
-<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+  geom_point(size=3)+
+  theme_bw()+
+  scale_color_viridis_d())</code></pre>
+<div id="htmlwidget-07a179e58a3a6e5ea397" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-07a179e58a3a6e5ea397">{"x":{"data":[{"x":[-0.152621009991295,0.228931514986943,-0.915726059947772,1.37358908992166,0.610484039965181,0.610484039965181,0.610484039965181,1.37358908992166,-0.534173534969534,0.228931514986943,0.992036564943419,0.610484039965181,0.228931514986943,0.228931514986943,0.992036564943419,1.37358908992166,-0.915726059947772,-0.152621009991295,0.992036564943419,1.37358908992166,0.992036564943419,-0.534173534969534],"y":[-0.276445334952386,-0.286283247228272,1.04183491001629,-0.955261281988496,-0.315796984055929,1.00248326091275,0.667994243532635,-0.3354728086077,0.382694787531951,0.264639840221324,1.33697227829286,1.35664810284463,1.33697227829286,-0.3354728086077,0.658156331256749,1.15988985732692,1.02215908546452,1.01232117318863,-0.974937106540267,0.36301896298018,0.0285299456000683,0.717183804912063],"text":["Satisfaction: -0.1526210<br />Loyalty: -0.27644533<br />factor(cluster): 1","Satisfaction:  0.2289315<br />Loyalty: -0.28628325<br />factor(cluster): 1","Satisfaction: -0.9157261<br />Loyalty:  1.04183491<br />factor(cluster): 1","Satisfaction:  1.3735891<br />Loyalty: -0.95526128<br />factor(cluster): 1","Satisfaction:  0.6104840<br />Loyalty: -0.31579698<br />factor(cluster): 1","Satisfaction:  0.6104840<br />Loyalty:  1.00248326<br />factor(cluster): 1","Satisfaction:  0.6104840<br />Loyalty:  0.66799424<br />factor(cluster): 1","Satisfaction:  1.3735891<br />Loyalty: -0.33547281<br />factor(cluster): 1","Satisfaction: -0.5341735<br />Loyalty:  0.38269479<br />factor(cluster): 1","Satisfaction:  0.2289315<br />Loyalty:  0.26463984<br />factor(cluster): 1","Satisfaction:  0.9920366<br />Loyalty:  1.33697228<br />factor(cluster): 1","Satisfaction:  0.6104840<br />Loyalty:  1.35664810<br />factor(cluster): 1","Satisfaction:  0.2289315<br />Loyalty:  1.33697228<br />factor(cluster): 1","Satisfaction:  0.2289315<br />Loyalty: -0.33547281<br />factor(cluster): 1","Satisfaction:  0.9920366<br />Loyalty:  0.65815633<br />factor(cluster): 1","Satisfaction:  1.3735891<br />Loyalty:  1.15988986<br />factor(cluster): 1","Satisfaction: -0.9157261<br />Loyalty:  1.02215909<br />factor(cluster): 1","Satisfaction: -0.1526210<br />Loyalty:  1.01232117<br />factor(cluster): 1","Satisfaction:  0.9920366<br />Loyalty: -0.97493711<br />factor(cluster): 1","Satisfaction:  1.3735891<br />Loyalty:  0.36301896<br />factor(cluster): 1","Satisfaction:  0.9920366<br />Loyalty:  0.02852995<br />factor(cluster): 1","Satisfaction: -0.5341735<br />Loyalty:  0.71718380<br />factor(cluster): 1"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(68,1,84,1)","opacity":1,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(68,1,84,1)"}},"hoveron":"points","name":"1","legendgroup":"1","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-0.915726059947772,-0.534173534969534,-2.06038363488249,-0.534173534969534,-1.67883110990425,-1.29727858492601,-1.29727858492601,-1.29727858492601],"y":[-1.30942612392038,-0.974937106540267,-1.6340772290246,-1.66359096585226,0.658156331256749,-1.66359096585226,-0.94542336971261,-1.33893986074804],"text":["Satisfaction: -0.9157261<br />Loyalty: -1.30942612<br />factor(cluster): 2","Satisfaction: -0.5341735<br />Loyalty: -0.97493711<br />factor(cluster): 2","Satisfaction: -2.0603836<br />Loyalty: -1.63407723<br />factor(cluster): 2","Satisfaction: -0.5341735<br />Loyalty: -1.66359097<br />factor(cluster): 2","Satisfaction: -1.6788311<br />Loyalty:  0.65815633<br />factor(cluster): 2","Satisfaction: -1.2972786<br />Loyalty: -1.66359097<br />factor(cluster): 2","Satisfaction: -1.2972786<br />Loyalty: -0.94542337<br />factor(cluster): 2","Satisfaction: -1.2972786<br />Loyalty: -1.33893986<br />factor(cluster): 2"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(253,231,37,1)","opacity":1,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(253,231,37,1)"}},"hoveron":"points","name":"2","legendgroup":"2","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":37.2602739726027},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-2.23208227112269,1.54528772616186],"tickmode":"array","ticktext":["-2","-1","0","1"],"tickvals":[-2,-1,0,1],"categoryorder":"array","categoryarray":["-2","-1","0","1"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Satisfaction","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1.81460291928711,1.50766005627947],"tickmode":"array","ticktext":["-1","0","1"],"tickvals":[-1,0,1],"categoryorder":"array","categoryarray":["-1","0","1"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Loyalty","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"factor(cluster)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"116bf73f89f2":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"116bf73f89f2","visdat":{"116bf73f89f2":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p>Para escolher o número ideal de clusters, podemos usar o método do
 “Elbow”. Para isto, vamos criar primeiramente uma função que facilite a
 criação de modelos k-means, logo iremos usar esta função
 <code>criar_k_means()</code> para gerar os valores das somas dos
 quadrados para diferentes valores de <code>k</code>.</p>
+<div id="método-elbow" class="section level3">
+<h3>Método Elbow</h3>
 <pre class="r"><code>criar_k_means &lt;- function(k){
   model &lt;- kmeans(customers_df, centers = k)
   model$tot.withinss
@@ -440,8 +514,12 @@ elbow %&gt;%
   ggplot(aes(k, tot.withinss))+
   geom_line(color=&quot;red&quot;)+
   geom_point(size=4, color=&quot;red&quot;)+
-  scale_x_continuous(breaks=1:10)</code></pre>
+  scale_x_continuous(breaks=1:10)+
+  theme_bw()</code></pre>
 <p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="método-da-silueta" class="section level3">
+<h3>Método da Silueta</h3>
 <p>Similarmente, usaremos um segundo método para identificar o número
 ideal de cluster, o método da silueta.</p>
 <pre class="r"><code>library(cluster)
@@ -465,11 +543,42 @@ sil_df %&gt;%
   ggplot(aes(k, sil_width))+
   geom_line(color=&quot;#e32d91&quot;)+
   geom_point(size=4, color=&quot;#e32d91&quot;)+
-  scale_x_continuous(breaks=1:10)</code></pre>
+  scale_x_continuous(breaks=1:10)+
+  theme_bw()</code></pre>
 <p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Neste método, quanto maior for o valor do <code>sil_width</code>,
+melhor será a escolha do número de clusters. Para o exemplo, o valor
+mais alto é quando são 2 clusters (0.47).</p>
 </div>
-<div id="segmentação-de-clientes---exemplo-2" class="section level2">
-<h2>Segmentação de clientes - Exemplo 2</h2>
+<div id="com-factoextra" class="section level3">
+<h3>Com <code>factoextra</code></h3>
+<p>Vamos repetir o exercício anterior usando o pacote
+<code>factoextra</code> e a função <code>eclust()</code>.</p>
+<pre class="r"><code>res.km &lt;- eclust(customers_df, &quot;kmeans&quot;, k=2)</code></pre>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Gráfico de dispersão:</p>
+<pre class="r"><code>fviz_cluster(res.km)</code></pre>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>No gráfico da silueta abaixo, podemos verificar que o valor médio do
+<code>width</code> é de 0.47. Quanto mais alto for este número
+melhor.</p>
+<pre class="r"><code>fviz_silhouette(res.km)</code></pre>
+<pre><code>##   cluster size ave.sil.width
+## 1       1   22          0.44
+## 2       2    8          0.53</code></pre>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>O objeto <code>res.km</code> contém as informações dos clusters:</p>
+<pre class="r"><code>res.km$cluster</code></pre>
+<pre><code>##  [1] 2 1 2 1 1 2 1 1 1 1 1 1 2 2 1 1 1 1 1 1 1 2 1 2 1 1 1 1 2 1</code></pre>
+<p>O que significa que podemos incluir essa coluna no dataframe original
+para assignar um cluster a cada observação:</p>
+<pre class="r"><code>customers_segmentados &lt;- customers_df %&gt;% 
+  mutate(cluster = res.km$cluster)</code></pre>
+</div>
+</div>
+<div id="segmentação-de-clientes---cluster-hierárquico"
+class="section level2">
+<h2>Segmentação de clientes - Cluster hierárquico</h2>
 <p>calcular a distância euclidiana entre clientes</p>
 <pre class="r"><code>clientes &lt;- readRDS(&quot;data5/ws_customers.rds&quot;)
 
@@ -478,7 +587,7 @@ dist_clientes &lt;- dist(clientes)</code></pre>
 <pre class="r"><code>ch_clientes &lt;- hclust(dist_clientes, method = &quot;complete&quot;)</code></pre>
 <p>graficar o dendograma:</p>
 <pre class="r"><code>plot(ch_clientes)</code></pre>
-<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Criar uma asignação de clusters no valor de altura h = 15000</p>
 <pre class="r"><code>clust_clientes &lt;- cutree(ch_clientes, h=15000)</code></pre>
 <p>Gerar um dataframe com os clientes segmentados</p>
@@ -495,7 +604,7 @@ dist_clientes &lt;- dist(clientes)</code></pre>
 dend_colorido &lt;- color_branches(dend_clientes, h=15000)
 
 plot(dend_colorido)</code></pre>
-<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>calcular a média para cada cluster</p>
 <pre class="r"><code>clientes_segmentados %&gt;% 
   group_by(cluster) %&gt;% 
@@ -518,6 +627,35 @@ os outros grupos</p></li>
 <li><p>Os clientes do cluster 2 gastaram consideravelmente menos do que
 os outros clusters</p></li>
 </ul>
+<div id="com-factoextra-1" class="section level3">
+<h3>Com <code>factoextra</code></h3>
+<p>Vamos repetir o exercício anterior usando o pacote
+<code>factoextra</code> e a função <code>eclust()</code>.</p>
+<pre class="r"><code>clientes_df &lt;- scale(clientes)
+
+res.hc &lt;- eclust(clientes_df, &quot;hclust&quot;)
+
+fviz_dend(res.hc, rect = TRUE)</code></pre>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Gráfico da silueta</p>
+<pre class="r"><code>fviz_silhouette(res.hc)</code></pre>
+<pre><code>##   cluster size ave.sil.width
+## 1       1   10          0.35
+## 2       2   29          0.62
+## 3       3    6          0.57</code></pre>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Gráfico de dispersão:</p>
+<pre class="r"><code>fviz_cluster(res.hc)</code></pre>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>O objeto <code>res.hc</code> contém as informações dos clusters:</p>
+<pre class="r"><code>res.hc$cluster</code></pre>
+<pre><code>##  [1] 1 2 2 2 2 2 2 2 1 2 2 1 1 1 2 2 1 3 2 1 2 2 1 2 2 2 1 2 2 2 2 2 2 2 3 2 2 1
+## [39] 2 3 2 2 3 3 3</code></pre>
+<p>O que significa que podemos incluir essa coluna no dataframe original
+para assignar um cluster a cada observação:</p>
+<pre class="r"><code>clientes_segmentados &lt;- clientes %&gt;% 
+  mutate(cluster = res.hc$cluster)</code></pre>
+</div>
 </div>
 <div id="agrupamento-de-profissões-a-partir-do-crescimento-dos-salários"
 class="section level2">
@@ -538,13 +676,13 @@ dend_oes &lt;- as.dendrogram(hc_oes)
 
 # Plot the dendrogram
 plot(dend_oes)</code></pre>
-<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <pre class="r"><code># Color branches by cluster formed from the cut at a height of 100000
 dend_colored &lt;- color_branches(dend_oes, h = 100000)
 
 # Plot the colored dendrogram
 plot(dend_colored)</code></pre>
-<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
 <p>agora, vamos ‘recortar’ a árvore e vamos incluir o agrupamento num
 novo dataframe.</p>
 <pre class="r"><code># Use rownames_to_column to move the rownames into a column of the data frame
@@ -569,12 +707,12 @@ clust3plot &lt;- ggplot(gathered_oes, aes(x = year, y = mean_salary, color = fac
   labs(title = &quot;Clustering Hierárquico com k = 3&quot;)
 
 clust3plot</code></pre>
-<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 </div>
 <div id="k-means" class="section level3">
 <h3>K-means</h3>
-<p>O algortimo do k-means segue a lógica descrita no último webinar. O
-primeiro passo é criar duas funções customizadas, que nos ajudarão a
+<p>O algoritmo do k-means segue a lógica descrita no exercício anterior.
+O primeiro passo é criar duas funções customizadas, que nos ajudarão a
 extrair as informações necessárias para a escolha do número de <span
 class="math inline">\(k\)</span> grupos.</p>
 <pre class="r"><code># Use map_dbl to run many models with varying value of k (centers)
@@ -593,7 +731,7 @@ elbow_df &lt;- data.frame(
 ggplot(elbow_df, aes(x = k, y = tot_withinss)) +
   geom_line() +
   scale_x_continuous(breaks = 1:10)</code></pre>
-<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>O interessante é que o método do Elbow sugere 2 clusters,
 diferentemente do clustering hierárquico que sugeria 3.</p>
 <pre class="r"><code>cluster_2 &lt;- kmeans(oes, centers = 2)
@@ -608,7 +746,7 @@ clust2plot &lt;- clust2_oes %&gt;%
   labs(title = &quot;Kmeans com k = 2&quot;)
 
 clust2plot</code></pre>
-<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <p>Vamos usar a largura média da silhueta (ASW) para tentar decidir qual
 número de clusters é o melhor.</p>
 <pre class="r"><code># Use map_dbl to run many models with varying value of k
@@ -627,7 +765,7 @@ sil_df &lt;- data.frame(
 ggplot(sil_df, aes(x = k, y = sil_width)) +
   geom_line(color = &quot;#e32d91&quot;, size =1) +
   scale_x_continuous(breaks = 2:10)</code></pre>
-<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>Neste método, quanto mais alto for o valor de um referido cluster,
 melhor, ou seja, este método sugere que o melhor número de clusters
 seria 7, pois obteve o valor mais alto de largura, seguido pelo cluster
@@ -644,16 +782,80 @@ clust7plot &lt;- clust7_oes %&gt;%
   labs(title = &quot;Kmeans com k = 7&quot;)
 
 clust7plot</code></pre>
-<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <p>Vamos comparar os três resultados:</p>
 <pre class="r"><code>plot_grid(clust2plot, clust3plot, clust7plot, ncol = 3, label_size = 10)</code></pre>
-<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-20-1.png" width="1344" /></p>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-30-1.png" width="1344" /></p>
+</div>
+<div id="com-factoextra-2" class="section level3">
+<h3>Com <code>factoextra</code></h3>
+<p>Vamos refazer este terceiro exercício usando <code>factoextra</code>
+para k-means e cluster hierárquico.</p>
+<div id="k-means-1" class="section level4">
+<h4>K-means</h4>
+<p>Os dados já se encontram em formato de matriz podemos rodar o
+algoritmo</p>
+<pre class="r"><code>oes_scale &lt;- scale(oes)
+
+res.km &lt;- eclust(oes_scale, &quot;kmeans&quot;, k=6)</code></pre>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<pre class="r"><code>fviz_silhouette(res.km)</code></pre>
+<pre><code>##   cluster size ave.sil.width
+## 1       1    1          0.00
+## 2       2    6          0.53
+## 3       3    4          0.61
+## 4       4    2          0.70
+## 5       5    5          0.71
+## 6       6    4          0.73</code></pre>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-31-2.png" width="672" /></p>
+<p>Agora podemos criar um dataframe dos dados originais com os
+clusters</p>
+<pre class="r"><code>df_oes &lt;- rownames_to_column(as.data.frame(oes), var = &#39;occupation&#39;)
+
+df_oes &lt;- df_oes %&gt;% 
+  mutate(cluster_km = res.km$cluster)</code></pre>
+</div>
+<div id="cluster-hierárquico" class="section level4">
+<h4>Cluster hierárquico</h4>
+<p>vamos usar a matriz escalada:</p>
+<pre class="r"><code>res.hc &lt;- eclust(oes_scale, &quot;hclust&quot;, k=6)
+
+fviz_silhouette(res.hc)</code></pre>
+<pre><code>##   cluster size ave.sil.width
+## 1       1    2          0.63
+## 2       2    3          0.68
+## 3       3    2          0.60
+## 4       4    6          0.52
+## 5       5    5          0.70
+## 6       6    4          0.74</code></pre>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p>Graficar o dendograma</p>
+<pre class="r"><code>fviz_dend(res.hc, rect = TRUE)</code></pre>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p>Vamos incluir os resultados no df:</p>
+<pre class="r"><code>df_oes &lt;- df_oes %&gt;% 
+  mutate(cluster_hc = res.hc$cluster)</code></pre>
+<p>Finalmente, podemos graficar as profissões por clusters</p>
+<pre class="r"><code>df_oes %&gt;% 
+  pivot_longer(2:16, names_to = &quot;year&quot;, values_to = &quot;mean_salary&quot;) %&gt;% 
+  ggplot(aes(year, mean_salary, color=factor(cluster_km)))+
+  geom_line(aes(group = occupation))+
+  theme_bw()</code></pre>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<pre class="r"><code>df_oes %&gt;% 
+  pivot_longer(2:16, names_to = &quot;year&quot;, values_to = &quot;mean_salary&quot;) %&gt;% 
+  ggplot(aes(year, mean_salary, color=factor(cluster_hc)))+
+  geom_line(aes(group = occupation))+
+  theme_bw()</code></pre>
+<p><img src="Gabarito-webinar5_files/figure-html/unnamed-chunk-36-2.png" width="672" /></p>
 </div>
 </div>
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiV2ViaW5hciA1IC0gTWFjaGluZSBMZWFybmluZyIKc3VidGl0bGU6ICJNw6l0b2RvcyBOw6NvIFN1cGVydmlzaW9uYWRvczogQ2x1c3RlcmluZyIKb3V0cHV0OiAKICBodG1sX2RvY3VtZW50OgogICAgY29kZV9kb3dubG9hZDogdHJ1ZQotLS0KCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUsIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFKQpgYGAKCiMjIFNvYnJlIG9zIGRhZG9zCgpQYXJhIGVzdGUgd2ViaW5hciB2YW1vcyB1c2FyIDMgZGF0YXNldHM6IAoKKiBPIHByaW1laXJvIHNvYnJlIGEgc2F0aXNmYcOnw6NvIGUgbGVhbGRhZGUgZGUgY2xpZW50ZXM7CiogTyBzZWd1bmRvIHNvYnJlIGNvbXByYXMgZGUgcHJvZHV0b3MgKHBhcmEgcmVhbGl6YXIgc2VnbWVudGHDp8OjbyBkZSBtZXJjYWRvKTsKKiBPIMO6bHRpbW8gZGF0YXNldCBzb2JyZSBzYWzDoXJpb3MgZGUgZGlmZXJlbnRlcyBwcm9maXNzw7VlcyAocGFyYSBhZ3J1cGFtZW50byBkZSBwcm9maXNzw7VlcyBjb20gY3Jlc2NpbWVudG8gZGUgc2Fsw6FyaW9zIHNpbWlsYXJlcykuCgpWb2PDqiBwb2RlIGJhaXhhciBvcyBkYWRvcwpgYGB7ciBlY2hvPUZBTFNFfQp4ZnVuOjpwa2dfbG9hZDIoYygnaHRtbHRvb2xzJywgJ21pbWUnKSkKeGZ1bjo6ZW1iZWRfZGlyKCJkYXRhNS8iLCB0ZXh0ID0gImFxdWkuIikKCmBgYAoKIyMgQ2FycmVnYW5kbyBwYWNvdGVzCgpgYGB7ciBwYWNvdGVzfQoKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkoZGVuZGV4dGVuZCkgIyBwYXJhIGNvbG9yaXIgb3MgYWdydXBhbWVudG9zIGRvIGNsdXN0ZXIgaGlyw6FycXVpY28KbGlicmFyeShjbHVzdGVyKSAjcGFyYSB1c2FyIGZ1bsOnw6NvIHBhbQpsaWJyYXJ5KGNvd3Bsb3QpICNwYXJhIHBsb3RhciB2w6FyaW9zIGdyw6FmaWNvcyBqdW50b3MKCmBgYAoKCiMjIFNlZ21lbnRhw6fDo28gZGUgY2xpZW50ZXMgLSBFeGVtcGxvIDEKClZhbW9zIGNvbWXDp2FyIGNvbSB1bSBleGVtcGxvIHNpbXBsZXMgZGUgc2VnbWVudGHDp8OjbyBkZSBjbGllbnRlcywgdXNhbmRvIGFwZW5hcyBkb2lzIGF0cmlidXRvczogYSBzYXRpc2Zhw6fDo28gZG8gY2xpZW50ZSBlIGEgc3VhIGxlYWxkYWRlLgoKYGBge3J9CgpjdXN0b21lcnMgPC0gcmVhZC5jc3YoImRhdGE1L2N1c3RvbWVycy5jc3YiKQoKY3VzdG9tZXJzICU+JSAKICBnZ3Bsb3QoYWVzKFNhdGlzZmFjdGlvbiwgTG95YWx0eSkpKwogIGdlb21fcG9pbnQoc2l6ZT0yKQoKCmN1c3RvbWVycyA8LSBzY2FsZShjdXN0b21lcnMpCgpjdXN0b21lcnNfZGYgPC0gYXMudGliYmxlKGN1c3RvbWVycykKCm1vZGVsIDwtIGttZWFucyhjdXN0b21lcnNfZGYsIGNlbnRlcnMgPSAyKQoKY2x1c3Rlcl9rbSA8LSBtb2RlbCRjbHVzdGVyCgpjdXN0b21lcnNfZGYgJT4lIAogIG11dGF0ZShjbHVzdGVyID0gY2x1c3Rlcl9rbSkgJT4lIAogIGdncGxvdChhZXMoU2F0aXNmYWN0aW9uLCBMb3lhbHR5LCBjb2xvciA9IGZhY3RvcihjbHVzdGVyKSkpKwogIGdlb21fcG9pbnQoc2l6ZT0zKQoKYGBgCgpQYXJhIGVzY29saGVyIG8gbsO6bWVybyBpZGVhbCBkZSBjbHVzdGVycywgcG9kZW1vcyB1c2FyIG8gbcOpdG9kbyBkbyAiRWxib3ciLiBQYXJhIGlzdG8sIHZhbW9zIGNyaWFyIHByaW1laXJhbWVudGUgdW1hIGZ1bsOnw6NvIHF1ZSBmYWNpbGl0ZSBhIGNyaWHDp8OjbyBkZSBtb2RlbG9zIGstbWVhbnMsIGxvZ28gaXJlbW9zIHVzYXIgZXN0YSBmdW7Dp8OjbyBgY3JpYXJfa19tZWFucygpYCBwYXJhIGdlcmFyIG9zIHZhbG9yZXMgZGFzIHNvbWFzIGRvcyBxdWFkcmFkb3MgcGFyYSBkaWZlcmVudGVzIHZhbG9yZXMgZGUgYGtgLgoKYGBge3J9Cgpjcmlhcl9rX21lYW5zIDwtIGZ1bmN0aW9uKGspewogIG1vZGVsIDwtIGttZWFucyhjdXN0b21lcnNfZGYsIGNlbnRlcnMgPSBrKQogIG1vZGVsJHRvdC53aXRoaW5zcwp9CgprID0gMTAKCmVsYm93IDwtIGRhdGEuZnJhbWUoaz0xOmspCmVsYm93JHRvdC53aXRoaW5zcyA8LSAwCgoKZm9yKGkgaW4gMTprKSB7CiAgZWxib3ckdG90LndpdGhpbnNzW2ldIDwtIGNyaWFyX2tfbWVhbnMoaSkKfQoKZWxib3cgJT4lIAogIGdncGxvdChhZXMoaywgdG90LndpdGhpbnNzKSkrCiAgZ2VvbV9saW5lKGNvbG9yPSJyZWQiKSsKICBnZW9tX3BvaW50KHNpemU9NCwgY29sb3I9InJlZCIpKwogIHNjYWxlX3hfY29udGludW91cyhicmVha3M9MToxMCkKCmBgYAoKU2ltaWxhcm1lbnRlLCB1c2FyZW1vcyB1bSBzZWd1bmRvIG3DqXRvZG8gcGFyYSBpZGVudGlmaWNhciBvIG7Dum1lcm8gaWRlYWwgZGUgY2x1c3RlciwgbyBtw6l0b2RvIGRhIHNpbHVldGEuCgpgYGB7cn0KbGlicmFyeShjbHVzdGVyKQoKY3JpYXJfc2lsdWV0YXMgPC0gZnVuY3Rpb24oayl7CiAgbW9kZWwgPC0gcGFtKGN1c3RvbWVyc19kZiwgayA9IGspCiAgbW9kZWwkc2lsaW5mbyRhdmcud2lkdGgKfQoKayA9IDEwCgpzaWxfZGYgPC0gZGF0YS5mcmFtZShrPTI6aykKc2lsX2RmJHNpbF93aWR0aCA8LSAwCgoKZm9yKGkgaW4gMjprKSB7CiAgc2lsX2RmJHNpbF93aWR0aFtpLTFdIDwtIGNyaWFyX3NpbHVldGFzKGkpCn0KCnNpbF9kZiAlPiUgCiAgZ2dwbG90KGFlcyhrLCBzaWxfd2lkdGgpKSsKICBnZW9tX2xpbmUoY29sb3I9IiNlMzJkOTEiKSsKICBnZW9tX3BvaW50KHNpemU9NCwgY29sb3I9IiNlMzJkOTEiKSsKICBzY2FsZV94X2NvbnRpbnVvdXMoYnJlYWtzPTE6MTApCmBgYAoKCgojIyBTZWdtZW50YcOnw6NvIGRlIGNsaWVudGVzIC0gRXhlbXBsbyAyCgpjYWxjdWxhciBhIGRpc3TDom5jaWEgZXVjbGlkaWFuYSBlbnRyZSBjbGllbnRlcwoKYGBge3J9CmNsaWVudGVzIDwtIHJlYWRSRFMoImRhdGE1L3dzX2N1c3RvbWVycy5yZHMiKQoKZGlzdF9jbGllbnRlcyA8LSBkaXN0KGNsaWVudGVzKQpgYGAKCmNyaWFyIHVtYSBhbsOhbGlzZSB1c2FuZG8gbyBhbGdvcml0bW8gZGEgZGlzdMOibmNpYSBjb21wbGV0YToKCmBgYHtyfQpjaF9jbGllbnRlcyA8LSBoY2x1c3QoZGlzdF9jbGllbnRlcywgbWV0aG9kID0gImNvbXBsZXRlIikKYGBgCgpncmFmaWNhciBvIGRlbmRvZ3JhbWE6CgpgYGB7cn0KcGxvdChjaF9jbGllbnRlcykKCmBgYAoKQ3JpYXIgdW1hIGFzaWduYcOnw6NvIGRlIGNsdXN0ZXJzIG5vIHZhbG9yIGRlIGFsdHVyYSBoID0gMTUwMDAKCmBgYHtyfQpjbHVzdF9jbGllbnRlcyA8LSBjdXRyZWUoY2hfY2xpZW50ZXMsIGg9MTUwMDApCmBgYAoKR2VyYXIgdW0gZGF0YWZyYW1lIGNvbSBvcyBjbGllbnRlcyBzZWdtZW50YWRvcwoKYGBge3J9CmNsaWVudGVzX3NlZ21lbnRhZG9zIDwtIG11dGF0ZShjbGllbnRlcywgY2x1c3RlciA9IGNsdXN0X2NsaWVudGVzKQpgYGAKCkNhbGN1bGFyIG8gbsO6bWVybyBkZSBjbGllbnRlcyBxdWUgZmF6ZXIgcGFydGUgZGUgY2FkYSBjbHVzdGVyCgpgYGB7cn0KCmNvdW50KGNsaWVudGVzX3NlZ21lbnRhZG9zLCBjbHVzdGVyKQpgYGAKCmNvbG9yaXIgbyBkZW5kb2dyYW1hIGNvbSBiYXNlIG5vIHZhbG9yIGRlIGN1dG9mZgoKYGBge3J9CgpkZW5kX2NsaWVudGVzIDwtIGFzLmRlbmRyb2dyYW0oY2hfY2xpZW50ZXMpCmRlbmRfY29sb3JpZG8gPC0gY29sb3JfYnJhbmNoZXMoZGVuZF9jbGllbnRlcywgaD0xNTAwMCkKCnBsb3QoZGVuZF9jb2xvcmlkbykKYGBgCgoKY2FsY3VsYXIgYSBtw6lkaWEgcGFyYSBjYWRhIGNsdXN0ZXIKCmBgYHtyfQoKY2xpZW50ZXNfc2VnbWVudGFkb3MgJT4lIAogIGdyb3VwX2J5KGNsdXN0ZXIpICU+JSAKICBzdW1tYXJpc2VfYWxsKG1lYW4pCmBgYAoKQ29tIGJhc2UgbmVzdGUgcmVzdWx0YWRvLCBwb2RlbW9zIGluZmVyaXIgcXVlOgoKKiBPcyBjbGllbnRlcyBkbyBjbHVzdGVyIDEgZ2FzdGFyYW0gbWFpcyBlbSBMZWl0ZSBkbyBxdWUgb3Mgb3V0cm9zIGdydXBvcwoKKiBPcyBjbGllbnRlcyBkbyBjbHVzdGVyIDMgZ2FzdGFyYW0gbWFpcyBlbSBtZXJjYWRvIGRvIHF1ZSBvcyBvdXRyb3MgZ3J1cG9zCgoqIG9zIGNsaWVudGVzIGRvIGNsdXN0ZXIgNCBnYXN0YXJhbSBtYWlzIGVtIGZyb3plbiBpb2d1cnRlIGRvIHF1ZSBvcyBvdXRyb3MgZ3J1cG9zCgoqIE9zIGNsaWVudGVzIGRvIGNsdXN0ZXIgMiBnYXN0YXJhbSBjb25zaWRlcmF2ZWxtZW50ZSBtZW5vcyBkbyBxdWUgb3Mgb3V0cm9zIGNsdXN0ZXJzCgoKCiMjIEFncnVwYW1lbnRvIGRlIHByb2Zpc3PDtWVzIGEgcGFydGlyIGRvIGNyZXNjaW1lbnRvIGRvcyBzYWzDoXJpb3MKClZhbW9zIGNhcnJlZ2FyIG9zIGRhZG9zOgoKYGBge3Igb2VzfQpvZXMgPC0gcmVhZFJEUygiZGF0YTUvb2VzLnJkcyIpCmBgYAoKIyMjIENsdXN0ZXJpbmcgaGllcsOhcnF1aWNvCgpwYXNzb3MgbmVjZXNzw6FyaW9zIGNvbmZvcm1lIG8gbcOpdG9kbwoKYGBge3J9CiMgQ2FsY3VsYXRlIEV1Y2xpZGVhbiBkaXN0YW5jZSBiZXR3ZWVuIHRoZSBvY2N1cGF0aW9ucwpkaXN0X29lcyA8LSBkaXN0KG9lcywgbWV0aG9kID0gImV1Y2xpZGVhbiIpCgojIEdlbmVyYXRlIGFuIGF2ZXJhZ2UgbGlua2FnZSBhbmFseXNpcyAKaGNfb2VzIDwtIGhjbHVzdChkaXN0X29lcywgbWV0aG9kID0gImF2ZXJhZ2UiKQoKIyBDcmVhdGUgYSBkZW5kcm9ncmFtIG9iamVjdCBmcm9tIHRoZSBoY2x1c3QgdmFyaWFibGUKZGVuZF9vZXMgPC0gYXMuZGVuZHJvZ3JhbShoY19vZXMpCgojIFBsb3QgdGhlIGRlbmRyb2dyYW0KcGxvdChkZW5kX29lcykKCiMgQ29sb3IgYnJhbmNoZXMgYnkgY2x1c3RlciBmb3JtZWQgZnJvbSB0aGUgY3V0IGF0IGEgaGVpZ2h0IG9mIDEwMDAwMApkZW5kX2NvbG9yZWQgPC0gY29sb3JfYnJhbmNoZXMoZGVuZF9vZXMsIGggPSAxMDAwMDApCgojIFBsb3QgdGhlIGNvbG9yZWQgZGVuZHJvZ3JhbQpwbG90KGRlbmRfY29sb3JlZCkKYGBgCgoKYWdvcmEsIHZhbW9zICdyZWNvcnRhcicgYSDDoXJ2b3JlIGUgdmFtb3MgaW5jbHVpciBvIGFncnVwYW1lbnRvIG51bSBub3ZvIGRhdGFmcmFtZS4KCmBgYHtyfQoKIyBVc2Ugcm93bmFtZXNfdG9fY29sdW1uIHRvIG1vdmUgdGhlIHJvd25hbWVzIGludG8gYSBjb2x1bW4gb2YgdGhlIGRhdGEgZnJhbWUKZGZfb2VzIDwtIHJvd25hbWVzX3RvX2NvbHVtbihhcy5kYXRhLmZyYW1lKG9lcyksIHZhciA9ICdvY2N1cGF0aW9uJykKCiMgQ3JlYXRlIGEgY2x1c3RlciBhc3NpZ25tZW50IHZlY3RvciBhdCBoID0gMTAwLDAwMApjdXRfb2VzIDwtIGN1dHJlZShoY19vZXMsIGggPSAxMDAwMDApCgojIEdlbmVyYXRlIHRoZSBzZWdtZW50ZWQgdGhlIG9lcyBkYXRhIGZyYW1lCmNsdXN0X29lcyA8LSBtdXRhdGUoZGZfb2VzLCBjbHVzdGVyID0gY3V0X29lcykKCiMgQ3JlYXRlIGEgdGlkeSBkYXRhIGZyYW1lIGJ5IGdhdGhlcmluZyB0aGUgeWVhciBhbmQgdmFsdWVzIGludG8gdHdvIGNvbHVtbnMKZ2F0aGVyZWRfb2VzIDwtIGdhdGhlcihkYXRhID0gY2x1c3Rfb2VzLCAKICAgICAgICAgICAgICAgICAgICAgICBrZXkgPSB5ZWFyLCAKICAgICAgICAgICAgICAgICAgICAgICB2YWx1ZSA9IG1lYW5fc2FsYXJ5LCAKICAgICAgICAgICAgICAgICAgICAgICAtb2NjdXBhdGlvbiwgLWNsdXN0ZXIpCgpgYGAKCkFnb3JhIHZhbW9zIHBsb3RhciBvcyBncnVwb3MgZGUgY2x1c3RlcnMgcGFyYSBjYWRhIGFubzoKCmBgYHtyfQoKIyBQbG90IHRoZSByZWxhdGlvbnNoaXAgYmV0d2VlbiBtZWFuX3NhbGFyeSBhbmQgeWVhciBhbmQgY29sb3IgdGhlIGxpbmVzIGJ5IHRoZSBhc3NpZ25lZCBjbHVzdGVyCgpjbHVzdDNwbG90IDwtIGdncGxvdChnYXRoZXJlZF9vZXMsIGFlcyh4ID0geWVhciwgeSA9IG1lYW5fc2FsYXJ5LCBjb2xvciA9IGZhY3RvcihjbHVzdGVyKSkpICsgCiAgICBnZW9tX2xpbmUoYWVzKGdyb3VwID0gb2NjdXBhdGlvbikpKwogIGxhYnModGl0bGUgPSAiQ2x1c3RlcmluZyBIaWVyw6FycXVpY28gY29tIGsgPSAzIikKCmNsdXN0M3Bsb3QKYGBgCgoKIyMjIEstbWVhbnMKCk8gYWxnb3J0aW1vIGRvIGstbWVhbnMgc2VndWUgYSBsw7NnaWNhIGRlc2NyaXRhIG5vIMO6bHRpbW8gd2ViaW5hci4gTyBwcmltZWlybyBwYXNzbyDDqSBjcmlhciBkdWFzIGZ1bsOnw7VlcyBjdXN0b21pemFkYXMsIHF1ZSBub3MgYWp1ZGFyw6NvIGEgZXh0cmFpciBhcyBpbmZvcm1hw6fDtWVzIG5lY2Vzc8OhcmlhcyBwYXJhIGEgZXNjb2xoYSBkbyBuw7ptZXJvIGRlICRrJCBncnVwb3MuCgpgYGB7cn0KCiMgVXNlIG1hcF9kYmwgdG8gcnVuIG1hbnkgbW9kZWxzIHdpdGggdmFyeWluZyB2YWx1ZSBvZiBrIChjZW50ZXJzKQp0b3Rfd2l0aGluc3MgPC0gbWFwX2RibCgxOjEwLCAgZnVuY3Rpb24oayl7CiAgbW9kZWwgPC0ga21lYW5zKHggPSBvZXMsIGNlbnRlcnMgPSBrKQogIG1vZGVsJHRvdC53aXRoaW5zcwp9KQoKIyBHZW5lcmF0ZSBhIGRhdGEgZnJhbWUgY29udGFpbmluZyBib3RoIGsgYW5kIHRvdF93aXRoaW5zcwplbGJvd19kZiA8LSBkYXRhLmZyYW1lKAogIGsgPSAxOjEwLAogIHRvdF93aXRoaW5zcyA9IHRvdF93aXRoaW5zcwopCgojIFBsb3QgdGhlIGVsYm93IHBsb3QKZ2dwbG90KGVsYm93X2RmLCBhZXMoeCA9IGssIHkgPSB0b3Rfd2l0aGluc3MpKSArCiAgZ2VvbV9saW5lKCkgKwogIHNjYWxlX3hfY29udGludW91cyhicmVha3MgPSAxOjEwKQpgYGAKCk8gaW50ZXJlc3NhbnRlIMOpIHF1ZSBvIG3DqXRvZG8gZG8gRWxib3cgc3VnZXJlIDIgY2x1c3RlcnMsIGRpZmVyZW50ZW1lbnRlIGRvIGNsdXN0ZXJpbmcgaGllcsOhcnF1aWNvIHF1ZSBzdWdlcmlhIDMuCgpgYGB7cn0KY2x1c3Rlcl8yIDwtIGttZWFucyhvZXMsIGNlbnRlcnMgPSAyKQoKY2x1c3QyX29lcyA8LSBtdXRhdGUoZGZfb2VzLCBjbHVzdGVyID0gY2x1c3Rlcl8yJGNsdXN0ZXIpCgpjbHVzdDJwbG90IDwtIGNsdXN0Ml9vZXMgJT4lIAogIHBpdm90X2xvbmdlcigyOjE2LCBuYW1lc190byA9ICJ5ZWFyIiwgCiAgICAgICAgICAgICAgIHZhbHVlc190byA9ICJtZWFuX3NhbGFyeSIpICU+JSAKICBnZ3Bsb3QoYWVzKHllYXIsIG1lYW5fc2FsYXJ5LCBjb2xvciA9IGZhY3RvcihjbHVzdGVyKSkpKwogIGdlb21fbGluZShhZXMoZ3JvdXA9b2NjdXBhdGlvbikpKwogIGxhYnModGl0bGUgPSAiS21lYW5zIGNvbSBrID0gMiIpCgpjbHVzdDJwbG90CgpgYGAKCgpWYW1vcyB1c2FyIGEgbGFyZ3VyYSBtw6lkaWEgZGEgc2lsaHVldGEgKEFTVykgcGFyYSB0ZW50YXIgZGVjaWRpciBxdWFsIG7Dum1lcm8gZGUgY2x1c3RlcnMgw6kgbyBtZWxob3IuCgpgYGB7cn0KCgojIFVzZSBtYXBfZGJsIHRvIHJ1biBtYW55IG1vZGVscyB3aXRoIHZhcnlpbmcgdmFsdWUgb2YgawpzaWxfd2lkdGggPC0gbWFwX2RibCgyOjEwLCAgZnVuY3Rpb24oayl7CiAgbW9kZWwgPC0gcGFtKG9lcywgayA9IGspCiAgbW9kZWwkc2lsaW5mbyRhdmcud2lkdGgKfSkKCiMgR2VuZXJhdGUgYSBkYXRhIGZyYW1lIGNvbnRhaW5pbmcgYm90aCBrIGFuZCBzaWxfd2lkdGgKc2lsX2RmIDwtIGRhdGEuZnJhbWUoCiAgayA9IDI6MTAsCiAgc2lsX3dpZHRoID0gc2lsX3dpZHRoCikKCiMgUGxvdCB0aGUgcmVsYXRpb25zaGlwIGJldHdlZW4gayBhbmQgc2lsX3dpZHRoCmdncGxvdChzaWxfZGYsIGFlcyh4ID0gaywgeSA9IHNpbF93aWR0aCkpICsKICBnZW9tX2xpbmUoY29sb3IgPSAiI2UzMmQ5MSIsIHNpemUgPTEpICsKICBzY2FsZV94X2NvbnRpbnVvdXMoYnJlYWtzID0gMjoxMCkKCmBgYAoKTmVzdGUgbcOpdG9kbywgcXVhbnRvIG1haXMgYWx0byBmb3IgbyB2YWxvciBkZSB1bSByZWZlcmlkbyBjbHVzdGVyLCBtZWxob3IsIG91IHNlamEsIGVzdGUgbcOpdG9kbyBzdWdlcmUgcXVlIG8gbWVsaG9yIG7Dum1lcm8gZGUgY2x1c3RlcnMgc2VyaWEgNywgcG9pcyBvYnRldmUgbyB2YWxvciBtYWlzIGFsdG8gZGUgbGFyZ3VyYSwgc2VndWlkbyBwZWxvIGNsdXN0ZXIgayA9IDIuCgpgYGB7cn0KCmNsdXN0ZXJfNyA8LSBrbWVhbnMob2VzLCBjZW50ZXJzID0gNykKCmNsdXN0N19vZXMgPC0gbXV0YXRlKGRmX29lcywgY2x1c3RlciA9IGNsdXN0ZXJfNyRjbHVzdGVyKQoKY2x1c3Q3cGxvdCA8LSBjbHVzdDdfb2VzICU+JSAKICBwaXZvdF9sb25nZXIoMjoxNiwgbmFtZXNfdG8gPSAieWVhciIsIAogICAgICAgICAgICAgICB2YWx1ZXNfdG8gPSAibWVhbl9zYWxhcnkiKSAlPiUgCiAgZ2dwbG90KGFlcyh5ZWFyLCBtZWFuX3NhbGFyeSwgY29sb3IgPSBmYWN0b3IoY2x1c3RlcikpKSsKICBnZW9tX2xpbmUoYWVzKGdyb3VwPW9jY3VwYXRpb24pKSsKICBsYWJzKHRpdGxlID0gIkttZWFucyBjb20gayA9IDciKQoKY2x1c3Q3cGxvdApgYGAKCgpWYW1vcyBjb21wYXJhciBvcyB0csOqcyByZXN1bHRhZG9zOgoKYGBge3IgZmlnLndpZHRoPTE0LCBmaWcuaGVpZ2h0PTR9CgoKcGxvdF9ncmlkKGNsdXN0MnBsb3QsIGNsdXN0M3Bsb3QsIGNsdXN0N3Bsb3QsIG5jb2wgPSAzLCBsYWJlbF9zaXplID0gMTApCmBgYAoK</div>
 
 
+</div>
+</div>
 
 </div>
 
@@ -685,12 +887,36 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+
 <script>
-$(document).ready(function () {
-  window.initializeSourceEmbed("Gabarito-webinar5.Rmd");
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
 });
 </script>
-
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

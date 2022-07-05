@@ -16,7 +16,7 @@
 <script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -29,9 +29,10 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
-<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -58,11 +59,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-#rmd-source-code {
-  display: none;
-}
-</style>
 
 
 <link rel="stylesheet" href="dd_cv_milz.css" type="text/css" />
@@ -228,10 +224,70 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
 
 
 
@@ -241,6 +297,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -357,17 +423,11 @@ $(document).ready(function () {
 
 <div id="header">
 
-<div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
-<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
-</ul>
-</div>
-
 
 
 <h1 class="title toc-ignore">Webinar 5 - Machine Learning</h1>
 <h3 class="subtitle">Métodos Não Supervisionados: Clustering</h3>
+<h4 class="date">Última versão em 05/07/22</h4>
 
 </div>
 
@@ -480,9 +540,10 @@ k = 2.</p>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiV2ViaW5hciA1IC0gTWFjaGluZSBMZWFybmluZyIKc3VidGl0bGU6ICJNw6l0b2RvcyBOw6NvIFN1cGVydmlzaW9uYWRvczogQ2x1c3RlcmluZyIKb3V0cHV0OiAKICBodG1sX2RvY3VtZW50OgogICAgY29kZV9kb3dubG9hZDogdHJ1ZQotLS0KCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUsIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFKQpgYGAKCiMjIFNvYnJlIG9zIGRhZG9zCgpQYXJhIGVzdGUgd2ViaW5hciB2YW1vcyB1c2FyIHVtIGRhdGFzZXQgc29icmUgY29tcHJhcyBkZSBwcm9kdXRvcyAocGFyYSByZWFsaXphciBzZWdtZW50YcOnw6NvIGRlIG1lcmNhZG8pIGUgdW0gZGF0YXNldCBzb2JyZSBzYWzDoXJpb3MgZGUgZGlmZXJlbnRlcyBwcm9maXNzw7VlcyAocGFyYSBhZ3J1cGFtZW50byBkZSBwcm9maXNzw7VlcyBjb20gY3Jlc2NpbWVudG8gZGUgc2Fsw6FyaW9zIHNpbWlsYXJlcykuCgpWb2PDqiBwb2RlIGJhaXhhciBvcyBkYWRvcwpgYGB7ciBlY2hvPUZBTFNFfQp4ZnVuOjpwa2dfbG9hZDIoYygnaHRtbHRvb2xzJywgJ21pbWUnKSkKeGZ1bjo6ZW1iZWRfZGlyKCJkYXRhNS8iLCB0ZXh0ID0gImFxdWkuIikKCmBgYAoKIyMgQ2FycmVnYW5kbyBwYWNvdGVzCgpgYGB7ciBwYWNvdGVzfQoKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkoZGVuZGV4dGVuZCkgIyBwYXJhIGNvbG9yaXIgb3MgYWdydXBhbWVudG9zIGRvIGNsdXN0ZXIgaGlyw6FycXVpY28KbGlicmFyeShjbHVzdGVyKSAjcGFyYSB1c2FyIGZ1bsOnw6NvIHBhbQpsaWJyYXJ5KGNvd3Bsb3QpICNwYXJhIHBsb3RhciB2w6FyaW9zIGdyw6FmaWNvcyBqdW50b3MKCmBgYAoKIyMgU2VnbWVudGHDp8OjbyBkZSBjbGllbnRlcwoKY2FsY3VsYXIgYSBkaXN0w6JuY2lhIGV1Y2xpZGlhbmEgZW50cmUgY2xpZW50ZXMKCmBgYHtyfQoKYGBgCgpjcmlhciB1bWEgYW7DoWxpc2UgdXNhbmRvIG8gYWxnb3JpdG1vIGRhIGRpc3TDom5jaWEgY29tcGxldGE6CgpgYGB7cn0KCgpgYGAKCmdyYWZpY2FyIG8gZGVuZG9ncmFtYToKCmBgYHtyfQoKCmBgYAoKQ3JpYXIgdW1hIGFzaWduYcOnw6NvIGRlIGNsdXN0ZXJzIG5vIHZhbG9yIGRlIGFsdHVyYSBoID0gMTUwMDAKCmBgYHtyfQoKYGBgCgpHZXJhciB1bSBkYXRhZnJhbWUgY29tIG9zIGNsaWVudGVzIHNlZ21lbnRhZG9zCgpgYGB7cn0KCmBgYAoKQ2FsY3VsYXIgbyBuw7ptZXJvIGRlIGNsaWVudGVzIHF1ZSBmYXplciBwYXJ0ZSBkZSBjYWRhIGNsdXN0ZXIKCmBgYHtyfQoKCmBgYAoKY29sb3JpciBvIGRlbmRvZ3JhbWEgY29tIGJhc2Ugbm8gdmFsb3IgZGUgY3V0b2ZmCgpgYGB7cn0KCgpgYGAKCgpjYWxjdWxhciBhIG3DqWRpYSBwYXJhIGNhZGEgY2x1c3RlcgoKYGBge3J9CgoKYGBgCgpDb20gYmFzZSBuZXN0ZSByZXN1bHRhZG8sIHBvZGVtb3MgaW5mZXJpciBxdWU6CgoqIE9zIGNsaWVudGVzIGRvIGNsdXN0ZXIgMSBnYXN0YXJhbSBtYWlzIGVtIExlaXRlIGRvIHF1ZSBvcyBvdXRyb3MgZ3J1cG9zCgoqIE9zIGNsaWVudGVzIGRvIGNsdXN0ZXIgMyBnYXN0YXJhbSBtYWlzIGVtIG1lcmNhZG8gZG8gcXVlIG9zIG91dHJvcyBncnVwb3MKCiogb3MgY2xpZW50ZXMgZG8gY2x1c3RlciA0IGdhc3RhcmFtIG1haXMgZW0gZnJvemVuIGlvZ3VydGUgZG8gcXVlIG9zIG91dHJvcyBncnVwb3MKCiogT3MgY2xpZW50ZXMgZG8gY2x1c3RlciAyIGdhc3RhcmFtIGNvbnNpZGVyYXZlbG1lbnRlIG1lbm9zIGRvIHF1ZSBvcyBvdXRyb3MgY2x1c3RlcnMKCgoKIyMgQWdydXBhbWVudG8gZGUgcHJvZmlzc8O1ZXMgYSBwYXJ0aXIgZG8gY3Jlc2NpbWVudG8gZG9zIHNhbMOhcmlvcwoKVmFtb3MgY2FycmVnYXIgb3MgZGFkb3M6CgpgYGB7ciBvZXN9CgpgYGAKCiMjIyBDbHVzdGVyaW5nIGhpZXLDoXJxdWljbwoKcGFzc29zIG5lY2Vzc8OhcmlvcyBjb25mb3JtZSBvIG3DqXRvZG8KCmBgYHtyfQojIENhbGN1bGF0ZSBFdWNsaWRlYW4gZGlzdGFuY2UgYmV0d2VlbiB0aGUgb2NjdXBhdGlvbnMKCgojIEdlbmVyYXRlIGFuIGF2ZXJhZ2UgbGlua2FnZSBhbmFseXNpcyAKCgojIENyZWF0ZSBhIGRlbmRyb2dyYW0gb2JqZWN0IGZyb20gdGhlIGhjbHVzdCB2YXJpYWJsZQoKCiMgUGxvdCB0aGUgZGVuZHJvZ3JhbQoKCiMgQ29sb3IgYnJhbmNoZXMgYnkgY2x1c3RlciBmb3JtZWQgZnJvbSB0aGUgY3V0IGF0IGEgaGVpZ2h0IG9mIDEwMDAwMAoKCiMgUGxvdCB0aGUgY29sb3JlZCBkZW5kcm9ncmFtCgpgYGAKCgphZ29yYSwgdmFtb3MgJ3JlY29ydGFyJyBhIMOhcnZvcmUgZSB2YW1vcyBpbmNsdWlyIG8gYWdydXBhbWVudG8gbnVtIG5vdm8gZGF0YWZyYW1lLgoKYGBge3J9CgojIFVzZSByb3duYW1lc190b19jb2x1bW4gdG8gbW92ZSB0aGUgcm93bmFtZXMgaW50byBhIGNvbHVtbiBvZiB0aGUgZGF0YSBmcmFtZQoKCiMgQ3JlYXRlIGEgY2x1c3RlciBhc3NpZ25tZW50IHZlY3RvciBhdCBoID0gMTAwLDAwMAoKCiMgR2VuZXJhdGUgdGhlIHNlZ21lbnRlZCB0aGUgb2VzIGRhdGEgZnJhbWUKCgojIENyZWF0ZSBhIHRpZHkgZGF0YSBmcmFtZSBieSBnYXRoZXJpbmcgdGhlIHllYXIgYW5kIHZhbHVlcyBpbnRvIHR3byBjb2x1bW5zCgoKYGBgCgpBZ29yYSB2YW1vcyBwbG90YXIgb3MgZ3J1cG9zIGRlIGNsdXN0ZXJzIHBhcmEgY2FkYSBhbm86CgpgYGB7cn0KCiMgUGxvdCB0aGUgcmVsYXRpb25zaGlwIGJldHdlZW4gbWVhbl9zYWxhcnkgYW5kIHllYXIgYW5kIGNvbG9yIHRoZSBsaW5lcyBieSB0aGUgYXNzaWduZWQgY2x1c3RlcgoKCmBgYAoKCiMjIyBLLW1lYW5zCgpPIGFsZ29ydGltbyBkbyBrLW1lYW5zIHNlZ3VlIGEgbMOzZ2ljYSBkZXNjcml0YSBubyDDumx0aW1vIHdlYmluYXIuIE8gcHJpbWVpcm8gcGFzc28gw6kgY3JpYXIgZHVhcyBmdW7Dp8O1ZXMgY3VzdG9taXphZGFzLCBxdWUgbm9zIGFqdWRhcsOjbyBhIGV4dHJhaXIgYXMgaW5mb3JtYcOnw7VlcyBuZWNlc3PDoXJpYXMgcGFyYSBhIGVzY29saGEgZG8gbsO6bWVybyBkZSAkayQgZ3J1cG9zLgoKYGBge3J9CgojIFVzZSBtYXBfZGJsIHRvIHJ1biBtYW55IG1vZGVscyB3aXRoIHZhcnlpbmcgdmFsdWUgb2YgayAoY2VudGVycykKCgojIEdlbmVyYXRlIGEgZGF0YSBmcmFtZSBjb250YWluaW5nIGJvdGggayBhbmQgdG90X3dpdGhpbnNzCgoKIyBQbG90IHRoZSBlbGJvdyBwbG90CgpgYGAKCk8gaW50ZXJlc3NhbnRlIMOpIHF1ZSBvIG3DqXRvZG8gZG8gRWxib3cgc3VnZXJlIDIgY2x1c3RlcnMsIGRpZmVyZW50ZW1lbnRlIGRvIGNsdXN0ZXJpbmcgaGllcsOhcnF1aWNvIHF1ZSBzdWdlcmlhIDMuCgpgYGB7cn0KCgpgYGAKCgpWYW1vcyB1c2FyIGEgbGFyZ3VyYSBtw6lkaWEgZGEgc2lsaHVldGEgKEFTVykgcGFyYSB0ZW50YXIgZGVjaWRpciBxdWFsIG7Dum1lcm8gZGUgY2x1c3RlcnMgw6kgbyBtZWxob3IuCgpgYGB7cn0KCgojIFVzZSBtYXBfZGJsIHRvIHJ1biBtYW55IG1vZGVscyB3aXRoIHZhcnlpbmcgdmFsdWUgb2YgawoKCiMgR2VuZXJhdGUgYSBkYXRhIGZyYW1lIGNvbnRhaW5pbmcgYm90aCBrIGFuZCBzaWxfd2lkdGgKCgojIFBsb3QgdGhlIHJlbGF0aW9uc2hpcCBiZXR3ZWVuIGsgYW5kIHNpbF93aWR0aAoKCmBgYAoKTmVzdGUgbcOpdG9kbywgcXVhbnRvIG1haXMgYWx0byBmb3IgbyB2YWxvciBkZSB1bSByZWZlcmlkbyBjbHVzdGVyLCBtZWxob3IsIG91IHNlamEsIGVzdGUgbcOpdG9kbyBzdWdlcmUgcXVlIG8gbWVsaG9yIG7Dum1lcm8gZGUgY2x1c3RlcnMgc2VyaWEgNywgcG9pcyBvYnRldmUgbyB2YWxvciBtYWlzIGFsdG8gZGUgbGFyZ3VyYSwgc2VndWlkbyBwZWxvIGNsdXN0ZXIgayA9IDIuCgpgYGB7cn0KCgpgYGAKCgpWYW1vcyBjb21wYXJhciBvcyB0csOqcyByZXN1bHRhZG9zOgoKYGBge3IgZmlnLndpZHRoPTE0LCBmaWcuaGVpZ2h0PTR9CgoKCmBgYAoK</div>
 
 
+</div>
+</div>
 
 </div>
 
@@ -514,12 +575,36 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+
 <script>
-$(document).ready(function () {
-  window.initializeSourceEmbed("webinar5.Rmd");
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
 });
 </script>
-
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

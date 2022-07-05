@@ -3,7 +3,11 @@ title: "Webinar 5 - Machine Learning"
 subtitle: "Métodos Não Supervisionados: Clustering"
 output: 
   html_document:
-    code_download: true
+    toc: true
+    toc_float: true
+    code_download: false
+    theme: paper
+date: "Última versão em `r format(Sys.time(), '%d/%m/%y')`"
 ---
 
 ```{r setup, include=FALSE}
@@ -33,11 +37,12 @@ library(tidyverse)
 library(dendextend) # para colorir os agrupamentos do cluster hirárquico
 library(cluster) #para usar função pam
 library(cowplot) #para plotar vários gráficos juntos
-
+library(plotly)
+library(factoextra)
 ```
 
 
-## Segmentação de clientes - Exemplo 1
+## Segmentação de clientes - K-means
 
 Vamos começar com um exemplo simples de segmentação de clientes, usando apenas dois atributos: a satisfação do cliente e a sua lealdade.
 
@@ -58,14 +63,19 @@ model <- kmeans(customers_df, centers = 2)
 
 cluster_km <- model$cluster
 
-customers_df %>% 
+ggplotly(customers_df %>% 
   mutate(cluster = cluster_km) %>% 
   ggplot(aes(Satisfaction, Loyalty, color = factor(cluster)))+
-  geom_point(size=3)
+  geom_point(size=3)+
+  theme_bw()+
+  scale_color_viridis_d())
+
 
 ```
 
 Para escolher o número ideal de clusters, podemos usar o método do "Elbow". Para isto, vamos criar primeiramente uma função que facilite a criação de modelos k-means, logo iremos usar esta função `criar_k_means()` para gerar os valores das somas dos quadrados para diferentes valores de `k`.
+
+### Método Elbow
 
 ```{r}
 
@@ -88,9 +98,12 @@ elbow %>%
   ggplot(aes(k, tot.withinss))+
   geom_line(color="red")+
   geom_point(size=4, color="red")+
-  scale_x_continuous(breaks=1:10)
+  scale_x_continuous(breaks=1:10)+
+  theme_bw()
 
 ```
+
+### Método da Silueta
 
 Similarmente, usaremos um segundo método para identificar o número ideal de cluster, o método da silueta.
 
@@ -116,12 +129,53 @@ sil_df %>%
   ggplot(aes(k, sil_width))+
   geom_line(color="#e32d91")+
   geom_point(size=4, color="#e32d91")+
-  scale_x_continuous(breaks=1:10)
+  scale_x_continuous(breaks=1:10)+
+  theme_bw()
+```
+
+Neste método, quanto maior for o valor do `sil_width`, melhor será a escolha do número de clusters. Para o exemplo, o valor mais alto é quando são 2 clusters (0.47).
+
+### Com `factoextra`
+
+Vamos repetir o exercício anterior usando o pacote `factoextra` e a função `eclust()`.
+
+```{r}
+
+res.km <- eclust(customers_df, "kmeans", k=2)
+
+
+```
+
+Gráfico de dispersão:
+
+```{r}
+fviz_cluster(res.km)
+
+
+```
+
+No gráfico da silueta abaixo, podemos verificar que o valor médio do `width` é de 0.47. Quanto mais alto for este número melhor.
+
+```{r}
+fviz_silhouette(res.km)
+```
+
+O objeto `res.km` contém as informações dos clusters:
+
+```{r}
+res.km$cluster
+```
+
+O que significa que podemos incluir essa coluna no dataframe original para assignar um cluster a cada observação:
+
+```{r}
+
+customers_segmentados <- customers_df %>% 
+  mutate(cluster = res.km$cluster)
 ```
 
 
-
-## Segmentação de clientes - Exemplo 2
+## Segmentação de clientes - Cluster hierárquico
 
 calcular a distância euclidiana entre clientes
 
@@ -193,6 +247,48 @@ Com base neste resultado, podemos inferir que:
 
 * Os clientes do cluster 2 gastaram consideravelmente menos do que os outros clusters
 
+### Com `factoextra` 
+
+Vamos repetir o exercício anterior usando o pacote `factoextra` e a função `eclust()`.
+
+```{r}
+clientes_df <- scale(clientes)
+
+res.hc <- eclust(clientes_df, "hclust")
+
+fviz_dend(res.hc, rect = TRUE)
+
+
+
+```
+
+
+Gráfico da silueta
+
+```{r}
+fviz_silhouette(res.hc)
+```
+
+
+Gráfico de dispersão:
+
+```{r}
+fviz_cluster(res.hc)
+```
+
+O objeto `res.hc` contém as informações dos clusters:
+
+```{r}
+res.hc$cluster
+```
+
+O que significa que podemos incluir essa coluna no dataframe original para assignar um cluster a cada observação:
+
+```{r}
+
+clientes_segmentados <- clientes %>% 
+  mutate(cluster = res.hc$cluster)
+```
 
 
 ## Agrupamento de profissões a partir do crescimento dos salários
@@ -265,7 +361,7 @@ clust3plot
 
 ### K-means
 
-O algortimo do k-means segue a lógica descrita no último webinar. O primeiro passo é criar duas funções customizadas, que nos ajudarão a extrair as informações necessárias para a escolha do número de $k$ grupos.
+O algoritmo do k-means segue a lógica descrita no exercício anterior. O primeiro passo é criar duas funções customizadas, que nos ajudarão a extrair as informações necessárias para a escolha do número de $k$ grupos.
 
 ```{r}
 
@@ -355,5 +451,77 @@ Vamos comparar os três resultados:
 
 
 plot_grid(clust2plot, clust3plot, clust7plot, ncol = 3, label_size = 10)
+```
+
+
+### Com `factoextra`
+
+Vamos refazer este terceiro exercício usando `factoextra` para k-means e cluster hierárquico.
+
+#### K-means 
+
+
+Os dados já se encontram em formato de matriz podemos rodar o algoritmo
+
+```{r}
+
+oes_scale <- scale(oes)
+
+res.km <- eclust(oes_scale, "kmeans", k=6)
+
+fviz_silhouette(res.km)
+
+```
+
+Agora podemos criar um dataframe dos dados originais com os clusters
+
+```{r}
+
+df_oes <- rownames_to_column(as.data.frame(oes), var = 'occupation')
+
+df_oes <- df_oes %>% 
+  mutate(cluster_km = res.km$cluster)
+
+```
+
+#### Cluster hierárquico
+
+vamos usar a matriz escalada:
+
+```{r}
+res.hc <- eclust(oes_scale, "hclust", k=6)
+
+fviz_silhouette(res.hc)
+
+```
+
+Graficar o dendograma
+
+```{r}
+fviz_dend(res.hc, rect = TRUE)
+```
+
+Vamos incluir os resultados no df:
+
+```{r}
+df_oes <- df_oes %>% 
+  mutate(cluster_hc = res.hc$cluster)
+```
+
+Finalmente, podemos graficar as profissões por clusters
+
+```{r fig.retina=2}
+df_oes %>% 
+  pivot_longer(2:16, names_to = "year", values_to = "mean_salary") %>% 
+  ggplot(aes(year, mean_salary, color=factor(cluster_km)))+
+  geom_line(aes(group = occupation))+
+  theme_bw()
+
+df_oes %>% 
+  pivot_longer(2:16, names_to = "year", values_to = "mean_salary") %>% 
+  ggplot(aes(year, mean_salary, color=factor(cluster_hc)))+
+  geom_line(aes(group = occupation))+
+  theme_bw()
+
 ```
 

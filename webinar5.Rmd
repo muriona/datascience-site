@@ -3,7 +3,11 @@ title: "Webinar 5 - Machine Learning"
 subtitle: "Métodos Não Supervisionados: Clustering"
 output: 
   html_document:
-    code_download: true
+    toc: true
+    toc_float: true
+    code_download: false
+    theme: paper
+date: "Última versão em `r format(Sys.time(), '%d/%m/%y')`"
 ---
 
 ```{r setup, include=FALSE}
