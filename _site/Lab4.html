@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Lab 4 - Tidymodels - Classificação</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="dd_cv_milz.css" type="text/css" />
+<link rel="stylesheet" href="custom_milz.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EPS 7008</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tutoriais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tutorial1.html">Tutorial 1 - Tidyverse</a>
+    </li>
+    <li>
+      <a href="Tutorial2.html">Tutorial 2 - Ggplot e Tidyverse</a>
+    </li>
+    <li>
+      <a href="Tutorial2_gabarito.html">Tutorial 2 - Ggplot e Tidyverse - Gabarito</a>
+    </li>
+    <li>
+      <a href="Tutorial3.html">Tutorial 3 - Regressão Linear</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Labs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Lab1.html">Lab 1 - EDA</a>
+    </li>
+    <li>
+      <a href="Lab2.html">Lab 2 - Dashboards em R</a>
+    </li>
+    <li>
+      <a href="Lab3.html">Lab 3 - Métodos Supervisionados: Titanic</a>
+    </li>
+    <li>
+      <a href="Lab4.html">Lab 4 - Tidymodels - Classificação</a>
+    </li>
+    <li>
+      <a href="Lab5.html">Lab 5 - Tidymodels - Regressão</a>
+    </li>
+    <li>
+      <a href="Lab6.html">Lab 6 - Métodos Não-Supervisionados</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Lab 4 - Tidymodels - Classificação</h1>
+<h3 class="subtitle">Previsão de reservas de hotel com crianças</h3>
+
+</div>
+
+
+<div id="carregando-os-dados" class="section level1">
+<h1>Carregando os dados</h1>
+<p>Este webinar usará dados sobre reservas de Hotéis que incluem
+crianças (versus aquelas que não. Os dados fazem parte deste <a
+href="https://www.sciencedirect.com/science/article/pii/S2352340918315191">estudo</a>.</p>
+<p>Vamos carregar os dados e incluir apenas as reservas que não foram
+canceladas uma vez que mais informações são coletadas do hospede na hora
+do check-in. Neste caso, os dados são automaticamente baixados do site
+do <strong>tidytuesday</strong>.</p>
+<pre class="r"><code>library(tidyverse)
+
+hotels &lt;- readr::read_csv(&quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-11/hotels.csv&quot;)</code></pre>
+</div>
+<div id="limpeza-dos-dados" class="section level1">
+<h1>Limpeza dos dados</h1>
+<p>Inicialmente é necessário fazer uma limpeza dos dados. Por exemplo,
+vamos considerar apenas as reservas efetivadas (e não as canceladas),
+portanto precisamos filtrá-las. Também vamos considerar bebês e crianças
+dentro da mesma categoria, então iremos criar uma nova coluna
+‘children’.</p>
+<pre class="r"><code>hotel_stays &lt;- hotels %&gt;%
+  filter(is_canceled == 0) %&gt;%
+  mutate(
+    children = case_when(
+      children + babies &gt; 0 ~ &quot;children&quot;,
+      TRUE ~ &quot;none&quot;
+    ),
+    required_car_parking_spaces = case_when(
+      required_car_parking_spaces &gt; 0 ~ &quot;parking&quot;,
+      TRUE ~ &quot;none&quot;
+    )
+  ) %&gt;%
+  select(-is_canceled, -reservation_status, -babies)
+
+hotel_stays %&gt;% 
+  head()</code></pre>
+<pre><code>## # A tibble: 6 × 29
+##   hotel   lead_…¹ arriv…² arriv…³ arriv…⁴ arriv…⁵ stays…⁶ stays…⁷ adults child…⁸
+##   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  
+## 1 Resort…     342    2015 July         27       1       0       0      2 none   
+## 2 Resort…     737    2015 July         27       1       0       0      2 none   
+## 3 Resort…       7    2015 July         27       1       0       1      1 none   
+## 4 Resort…      13    2015 July         27       1       0       1      1 none   
+## 5 Resort…      14    2015 July         27       1       0       2      2 none   
+## 6 Resort…      14    2015 July         27       1       0       2      2 none   
+## # … with 19 more variables: meal &lt;chr&gt;, country &lt;chr&gt;, market_segment &lt;chr&gt;,
+## #   distribution_channel &lt;chr&gt;, is_repeated_guest &lt;dbl&gt;,
+## #   previous_cancellations &lt;dbl&gt;, previous_bookings_not_canceled &lt;dbl&gt;,
+## #   reserved_room_type &lt;chr&gt;, assigned_room_type &lt;chr&gt;, booking_changes &lt;dbl&gt;,
+## #   deposit_type &lt;chr&gt;, agent &lt;chr&gt;, company &lt;chr&gt;, days_in_waiting_list &lt;dbl&gt;,
+## #   customer_type &lt;chr&gt;, adr &lt;dbl&gt;, required_car_parking_spaces &lt;chr&gt;,
+## #   total_of_special_requests &lt;dbl&gt;, reservation_status_date &lt;date&gt;, and …
+## # ℹ Use `colnames()` to see all variable names</code></pre>
+<p>Observamos que há quase 10x mais reservas sem crianças.</p>
+<pre class="r"><code>hotel_stays %&gt;%
+  count(children)</code></pre>
+<pre><code>## # A tibble: 2 × 2
+##   children     n
+##   &lt;chr&gt;    &lt;int&gt;
+## 1 children  6073
+## 2 none     69093</code></pre>
+</div>
+<div id="análise-exploratória-de-dados---eda" class="section level1">
+<h1>Análise exploratória de dados - EDA</h1>
+<p>Vamos usar a função <code>skim</code> que ajuda a identificar de
+forma rápida as características do nosso dataframe, por exemplo, se há
+valores <code>NA</code> bem como os máximos e mínimos das colunas
+numéricas, etc.</p>
+<pre class="r"><code>library(skimr)
+
+skim(hotel_stays)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">hotel_stays</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">75166</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">29</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">14</td>
+</tr>
+<tr class="odd">
+<td align="left">Date</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">14</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col width="32%" />
+<col width="11%" />
+<col width="16%" />
+<col width="4%" />
+<col width="4%" />
+<col width="6%" />
+<col width="10%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">hotel</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">10</td>
+<td align="right">12</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">arrival_date_month</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">12</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">children</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">8</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">meal</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">5</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">country</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">166</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">market_segment</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">6</td>
+<td align="right">13</td>
+<td align="right">0</td>
+<td align="right">7</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">distribution_channel</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">5</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">reserved_room_type</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">9</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">assigned_room_type</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">10</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">deposit_type</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">agent</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">315</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">company</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">332</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">customer_type</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">required_car_parking_spaces</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">7</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: Date</strong></p>
+<table>
+<colgroup>
+<col width="26%" />
+<col width="11%" />
+<col width="15%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">min</th>
+<th align="left">max</th>
+<th align="left">median</th>
+<th align="right">n_unique</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">reservation_status_date</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">2015-07-01</td>
+<td align="left">2017-09-14</td>
+<td align="left">2016-09-01</td>
+<td align="right">805</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<colgroup>
+<col width="28%" />
+<col width="9%" />
+<col width="13%" />
+<col width="7%" />
+<col width="5%" />
+<col width="7%" />
+<col width="6%" />
+<col width="6%" />
+<col width="4%" />
+<col width="4%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">lead_time</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">79.98</td>
+<td align="right">91.11</td>
+<td align="right">0.00</td>
+<td align="right">9.0</td>
+<td align="right">45.0</td>
+<td align="right">124</td>
+<td align="right">737</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">arrival_date_year</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2016.15</td>
+<td align="right">0.70</td>
+<td align="right">2015.00</td>
+<td align="right">2016.0</td>
+<td align="right">2016.0</td>
+<td align="right">2017</td>
+<td align="right">2017</td>
+<td align="left">▃▁▇▁▆</td>
+</tr>
+<tr class="odd">
+<td align="left">arrival_date_week_number</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">27.08</td>
+<td align="right">13.90</td>
+<td align="right">1.00</td>
+<td align="right">16.0</td>
+<td align="right">28.0</td>
+<td align="right">38</td>
+<td align="right">53</td>
+<td align="left">▆▇▇▇▆</td>
+</tr>
+<tr class="even">
+<td align="left">arrival_date_day_of_month</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">15.84</td>
+<td align="right">8.78</td>
+<td align="right">1.00</td>
+<td align="right">8.0</td>
+<td align="right">16.0</td>
+<td align="right">23</td>
+<td align="right">31</td>
+<td align="left">▇▇▇▇▆</td>
+</tr>
+<tr class="odd">
+<td align="left">stays_in_weekend_nights</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.93</td>
+<td align="right">0.99</td>
+<td align="right">0.00</td>
+<td align="right">0.0</td>
+<td align="right">1.0</td>
+<td align="right">2</td>
+<td align="right">19</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">stays_in_week_nights</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2.46</td>
+<td align="right">1.92</td>
+<td align="right">0.00</td>
+<td align="right">1.0</td>
+<td align="right">2.0</td>
+<td align="right">3</td>
+<td align="right">50</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">adults</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.83</td>
+<td align="right">0.51</td>
+<td align="right">0.00</td>
+<td align="right">2.0</td>
+<td align="right">2.0</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="left">▁▂▇▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">is_repeated_guest</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.04</td>
+<td align="right">0.20</td>
+<td align="right">0.00</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">previous_cancellations</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.02</td>
+<td align="right">0.27</td>
+<td align="right">0.00</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0</td>
+<td align="right">13</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">previous_bookings_not_canceled</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.20</td>
+<td align="right">1.81</td>
+<td align="right">0.00</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0</td>
+<td align="right">72</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">booking_changes</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.29</td>
+<td align="right">0.74</td>
+<td align="right">0.00</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0</td>
+<td align="right">21</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">days_in_waiting_list</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.59</td>
+<td align="right">14.78</td>
+<td align="right">0.00</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0</td>
+<td align="right">379</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">adr</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">99.99</td>
+<td align="right">49.21</td>
+<td align="right">-6.38</td>
+<td align="right">67.5</td>
+<td align="right">92.5</td>
+<td align="right">125</td>
+<td align="right">510</td>
+<td align="left">▇▆▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">total_of_special_requests</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.71</td>
+<td align="right">0.83</td>
+<td align="right">0.00</td>
+<td align="right">0.0</td>
+<td align="right">1.0</td>
+<td align="right">1</td>
+<td align="right">5</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+<p>As reservas de Hotel variam de acordo com o mês? há diferenças entre
+Hotéis Resort e Hotéis de Executivo?</p>
+<pre class="r"><code>hotel_stays %&gt;%
+  mutate(arrival_date_month = factor(arrival_date_month,
+    levels = month.name
+  )) %&gt;%
+  count(hotel, arrival_date_month, children) %&gt;%
+  group_by(hotel, children) %&gt;%
+  mutate(proportion = n / sum(n)) %&gt;%
+  ggplot(aes(arrival_date_month, proportion, fill = children)) +
+  geom_col(position = &quot;dodge&quot;) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  facet_wrap(~hotel, nrow = 2) +
+  labs(
+    x = NULL,
+    y = &quot;Proporção de reservas&quot;,
+    fill = NULL
+  )</code></pre>
+<p><img src="Lab4_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Vamos explorar algumas outras relações entre as variáveis:</p>
+<pre class="r"><code>library(GGally)
+
+hotel_stays %&gt;%
+  select(
+    children, adr,
+    required_car_parking_spaces,
+    total_of_special_requests
+  ) %&gt;%
+  ggpairs(mapping = aes(color = children))</code></pre>
+<p><img src="Lab4_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="modelagem-supervisionada-usando-tidymodels"
+class="section level1">
+<h1>Modelagem supervisionada usando Tidymodels</h1>
+<p>O pacote <code>tidymodels</code> é uma evolução do <code>caret</code>
+e procura facilitar a construção de modelos de machine learning,
+seguindo um padrão que independe do modelo a ser construído (regressão
+linear, árvores de decisão, etc.).</p>
+<p>Para isto, vamos selecionar apenas algumas colunas de interesse e
+criar um novo objeto denominado <code>hotels_df</code>.</p>
+<pre class="r"><code>hotels_df &lt;- hotel_stays %&gt;%
+  select(
+    children, hotel, arrival_date_month, meal, adr, adults,
+    required_car_parking_spaces, total_of_special_requests,
+    stays_in_week_nights, stays_in_weekend_nights
+  ) %&gt;%
+  mutate_if(is.character, factor)</code></pre>
+<p>Vamos dividir o dataset em treino e teste:</p>
+<pre class="r"><code>library(tidymodels)
+
+set.seed(1234)
+hotel_split &lt;- initial_split(hotels_df, strata=children)
+
+hotel_train &lt;- training(hotel_split)
+hotel_test &lt;- testing(hotel_split)</code></pre>
+<p>Para aprimorar a robustez das nossas estimações, iremos usar um
+procedimento denominado k-fold cross validation ou validação cruzada.
+Neste procedimento, os dados de treino são subdivididos aleatoriamente
+em treino e teste e seus parâmetros de acurácia são calculados. Este
+procedimento é repetido ‘k’ vezes de forma que sejam calculados os
+parâmetros de acurácia de cada ‘k’. Uma vez que o procedimento é
+completado (ajustando o modelo a cada ‘k’ subdataset de treino e teste),
+calcula-se a média de todos os parâmetros de acurácia. Mais detalhes <a
+href="https://pt.wikipedia.org/wiki/Valida%C3%A7%C3%A3o_cruzada#M%C3%A9todo_k-fold">aqui</a>.</p>
+<pre class="r"><code>hotel_fold &lt;- vfold_cv(hotel_train)
+
+hotel_rec &lt;- recipe(children ~ ., data = hotel_train) %&gt;%
+  step_dummy(all_nominal(), -all_outcomes()) %&gt;%
+  step_normalize(all_numeric())
+
+hotel_wf &lt;- workflow() %&gt;% 
+  add_recipe(hotel_rec)</code></pre>
+<p>Vamos treinar um modelo de Regressão Logística (usando
+<code>glm</code>), logo um de Árvore de Decisão (usando
+<code>rpart</code>) e finalmente um de Random Forest (usando
+<code>ranger</code>)</p>
+<pre class="r"><code>glm_spec &lt;- logistic_reg() %&gt;% 
+  set_engine(&quot;glm&quot;)
+
+tree_spec &lt;- decision_tree() %&gt;%
+  set_engine(&quot;rpart&quot;) %&gt;%
+  set_mode(&quot;classification&quot;)
+
+rf_spec &lt;- rand_forest(trees=1000) %&gt;% 
+  set_engine(&quot;ranger&quot;) %&gt;% 
+  set_mode(&quot;classification&quot;)</code></pre>
+<p>Segue os resultados do modelo de Regressão Logística:</p>
+<pre class="r"><code>doParallel::registerDoParallel()
+
+glm_rs &lt;- hotel_wf %&gt;% 
+  add_model(glm_spec) %&gt;% 
+  fit_resamples(resamples=hotel_fold,
+                metrics=metric_set(roc_auc, accuracy, sensitivity, specificity),
+                control=control_resamples(save_pred=TRUE))
+
+collect_metrics(glm_rs)</code></pre>
+<pre><code>## # A tibble: 4 × 6
+##   .metric     .estimator   mean     n  std_err .config             
+##   &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt; &lt;chr&gt;               
+## 1 accuracy    binary     0.919     10 0.00121  Preprocessor1_Model1
+## 2 roc_auc     binary     0.799     10 0.00266  Preprocessor1_Model1
+## 3 sensitivity binary     0.0896    10 0.00308  Preprocessor1_Model1
+## 4 specificity binary     0.992     10 0.000439 Preprocessor1_Model1</code></pre>
+<pre class="r"><code>glm_rs %&gt;% 
+  conf_mat_resampled()</code></pre>
+<pre><code>## # A tibble: 4 × 3
+##   Prediction Truth      Freq
+##   &lt;fct&gt;      &lt;fct&gt;     &lt;dbl&gt;
+## 1 children   children   41  
+## 2 children   none       39.1
+## 3 none       children  418. 
+## 4 none       none     5140.</code></pre>
+<pre class="r"><code>glm_rs %&gt;% 
+  collect_predictions() %&gt;% 
+  group_by(id) %&gt;% 
+  roc_curve(children, .pred_children) %&gt;% 
+  autoplot()</code></pre>
+<p><img src="Lab4_files/figure-html/glm-1.png" width="672" /></p>
+<p>Segue os resultados do modelo de Árvore de Decisão:</p>
+<pre class="r"><code>tree_rs &lt;- hotel_wf %&gt;% 
+  add_model(tree_spec) %&gt;% 
+  fit_resamples(resamples=hotel_fold,
+                metrics=metric_set(roc_auc, accuracy, sensitivity, specificity),
+                control=control_resamples(save_pred=TRUE))
+
+collect_metrics(tree_rs)</code></pre>
+<pre><code>## # A tibble: 4 × 6
+##   .metric     .estimator   mean     n std_err .config             
+##   &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+## 1 accuracy    binary     0.921     10 0.00126 Preprocessor1_Model1
+## 2 roc_auc     binary     0.574     10 0.0246  Preprocessor1_Model1
+## 3 sensitivity binary     0.0481    10 0.0198  Preprocessor1_Model1
+## 4 specificity binary     0.998     10 0.00109 Preprocessor1_Model1</code></pre>
+<pre class="r"><code>tree_rs %&gt;% 
+  conf_mat_resampled()</code></pre>
+<pre><code>## # A tibble: 4 × 3
+##   Prediction Truth      Freq
+##   &lt;fct&gt;      &lt;fct&gt;     &lt;dbl&gt;
+## 1 children   children   22.2
+## 2 children   none       10.1
+## 3 none       children  436. 
+## 4 none       none     5169.</code></pre>
+<pre class="r"><code>tree_rs %&gt;% 
+  collect_predictions() %&gt;% 
+  group_by(id) %&gt;% 
+  roc_curve(children, .pred_children) %&gt;% 
+  autoplot()</code></pre>
+<p><img src="Lab4_files/figure-html/tree-1.png" width="672" /></p>
+<p>Segue os resultados do modelo Random Forest:</p>
+<pre class="r"><code>rf_rs &lt;- hotel_wf %&gt;% 
+  add_model(rf_spec) %&gt;% 
+  fit_resamples(resamples=hotel_fold,
+                metrics=metric_set(roc_auc, accuracy, sensitivity, specificity),
+                control=control_resamples(save_pred=TRUE))
+
+collect_metrics(rf_rs)</code></pre>
+<pre><code>## # A tibble: 4 × 6
+##   .metric     .estimator  mean     n  std_err .config             
+##   &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt; &lt;chr&gt;               
+## 1 accuracy    binary     0.928    10 0.000794 Preprocessor1_Model1
+## 2 roc_auc     binary     0.872    10 0.00200  Preprocessor1_Model1
+## 3 sensitivity binary     0.153    10 0.00399  Preprocessor1_Model1
+## 4 specificity binary     0.997    10 0.000341 Preprocessor1_Model1</code></pre>
+<pre class="r"><code>rf_rs %&gt;% 
+  conf_mat_resampled()</code></pre>
+<pre><code>## # A tibble: 4 × 3
+##   Prediction Truth      Freq
+##   &lt;fct&gt;      &lt;fct&gt;     &lt;dbl&gt;
+## 1 children   children   70.2
+## 2 children   none       16.8
+## 3 none       children  388. 
+## 4 none       none     5162.</code></pre>
+<pre class="r"><code>rf_rs %&gt;% 
+  collect_predictions() %&gt;% 
+  group_by(id) %&gt;% 
+  roc_curve(children, .pred_children) %&gt;% 
+  autoplot()</code></pre>
+<p><img src="Lab4_files/figure-html/rf-1.png" width="672" /></p>
+<p>O melhor modelo é o Random Forest, portanto o usaremos para realizar
+as estimações finais no dataset de teste. A função
+<code>last_fit()</code> realiza um último ajuste (fit) usando os dados
+de treino (dentro da especificação rf_spec) e automaticamente uma última
+estimação, usando os dados de teste (a função reconhece os dados de
+treino e teste no objeto <code>hotel_split</code>).</p>
+<p>Note que até agora, não usamos em nenhum momento os dados de
+teste.</p>
+<pre class="r"><code>modelo_final &lt;- hotel_wf %&gt;% 
+  add_model(rf_spec) %&gt;% 
+  last_fit(hotel_split)
+
+collect_metrics(modelo_final)</code></pre>
+<pre><code>## # A tibble: 2 × 4
+##   .metric  .estimator .estimate .config             
+##   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;               
+## 1 accuracy binary         0.930 Preprocessor1_Model1
+## 2 roc_auc  binary         0.868 Preprocessor1_Model1</code></pre>
+<pre class="r"><code>collect_predictions(modelo_final) %&gt;% 
+  conf_mat(children, .pred_class)</code></pre>
+<pre><code>##           Truth
+## Prediction children  none
+##   children      234    62
+##   none         1252 17244</code></pre>
+<pre class="r"><code>collect_predictions(modelo_final) %&gt;% 
+  roc_curve(children, .pred_children) %&gt;% 
+  ggplot(aes(x = 1 - specificity, y = sensitivity)) +
+  geom_line(size = 1.5, color = &quot;midnightblue&quot;) +
+  geom_abline(
+    lty = 2, alpha = 0.5,
+    color = &quot;gray50&quot;,
+    size = 1.2
+  ) +
+  coord_equal()</code></pre>
+<p><img src="Lab4_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -4,7 +4,7 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Tarefas"
+#    - text: "Tarefas"
 #      menu: 
 #      - text: "Instruções Gerais"
 #        href: Tarefa_Instrucoes.html
@@ -23,34 +23,34 @@ navbar:
 #    - text: "Notas"
 #      href: notas.html
     - text: "Tutoriais"
-#      menu: 
-#      - text: "Tutorial 1 - Tidyverse"
-#        href: Tutorial1.html
-#      - text: "Tutorial 2 - Ggplot e Tidyverse"
-#        href: Tutorial2.html
-#      - text: "Tutorial 2 - Ggplot e Tidyverse - Gabarito"
-#        href: Tutorial2_gabarito.html
-#      - text: "Tutorial 3 - Regressão Linear"
-#        href: Tutorial3.html
+      menu: 
+      - text: "Tutorial 1 - Tidyverse"
+        href: Tutorial1.html
+      - text: "Tutorial 2 - Ggplot e Tidyverse"
+        href: Tutorial2.html
+      - text: "Tutorial 2 - Ggplot e Tidyverse - Gabarito"
+        href: Tutorial2_gabarito.html
+      - text: "Tutorial 3 - Regressão Linear"
+        href: Tutorial3.html
     - text: "Labs"
-#      menu: 
-##      - text: "Lab 1"
-##        href: webinar1a-EDA.html
+      menu: 
+      - text: "Lab 1 - EDA"
+        href: Lab1.html
 ##      - text: "Lab 1a - Gabarito"
 ##        href: Gabarito-webinar1a.html
-##      - text: "Lab 1a - Gabarito com output"
-##        href: Gabarito-webinar1a-output.html
-##      - text: "Lab 1b - Gabarito com output"
-##      - text: "Lab 2 - Dashboards em R"
-##        href: Gabarito-webinar2.html
-##      - text: "Lab 3a - Gabarito com output"
-##        href: Gabarito-webinar3a.html
-##      - text: "Lab 3b - Gabarito com output"
-##        href: Gabarito-webinar3b.html
-##      - text: "Lab 4 - Gabarito com output"
-##        href: Gabarito-webinar4b.html
-##      - text: "Lab 5 - Gabarito com output"
-##        href: Gabarito-webinar5.html
+#      - text: "Lab 1a - Gabarito com output"
+#        href: Gabarito-webinar1a-output.html
+#      - text: "Lab 1b - Gabarito com output"
+      - text: "Lab 2 - Dashboards em R"
+        href: Lab2.html
+      - text: "Lab 3 - Métodos Supervisionados: Titanic"
+        href: Lab3.html
+      - text: "Lab 4 - Tidymodels - Classificação"
+        href: Lab4.html
+      - text: "Lab 5 - Tidymodels - Regressão"
+        href: Lab5.html
+      - text: "Lab 6 - Métodos Não-Supervisionados"
+        href: Lab6.html
 output:
   html_document:
     #css: style.css
