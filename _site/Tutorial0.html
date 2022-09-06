@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Tutorial 0 - Conhecendo o R</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="tarefas.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EPS 7008</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tutoriais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tutorial0.html">Tutorial 0 - Conhecendo o R</a>
+    </li>
+    <li>
+      <a href="Tutorial1.html">Tutorial 1 - Tidyverse</a>
+    </li>
+    <li>
+      <a href="Tutorial2.html">Tutorial 2 - Ggplot e Tidyverse</a>
+    </li>
+    <li>
+      <a href="Tutorial2_gabarito.html">Tutorial 2 - Ggplot e Tidyverse - Gabarito</a>
+    </li>
+    <li>
+      <a href="Tutorial3.html">Tutorial 3 - Regressão Linear</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Labs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Lab1.html">Lab 1 - EDA</a>
+    </li>
+    <li>
+      <a href="Lab2.html">Lab 2 - Dashboards em R</a>
+    </li>
+    <li>
+      <a href="Lab3.html">Lab 3 - Métodos Supervisionados: Titanic</a>
+    </li>
+    <li>
+      <a href="Lab4.html">Lab 4 - Tidymodels - Classificação</a>
+    </li>
+    <li>
+      <a href="Lab5.html">Lab 5 - Tidymodels - Regressão</a>
+    </li>
+    <li>
+      <a href="Lab6.html">Lab 6 - Métodos Não-Supervisionados</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Tutorial 0 - Conhecendo o R</h1>
+
+</div>
+
+
+<div id="conhecendo-o-r" class="section level1">
+<h1>Conhecendo o R</h1>
+<p>O R é uma linguagem de programação muito poderosa e amplamente
+utilizada em data science.</p>
+<p>Para se ter uma noção do que é possível fazer com o R e do que vocês
+irão realizar em algumas semanas acesse um exemplo de dashboard <a
+href="https://uriona.shinyapps.io/dash_meu_netflix/">neste link</a>.</p>
+</div>
+<div id="rstudio-e-datacamp-workspace" class="section level1">
+<h1>RStudio e Datacamp Workspace</h1>
+<p>O RStudio é o software IDE (Interface Development Environment) mais
+conhecido e populat para trabalhar com o R. Tem uma interface
+informativa e uma simbiose muito forte com o R. Iremos usar o RStudio
+localmente nos nossos computadores.</p>
+<p>Já o <a href="https://app.datacamp.com/workspace/">Datacamp
+Workspace</a> é um software em nuvem que está gratuitamente disponível
+para nós por sermos instituição educacional. A interface do Datacamp
+Workspace é mais simples porém mais <strong>clean</strong>. Iremos usar
+o Datacamp Workspace na nuvem.</p>
+</div>
+<div id="datacamp" class="section level1">
+<h1>Datacamp</h1>
+<p>Antes de prosseguir, confira que seu cadastro no Datacamp está ok.
+Caso não o tenha feito ainda, aproveite este momento para fazê-lo,
+lembre de cadastrar seu usuário com o email <span
+class="math inline">\(@grad.ufsc.br\)</span> e use <a
+href="https://www.datacamp.com/groups/shared_links/de309f0186ad8e86e2399610c082b2a4e1432aff47fcbfd66d4734c7293558d6">este
+link</a> para facilitar o cadastro.</p>
+</div>
+<div id="code-along" class="section level1">
+<h1>Code Along</h1>
+<p>Agora, abra <a
+href="https://app.datacamp.com/workspace/new?_tag=workspace&amp;accountGroupId=63418&amp;accountType=group&amp;utm_content=copy_duplicate_link&amp;utm_medium=in_product&amp;utm_source=workspace&amp;workspaceId=4f2f579b-6349-4454-829d-b4ad9df2f2df">este
+link</a> em seu computador para acompanhar a nossa primeira aula prática
+usando o R, especificamente iremos utilizar o <a
+href="https://app.datacamp.com/workspace/">Datacamp Workspace</a>. Se
+você não tiver se cadastrado ainda, o Datacamp solicitará que o
+faça.</p>
+</div>
+<div id="instalando-pacotes-no-rstudio" class="section level1">
+<h1>Instalando pacotes no RStudio</h1>
+<p>Em paralelo, vamos instalar localmente os pacotes que vamos usar ao
+longo do semestre no RStudio. No Workspace não há necessidade pois os
+pacotes já vem pré-configurados.</p>
+<p>Para rodar esta instalação, baixe esta página (note que há um botão
+“CODE” no canto superior direito).</p>
+<p><img
+src="images/Screen%20Shot%202022-09-06%20at%201.41.31%20PM.png" /></p>
+<p>E uma vez baixado, abra o arquivo <code>.Rmd</code> no RStudio e rode
+o código a seguir:</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)
+install.packages(&quot;flexdashboard&quot;)
+install.packages(&quot;forecast&quot;)
+install.packages(&quot;highcharter&quot;)
+install.packages(&quot;treemap&quot;)
+install.packages(&quot;viridisLite&quot;)
+install.packages(&quot;prettydoc&quot;)
+install.packages(&quot;openxlsx&quot;)
+install.packages(&quot;ggrepel&quot;)
+install.packages(&quot;bookdown&quot;)
+install.packages(&quot;tufte&quot;)
+install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;rstudio-education/dsbox&quot;)
+install.packages(&quot;ranger&quot;)
+install.packages(&quot;tidymodels&quot;)
+install.packages(&quot;leaflet&quot;)
+install.packages(&quot;DT&quot;)
+install.packages(&quot;kableExtra&quot;)
+install.packages(&quot;plotly&quot;)
+install.packages(&quot;titanic&quot;)
+install.packages(&quot;broom&quot;)
+install.packages(&quot;pROC&quot;)
+install.packages(&quot;WVPlots&quot;)
+install.packages(&quot;rpart&quot;)
+install.packages(&quot;rpart.plot&quot;)
+install.packages(&quot;vtreat&quot;)
+install.packages(&quot;cluster&quot;)
+install.packages(&quot;shiny&quot;)
+install.packages(&quot;skimr&quot;)
+install.packages(&quot;caret&quot;)
+install.packages(&quot;GGally&quot;)
+install.packages(&quot;vip&quot;)
+install.packages(&quot;remotes&quot;)
+install.packages(&quot;gt&quot;)
+remotes::install_github(&#39;rstudio/pagedown&#39;, upgrade = &quot;always&quot;)
+remotes::install_github(&#39;yihui/xaringan&#39;, upgrade = &quot;always&quot;)</code></pre>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVHV0b3JpYWwgMCAtIENvbmhlY2VuZG8gbyBSIgpvdXRwdXQ6IAogIGh0bWxfZG9jdW1lbnQ6CiAgICB0b2M6IHRydWUKICAgIHRvY19mbG9hdDogdHJ1ZQogICAgY29kZV9kb3dubG9hZDogdHJ1ZQogICAgdGhlbWU6IHBhcGVyCiAgICBjc3M6IHRhcmVmYXMuY3NzCi0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSwgZXZhbD1UUlVFKQpgYGAKCiMgQ29uaGVjZW5kbyBvIFIKCk8gUiDDqSB1bWEgbGluZ3VhZ2VtIGRlIHByb2dyYW1hw6fDo28gbXVpdG8gcG9kZXJvc2EgZSBhbXBsYW1lbnRlIHV0aWxpemFkYSBlbSBkYXRhIHNjaWVuY2UuCgpQYXJhIHNlIHRlciB1bWEgbm/Dp8OjbyBkbyBxdWUgw6kgcG9zc8OtdmVsIGZhemVyIGNvbSBvIFIgZSBkbyBxdWUgdm9jw6pzIGlyw6NvIHJlYWxpemFyIGVtIGFsZ3VtYXMgc2VtYW5hcyBhY2Vzc2UgdW0gZXhlbXBsbyBkZSBkYXNoYm9hcmQgW25lc3RlIGxpbmtdKGh0dHBzOi8vdXJpb25hLnNoaW55YXBwcy5pby9kYXNoX21ldV9uZXRmbGl4LykuCgojIFJTdHVkaW8gZSBEYXRhY2FtcCBXb3Jrc3BhY2UKCk8gUlN0dWRpbyDDqSBvIHNvZnR3YXJlIElERSAoSW50ZXJmYWNlIERldmVsb3BtZW50IEVudmlyb25tZW50KSBtYWlzIGNvbmhlY2lkbyBlIHBvcHVsYXQgcGFyYSB0cmFiYWxoYXIgY29tIG8gUi4gVGVtIHVtYSBpbnRlcmZhY2UgaW5mb3JtYXRpdmEgZSB1bWEgc2ltYmlvc2UgbXVpdG8gZm9ydGUgY29tIG8gUi4gSXJlbW9zIHVzYXIgbyBSU3R1ZGlvIGxvY2FsbWVudGUgbm9zIG5vc3NvcyBjb21wdXRhZG9yZXMuCgpKw6EgbyBbRGF0YWNhbXAgV29ya3NwYWNlXShodHRwczovL2FwcC5kYXRhY2FtcC5jb20vd29ya3NwYWNlLykgw6kgdW0gc29mdHdhcmUgZW0gbnV2ZW0gcXVlIGVzdMOhIGdyYXR1aXRhbWVudGUgZGlzcG9uw612ZWwgcGFyYSBuw7NzIHBvciBzZXJtb3MgaW5zdGl0dWnDp8OjbyBlZHVjYWNpb25hbC4gQSBpbnRlcmZhY2UgZG8gRGF0YWNhbXAgV29ya3NwYWNlIMOpIG1haXMgc2ltcGxlcyBwb3LDqW0gbWFpcyAqKmNsZWFuKiouIElyZW1vcyB1c2FyIG8gRGF0YWNhbXAgV29ya3NwYWNlIG5hIG51dmVtLgoKIyBEYXRhY2FtcAoKQW50ZXMgZGUgcHJvc3NlZ3VpciwgY29uZmlyYSBxdWUgc2V1IGNhZGFzdHJvIG5vIERhdGFjYW1wIGVzdMOhIG9rLiBDYXNvIG7Do28gbyB0ZW5oYSBmZWl0byBhaW5kYSwgYXByb3ZlaXRlIGVzdGUgbW9tZW50byBwYXJhIGZhesOqLWxvLCBsZW1icmUgZGUgY2FkYXN0cmFyIHNldSB1c3XDoXJpbyBjb20gbyBlbWFpbCAkQGdyYWQudWZzYy5iciQgZSB1c2UgW2VzdGUgbGlua10oaHR0cHM6Ly93d3cuZGF0YWNhbXAuY29tL2dyb3Vwcy9zaGFyZWRfbGlua3MvZGUzMDlmMDE4NmFkOGU4NmUyMzk5NjEwYzA4MmIyYTRlMTQzMmFmZjQ3ZmNiZmQ2NmQ0NzM0YzcyOTM1NThkNikgcGFyYSBmYWNpbGl0YXIgbyBjYWRhc3Ryby4KCiMgQ29kZSBBbG9uZwoKQWdvcmEsIGFicmEgW2VzdGUgbGlua10oaHR0cHM6Ly9hcHAuZGF0YWNhbXAuY29tL3dvcmtzcGFjZS9uZXc/X3RhZz13b3Jrc3BhY2UmYWNjb3VudEdyb3VwSWQ9NjM0MTgmYWNjb3VudFR5cGU9Z3JvdXAmdXRtX2NvbnRlbnQ9Y29weV9kdXBsaWNhdGVfbGluayZ1dG1fbWVkaXVtPWluX3Byb2R1Y3QmdXRtX3NvdXJjZT13b3Jrc3BhY2Umd29ya3NwYWNlSWQ9NGYyZjU3OWItNjM0OS00NDU0LTgyOWQtYjRhZDlkZjJmMmRmKSBlbSBzZXUgY29tcHV0YWRvciBwYXJhIGFjb21wYW5oYXIgYSBub3NzYSBwcmltZWlyYSBhdWxhIHByw6F0aWNhIHVzYW5kbyBvIFIsIGVzcGVjaWZpY2FtZW50ZSBpcmVtb3MgdXRpbGl6YXIgbyBbRGF0YWNhbXAgV29ya3NwYWNlXShodHRwczovL2FwcC5kYXRhY2FtcC5jb20vd29ya3NwYWNlLykuIFNlIHZvY8OqIG7Do28gdGl2ZXIgc2UgY2FkYXN0cmFkbyBhaW5kYSwgbyBEYXRhY2FtcCBzb2xpY2l0YXLDoSBxdWUgbyBmYcOnYS4KCiMgSW5zdGFsYW5kbyBwYWNvdGVzIG5vIFJTdHVkaW8KCkVtIHBhcmFsZWxvLCB2YW1vcyBpbnN0YWxhciBsb2NhbG1lbnRlIG9zIHBhY290ZXMgcXVlIHZhbW9zIHVzYXIgYW8gbG9uZ28gZG8gc2VtZXN0cmUgbm8gUlN0dWRpby4gTm8gV29ya3NwYWNlIG7Do28gaMOhIG5lY2Vzc2lkYWRlIHBvaXMgb3MgcGFjb3RlcyBqw6EgdmVtIHByw6ktY29uZmlndXJhZG9zLgoKUGFyYSByb2RhciBlc3RhIGluc3RhbGHDp8OjbywgYmFpeGUgZXN0YSBww6FnaW5hIChub3RlIHF1ZSBow6EgdW0gYm90w6NvICJDT0RFIiBubyBjYW50byBzdXBlcmlvciBkaXJlaXRvKS4KCiFbXShpbWFnZXMvU2NyZWVuJTIwU2hvdCUyMDIwMjItMDktMDYlMjBhdCUyMDEuNDEuMzElMjBQTS5wbmcpCgpFIHVtYSB2ZXogYmFpeGFkbywgYWJyYSBvIGFycXVpdm8gYC5SbWRgIG5vIFJTdHVkaW8gZSByb2RlIG8gY8OzZGlnbyBhIHNlZ3VpcjoKCmBgYHtyIGV2YWw9RkFMU0V9Cmluc3RhbGwucGFja2FnZXMoInRpZHl2ZXJzZSIpCmluc3RhbGwucGFja2FnZXMoImZsZXhkYXNoYm9hcmQiKQppbnN0YWxsLnBhY2thZ2VzKCJmb3JlY2FzdCIpCmluc3RhbGwucGFja2FnZXMoImhpZ2hjaGFydGVyIikKaW5zdGFsbC5wYWNrYWdlcygidHJlZW1hcCIpCmluc3RhbGwucGFja2FnZXMoInZpcmlkaXNMaXRlIikKaW5zdGFsbC5wYWNrYWdlcygicHJldHR5ZG9jIikKaW5zdGFsbC5wYWNrYWdlcygib3Blbnhsc3giKQppbnN0YWxsLnBhY2thZ2VzKCJnZ3JlcGVsIikKaW5zdGFsbC5wYWNrYWdlcygiYm9va2Rvd24iKQppbnN0YWxsLnBhY2thZ2VzKCJ0dWZ0ZSIpCmluc3RhbGwucGFja2FnZXMoImRldnRvb2xzIikKZGV2dG9vbHM6Omluc3RhbGxfZ2l0aHViKCJyc3R1ZGlvLWVkdWNhdGlvbi9kc2JveCIpCmluc3RhbGwucGFja2FnZXMoInJhbmdlciIpCmluc3RhbGwucGFja2FnZXMoInRpZHltb2RlbHMiKQppbnN0YWxsLnBhY2thZ2VzKCJsZWFmbGV0IikKaW5zdGFsbC5wYWNrYWdlcygiRFQiKQppbnN0YWxsLnBhY2thZ2VzKCJrYWJsZUV4dHJhIikKaW5zdGFsbC5wYWNrYWdlcygicGxvdGx5IikKaW5zdGFsbC5wYWNrYWdlcygidGl0YW5pYyIpCmluc3RhbGwucGFja2FnZXMoImJyb29tIikKaW5zdGFsbC5wYWNrYWdlcygicFJPQyIpCmluc3RhbGwucGFja2FnZXMoIldWUGxvdHMiKQppbnN0YWxsLnBhY2thZ2VzKCJycGFydCIpCmluc3RhbGwucGFja2FnZXMoInJwYXJ0LnBsb3QiKQppbnN0YWxsLnBhY2thZ2VzKCJ2dHJlYXQiKQppbnN0YWxsLnBhY2thZ2VzKCJjbHVzdGVyIikKaW5zdGFsbC5wYWNrYWdlcygic2hpbnkiKQppbnN0YWxsLnBhY2thZ2VzKCJza2ltciIpCmluc3RhbGwucGFja2FnZXMoImNhcmV0IikKaW5zdGFsbC5wYWNrYWdlcygiR0dhbGx5IikKaW5zdGFsbC5wYWNrYWdlcygidmlwIikKaW5zdGFsbC5wYWNrYWdlcygicmVtb3RlcyIpCmluc3RhbGwucGFja2FnZXMoImd0IikKcmVtb3Rlczo6aW5zdGFsbF9naXRodWIoJ3JzdHVkaW8vcGFnZWRvd24nLCB1cGdyYWRlID0gImFsd2F5cyIpCnJlbW90ZXM6Omluc3RhbGxfZ2l0aHViKCd5aWh1aS94YXJpbmdhbicsIHVwZ3JhZGUgPSAiYWx3YXlzIikKCmBgYAoK</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("Tutorial0.Rmd");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

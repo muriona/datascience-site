@@ -24,6 +24,8 @@ navbar:
 #      href: notas.html
     - text: "Tutoriais"
       menu: 
+      - text: "Tutorial 0 - Conhecendo o R"
+        href: Tutorial0.html
       - text: "Tutorial 1 - Tidyverse"
         href: Tutorial1.html
       - text: "Tutorial 2 - Ggplot e Tidyverse"

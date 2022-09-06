@@ -1,0 +1,85 @@
+---
+title: "Tutorial 0 - Conhecendo o R"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    code_download: true
+    theme: paper
+    css: tarefas.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=TRUE)
+```
+
+# Conhecendo o R
+
+O R é uma linguagem de programação muito poderosa e amplamente utilizada em data science.
+
+Para se ter uma noção do que é possível fazer com o R e do que vocês irão realizar em algumas semanas acesse um exemplo de dashboard [neste link](https://uriona.shinyapps.io/dash_meu_netflix/).
+
+# RStudio e Datacamp Workspace
+
+O RStudio é o software IDE (Interface Development Environment) mais conhecido e populat para trabalhar com o R. Tem uma interface informativa e uma simbiose muito forte com o R. Iremos usar o RStudio localmente nos nossos computadores.
+
+Já o [Datacamp Workspace](https://app.datacamp.com/workspace/) é um software em nuvem que está gratuitamente disponível para nós por sermos instituição educacional. A interface do Datacamp Workspace é mais simples porém mais **clean**. Iremos usar o Datacamp Workspace na nuvem.
+
+# Datacamp
+
+Antes de prosseguir, confira que seu cadastro no Datacamp está ok. Caso não o tenha feito ainda, aproveite este momento para fazê-lo, lembre de cadastrar seu usuário com o email $@grad.ufsc.br$ e use [este link](https://www.datacamp.com/groups/shared_links/de309f0186ad8e86e2399610c082b2a4e1432aff47fcbfd66d4734c7293558d6) para facilitar o cadastro.
+
+# Code Along
+
+Agora, abra [este link](https://app.datacamp.com/workspace/new?_tag=workspace&accountGroupId=63418&accountType=group&utm_content=copy_duplicate_link&utm_medium=in_product&utm_source=workspace&workspaceId=4f2f579b-6349-4454-829d-b4ad9df2f2df) em seu computador para acompanhar a nossa primeira aula prática usando o R, especificamente iremos utilizar o [Datacamp Workspace](https://app.datacamp.com/workspace/). Se você não tiver se cadastrado ainda, o Datacamp solicitará que o faça.
+
+# Instalando pacotes no RStudio
+
+Em paralelo, vamos instalar localmente os pacotes que vamos usar ao longo do semestre no RStudio. No Workspace não há necessidade pois os pacotes já vem pré-configurados.
+
+Para rodar esta instalação, baixe esta página (note que há um botão "CODE" no canto superior direito).
+
+![](images/Screen%20Shot%202022-09-06%20at%201.41.31%20PM.png)
+
+E uma vez baixado, abra o arquivo `.Rmd` no RStudio e rode o código a seguir:
+
+```{r eval=FALSE}
+install.packages("tidyverse")
+install.packages("flexdashboard")
+install.packages("forecast")
+install.packages("highcharter")
+install.packages("treemap")
+install.packages("viridisLite")
+install.packages("prettydoc")
+install.packages("openxlsx")
+install.packages("ggrepel")
+install.packages("bookdown")
+install.packages("tufte")
+install.packages("devtools")
+devtools::install_github("rstudio-education/dsbox")
+install.packages("ranger")
+install.packages("tidymodels")
+install.packages("leaflet")
+install.packages("DT")
+install.packages("kableExtra")
+install.packages("plotly")
+install.packages("titanic")
+install.packages("broom")
+install.packages("pROC")
+install.packages("WVPlots")
+install.packages("rpart")
+install.packages("rpart.plot")
+install.packages("vtreat")
+install.packages("cluster")
+install.packages("shiny")
+install.packages("skimr")
+install.packages("caret")
+install.packages("GGally")
+install.packages("vip")
+install.packages("remotes")
+install.packages("gt")
+remotes::install_github('rstudio/pagedown', upgrade = "always")
+remotes::install_github('yihui/xaringan', upgrade = "always")
+
+```
+

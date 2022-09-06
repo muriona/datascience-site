@@ -9,7 +9,6 @@ output:
     theme: paper
     css: tarefas.css
 
-date: "Última versão em `r format(Sys.time(), '%d/%m/%y')`"
 ---
 
 ```{r setup, include=FALSE}
