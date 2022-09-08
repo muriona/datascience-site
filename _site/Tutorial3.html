@@ -376,6 +376,18 @@ div.tocify {
     </li>
   </ul>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tarefas
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tarefa_Superstore.html">Tarefa 1</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -511,11 +523,11 @@ train(GPA~SAT, data=gpa, trControl=train_control, method = &quot;lm&quot; )</cod
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (3 fold) 
-## Summary of sample sizes: 56, 56, 56 
+## Summary of sample sizes: 57, 56, 55 
 ## Resampling results:
 ## 
 ##   RMSE       Rsquared   MAE      
-##   0.2116703  0.4381039  0.1567771
+##   0.2090901  0.4175652  0.1563071
 ## 
 ## Tuning parameter &#39;intercept&#39; was held constant at a value of TRUE</code></pre>
 <pre class="r"><code>model &lt;- train(GPA~SAT, data=gpa, trControl=train_control, method = &quot;lm&quot; )
@@ -600,11 +612,11 @@ train(fmla, data=real_state, trControl=train_control, method = &quot;lm&quot; )<
 ## 
 ## No pre-processing
 ## Resampling: Cross-Validated (3 fold) 
-## Summary of sample sizes: 67, 65, 68 
+## Summary of sample sizes: 68, 66, 66 
 ## Resampling results:
 ## 
 ##   RMSE      Rsquared   MAE     
-##   39700.59  0.7566338  33471.52
+##   41725.04  0.7631708  35237.83
 ## 
 ## Tuning parameter &#39;intercept&#39; was held constant at a value of TRUE</code></pre>
 <pre class="r"><code>model &lt;- train(fmla, data=real_state, trControl=train_control, method = &quot;lm&quot; )

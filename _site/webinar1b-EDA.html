@@ -387,6 +387,18 @@ div.tocify {
     </li>
   </ul>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tarefas
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Tarefa_Superstore.html">Tarefa 1</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -408,7 +420,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Gabarito - Webinar 1b - EDA</h1>
 <h3 class="subtitle">Segunda parte</h3>
-<h4 class="date">Última versão em 06/09/22</h4>
+<h4 class="date">Última versão em 08/09/22</h4>
 
 </div>
 
@@ -544,368 +556,160 @@ library(knitr)
 assistidos_vs_total %&gt;% 
   kable(digits = 2)</code></pre>
 <table>
+<colgroup>
+<col width="36%" />
+<col width="7%" />
+<col width="5%" />
+<col width="35%" />
+<col width="6%" />
+<col width="9%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left;">
-series_title
-</th>
-<th style="text-align:right;">
-total
-</th>
-<th style="text-align:right;">
-n
-</th>
-<th style="text-align:left;">
-titulo_pt
-</th>
-<th style="text-align:right;">
-nota
-</th>
-<th style="text-align:right;">
-faltam
-</th>
+<tr class="header">
+<th align="left">series_title</th>
+<th align="right">total</th>
+<th align="right">n</th>
+<th align="left">titulo_pt</th>
+<th align="right">nota</th>
+<th align="right">faltam</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-13 Reasons Why
-</td>
-<td style="text-align:right;">
-49
-</td>
-<td style="text-align:right;">
-15
-</td>
-<td style="text-align:left;">
-13 Reasons Why
-</td>
-<td style="text-align:right;">
-7.25
-</td>
-<td style="text-align:right;">
-34
-</td>
+<tr class="odd">
+<td align="left">13 Reasons Why</td>
+<td align="right">49</td>
+<td align="right">15</td>
+<td align="left">13 Reasons Why</td>
+<td align="right">7.25</td>
+<td align="right">34</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Away
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:left;">
-Away
-</td>
-<td style="text-align:right;">
-7.08
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">Away</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="left">Away</td>
+<td align="right">7.08</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Bates Motel
-</td>
-<td style="text-align:right;">
-50
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:left;">
-Motel Bates
-</td>
-<td style="text-align:right;">
-8.59
-</td>
-<td style="text-align:right;">
-33
-</td>
+<tr class="odd">
+<td align="left">Bates Motel</td>
+<td align="right">50</td>
+<td align="right">17</td>
+<td align="left">Motel Bates</td>
+<td align="right">8.59</td>
+<td align="right">33</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Dark
-</td>
-<td style="text-align:right;">
-26
-</td>
-<td style="text-align:right;">
-26
-</td>
-<td style="text-align:left;">
-Dark
-</td>
-<td style="text-align:right;">
-9.08
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">Dark</td>
+<td align="right">26</td>
+<td align="right">26</td>
+<td align="left">Dark</td>
+<td align="right">9.08</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Greenleaf
-</td>
-<td style="text-align:right;">
-60
-</td>
-<td style="text-align:right;">
-60
-</td>
-<td style="text-align:left;">
-Greenleaf
-</td>
-<td style="text-align:right;">
-7.59
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="odd">
+<td align="left">Greenleaf</td>
+<td align="right">60</td>
+<td align="right">60</td>
+<td align="left">Greenleaf</td>
+<td align="right">7.59</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Grimm
-</td>
-<td style="text-align:right;">
-123
-</td>
-<td style="text-align:right;">
-123
-</td>
-<td style="text-align:left;">
-Grimm: Contos de Terror
-</td>
-<td style="text-align:right;">
-8.44
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">Grimm</td>
+<td align="right">123</td>
+<td align="right">123</td>
+<td align="left">Grimm: Contos de Terror</td>
+<td align="right">8.44</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hemlock Grove
-</td>
-<td style="text-align:right;">
-33
-</td>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:left;">
-Hemlock Grove
-</td>
-<td style="text-align:right;">
-7.49
-</td>
-<td style="text-align:right;">
-22
-</td>
+<tr class="odd">
+<td align="left">Hemlock Grove</td>
+<td align="right">33</td>
+<td align="right">11</td>
+<td align="left">Hemlock Grove</td>
+<td align="right">7.49</td>
+<td align="right">22</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-How to Get Away With Murder
-</td>
-<td style="text-align:right;">
-180
-</td>
-<td style="text-align:right;">
-71
-</td>
-<td style="text-align:left;">
-Como Defender um Assassino
-</td>
-<td style="text-align:right;">
-8.57
-</td>
-<td style="text-align:right;">
-109
-</td>
+<tr class="even">
+<td align="left">How to Get Away With Murder</td>
+<td align="right">180</td>
+<td align="right">71</td>
+<td align="left">Como Defender um Assassino</td>
+<td align="right">8.57</td>
+<td align="right">109</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Lucifer
-</td>
-<td style="text-align:right;">
-75
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:left;">
-Lúcifer
-</td>
-<td style="text-align:right;">
-8.74
-</td>
-<td style="text-align:right;">
-52
-</td>
+<tr class="odd">
+<td align="left">Lucifer</td>
+<td align="right">75</td>
+<td align="right">23</td>
+<td align="left">Lúcifer</td>
+<td align="right">8.74</td>
+<td align="right">52</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Narcos
-</td>
-<td style="text-align:right;">
-30
-</td>
-<td style="text-align:right;">
-19
-</td>
-<td style="text-align:left;">
-Narcos
-</td>
-<td style="text-align:right;">
-8.76
-</td>
-<td style="text-align:right;">
-11
-</td>
+<tr class="even">
+<td align="left">Narcos</td>
+<td align="right">30</td>
+<td align="right">19</td>
+<td align="left">Narcos</td>
+<td align="right">8.76</td>
+<td align="right">11</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Once Upon a Time
-</td>
-<td style="text-align:right;">
-312
-</td>
-<td style="text-align:right;">
-105
-</td>
-<td style="text-align:left;">
-Era Uma Vez
-</td>
-<td style="text-align:right;">
-8.27
-</td>
-<td style="text-align:right;">
-207
-</td>
+<tr class="odd">
+<td align="left">Once Upon a Time</td>
+<td align="right">312</td>
+<td align="right">105</td>
+<td align="left">Era Uma Vez</td>
+<td align="right">8.27</td>
+<td align="right">207</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Orange Is the New Black
-</td>
-<td style="text-align:right;">
-91
-</td>
-<td style="text-align:right;">
-65
-</td>
-<td style="text-align:left;">
-Orange Is the New Black
-</td>
-<td style="text-align:right;">
-8.17
-</td>
-<td style="text-align:right;">
-26
-</td>
+<tr class="even">
+<td align="left">Orange Is the New Black</td>
+<td align="right">91</td>
+<td align="right">65</td>
+<td align="left">Orange Is the New Black</td>
+<td align="right">8.17</td>
+<td align="right">26</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Orphan Black
-</td>
-<td style="text-align:right;">
-50
-</td>
-<td style="text-align:right;">
-22
-</td>
-<td style="text-align:left;">
-Orphan Black
-</td>
-<td style="text-align:right;">
-8.53
-</td>
-<td style="text-align:right;">
-28
-</td>
+<tr class="odd">
+<td align="left">Orphan Black</td>
+<td align="right">50</td>
+<td align="right">22</td>
+<td align="left">Orphan Black</td>
+<td align="right">8.53</td>
+<td align="right">28</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Scream
-</td>
-<td style="text-align:right;">
-29
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:left;">
-Pânico: A Série de TV
-</td>
-<td style="text-align:right;">
-7.54
-</td>
-<td style="text-align:right;">
-19
-</td>
+<tr class="even">
+<td align="left">Scream</td>
+<td align="right">29</td>
+<td align="right">10</td>
+<td align="left">Pânico: A Série de TV</td>
+<td align="right">7.54</td>
+<td align="right">19</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Sleepy Hollow
-</td>
-<td style="text-align:right;">
-62
-</td>
-<td style="text-align:right;">
-13
-</td>
-<td style="text-align:left;">
-Sleepy Hollow
-</td>
-<td style="text-align:right;">
-7.68
-</td>
-<td style="text-align:right;">
-49
-</td>
+<tr class="odd">
+<td align="left">Sleepy Hollow</td>
+<td align="right">62</td>
+<td align="right">13</td>
+<td align="left">Sleepy Hollow</td>
+<td align="right">7.68</td>
+<td align="right">49</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Stranger Things
-</td>
-<td style="text-align:right;">
-25
-</td>
-<td style="text-align:right;">
-25
-</td>
-<td style="text-align:left;">
-Stranger Things
-</td>
-<td style="text-align:right;">
-8.68
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">Stranger Things</td>
+<td align="right">25</td>
+<td align="right">25</td>
+<td align="left">Stranger Things</td>
+<td align="right">8.68</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-The Walking Dead
-</td>
-<td style="text-align:right;">
-288
-</td>
-<td style="text-align:right;">
-67
-</td>
-<td style="text-align:left;">
-The Walking Dead
-</td>
-<td style="text-align:right;">
-8.01
-</td>
-<td style="text-align:right;">
-221
-</td>
+<tr class="odd">
+<td align="left">The Walking Dead</td>
+<td align="right">288</td>
+<td align="right">67</td>
+<td align="left">The Walking Dead</td>
+<td align="right">8.01</td>
+<td align="right">221</td>
 </tr>
 </tbody>
 </table>

@@ -4,8 +4,6 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-#    - text: "Notas"
-#      href: notas.html
     - text: "Tutoriais"
       menu: 
       - text: "Tutorial 0 - Conhecendo o R"
@@ -37,6 +35,10 @@ navbar:
         href: Lab5.html
       - text: "Lab 6 - Métodos Não-Supervisionados"
         href: Lab6.html
+    - text: "Tarefas"
+      menu: 
+      - text: "Tarefa 1"
+        href: Tarefa_Superstore.html
 output:
   html_document:
     #css: style.css

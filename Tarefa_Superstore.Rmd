@@ -1,0 +1,97 @@
+---
+title: "Tarefa 1 - Dashboards em R"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: paper
+    css: tarefas.css
+link-citations: yes
+---
+
+```{r photo, fig.margin = TRUE, echo = FALSE, fig.width=3, fig.cap="Photo by Martin Vorel on libreshot"}
+knitr::include_graphics("img/business-analysis.jpg")
+
+```
+
+Nesta tarefa vocês terão a oportunidade de criar um Dashboard responsivo a partir dos datasets a seguir:
+
+-   `Global Superstore Orders 2016.xlsx`
+-   `Global Superstore Returns 2016.csv`
+
+# Pacotes
+
+Usaremos os pacotes (bibliotecas) `tidyverse` e `flexdashboard` de forma **obrigatória**. Outras bibliotecas podem se instaladas por cada equipe, de acordo com as necessidades específicas do dashboard.
+
+```{r load-package, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, cache = TRUE)
+
+```
+
+```{r bibliotecas}
+library(tidyverse)
+library(flexdashboard)
+
+```
+
+# Dados
+
+Os dados incluem as vendas fictícias de uma grande loja, chamada `Global SuperStore`, incluindo ordem de pedido, data de compra, data de expedição, nome do cliente, categoria do produto, valor da venda e prioridade, dentre outros.
+
+```{r}
+library(readxl)
+library(knitr)
+
+global <- read_xlsx("/Users/mauricio/Dropbox/mauricio/10. R Studio/eps7008-site/data_superstore/Global Superstore Orders 2016.xlsx")
+
+returns <- read_csv("/Users/mauricio/Dropbox/mauricio/10. R Studio/eps7008-site/data_superstore/Global Superstore Returns 2016.csv")
+
+```
+
+A seguir, mostram-se as primeiras linhas do dataset `Global Superstore Orders 2016.xlsx`.
+
+```{r}
+library(gt)
+global %>% 
+  head() %>% 
+  gt()
+```
+
+E as primeiras linhas do dataset `Global Superstore Returns 2016.csv` :
+
+```{r}
+
+returns %>% 
+  head() %>% 
+  gt()
+```
+
+Você pode baixar os dados
+```{r}
+xfun::pkg_load2(c('htmltools', 'mime'))
+xfun::embed_dir("data_superstore/", text = "aqui.")
+```
+
+# Instruções
+
+A ideia desta Tarefa é demonstrar tudo que aprenderam em termos de leitura, limpeza e análise exploratória de dados em R com o objetivo de construir um Dashboard que seja informativo e gere insights para tomada de decisão.
+
+Vocês são livres de escolher o tipo e número de visualizações que irão apresentar.
+
+-   É obrigatório incluir controles responsivos (usar `shiny`) e visualizações que usem pelo menos alguns dos tipos aprendidos (barras, linhas, dispersão, etc.).
+
+-   É obrigatório usar ambos os datasets, para isto, será necessário uni-los usando comandos de `join`.
+
+**Dica** Vocês podem incluir novas colunas, realizar cálculos de novos indicadores, incluir dados de longitude e latitude (criar mapas), integrar outros datasets, criar mais de uma aba de dashboard ou outras ações que vejam convenientes.
+
+# Entrega
+
+-   Para esta tarefa, o arquivo a ser entregue pelo moodle será o `.Rmd`.
+
+-   O Dashboard deverá ser subido na plataforma [shinyapps](https://www.shinyapps.io/) por apenas um membro de cada equipe. Instruções sobre como criar uma conta gratuita e sobre como subir o dashboard podem ser encontradas [aqui](https://shiny.rstudio.com/articles/shinyapps.html).
+
+-   Em paralelo, nós avaliaremos o dashboard criado e funcional, diretamente no link que deverá ser repassado por vocês para acessar o `shinyapps`.
+
+# Avaliação
+
+A avaliação levará em conta a sua capacidade de criar visualizações que sigam as boas práticas, que informem e que tragam à tona os aspectos mais importantes dos dados referentes a Global Superstore.
