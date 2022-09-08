@@ -4,22 +4,6 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-#    - text: "Tarefas"
-#      menu: 
-#      - text: "Instruções Gerais"
-#        href: Tarefa_Instrucoes.html
-#      - text: "Template para entregas"
-#        href: Template_entregas.html
-#      - text: "Tarefa 1"
-#        href: Tarefa1.html
-#      - text: "Gabarito - Tarefa 1"
-#        href: Gabarito_Tarefa1.html
-#      - text: "Tarefa 2"
-#        href: Tarefa2_20221.html
-#      - text: "Tarefa 3 - Regressão"
-#        href: Tarefa3_DCbike.html
-#      - text: "Tarefa 3 - Classificação"
-#        href: Tarefa3_DCbike_class.html
 #    - text: "Notas"
 #      href: notas.html
     - text: "Tutoriais"
