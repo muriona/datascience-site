@@ -35,6 +35,8 @@ xfun::embed_dir("data1/", text = "Você pode baixar os dados aqui.")
 
 ```
 
+Alternativamente, pode usar este [link](https://app.datacamp.com/workspace/new?_tag=workspace&accountGroupId=63418&accountType=group&utm_content=copy_duplicate_link&utm_medium=in_product&utm_source=workspace&workspaceId=5b4afb4c-5deb-40c0-ab09-4ec0d78a4bcf) para criar uma cópia no Workspace.
+
 ```{r tidyverse, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(readxl) # para fazer leitura de arquivos excel
