@@ -39,6 +39,8 @@ navbar:
       menu: 
       - text: "Tarefa 1"
         href: Tarefa_Superstore.html
+      - text: "Tarefa 2"
+        href: Tarefa_DCbike.html
 output:
   html_document:
     #css: style.css
