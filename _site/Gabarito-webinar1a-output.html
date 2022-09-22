@@ -397,6 +397,9 @@ div.tocify {
     <li>
       <a href="Tarefa_Superstore.html">Tarefa 1</a>
     </li>
+    <li>
+      <a href="Tarefa_DCbike.html">Tarefa 2</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -420,7 +423,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Gabarito - Webinar 1 - EDA</h1>
 <h3 class="subtitle">Com outputs</h3>
-<h4 class="date">Última versão em 12/09/22</h4>
+<h4 class="date">Última versão em 22/09/22</h4>
 
 </div>
 
@@ -488,12 +491,12 @@ class="uri">https://github.com/nazareno/imdb-series</a> para fazer o web
 scrapping do site oficial do IMDb.</p>
 <p>Carregando os dados do IMDb e mostrando os primeiras 10 linhas:</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-## ✔ ggplot2 3.3.6     ✔ purrr   0.3.4
-## ✔ tibble  3.1.8     ✔ dplyr   1.0.9
-## ✔ tidyr   1.2.0     ✔ stringr 1.4.0
-## ✔ readr   2.1.2     ✔ forcats 0.5.1
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Attaching packages ──────────────
+## ✔ ggplot2 3.3.6      ✔ purrr   0.3.4 
+## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
+## ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
+## ✔ readr   2.1.2      ✔ forcats 0.5.1 
+## ── Conflicts ───────────────────────
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(readxl)
@@ -515,8 +518,7 @@ head(imdb, 10)</code></pre>
 ## 10 13 Reaso… Tape 5…      10      1      10 http…     8.6    5111 0.0736 0.00274
 ## # … with 8 more variables: r3 &lt;dbl&gt;, r4 &lt;dbl&gt;, r5 &lt;dbl&gt;, r6 &lt;dbl&gt;, r7 &lt;dbl&gt;,
 ## #   r8 &lt;dbl&gt;, r9 &lt;dbl&gt;, r10 &lt;dbl&gt;, and abbreviated variable names ¹​series_name,
-## #   ²​series_ep, ³​season_ep, ⁴​UserRating, ⁵​UserVotes
-## # ℹ Use `colnames()` to see all variable names</code></pre>
+## #   ²​series_ep, ³​season_ep, ⁴​UserRating, ⁵​UserVotes</code></pre>
 <p>Carregando os dados do Netflix e mostrando as primeiras 10
 linhas:</p>
 <pre class="r"><code>netflix &lt;- read.csv(&quot;data1/NetflixViewingHistory.csv&quot;)
@@ -755,8 +757,9 @@ seriado “Bates Motel”:</p>
   ggplot(aes(ano, assistidos))+ 
   geom_bar(stat=&quot;identity&quot;, fill = &quot;#5b59d6&quot;)+
   labs(title=&quot;Bates Motel - capítulos assistidos por ano&quot;)</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;series_title&#39;. You can override using the
-## `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by
+## &#39;series_title&#39;. You can override
+## using the `.groups` argument.</code></pre>
 <p><img src="Gabarito-webinar1a-output_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>Ou ver a distribuição por data:</p>
 <pre class="r"><code>netflix_series_limpo %&gt;% 
@@ -798,8 +801,7 @@ função <code>arrange</code></p>
 ##  8 Grimm: Contos de Terror      123
 ##  9 Orange Is the New Black       91
 ## 10 Lúcifer                       75
-## # … with 17 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
+## # … with 17 more rows</code></pre>
 <p>Claramente têm seriados com muitos capítulos e outros com poucos,
 pode ser por causa do número de temporadas? vamos conferir:</p>
 <pre class="r"><code>imdb %&gt;% 
@@ -823,8 +825,7 @@ pode ser por causa do número de temporadas? vamos conferir:</p>
 ##  8 Grimm: Contos de Terror         6    13
 ##  9 Greenleaf                       5     8
 ## 10 Lúcifer                         5     8
-## # … with 17 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
+## # … with 17 more rows</code></pre>
 <p>Será que há relação entre o número de capítulos e o número de
 temporadas?</p>
 <pre class="r"><code>imdb %&gt;% 
@@ -873,8 +874,7 @@ imdb_rating</code></pre>
 ##  8 Como Defender um Assassino  8.57
 ##  9 Orphan Black                8.53
 ## 10 The Witcher                 8.49
-## # … with 17 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
+## # … with 17 more rows</code></pre>
 <p>Se compararmos estes resultados com os obtidos acima, referentes aos
 seriados mais assistidos no Netflix (“Greenleaf”, “How to get away with
 murder”, “Once upon a Time”, “Away”, “Bates Motel”, “Dark”, “Money
@@ -900,8 +900,7 @@ series_mais_assistidas_com_rating</code></pre>
 ##  8 Como Defender um Assassino  8.57    NA
 ##  9 Orphan Black                8.53    22
 ## 10 The Witcher                 8.49     8
-## # … with 17 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
+## # … with 17 more rows</code></pre>
 <p>E se realizarmos um gráfico de dispersão?</p>
 <pre class="r"><code>series_mais_assistidas_com_rating %&gt;% 
   ggplot(aes(n, media))+

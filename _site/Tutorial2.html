@@ -386,6 +386,9 @@ div.tocify {
     <li>
       <a href="Tarefa_Superstore.html">Tarefa 1</a>
     </li>
+    <li>
+      <a href="Tarefa_DCbike.html">Tarefa 2</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -487,8 +490,7 @@ Primeiro vamos gerar o gráfico com as configuração padrão.</p>
 ## #   num_avaliacoes &lt;dbl&gt;, direcao &lt;chr&gt;, roteiro &lt;chr&gt;, producao &lt;chr&gt;,
 ## #   elenco &lt;chr&gt;, descricao &lt;chr&gt;, num_criticas_publico &lt;dbl&gt;,
 ## #   num_criticas_critica &lt;dbl&gt;, and abbreviated variable names
-## #   ¹​data_lancamento, ²​orcamento
-## # ℹ Use `colnames()` to see all variable names</code></pre>
+## #   ¹​data_lancamento, ²​orcamento</code></pre>
 </div>
 <div id="mudando-os-eixos-e-adicionando-cores" class="section level2">
 <h2>Mudando os eixos e adicionando cores</h2>
@@ -514,8 +516,7 @@ Primeiro vamos gerar o gráfico com as configuração padrão.</p>
 ## #   num_avaliacoes &lt;dbl&gt;, direcao &lt;chr&gt;, roteiro &lt;chr&gt;, producao &lt;chr&gt;,
 ## #   elenco &lt;chr&gt;, descricao &lt;chr&gt;, num_criticas_publico &lt;dbl&gt;,
 ## #   num_criticas_critica &lt;dbl&gt;, and abbreviated variable names
-## #   ¹​data_lancamento, ²​orcamento
-## # ℹ Use `colnames()` to see all variable names</code></pre>
+## #   ¹​data_lancamento, ²​orcamento</code></pre>
 <p>Vamos aplicar tudo o aprendido num segundo exemplo, usando o
 dataframe <code>imdb</code> para mostrar os seriados com maior número de
 votos <code>UserVotes</code>.</p>
@@ -536,8 +537,7 @@ votos <code>UserVotes</code>.</p>
 ##  8 Lúcifer                     298412
 ##  9 Dark                        264631
 ## 10 Como Defender um Assassino  228352
-## # … with 17 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
+## # … with 17 more rows</code></pre>
 <p>Você pode ver mais exemplos no Capítulo 8 do livro <a
 href="https://livro.curso-r.com/8-1-o-pacote-ggplot2.html#gr%C3%A1ficos-de-barras">Curso-R</a></p>
 </div>
@@ -566,8 +566,7 @@ assistidos por dia.</p>
 ##  8 2017-01-29      1
 ##  9 2017-03-05      2
 ## 10 2017-03-12      1
-## # … with 104 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
+## # … with 104 more rows</code></pre>
 <p>Podemos agrupar contagens usando a função <code>floor_date</code> do
 pacote <code>lubridate</code> para meses, trimestres, etc.
 Adicionalmente, podemos incluir cores.</p>
@@ -586,8 +585,7 @@ Adicionalmente, podemos incluir cores.</p>
 ##  8 2017-03-01     3
 ##  9 2017-05-01     1
 ## 10 2017-06-01     8
-## # … with 38 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
+## # … with 38 more rows</code></pre>
 </div>
 <div id="adicionando-mais-de-uma-linha" class="section level2">
 <h2>Adicionando mais de uma linha</h2>
@@ -601,8 +599,9 @@ curvas, usando <code>geom_smooth()</code>.</p>
   filter(!is.na(lucro)) %&gt;% 
   group_by(lucro_factor,ano) %&gt;% 
   summarise(nota_media=mean(nota_imdb,na.rm=TRUE))</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;lucro_factor&#39;. You can override using the
-## `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by
+## &#39;lucro_factor&#39;. You can override
+## using the `.groups` argument.</code></pre>
 <pre><code>## # A tibble: 169 × 3
 ## # Groups:   lucro_factor [2]
 ##    lucro_factor   ano nota_media
@@ -617,8 +616,7 @@ curvas, usando <code>geom_smooth()</code>.</p>
 ##  8 Não           1933       7.65
 ##  9 Não           1934       7.55
 ## 10 Não           1935       7.3 
-## # … with 159 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
+## # … with 159 more rows</code></pre>
 <p>Você pode ver mais exemplos do <code>geom_line()</code> no livro <a
 href="https://livro.curso-r.com/8-1-o-pacote-ggplot2.html#gr%C3%A1ficos-de-linhas">Curso-R</a></p>
 </div>
@@ -649,8 +647,7 @@ imdb %&gt;%
 ##  8 The Walking Dead Made to Suffer                   3        9  
 ##  9 The Walking Dead The Suicide King                 3        8.2
 ## 10 The Walking Dead Home                             3        8.7
-## # … with 278 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
+## # … with 278 more rows</code></pre>
 </div>
 <div id="adicionando-cores-por-meio-de-paletas-pré-definidas"
 class="section level2">
@@ -676,8 +673,7 @@ pré-definidas como: <code>scale_fill_viridis_d()</code> e
 ##  8 The Walking Dead Made to Suffer                   3        9  
 ##  9 The Walking Dead The Suicide King                 3        8.2
 ## 10 The Walking Dead Home                             3        8.7
-## # … with 278 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
+## # … with 278 more rows</code></pre>
 </div>
 </div>
 <div id="gráfico-de-histograma" class="section level1">
@@ -707,8 +703,7 @@ ajustar melhor o resultado.</p>
 ##  8 The Walking Dead Made to Suffer                   3        9  
 ##  9 The Walking Dead The Suicide King                 3        8.2
 ## 10 The Walking Dead Home                             3        8.7
-## # … with 278 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
+## # … with 278 more rows</code></pre>
 <p>Agora, vamos usar o dataset <code>imdb_filmes</code> para verificar
 quão lucrativo é um determinado genero.</p>
 <pre class="r"><code>genero_escolhido &lt;- &quot;Comedy&quot;
@@ -734,8 +729,7 @@ imdb_filmes %&gt;%
 ## #   num_avaliacoes &lt;dbl&gt;, direcao &lt;chr&gt;, roteiro &lt;chr&gt;, producao &lt;chr&gt;,
 ## #   elenco &lt;chr&gt;, descricao &lt;chr&gt;, num_criticas_publico &lt;dbl&gt;,
 ## #   num_criticas_critica &lt;dbl&gt;, lucro &lt;dbl&gt;, and abbreviated variable names
-## #   ¹​data_lancamento, ²​orcamento
-## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</code></pre>
+## #   ¹​data_lancamento, ²​orcamento</code></pre>
 </div>
 <div id="adicionando-cores-1" class="section level2">
 <h2>Adicionando cores</h2>
@@ -763,8 +757,7 @@ adicionando o argumento <code>fill</code> dentro de
 ## #   num_avaliacoes &lt;dbl&gt;, direcao &lt;chr&gt;, roteiro &lt;chr&gt;, producao &lt;chr&gt;,
 ## #   elenco &lt;chr&gt;, descricao &lt;chr&gt;, num_criticas_publico &lt;dbl&gt;,
 ## #   num_criticas_critica &lt;dbl&gt;, lucro &lt;dbl&gt;, and abbreviated variable names
-## #   ¹​data_lancamento, ²​orcamento
-## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</code></pre>
+## #   ¹​data_lancamento, ²​orcamento</code></pre>
 <p>Você pode ver mais exemplos do Histogramas e Boxplots no Cap. 8 do
 livro <a
 href="https://livro.curso-r.com/8-1-o-pacote-ggplot2.html#histogramas-e-boxplots">Curso-R</a></p>
@@ -787,8 +780,7 @@ exemplos anteriores.</p>
 ##  8 The Walking Dead Made to Suffer                   3        9  
 ##  9 The Walking Dead The Suicide King                 3        8.2
 ## 10 The Walking Dead Home                             3        8.7
-## # … with 278 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
+## # … with 278 more rows</code></pre>
 <p>Podemos também customizar a cor da linha e da área abaixo da
 densidade usando os argumentos <code>fill</code> e <code>color</code>
 dentro do <code>geom_density()</code> bem como a transparência usando
@@ -814,8 +806,7 @@ dentro do <code>geom_density()</code> bem como a transparência usando
 ## #   num_avaliacoes &lt;dbl&gt;, direcao &lt;chr&gt;, roteiro &lt;chr&gt;, producao &lt;chr&gt;,
 ## #   elenco &lt;chr&gt;, descricao &lt;chr&gt;, num_criticas_publico &lt;dbl&gt;,
 ## #   num_criticas_critica &lt;dbl&gt;, lucro &lt;dbl&gt;, and abbreviated variable names
-## #   ¹​data_lancamento, ²​orcamento
-## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</code></pre>
+## #   ¹​data_lancamento, ²​orcamento</code></pre>
 <p>E por fim, podemos comparar duas ou mais categorias. Vamos fazer
 isso, comparando os generos “Comedy” e “Drama” para saber se há
 diferenças significativas em termos de lucro. Para isto, vamos incluir o
@@ -843,8 +834,7 @@ argumento <code>group</code> dentro da camada <code>aes</code> além de
 ## #   nota_imdb &lt;dbl&gt;, num_avaliacoes &lt;dbl&gt;, direcao &lt;chr&gt;, roteiro &lt;chr&gt;,
 ## #   producao &lt;chr&gt;, elenco &lt;chr&gt;, descricao &lt;chr&gt;, num_criticas_publico &lt;dbl&gt;,
 ## #   num_criticas_critica &lt;dbl&gt;, lucro &lt;dbl&gt;, and abbreviated variable names
-## #   ¹​data_lancamento, ²​orcamento
-## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</code></pre>
+## #   ¹​data_lancamento, ²​orcamento</code></pre>
 </div>
 </div>
 <div id="outras-customizações" class="section level1">
