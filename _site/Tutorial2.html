@@ -599,9 +599,8 @@ curvas, usando <code>geom_smooth()</code>.</p>
   filter(!is.na(lucro)) %&gt;% 
   group_by(lucro_factor,ano) %&gt;% 
   summarise(nota_media=mean(nota_imdb,na.rm=TRUE))</code></pre>
-<pre><code>## `summarise()` has grouped output by
-## &#39;lucro_factor&#39;. You can override
-## using the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;lucro_factor&#39;.
+## You can override using the `.groups` argument.</code></pre>
 <pre><code>## # A tibble: 169 × 3
 ## # Groups:   lucro_factor [2]
 ##    lucro_factor   ano nota_media
